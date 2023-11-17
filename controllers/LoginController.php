@@ -10,8 +10,8 @@ class LoginController {
 
     public function processLogin() {
         // Procesar el formulario de inicio de sesión
-        $userEmail = $_POST['userEmail'];
-        $password = $_POST['password'];
+        $userEmail = $_POST['loginEmail'];
+        $password = $_POST['loginPassword'];
 
         $userModel = new UserModel();
 
@@ -20,9 +20,41 @@ class LoginController {
             header('Location: index.php');
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
-            include '../views/LoginView.php';
+            include '../views/LoginView.html';
             echo '<p>Invalid userEmail or password</p>';
         }
+    }
+
+    public function processRegistration() {
+        $userName = $_POST['registerName'];
+        $userEmail = $_POST['registerEmail'];
+        $password = $_POST['registerPassword'];
+
+        $userModel = new UserModel();
+
+        // Validar que los campos no estén vacíos (hay que añadir mas condiciones)
+        if (empty($name) || empty($email) || empty($password)) {
+            // Mostrar pop-up con mensaje: "¡Todos los campos son obligatorios!"
+            echo 'Todos los campos son obligatorios';
+            return;
+        }
+
+        // Validar el formato del email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // Mostrar pop-up con mensaje: "¡El email no es valido!"
+            echo 'Formato de email no válido';
+            return;
+        }
+
+        // Cifrado de contraseña
+        $hashedPassword = md5($password);
+
+        // Guardar el usuario en la base de datos
+        $userModel->register($name, $email, $hashedPassword);
+
+        // Redirigir a otra página después del registro exitoso
+        echo 'Registro realizado';
+
     }
 }
 ?>
