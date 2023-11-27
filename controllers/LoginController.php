@@ -1,11 +1,11 @@
 <?php
 // Controlador para gestionar el proceso de inicio de sesión
-require_once '../models/UserModel.php';
+require_once 'models/UserModel.php';
 
 class LoginController {
     public function showLoginForm() {
         // Mostrar la vista de inicio de sesión
-        include '../views/LoginView.html';
+        include 'views/LoginView.html';
     }
 
     public function processLogin() {
@@ -20,7 +20,7 @@ class LoginController {
             header('Location: index.php');
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
-            include '../views/LoginView.html';
+            include 'views/LoginView.html';
             echo '<p>Invalid userEmail or password</p>';
         }
     }
@@ -58,6 +58,7 @@ class LoginController {
     }
 }
 
+$loginController = new LoginController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si se envió el formulario, procesar el inicio de sesión o registro

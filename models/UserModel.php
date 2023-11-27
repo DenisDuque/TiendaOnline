@@ -1,5 +1,5 @@
 <?php
-require_once '../config/Database.php';
+require_once 'config/Database.php';
 class UserModel {
     public function authenticate($userEmail, $password) {
         // Lógica de autenticación (consulta a la base de datos)

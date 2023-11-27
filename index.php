@@ -6,13 +6,13 @@ $action = isset($_GET['page']) ? $_GET['page'] : '';
 switch($action){
 
 	case 'login':
-		include __DIR__.'/controllers/LoginController.php';
+		include 'controllers/LoginController.php';
 		break;
 	/* etc */
 
 	case 'main':
 	default:
-		include __DIR__.'/controllers/main.php';		
+		include 'controllers/LoginController.php';		
 		break;
 
 }
