@@ -1,10 +1,10 @@
-var buttons = document.getElementsByClassName("menu");
+var panels = document.getElementsByClassName("panel");
 
-for(var i = 0; i < buttons.length; i++){
-    buttons[i].addEventListener("click", function(e){
-        let idBtn = buttons[i].id;
+for(var i = 0; i < panels.length; i++){
+    panels[i].addEventListener("click", function(e){
+        let id = panels[i].id;
         var meta = document.createElement("meta");
         meta.httpEquiv = "refresh";
-        meta.content = "0:index.php?page=admnistrator&filter="+idBtn;
+        meta.content = "0:index.php?page=admnistrator&panel="+id;
     })
 }
