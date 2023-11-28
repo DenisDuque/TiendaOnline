@@ -3,7 +3,7 @@ class ProductModel {
     private $code;
     private $name;
     private $description;
-    private $codeCategory;
+    private $category;
     private $price;
     private $stock;
     private $size;
@@ -34,12 +34,12 @@ class ProductModel {
         return $this->description;
     }
 
-    public function setCodeCategory($codeCategory) {
-        $this->codeCategory = $codeCategory;
+    public function setCategory($category) {
+        $this->category = $category;
     } 
 
-    public function getCodeCategory() {
-        return $this->codeCategory;
+    public function getCategory() {
+        return $this->category;
     }
 
     public function setPrice($price) {
@@ -83,27 +83,33 @@ class ProductModel {
     }
     public function getTopProducts($conn, $limit = 10) {
         try {
-            $query = "SELECT * FROM products ORDER BY sold DESC LIMIT :limit";
-            $stmt = $this->$conn->prepare($query);
+            $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
+            $stmt = $conn->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
-
+    
             $topProducts = [];
-
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            foreach ($rows as $row) {
                 $product = new ProductModel();
-                // Asignar valores al objeto ProductModel desde la fila de la base de datos
+    
                 $product->setCode($row['code']);
+                $product->setCategory($row['category']);
+                $product->setName($row['name']);
+                $product->setPrice($row['price']);
+                $product->setSold($row['sold']);
+                $product->setStock($row['stock']);
                 
                 $topProducts[] = $product;
             }
-
+            
             return $topProducts;
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            return [];
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
         }
-
     }
+    
 }
 ?>
