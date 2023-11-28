@@ -37,15 +37,7 @@
         </div>
         <h3>Best Sellers</h3>
         <!-- Aqui va la parte php para saber si hay algun resultado en la query de Best Sellers -->
-        <?php
-        // llamamos a la funcion BestSeller();
-        // function BestSeller(){
-            // if($resltado=false){
-            //     // se ponen del top 1 al top 4, en caso de haber 4 o más.
-            // }else{
-            //     echo "<p>There is no Best Sellers yet!</p>";
-            // }
-        // }
+        <?php // bestSellers();
         ?>
     </body>
 </html>
