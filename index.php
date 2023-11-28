@@ -10,8 +10,13 @@ switch($action){
 		break;
 	/* etc */
 
+	case 'administrator':
+		include 'controllers/AdminDashboardController.php';
+		break;
+
 	case 'main':
 	default:
+	//To-do
 		include 'controllers/LoginController.php';		
 		break;
 

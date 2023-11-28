@@ -17,7 +17,7 @@ class LoginController {
 
         if ($userModel->authenticate($userEmail, $password)) {
             // Autenticación exitosa, redirige a la página principal
-            header('Location: index.php');
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
             include 'views/LoginView.html';
