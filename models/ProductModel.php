@@ -8,6 +8,7 @@ class ProductModel {
     private $stock;
     private $size;
     private $outstanding;
+    private $sold;
 
     public function setCode($code) {
         $this->code = $code;
@@ -72,8 +73,37 @@ class ProductModel {
     public function getOutstanding() {
         return $this->outstanding;
     }
-    public function getTopProducts() {
-        $
+
+    public function setSold($sold) {
+        $this->sold = $sold;
+    } 
+
+    public function getSold() {
+        return $this->sold;
+    }
+    public function getTopProducts($conn, $limit = 10) {
+        try {
+            $query = "SELECT * FROM products ORDER BY sold DESC LIMIT :limit";
+            $stmt = $this->$conn->prepare($query);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $topProducts = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $product = new ProductModel();
+                // Asignar valores al objeto ProductModel desde la fila de la base de datos
+                $product->setCode($row['code']);
+                
+                $topProducts[] = $product;
+            }
+
+            return $topProducts;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+
     }
 }
 ?>
