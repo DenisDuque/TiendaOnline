@@ -73,7 +73,7 @@ class ProductModel {
         return $this->outstanding;
     }
     public function getTopProducts() {
-        
+        $
     }
 }
 ?>
