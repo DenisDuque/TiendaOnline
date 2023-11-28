@@ -19,4 +19,9 @@ class AdminDashboardController {
         */
     }
 }
+if(isset($_SESSION['user'])) {
+    if($_SESSION['rol'] != 'admin') {
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
+    }
+}
 ?>  
