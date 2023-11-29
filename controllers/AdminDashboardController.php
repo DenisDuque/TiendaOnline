@@ -37,13 +37,13 @@ $AdminDashboardController = new AdminDashboardController();
             // Registrar nuevo usuario
         	$loginController->processRegistration();
         	break;
-        case 'Categories':
-
-        case 'Products':
-
-        case '':
-
-        case '':
+        case 'categories':
+            break;
+        case 'products':
+            break;
+        case 'orders':
+            break;
+        case 'customers':
     	default:
         	// Manejar caso no válido
         	break;
