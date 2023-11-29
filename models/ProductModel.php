@@ -1,5 +1,6 @@
 <?php
-class ProductModel {
+include("../config/Database.php");
+class ProductModel extends Database {
     private $code;
     private $name;
     private $description;
@@ -81,7 +82,8 @@ class ProductModel {
     public function getSold() {
         return $this->sold;
     }
-    public function getTopProducts($conn, $limit = 10) {
+    public function getTopProducts($limit = 10) {
+        $conn = conection();
         try {
             $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = $conn->prepare($query);
