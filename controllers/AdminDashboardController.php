@@ -20,7 +20,14 @@ class AdminDashboardController {
     }
     public function bestSelled() {
         $ProductModel = new ProductModel();
-        $Products = $ProductModel->getTopProducts()
+        $Products = $ProductModel->getTopProducts();
+        foreach($Products as $product) {
+            echo "
+                <div>
+                    ". $product['name'] ."
+                </div>
+            ";
+        }
     }
 }
 if(isset($_SESSION['user'])) {
