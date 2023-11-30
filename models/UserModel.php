@@ -94,7 +94,8 @@ class UserModel extends Database {
                 $stmt->bindParam(':name', $userName);
                 $stmt->bindParam(':surnames', $userSurnames);
                 //Borrar admin despues para crear el administrador por primera vez!!!! (cambiar por customer).
-                $stmt->bindParam(':rol', 'admin');
+                $role = 'admin';
+                $stmt->bindParam(':rol', $role);
                 $stmt->execute();
                 return $stmt;
             }

@@ -19,24 +19,23 @@ class AdminDashboardController {
         */
     }
     public function bestSelled() {
-        $ProductModel = new ProductModel();
-        $Products = $ProductModel->getTopProducts(10);
+        $Products = ProductModel::getTopProducts(10);
         foreach($Products as $product) {
-            $img = $ProductModel->getProductImage('lateralPerspective', $product->getCode());
+            $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
             echo "
                 <div>
                     <div>
                         <img src='/views/assets/images/products".$img."'>
                     </div>
                     <div>
-                        <div>". $product['name'] ."</div>
-                        <div>Category: ". $product['category'] ."</div>
-                        <div>Product Code: ". $product['code'] ."</div>
-                        <div>". $product['price'] ."</div>
+                        <div>". $product->getName() ."</div>
+                        <div>Category: ". $product->getCategory() ."</div>
+                        <div>Product Code: ". $product->getCode() ."</div>
+                        <div>". $product->getPrice() ."</div>
                     </div>
                     <div>
-                        <div>Sold: ". $product['sold'] ."</div>
-                        <div>Stock: ". $product['stock'] ."</div>
+                        <div>Sold: ". $product->getSold() ."</div>
+                        <div>Stock: ". $product->getStock() ."</div>
                     </div>
                 </div>
             ";

@@ -90,7 +90,7 @@ class ProductModel extends Database {
         $this->sold = $sold;
         $this->stock = $stock;
     }
-    public function getTopProducts($limit = 10) {
+    public static function getTopProducts($limit = 10) {
         try {
             $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::$conn->prepare($query);
@@ -112,7 +112,7 @@ class ProductModel extends Database {
         }
     }
 
-    public function getProductImage($perspective, $product) {
+    public static function getProductImage($perspective, $product) {
         try {
             $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
             $stmt = self::$conn->prepare($query);
