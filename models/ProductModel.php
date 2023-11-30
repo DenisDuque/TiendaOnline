@@ -1,5 +1,5 @@
 <?php
-include("../config/Database.php");
+include("/config/Database.php");
 class ProductModel extends Database {
     private $code;
     private $name;

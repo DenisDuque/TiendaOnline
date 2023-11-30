@@ -11,27 +11,14 @@ body {
   align-items: center;
   justify-content: center;
   background-size: 300% 300%;
-  background-image: linear-gradient(-45deg, #0C134F 0%, #1D267D 25%, #5C469C 51%, #D4ADFC 100%);
-  -webkit-animation: AnimateBackground 20s ease infinite;
+  background-image: linear-gradient(-45deg, #FF5E00 0%, #FD9346 25%, #FDA766 51%, #FFCB74 100%);
   animation: AnimateBackground 20s ease infinite;
   height: 100vh;
   margin: -2vh 0 6vh;
   margin-top: 2vh;
   -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@-webkit-keyframes AnimateBackground {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  -moz-user-select: none;
+       user-select: none;
 }
 @keyframes AnimateBackground {
   0% {
@@ -66,7 +53,7 @@ span {
 }
 
 a {
-  color: #1D267D;
+  color: #FF5E00;
   font-size: 1.9vh;
   text-decoration: none;
   margin: 2vh 0;
@@ -102,7 +89,7 @@ a {
 }
 
 .social-container a {
-  border: 1px solid #5C469C;
+  border: 1px solid #ABABAB;
   border-radius: 50%;
   display: inline-flex;
   justify-content: center;
@@ -114,7 +101,7 @@ a {
 }
 .social-container a:hover {
   transform: rotateZ(13deg);
-  border: 1px solid #1D267D;
+  border: 1px solid #FF5E00;
 }
 .social-container a div {
   width: 100%;
@@ -148,8 +135,8 @@ a {
 button {
   border-radius: 10px;
   box-shadow: 0 1px 1px;
-  border: 1px solid #5C469C;
-  background: #5C469C;
+  border: 1px solid #FD9346;
+  background: #FD9346;
   color: #fff;
   font-size: 1.6vh;
   font-weight: bold;
@@ -202,7 +189,7 @@ button.ghost {
 }
 
 .overlay {
-  background: linear-gradient(to right, #1D267D, #5C469C) no-repeat 0 0/cover;
+  background: linear-gradient(to right, #FF5E00, #FDA766) no-repeat 0 0/cover;
   color: #fff;
   position: relative;
   left: -100%;

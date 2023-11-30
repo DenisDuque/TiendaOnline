@@ -1,5 +1,6 @@
 <?php
-class UserModel {
+include(__DIR__."/../config/Database.php");
+class UserModel extends Database {
     private $email;
     private $phone;
     private $name;
@@ -56,15 +57,31 @@ class UserModel {
     }
 
     public function authenticate($userEmail, $password) {
-        /*
-        
-        */ 
+        $conn = $this->connect();
+        try {
+            $hashedPassword = md5($password);
+            $query = "SELECT rol FROM users WHERE email = :email AND password = :password";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':email', $userEmail);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->execute();
+            if($stmt->rowCount() > 0) {
+                $rol = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rol['rol'];
+            } else {
+                return false;
+            }
+
+            //$img = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
 
     public function register($userName, $userEmail, $userPassword) {
         $validRegister = false;
         $selectUser = "SELECT * FROM users WHERE email LIKE $userEmail";
-
     }
 }
 ?>

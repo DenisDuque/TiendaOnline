@@ -1,9 +1,8 @@
 <?php
 
-
 class Database{
    
-    public function conectar(){
+    public function connect(){
 
         try {
             // Configuración de la base de datos

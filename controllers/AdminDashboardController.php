@@ -25,7 +25,19 @@ class AdminDashboardController {
             $img = $ProductModel->getProductImage('lateralPerspective', $product->getCode());
             echo "
                 <div>
-                    ". $product['name'] ."
+                    <div>
+                        <img src='/views/assets/images/products".$img."'>
+                    </div>
+                    <div>
+                        <div>". $product['name'] ."</div>
+                        <div>Category: ". $product['category'] ."</div>
+                        <div>Product Code: ". $product['code'] ."</div>
+                        <div>". $product['price'] ."</div>
+                    </div>
+                    <div>
+                        <div>Sold: ". $product['sold'] ."</div>
+                        <div>Stock: ". $product['stock'] ."</div>
+                    </div>
                 </div>
             ";
         }
