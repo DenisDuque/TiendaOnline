@@ -97,7 +97,8 @@ CREATE TABLE public.products (
     price integer NOT NULL,
     stock integer NOT NULL,
     outstanding character(50) NOT NULL,
-    size integer NOT NULL
+    size integer NOT NULL,
+    sold integer NOT NULL
 );
 
 
@@ -194,7 +195,7 @@ COPY public.notifications (id, useremail, message, title) FROM stdin;
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.products (code, name, description, codecategory, price, stock, outstanding, size) FROM stdin;
+COPY public.products (code, name, description, codecategory, price, stock, outstanding, size, sold) FROM stdin;
 \.
 
 

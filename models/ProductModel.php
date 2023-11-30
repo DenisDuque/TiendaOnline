@@ -112,6 +112,20 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    
+    public function getProductImage($perspective, $product) {
+        $conn = conection();
+        try {
+            $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':perspective', $perspective);
+            $stmt->bindParam(':product', $product);
+            $stmt->execute();
+            $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $img['route'];
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>

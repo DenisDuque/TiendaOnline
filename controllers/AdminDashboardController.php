@@ -22,6 +22,7 @@ class AdminDashboardController {
         $ProductModel = new ProductModel();
         $Products = $ProductModel->getTopProducts(10);
         foreach($Products as $product) {
+            $img = $ProductModel->getProductImage('lateralPerspective', $product->getCode());
             echo "
                 <div>
                     ". $product['name'] ."

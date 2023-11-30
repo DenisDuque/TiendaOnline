@@ -10,7 +10,7 @@ class Database{
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "TiendaOnline";
+            $dbname = "urbanstore";
             
             // Crear conexión
             $connectPdo = new PDO('pgsql:host='.$servername.';dbname='.$dbname, $username, $password);
