@@ -71,17 +71,30 @@ class UserModel extends Database {
             } else {
                 return false;
             }
-
-            //$img = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
-    public function register($userName, $userEmail, $userPassword) {
-        $validRegister = false;
-        $selectUser = "SELECT * FROM users WHERE email LIKE $userEmail";
-    }
+    public function register($userName, $userSurnames, $userEmail, $userPassword) {
+        $conn = $this->connect();
+        try {
+            $validRegister = false;
+            $selectUser = "SELECT * FROM users WHERE email LIKE :email";
+            $stmt = $conn->prepare($selectUser);
+            $stmt->bindParam(':email', $userEmail);
+            $stmt->execute();
+            if($stmt->rowCount() > 0) {
+                return false; 
+            } else {
+                $insertUser = "INSERT INTO users(email, name, surnames, rol)";
+                
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }   
+   }
 }
 ?>

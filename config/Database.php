@@ -1,14 +1,13 @@
 <?php
 
 class Database{
-   
     public function connect(){
 
         try {
             // Configuración de la base de datos
             $servername = "localhost";
-            $username = "root";
-            $password = "";
+            $username = "postgres";
+            $password = "password";
             $dbname = "urbanstore";
             
             // Crear conexión
@@ -23,7 +22,6 @@ class Database{
         }
     
     }
-    
 }
 
 ?>
