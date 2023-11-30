@@ -57,11 +57,10 @@ class UserModel extends Database {
     }
 
     public function authenticate($userEmail, $password) {
-        $conn = $this->connect();
         try {
             $hashedPassword = md5($password);
             $query = "SELECT rol FROM users WHERE email = :email AND password = :password";
-            $stmt = $conn->prepare($query);
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':email', $userEmail);
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->execute();
@@ -78,18 +77,17 @@ class UserModel extends Database {
     }
 
     public function register($userName, $userSurnames, $userEmail, $userPassword) {
-        $conn = $this->connect();
         try {
             $validRegister = false;
-            $selectUser = "SELECT * FROM users WHERE email LIKE :email";
-            $stmt = $conn->prepare($selectUser);
+            $query = "SELECT * FROM users WHERE email LIKE :email";
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':email', $userEmail);
             $stmt->execute();
             if($stmt->rowCount() > 0) {
                 return false; 
             } else {
-                $insertUser = "INSERT INTO users(email, name, surnames, rol) VALUES (:email, :name, :surnames, :rol)";
-                $stmt = $conn->prepare($insertUser);
+                $query = "INSERT INTO users(email, name, surnames, rol) VALUES (:email, :name, :surnames, :rol)";
+                $stmt = self::$conn->prepare($query);
                 $stmt->bindParam(':email', $userEmail);
                 $stmt->bindParam(':name', $userName);
                 $stmt->bindParam(':surnames', $userSurnames);
