@@ -132,6 +132,7 @@ CREATE TABLE public.users (
     surnames character(50) NOT NULL,
     address character(50),
     rol character varying(20) NOT NULL,
+    password character(200) NOT NULL,
     CONSTRAINT users_rol_check CHECK (((rol)::text = ANY (ARRAY[('admin'::character varying)::text, ('customer'::character varying)::text])))
 );
 
@@ -211,7 +212,7 @@ COPY public.shopping (id, useremail, price, status, datepurchase, dateend) FROM 
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (email, phone, name, surnames, address, rol) FROM stdin;
+COPY public.users (email, phone, name, surnames, address, rol, password) FROM stdin;
 \.
 
 

@@ -1,5 +1,6 @@
 <?php
-class UserModel {
+include("/config/Database.php");
+class UserModel extends Database {
     private $email;
     private $phone;
     private $name;
@@ -56,9 +57,19 @@ class UserModel {
     }
 
     public function authenticate($userEmail, $password) {
-        /*
-        
-        */ 
+        $conn = conection();
+        try {
+            $query = "SELECT * FROM users WHERE email = :perspective AND product = :product";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':perspective', $perspective);
+            $stmt->bindParam(':product', $product);
+            $stmt->execute();
+            $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $img['route'];
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
 
     public function register($userName, $userEmail, $userPassword) {
