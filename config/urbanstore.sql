@@ -96,7 +96,6 @@ CREATE TABLE public.products (
     codecategory character(50),
     price integer NOT NULL,
     stock integer NOT NULL,
-    outstanding character(50) NOT NULL,
     size integer NOT NULL,
     sold integer NOT NULL
 );
@@ -127,7 +126,7 @@ ALTER TABLE public.shopping OWNER TO postgres;
 
 CREATE TABLE public.users (
     email character(50) NOT NULL,
-    phone integer NOT NULL,
+    phone integer,
     name character(50) NOT NULL,
     surnames character(50) NOT NULL,
     address character(50),
@@ -144,9 +143,8 @@ ALTER TABLE public.users OWNER TO postgres;
 --
 
 CREATE TABLE public.wishlist (
-    code character(50) NOT NULL,
-    useremail character(50) NOT NULL,
-    productcode character(50) NOT NULL
+    useremail character varying(255) NOT NULL,
+    productcode character varying(255) NOT NULL
 );
 
 
@@ -196,7 +194,7 @@ COPY public.notifications (id, useremail, message, title) FROM stdin;
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.products (code, name, description, codecategory, price, stock, outstanding, size, sold) FROM stdin;
+COPY public.products (code, name, description, codecategory, price, stock, size, sold) FROM stdin;
 \.
 
 
@@ -220,7 +218,7 @@ COPY public.users (email, phone, name, surnames, address, rol, password) FROM st
 -- Data for Name: wishlist; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.wishlist (code, useremail, productcode) FROM stdin;
+COPY public.wishlist (useremail, productcode) FROM stdin;
 \.
 
 
@@ -285,7 +283,7 @@ ALTER TABLE ONLY public.users
 --
 
 ALTER TABLE ONLY public.wishlist
-    ADD CONSTRAINT wishlist_pkey PRIMARY KEY (code);
+    ADD CONSTRAINT wishlist_pkey PRIMARY KEY (useremail, productcode);
 
 
 --
@@ -294,14 +292,6 @@ ALTER TABLE ONLY public.wishlist
 
 ALTER TABLE ONLY public.bill
     ADD CONSTRAINT bill_purchase_fkey FOREIGN KEY (purchase) REFERENCES public.shopping(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: products fk_products_outstanding; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.products
-    ADD CONSTRAINT fk_products_outstanding FOREIGN KEY (outstanding) REFERENCES public.wishlist(code) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

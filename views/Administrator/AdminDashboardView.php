@@ -3,16 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <link rel="stylesheet" href="scss/css/main.css"> -->
+        <link rel="stylesheet" href="views/scss/css/administrator.css">
+        <script src="views/js/Administrator.js"></script>
         <title>Dashboard</title>
     </head>
     <body>
         <div>
+            <h1>Urban Store</h1>
             <img src="views/assets/images/utils/signout.png" alt="Sign out">
         </div>
+        <h2>Administrator Panel</h2>
         <div>
-            <h1>Urban Store</h1>
-            <h2>Administrator Panel</h2>
             <div class='panel' id='categories'>
                 <div class='image'>
                     <img src="views/assets/images/utils/categories.png" alt="Categories">
@@ -37,7 +38,9 @@
                 </div>
                 <p>Orders</p>
             </div>
-            <h3>Best Sellers</h3>
+        </div>
+        <h3>Best Sellers</h3>
+        <div>
             <!-- Aqui va la parte php para saber si hay algun resultado en la query de Best Sellers -->
             <?php // bestSellers();
             ?>

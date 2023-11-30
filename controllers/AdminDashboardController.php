@@ -1,11 +1,11 @@
 <?php
 // Controlador para gestionar el proceso de inicio de sesión
-require_once 'models/ProductModel.php';
+require_once __DIR__.'/../models/ProductModel.php';
 
 class AdminDashboardController {
     public function showAdminDashboard() {
         // Mostrar la vista de inicio de sesión
-        include 'views/AdminDashboard.php';
+        include __DIR__.'/../views/AdminDashboard.php';
     }
     public function isUserLoged() {
         /* 
@@ -53,23 +53,15 @@ $AdminDashboardController = new AdminDashboardController();
     // Si se envió el formulario, procesar el inicio de sesión o registro
     $panel = isset($_GET['panel']) ? $_GET['panel'] : '';
 	switch ($panel) {
-    	case 'login':
-            // Iniciar Sesión
-        	$loginController->processLogin();
-        	break;
-    	case 'register':
-            // Registrar nuevo usuario
-        	$loginController->processRegistration();
-        	break;
         case 'categories':
             break;
         case 'products':
             break;
         case 'orders':
             break;
-        case 'customers':
+        case '':
     	default:
-        	// Manejar caso no válido
+            include('views/Administrator/AdminDashboardView.php');
         	break;
 	}
 ?>  

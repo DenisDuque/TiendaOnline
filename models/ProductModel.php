@@ -1,5 +1,5 @@
 <?php
-include("/config/Database.php");
+include(__DIR__.'/../config/Database.php');
 class ProductModel extends Database {
     private $code;
     private $name;
@@ -90,10 +90,10 @@ class ProductModel extends Database {
         $this->sold = $sold;
         $this->stock = $stock;
     }
-    public function getTopProducts($conn, $limit = 10) {
+    public function getTopProducts($limit = 10) {
         try {
             $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
-            $stmt = $conn->prepare($query);
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
     
@@ -112,28 +112,10 @@ class ProductModel extends Database {
         }
     }
 
-    public funcion getProductFromId($id){
-        try {
-            $query = "SELECT * FROM products WHERE code LIKE '$id'";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':perspective', $perspective);
-            $stmt->bindParam(':product', $product);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $product = new ProductModel($result['code'],$result['category'],$result['name'],$result['price'],$result['sold'],$result['stock']);                
-            return $product;
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
-        }
-
-    }
-
     public function getProductImage($perspective, $product) {
-        $conn = conection();
         try {
             $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
-            $stmt = $conn->prepare($query);
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':perspective', $perspective);
             $stmt->bindParam(':product', $product);
             $stmt->execute();

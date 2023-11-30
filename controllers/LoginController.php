@@ -38,20 +38,21 @@ class LoginController {
 
     public function processRegistration() {
         $userName = $_POST['registerName'];
+        $userSurnames = $_POST['registerSurnames'];
         $userEmail = $_POST['registerEmail'];
         $password = $_POST['registerPassword'];
 
         $userModel = new UserModel();
 
         // Validar que los campos no estén vacíos (hay que añadir mas condiciones)
-        if (empty($name) || empty($email) || empty($password)) {
+        if (empty($userName) || empty($userSurnames) || empty($userEmail) || empty($password)) {
             // Mostrar pop-up con mensaje: "¡Todos los campos son obligatorios!"
             echo 'Todos los campos son obligatorios';
             return;
         }
 
         // Validar el formato del email
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
             // Mostrar pop-up con mensaje: "¡El email no es valido!"
             echo 'Formato de email no válido';
             return;
@@ -61,7 +62,7 @@ class LoginController {
         $hashedPassword = md5($password);
 
         // Guardar el usuario en la base de datos
-        $userModel->register($name, $email, $hashedPassword);
+        $userModel->register($userName, $userSurnames, $userEmail, $hashedPassword);
 
         // Redirigir a otra página después del registro exitoso
         echo 'Registro realizado';
