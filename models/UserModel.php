@@ -1,5 +1,5 @@
 <?php
-include("/config/Database.php");
+include(__DIR__."/../config/Database.php");
 class UserModel extends Database {
     private $email;
     private $phone;
