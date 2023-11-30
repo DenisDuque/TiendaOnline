@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Categories</title>
+        <title>Products</title>
     </head>
     <body>
         <div>
@@ -15,15 +15,15 @@
                 <div>
                     <div class='panel' id='categories'>
                         <div class='image'>
+                            <img src="../assets/images/utils/categories.png" alt="Categories">
+                        </div>
+                        <p>Categories</p>
+                    </div>
+                    <div class='panel' id='categories'>
+                        <div class='image'>
                             <img src="../assets/images/utils/dashboard.png" alt="Dashboard">
                         </div>
                         <p>Dashboard</p>
-                    </div>
-                    <div class='panel' id='products'>
-                        <div class='image'>
-                            <img src="../assets/images/utils/products.png" alt="Products">
-                        </div>
-                        <p>Products</p>
                     </div>
                     <div class='panel' id='customers'>
                         <div class='image'>
@@ -92,24 +92,68 @@
                 </div>
                 <div>
                     <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        <div id='productImage'>
+                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
+                        </div>
+                        <div>
+                            <label>Product's Name</label>
+                            <label>Category: Sneakers</label>
+                            <label>Product Code: Code</label>
+                            <label>$120.00</label>
+                        </div>
+                        <div>
+                            <label>Sold: 222</label>
+                            <label>Stock: 125</label>
+                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        </div>
                     </div>
                     <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        <div id='productImage'>
+                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
+                        </div>
+                        <div>
+                            <label>Product's Name</label>
+                            <label>Category: Sneakers</label>
+                            <label>Product Code: Code</label>
+                            <label>$120.00</label>
+                        </div>
+                        <div>
+                            <label>Sold: 222</label>
+                            <label>Stock: 125</label>
+                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        </div>
                     </div>
                     <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        <div id='productImage'>
+                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
+                        </div>
+                        <div>
+                            <label>Product's Name</label>
+                            <label>Category: Sneakers</label>
+                            <label>Product Code: Code</label>
+                            <label>$120.00</label>
+                        </div>
+                        <div>
+                            <label>Sold: 222</label>
+                            <label>Stock: 125</label>
+                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        </div>
                     </div>
                     <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        <div id='productImage'>
+                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
+                        </div>
+                        <div>
+                            <label>Product's Name</label>
+                            <label>Category: Sneakers</label>
+                            <label>Product Code: Code</label>
+                            <label>$120.00</label>
+                        </div>
+                        <div>
+                            <label>Sold: 222</label>
+                            <label>Stock: 125</label>
+                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                        </div>
                     </div>
                 </div>
             </div>
