@@ -7,7 +7,8 @@
 }
 
 body {
-    :first-child {
+    margin: 3vh 3vw;
+    >:first-child {
         display: flex;
         width: 100%;
         align-items: center;
@@ -18,5 +19,27 @@ body {
             height: 2.6vw;
             width: 2.6vw;
         }
+    }
+}
+.panels {
+    display: flex;
+    flex-direction: row;
+}
+.panel {
+    background-color: $adminOrange;
+    width: 12.7vw;
+    height: 13.5vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius;
+    padding: 2.5vh;
+    margin: 2.5vh;
+    img {
+        width: 7vh;
+        height: 7vh;
+        margin-bottom: 2vh;
+    }
+    p {
+        font-size: 36px;
     }
 }

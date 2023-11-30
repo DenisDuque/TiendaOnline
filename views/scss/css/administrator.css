@@ -3,15 +3,42 @@
   padding: 0;
 }
 
-body :first-child {
+body {
+  margin: 3vh 3vw;
+}
+body > :first-child {
   display: flex;
   width: 100%;
   align-items: center;
 }
-body :first-child h1 {
+body > :first-child h1 {
   font-size: 64px;
 }
-body :first-child img {
+body > :first-child img {
   height: 2.6vw;
   width: 2.6vw;
+}
+
+.panels {
+  display: flex;
+  flex-direction: row;
+}
+
+.panel {
+  background-color: rgba(255, 94, 0, 0.25);
+  width: 12.7vw;
+  height: 13.5vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 2.5vh;
+  margin: 2.5vh;
+}
+.panel img {
+  width: 7vh;
+  height: 7vh;
+  margin-bottom: 2vh;
+}
+.panel p {
+  font-size: 36px;
 }/*# sourceMappingURL=administrator.css.map */
