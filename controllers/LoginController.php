@@ -22,9 +22,9 @@ class LoginController {
             $_SESSION['rol'] = $rol;
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=administrator'>";
-            } else if ($rol == 'customer') {
+            } else {
                 /* 
-                
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=home'>";
                 */
             }
             // Autenticación exitosa, redirige a la página principal dependiendo del rol
