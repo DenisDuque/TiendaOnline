@@ -1,7 +1,7 @@
 <?php
 
 class Database{
-    protected $connect = connect();
+    protected static $conn = connect();
     public static function connect() {
 
         try {
