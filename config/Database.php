@@ -1,7 +1,8 @@
 <?php
 
 class Database{
-    public function connect(){
+    protected static $conn = connect();
+    public static function connect() {
 
         try {
             // Configuración de la base de datos

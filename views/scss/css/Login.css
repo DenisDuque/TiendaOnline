@@ -143,11 +143,14 @@ button {
   padding: 1.6vh 2.9vw;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: transform 0.8s ease-in;
+  transition: transform 0.1s ease-in;
   cursor: pointer;
 }
 button:active {
   transform: scale(0.95);
+}
+button:hover {
+  transform: scale(1.01);
 }
 button:focus {
   outline: none;

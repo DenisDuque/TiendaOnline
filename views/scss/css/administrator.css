@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body :first-child {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+body :first-child h1 {
+  font-size: 64px;
+}
+body :first-child img {
+  height: 2.6vw;
+  width: 2.6vw;
+}/*# sourceMappingURL=administrator.css.map */

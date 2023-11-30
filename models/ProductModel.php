@@ -1,5 +1,5 @@
 <?php
-include("/config/Database.php");
+include(__DIR__.'/../config/Database.php');
 class ProductModel extends Database {
     private $code;
     private $name;
@@ -82,11 +82,18 @@ class ProductModel extends Database {
     public function getSold() {
         return $this->sold;
     }
+    public function __construct($code,$category,$name,$price,$sold,$stock){
+        $this->code = $code;
+        $this->category = $category;
+        $this->name = $name;
+        $this->price = $price;
+        $this->sold = $sold;
+        $this->stock = $stock;
+    }
     public function getTopProducts($limit = 10) {
-        $conn = conection();
         try {
             $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
-            $stmt = $conn->prepare($query);
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
     
@@ -94,15 +101,7 @@ class ProductModel extends Database {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($rows as $row) {
-                $product = new ProductModel();
-    
-                $product->setCode($row['code']);
-                $product->setCategory($row['category']);
-                $product->setName($row['name']);
-                $product->setPrice($row['price']);
-                $product->setSold($row['sold']);
-                $product->setStock($row['stock']);
-                
+                $product = new ProductModel($row['code'],$row['category'],$row['name'],$row['price'],$row['sold'],$row['stock']);                
                 $topProducts[] = $product;
             }
             
@@ -112,11 +111,11 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
     public function getProductImage($perspective, $product) {
-        $conn = conection();
         try {
             $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
-            $stmt = $conn->prepare($query);
+            $stmt = self::$conn->prepare($query);
             $stmt->bindParam(':perspective', $perspective);
             $stmt->bindParam(':product', $product);
             $stmt->execute();
