@@ -59,13 +59,20 @@ class UserModel extends Database {
     public function authenticate($userEmail, $password) {
         $conn = conection();
         try {
-            $query = "SELECT * FROM users WHERE email = :perspective AND product = :product";
+            $hashedPassword = md5($password);
+            $query = "SELECT rol FROM users WHERE email = :email AND password = :password";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':perspective', $perspective);
-            $stmt->bindParam(':product', $product);
+            $stmt->bindParam(':email', $userEmail);
+            $stmt->bindParam(':password', $hashedPassword);
             $stmt->execute();
-            $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $img['route'];
+            if($stmt->rowCount() > 0) {
+                $rol = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rol['rol'];
+            } else {
+                return false;
+            }
+
+            //$img = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

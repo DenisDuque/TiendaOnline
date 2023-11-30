@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Controlador para gestionar el proceso de inicio de sesión
 require_once 'models/UserModel.php';
 
@@ -15,7 +16,13 @@ class LoginController {
 
         $userModel = new UserModel();
 
-        if ($userModel->authenticate($userEmail, $password)) {
+        $rol = $userModel->authenticate($userEmail, $password)
+        if ($rol) {
+            if($rol == 'admin') {
+
+            } else if ($rol == 'customer') {
+                
+            }
             // Autenticación exitosa, redirige a la página principal
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
         } else {
