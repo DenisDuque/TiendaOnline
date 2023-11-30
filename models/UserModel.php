@@ -88,8 +88,15 @@ class UserModel extends Database {
             if($stmt->rowCount() > 0) {
                 return false; 
             } else {
-                $insertUser = "INSERT INTO users(email, name, surnames, rol)";
-                
+                $insertUser = "INSERT INTO users(email, name, surnames, rol) VALUES (:email, :name, :surnames, :rol)";
+                $stmt = $conn->prepare($insertUser);
+                $stmt->bindParam(':email', $userEmail);
+                $stmt->bindParam(':name', $userName);
+                $stmt->bindParam(':surnames', $userSurnames);
+                //Borrar admin despues para crear el administrador por primera vez!!!! (cambiar por customer).
+                $stmt->bindParam(':rol', 'admin');
+                $stmt->execute();
+                return $stmt;
             }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
