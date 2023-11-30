@@ -1,5 +1,5 @@
 <?php
-include("/config/Database.php");
+include(__DIR__."/../config/Database.php");
 class UserModel extends Database {
     private $email;
     private $phone;
@@ -57,7 +57,7 @@ class UserModel extends Database {
     }
 
     public function authenticate($userEmail, $password) {
-        $conn = conection();
+        $conn = $this->connect();
         try {
             $hashedPassword = md5($password);
             $query = "SELECT rol FROM users WHERE email = :email AND password = :password";

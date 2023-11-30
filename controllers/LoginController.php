@@ -16,7 +16,7 @@ class LoginController {
 
         $userModel = new UserModel();
 
-        $rol = $userModel->authenticate($userEmail, $password)
+        $rol = $userModel->authenticate($userEmail, $password);
         if ($rol) {
             if($rol == 'admin') {
 
