@@ -28,6 +28,7 @@
         }
     
     }
+    // QUERYS PARA PAGINA ADMIN-CATEGORIAS, PARA PODER MOSTRAR LAS CATEGORIAS Y SUS PRODUCTOS
     $conn = connect();
     $query = "SELECT * FROM categories";
     $stmt = $conn->prepare($query);
@@ -48,6 +49,14 @@
             echo "<br>";
         }
     }
+
+    // QUERYS PARA PAGINA ADMIN-
+
+
+
+
+
+
     ?>
-    </body>
+</body>
 </html>
