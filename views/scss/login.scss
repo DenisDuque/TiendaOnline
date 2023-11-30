@@ -1,3 +1,4 @@
+@import 'variables.scss';
 // Animated Wave Background Style
 html, body {
     width: 100%;
@@ -14,7 +15,7 @@ body {
     justify-content: center;
     background-size: 300% 300%;
     // Make gradient transition from dark to light
-    background-image: linear-gradient(-45deg, #0C134F 0%, #1D267D 25%, #5C469C 51%, #D4ADFC 100%);
+    background-image: linear-gradient(-45deg, $orange 0%, #FD9346 25%, #FDA766 51%, $yellow 100%);
     -webkit-animation: AnimateBackground 20s ease infinite;
     animation: AnimateBackground 20s ease infinite;
     height: 100vh;
@@ -75,7 +76,7 @@ span {
 }
 
 a {
-    color: #1D267D;
+    color: $orange;
     font-size: 1.9vh;
     text-decoration: none;
     margin: 2vh 0;
@@ -111,7 +112,7 @@ a {
 }
 
 .social-container a {
-    border: 1px solid #5C469C;
+    border: 1px solid $grey;
     border-radius: 50%;
     display: inline-flex;
     justify-content: center;
@@ -123,7 +124,7 @@ a {
 
     &:hover {
         transform: rotateZ(13deg);
-        border: 1px solid #1D267D;
+        border: 1px solid $orange;
     }
 
     div {
@@ -162,8 +163,8 @@ a {
 button {
     border-radius: 10px;
     box-shadow: 0 1px 1px;
-    border: 1px solid #5C469C;
-    background: #5C469C;
+    border: 1px solid #FD9346;
+    background: #FD9346;
     color: #fff;
     font-size: 1.6vh;
     font-weight: bold;
@@ -219,7 +220,7 @@ button {
 }
 
 .overlay {
-    background: linear-gradient(to right, #1D267D, #5C469C) no-repeat 0 0 / cover;
+    background: linear-gradient(to right, $orange, #FDA766) no-repeat 0 0 / cover;
     color: #fff;
     position: relative;
     left: -100%;
