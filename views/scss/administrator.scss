@@ -1,9 +1,11 @@
 @import 'variables.scss';
 @import 'mixins.scss';
+@import 'https://fonts.googleapis.com/css?family=Kanit';
 
 * {
     margin: 0;
     padding: 0;
+    font-family: Kanit;
 }
 
 body {
@@ -16,14 +18,22 @@ body {
             font-size: 64px;
         }
         img {
+            filter: brightness(0);
             height: 2.6vw;
             width: 2.6vw;
+            transition: all ease 0s 0;
+        }
+        img:hover {
+            filter: brightness(1);
+            transform: scale(101%);
         }
     }
 }
+h2 {
+    font-size: 48px;
+}
 .panels {
     display: flex;
-    flex-direction: row;
 }
 .panel {
     background-color: $adminOrange;
@@ -31,15 +41,29 @@ body {
     height: 13.5vh;
     display: flex;
     flex-direction: column;
+    align-content: center;
     border-radius: $radius;
     padding: 2.5vh;
     margin: 2.5vh;
+    transition: all ease 0.33s 0;
     img {
+        transition: 0.33s;
         width: 7vh;
         height: 7vh;
-        margin-bottom: 2vh;
     }
     p {
         font-size: 36px;
+        margin-top: -2vh;
     }
+}
+
+.panel:hover {
+    background-color: $adminOrangeHover;
+    transform: scale(101%);
+    img {
+        transform: rotateZ(13deg);
+    }
+}
+h3 {
+    font-size: 40px;
 }

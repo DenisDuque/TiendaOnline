@@ -13,7 +13,7 @@
             <img src="views/assets/images/utils/signout.png" alt="Sign out">
         </div>
         <h2>Administrator Panel</h2>
-        <div>
+        <div class="panels">
             <div class='panel' id='categories'>
                 <div class='image'>
                     <img src="views/assets/images/utils/categories.png" alt="Categories">
