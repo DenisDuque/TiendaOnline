@@ -18,6 +18,18 @@ class AdminDashboardController {
         }
         */
     }
+    public function bestSelled() {
+        $ProductModel = new ProductModel();
+        $Products = $ProductModel->getTopProducts(10);
+        foreach($Products as $product) {
+            $img = $ProductModel->getProductImage('lateralPerspective', $product->getCode());
+            echo "
+                <div>
+                    ". $product['name'] ."
+                </div>
+            ";
+        }
+    }
 }
 if(isset($_SESSION['user'])) {
     if($_SESSION['rol'] != 'admin') {
