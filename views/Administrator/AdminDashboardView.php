@@ -41,9 +41,7 @@
         </div>
         <h3>Best Sellers</h3>
         <div>
-            <!-- Aqui va la parte php para saber si hay algun resultado en la query de Best Sellers -->
-            <?php // bestSellers();
-            ?>
+            <?php AdminDashboardController::bestSellers(); ?>
         </div>
     </body>
 </html>

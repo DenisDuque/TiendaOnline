@@ -92,8 +92,8 @@ class ProductModel extends Database {
     }
     public static function getTopProducts($limit = 10) {
         try {
-            $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
-            $stmt = self::$conn->prepare($query);
+            $query = "SELECT code, codecategory, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
+            $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
     
@@ -101,21 +101,29 @@ class ProductModel extends Database {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($rows as $row) {
-                $product = new ProductModel($row['code'],$row['category'],$row['name'],$row['price'],$row['sold'],$row['stock']);                
+                $product = new ProductModel(
+                    $row['code'],
+                    $row['codecategory'],
+                    $row['name'],
+                    $row['price'],
+                    $row['sold'],
+                    $row['stock']
+                );
                 $topProducts[] = $product;
             }
-            
+    
             return $topProducts;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+    
 
     public static function getProductImage($perspective, $product) {
         try {
             $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
-            $stmt = self::$conn->prepare($query);
+            $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':perspective', $perspective);
             $stmt->bindParam(':product', $product);
             $stmt->execute();
