@@ -18,12 +18,16 @@ class LoginController {
 
         $rol = $userModel->authenticate($userEmail, $password);
         if ($rol) {
+            $_SESSION['email'] = $userEmail;
+            $_SESSION['rol'] = $rol;
             if($rol == 'admin') {
-
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=administrator'>";
             } else if ($rol == 'customer') {
+                /* 
                 
+                */
             }
-            // Autenticación exitosa, redirige a la página principal
+            // Autenticación exitosa, redirige a la página principal dependiendo del rol
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
