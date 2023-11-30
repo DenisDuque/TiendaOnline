@@ -19,7 +19,7 @@
                         </div>
                         <p>Categories</p>
                     </div>
-                    <div class='panel' id='categories'>
+                    <div class='panel' id='dashboard'>
                         <div class='image'>
                             <img src="../assets/images/utils/dashboard.png" alt="Dashboard">
                         </div>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div>
-                <h2>Categories</h2>
+                <h2>Products</h2>
                 <div id='searcher'>
                     <input type="text" name="q" placeholder="Search">
                     <!-- LA IMAGEN SE PONE DESDE EL CSS CON EL BACKGROUND-IMAGE, AQUI SE DEJARIA EL BOTON SOLO -->
@@ -96,15 +96,15 @@
                             <img src="../assets/images/utils/productImage.png" alt="Product's Image">
                         </div>
                         <div>
-                            <label>Product's Name</label>
-                            <label>Category: Sneakers</label>
-                            <label>Product Code: Code</label>
-                            <label>$120.00</label>
+                            <p>Product's Name</p>
+                            <p>Category: Sneakers</p>
+                            <p>Product Code: Code</p>
+                            <p>$120.00</p>
                         </div>
                         <div>
-                            <label>Sold: 222</label>
-                            <label>Stock: 125</label>
-                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                            <p>Sold: 222</p>
+                            <p>Stock: 125</p>
+                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                         </div>
                     </div>
                     <div>
@@ -112,15 +112,15 @@
                             <img src="../assets/images/utils/productImage.png" alt="Product's Image">
                         </div>
                         <div>
-                            <label>Product's Name</label>
-                            <label>Category: Sneakers</label>
-                            <label>Product Code: Code</label>
-                            <label>$120.00</label>
+                            <p>Product's Name</p>
+                            <p>Category: Sneakers</p>
+                            <p>Product Code: Code</p>
+                            <p>$120.00</p>
                         </div>
                         <div>
-                            <label>Sold: 222</label>
-                            <label>Stock: 125</label>
-                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                            <p>Sold: 222</p>
+                            <p>Stock: 125</p>
+                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                         </div>
                     </div>
                     <div>
@@ -128,15 +128,15 @@
                             <img src="../assets/images/utils/productImage.png" alt="Product's Image">
                         </div>
                         <div>
-                            <label>Product's Name</label>
-                            <label>Category: Sneakers</label>
-                            <label>Product Code: Code</label>
-                            <label>$120.00</label>
+                            <p>Product's Name</p>
+                            <p>Category: Sneakers</p>
+                            <p>Product Code: Code</p>
+                            <p>$120.00</p>
                         </div>
                         <div>
-                            <label>Sold: 222</label>
-                            <label>Stock: 125</label>
-                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                            <p>Sold: 222</p>
+                            <p>Stock: 125</p>
+                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                         </div>
                     </div>
                     <div>
@@ -144,15 +144,15 @@
                             <img src="../assets/images/utils/productImage.png" alt="Product's Image">
                         </div>
                         <div>
-                            <label>Product's Name</label>
-                            <label>Category: Sneakers</label>
-                            <label>Product Code: Code</label>
-                            <label>$120.00</label>
+                            <p>Product's Name</p>
+                            <p>Category: Sneakers</p>
+                            <p>Product Code: Code</p>
+                            <p>$120.00</p>
                         </div>
                         <div>
-                            <label>Sold: 222</label>
-                            <label>Stock: 125</label>
-                            <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
+                            <p>Sold: 222</p>
+                            <p>Stock: 125</p>
+                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                         </div>
                     </div>
                 </div>
