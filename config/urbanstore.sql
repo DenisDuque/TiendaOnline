@@ -51,7 +51,8 @@ ALTER TABLE public.categories OWNER TO postgres;
 CREATE TABLE public.images (
     id character(50) NOT NULL,
     product character(50) NOT NULL,
-    route character(200) NOT NULL
+    route character(200) NOT NULL,
+    perspectives character(50) NOT NULL
 );
 
 
@@ -169,7 +170,7 @@ COPY public.categories (code, name) FROM stdin;
 -- Data for Name: images; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.images (id, product, route) FROM stdin;
+COPY public.images (id, product, route, perspectives) FROM stdin;
 \.
 
 

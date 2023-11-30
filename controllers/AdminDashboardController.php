@@ -20,7 +20,7 @@ class AdminDashboardController {
     }
     public function bestSelled() {
         $ProductModel = new ProductModel();
-        $Products = $ProductModel->getTopProducts();
+        $Products = $ProductModel->getTopProducts(10);
         foreach($Products as $product) {
             echo "
                 <div>
