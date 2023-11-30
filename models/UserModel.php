@@ -64,7 +64,6 @@ class UserModel {
     public function register($userName, $userEmail, $userPassword) {
         $validRegister = false;
         $selectUser = "SELECT * FROM users WHERE email LIKE $userEmail";
-
     }
 }
 ?>
