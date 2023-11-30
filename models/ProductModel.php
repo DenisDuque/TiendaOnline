@@ -82,8 +82,15 @@ class ProductModel extends Database {
     public function getSold() {
         return $this->sold;
     }
-    public function getTopProducts($limit = 10) {
-        $conn = conection();
+    public function __construct($code,$category,$name,$price,$sold,$stock){
+        $this->code = $code;
+        $this->category = $category;
+        $this->name = $name;
+        $this->price = $price;
+        $this->sold = $sold;
+        $this->stock = $stock;
+    }
+    public function getTopProducts($conn, $limit = 10) {
         try {
             $query = "SELECT code, category, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = $conn->prepare($query);
@@ -94,15 +101,7 @@ class ProductModel extends Database {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
             foreach ($rows as $row) {
-                $product = new ProductModel();
-    
-                $product->setCode($row['code']);
-                $product->setCategory($row['category']);
-                $product->setName($row['name']);
-                $product->setPrice($row['price']);
-                $product->setSold($row['sold']);
-                $product->setStock($row['stock']);
-                
+                $product = new ProductModel($row['code'],$row['category'],$row['name'],$row['price'],$row['sold'],$row['stock']);                
                 $topProducts[] = $product;
             }
             
@@ -112,6 +111,24 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+    public funcion getProductFromId($id){
+        try {
+            $query = "SELECT * FROM products WHERE code LIKE '$id'";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':perspective', $perspective);
+            $stmt->bindParam(':product', $product);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $product = new ProductModel($result['code'],$result['category'],$result['name'],$result['price'],$result['sold'],$result['stock']);                
+            return $product;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+
+    }
+
     public function getProductImage($perspective, $product) {
         $conn = conection();
         try {
