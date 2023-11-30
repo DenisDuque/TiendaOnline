@@ -112,12 +112,11 @@ class ProductModel extends Database {
         }
     }
 
-    public funcion getProductFromId($id){
+    public static function getProductFromId($id){
+        $conn = conection();
         try {
             $query = "SELECT * FROM products WHERE code LIKE '$id'";
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':perspective', $perspective);
-            $stmt->bindParam(':product', $product);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $product = new ProductModel($result['code'],$result['category'],$result['name'],$result['price'],$result['sold'],$result['stock']);                

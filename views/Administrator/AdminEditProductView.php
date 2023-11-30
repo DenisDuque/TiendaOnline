@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php
-
+        include("ProductModel.php");
         function fillInfoProduct($id){
             $product = new ProductModel()->getProductFromId($id);
 
