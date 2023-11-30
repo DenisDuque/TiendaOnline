@@ -1,0 +1,11 @@
+@import 'variables.scss';
+
+@mixin background{
+    background-color: $black;
+}
+
+
+@mixin alignItemsCenter{
+    background-color: $orange;
+    border: 2px solid $grey;
+}

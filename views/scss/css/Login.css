@@ -12,13 +12,26 @@ body {
   justify-content: center;
   background-size: 300% 300%;
   background-image: linear-gradient(-45deg, #0C134F 0%, #1D267D 25%, #5C469C 51%, #D4ADFC 100%);
+  -webkit-animation: AnimateBackground 20s ease infinite;
   animation: AnimateBackground 20s ease infinite;
   height: 100vh;
   margin: -2vh 0 6vh;
   margin-top: 2vh;
   -webkit-user-select: none;
-  -moz-user-select: none;
-       user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@-webkit-keyframes AnimateBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @keyframes AnimateBackground {
   0% {

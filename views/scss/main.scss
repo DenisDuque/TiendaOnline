@@ -1,0 +1,10 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
+body{
+    background-color: $black;
+    
+    body > div:nth-child(2) {
+        @include alignItemsCenter;
+    }
+}
