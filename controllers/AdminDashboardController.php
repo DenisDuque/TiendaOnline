@@ -58,6 +58,8 @@ $AdminDashboardController = new AdminDashboardController();
             break;
         case 'orders':
             break;
+        case 'customers':
+            break;
         case '':
     	default:
             $AdminDashboardController->showAdminDashboard();
