@@ -18,17 +18,17 @@ class LoginController {
 
         $rol = $userModel->authenticate($userEmail, $password);
         if ($rol) {
+            //Creacion de las variables de sesion.
             $_SESSION['email'] = $userEmail;
             $_SESSION['rol'] = $rol;
+            // Autenticación exitosa, redirige a la página principal dependiendo del rol
             if($rol == 'admin') {
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=administrator'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
                 /* 
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=home'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=home'>";
                 */
             }
-            // Autenticación exitosa, redirige a la página principal dependiendo del rol
-            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
             include 'views/LoginView.html';
@@ -37,7 +37,7 @@ class LoginController {
     }
 
     public function processRegistration() {
-        $userName = $_POST['registerName'];
+        $userName = $_POST['registerUsername'];
         $userSurnames = $_POST['registerSurnames'];
         $userEmail = $_POST['registerEmail'];
         $password = $_POST['registerPassword'];
@@ -62,7 +62,14 @@ class LoginController {
         $hashedPassword = md5($password);
 
         // Guardar el usuario en la base de datos
-        $userModel->register($userName, $userSurnames, $userEmail, $hashedPassword);
+        if ($userModel->register($userName, $userSurnames, $userEmail, $hashedPassword)) {
+            $_SESSION['email'] = $userEmail;
+            //$_SESSION['rol'] = 'customer';
+
+            //Aqui la redireccion futura a la pagina principal de customer logeado.
+            //echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=customer'>";
+            
+        }
 
         // Redirigir a otra página después del registro exitoso
         echo 'Registro realizado';
