@@ -5,7 +5,7 @@ require_once __DIR__.'/../models/ProductModel.php';
 class AdminDashboardController {
     public function showAdminDashboard() {
         // Mostrar la vista de inicio de sesión
-        include __DIR__.'/../views/AdminDashboard.php';
+        include __DIR__.'/../views/Administrator/AdminDashboardView.php';
     }
     public function isUserLoged() {
         /* 
@@ -60,7 +60,8 @@ $AdminDashboardController = new AdminDashboardController();
             break;
         case '':
     	default:
-            include('views/Administrator/AdminDashboardView.php');
+            $AdminDashboardController->showAdminDashboard();
         	break;
 	}
+    
 ?>  

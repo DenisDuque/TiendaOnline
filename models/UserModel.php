@@ -65,7 +65,7 @@ class UserModel extends Database {
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->execute();
             if($stmt->rowCount() > 0) {
-                $rol = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $rol = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $rol['rol'];
             } else {
                 return false;
@@ -86,13 +86,13 @@ class UserModel extends Database {
             if($stmt->rowCount() > 0) {
                 return false; 
             } else {
-                $query = "INSERT INTO users(email, name, surnames, rol) VALUES (:email, :name, :surnames, :rol)";
+                $query = "INSERT INTO users(email, name, surnames, rol, password) VALUES (:email, :name, :surnames, :rol, :password)";
                 $stmt = self::getConnection()->prepare($query);
                 $stmt->bindParam(':email', $userEmail);
                 $stmt->bindParam(':name', $userName);
                 $stmt->bindParam(':surnames', $userSurnames);
-                //Borrar admin despues para crear el administrador por primera vez!!!! (cambiar por customer).
-                $role = 'admin';
+                $stmt->bindParam(':password', $userPassword);
+                $role = 'customer';
                 $stmt->bindParam(':rol', $role);
                 $stmt->execute();
                 return $stmt;
