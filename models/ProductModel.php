@@ -109,7 +109,9 @@ class ProductModel extends Database {
             $catName = $categoryName->fetchAll(PDO::FETCH_NUM);
             $catName = $categoryName[0][0];
 
+            $catName = strtoupper($catName);
             $catName = str_split($catName);
+            $name = strtoupper($name);
             $name = str_split($name);
 
             for($i = 0; $i<3; $i++){
