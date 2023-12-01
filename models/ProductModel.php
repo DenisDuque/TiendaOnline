@@ -90,6 +90,47 @@ class ProductModel extends Database {
         $this->sold = $sold;
         $this->stock = $stock;
     }
+    
+    public static function generateCode($name, $category){
+        //Dos primeras letras categoria--numero 3 cifras--Tres primeras letras producto
+        try {
+            $query = "SELECT * FROM products WHERE category LIKE :category";
+            $categoryCount = self::$conn->prepare($query);
+            $categoryCount ->bindParam(':category', $category, PDO::PARAM_STR);
+            $categoryCount ->execute();
+            $numId = $categoryCount ->rowCount();
+            $numId+= 1;
+            $numId = (string) $numId;
+
+            $query = "SELECT name FROM categories WHERE code LIKE :code";
+            $categoryName = self::$conn->prepare($query);
+            $categoryName->bindParam(':code', $category, PDO::PARAM_STR);
+            $categoryName->execute();
+            $catName = $categoryName->fetchAll(PDO::FETCH_NUM);
+            $catName = $categoryName[0][0];
+
+            $catName = str_split($catName);
+            $name = str_split($name);
+
+            for($i = 0; $i<3; $i++){
+                if(strlen($numId)<3){
+                    $numId = "0".$numId;
+                }
+                
+            }
+
+            $code = $catName[0].$catName[1].$numId.$name[0].$name[1].$name[2];
+
+            return $code;
+            
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+
+
+    }
+
     public static function getTopProducts($limit = 10) {
         try {
             $query = "SELECT code, codecategory, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
