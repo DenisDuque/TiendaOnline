@@ -96,10 +96,10 @@ class ProductModel extends Database {
         try {
             $query = "SELECT * FROM products WHERE category LIKE :category";
             $categoryCount = self::$conn->prepare($query);
-            $categoryCount ->bindParam(':category', $category, PDO::PARAM_STR);
-            $categoryCount ->execute();
-            $numId = $categoryCount ->rowCount();
-            $numId+= 1;
+            $categoryCount->bindParam(':category', $category, PDO::PARAM_STR);
+            $categoryCount->execute();
+            $numId = $categoryCount->rowCount();
+            $numId += 1;
             $numId = (string) $numId;
 
             $query = "SELECT name FROM categories WHERE code LIKE :code";
@@ -111,11 +111,12 @@ class ProductModel extends Database {
 
             $catName = strtoupper($catName);
             $catName = str_split($catName);
+
             $name = strtoupper($name);
             $name = str_split($name);
 
-            for($i = 0; $i<3; $i++){
-                if(strlen($numId)<3){
+            for($i = 0; $i<3; $i++) {
+                if(strlen($numId) < 3) {
                     $numId = "0".$numId;
                 }
                 
@@ -129,8 +130,6 @@ class ProductModel extends Database {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
-
-
     }
 
     public static function getTopProducts($limit = 10) {
