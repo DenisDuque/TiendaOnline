@@ -1,6 +1,6 @@
 <?php
 // Controlador para gestionar el proceso de inicio de sesión
-require_once __DIR__.'/../models/ProductModel.php';
+
 
 class AdminDashboardController {
     public function showAdminDashboard() {
@@ -42,28 +42,35 @@ class AdminDashboardController {
         }
     }
 }
+
 if(isset($_SESSION['user'])) {
     if($_SESSION['rol'] != 'admin') {
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php'>";
     }
-}
-
-$AdminDashboardController = new AdminDashboardController();
+} else {
+    $AdminDashboardController = new AdminDashboardController();
     // Si se envió el formulario, procesar el inicio de sesión o registro
     $panel = isset($_GET['panel']) ? $_GET['panel'] : '';
-	switch ($panel) {
+    switch ($panel) {
         case 'categories':
+            include __DIR__.'/AdminCategoriesController.php';
             break;
         case 'products':
+            include __DIR__.'/AdminProductsController.php';
             break;
         case 'orders':
+            include __DIR__.'/AdminOrdersController.php';
             break;
         case 'customers':
+            include __DIR__.'/AdminCustomersController.php';
             break;
         case '':
-    	default:
+        default:
+            require_once __DIR__.'/../models/ProductModel.php';
             $AdminDashboardController->showAdminDashboard();
-        	break;
-	}
+            break;
+    }
+}
+
     
 ?>  
