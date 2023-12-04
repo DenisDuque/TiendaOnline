@@ -38,49 +38,6 @@
                         <p>Orders</p>
                     </div>
                 </div>
-                <div>
-                    <div id='row'>
-                        <img src="../assets/images/utils/row.png" alt="Dashboard">
-                    </div>
-                    <div>
-                        <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
-                        </div>
-                        <p>Product's Name</p>
-                    </div>
-                    <div>
-                        <div>
-                            <p>Product Code</p>
-                            <hr>
-                            <p>NI001NIK</p>
-                        </div>
-                        <div>
-                            <p>Price</p>
-                            <hr>
-                            <p>$ 120.00</p>
-                        </div>
-                        <div>
-                            <p>Stock</p>
-                            <hr>
-                            <p>99</p>
-                        </div>
-                        <div>
-                            <label>Status</label>
-                            <select name="status" id="status">
-                                <option value="Enabled">Enabled</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>Category</label>
-                            <select name="category" id="category">
-                                <option value="Sneakers">Sneakers</option>
-                            </select>
-                        </div>
-                        <div id='button'>
-                            <input type="submit" value="Save Changes">
-                        </div>
-                    </div>
-                </div>
             </div>
             <div>
                 <h2>Products</h2>
@@ -91,70 +48,7 @@
                     <button type="submit"><img src="../assets/images/utils/addProduct.png" alt="Add Product"></a></button>
                 </div>
                 <div>
-                    <div>
-                        <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
-                        </div>
-                        <div>
-                            <p>Product's Name</p>
-                            <p>Category: Sneakers</p>
-                            <p>Product Code: Code</p>
-                            <p>$120.00</p>
-                        </div>
-                        <div>
-                            <p>Sold: 222</p>
-                            <p>Stock: 125</p>
-                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
-                        </div>
-                    </div>
-                    <div>
-                        <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
-                        </div>
-                        <div>
-                            <p>Product's Name</p>
-                            <p>Category: Sneakers</p>
-                            <p>Product Code: Code</p>
-                            <p>$120.00</p>
-                        </div>
-                        <div>
-                            <p>Sold: 222</p>
-                            <p>Stock: 125</p>
-                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
-                        </div>
-                    </div>
-                    <div>
-                        <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
-                        </div>
-                        <div>
-                            <p>Product's Name</p>
-                            <p>Category: Sneakers</p>
-                            <p>Product Code: Code</p>
-                            <p>$120.00</p>
-                        </div>
-                        <div>
-                            <p>Sold: 222</p>
-                            <p>Stock: 125</p>
-                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
-                        </div>
-                    </div>
-                    <div>
-                        <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
-                        </div>
-                        <div>
-                            <p>Product's Name</p>
-                            <p>Category: Sneakers</p>
-                            <p>Product Code: Code</p>
-                            <p>$120.00</p>
-                        </div>
-                        <div>
-                            <p>Sold: 222</p>
-                            <p>Stock: 125</p>
-                            <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
-                        </div>
-                    </div>
+                    <?php AdminProductsController::showProducts(); ?>
                 </div>
             </div>
         </form>

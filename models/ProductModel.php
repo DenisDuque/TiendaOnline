@@ -132,6 +132,30 @@ class ProductModel extends Database {
         }
     }
 
+    public static function getAllProducts() {
+        try {
+            $query = "SELECT code, codecategory, name, price, sold, stock FROM products";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $Products = [];
+            foreach($rows as $row) {
+                $product = new ProductModel(
+                    $row['code'],
+                    $row['codecategory'],
+                    $row['name'],
+                    $row['price'],
+                    $row['sold'],
+                    $row['stock']
+                );
+                $Products[] = $product;
+            }
+            return $Products;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
     public static function getTopProducts($limit = 10) {
         try {
             $query = "SELECT code, codecategory, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
