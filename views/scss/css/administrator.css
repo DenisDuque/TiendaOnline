@@ -5,37 +5,46 @@
   font-family: Kanit;
 }
 
-body {
-  margin: 3vh 3vw;
-}
-body > :first-child {
+header {
   display: flex;
   width: 100%;
   align-items: center;
 }
-body > :first-child h1 {
+header h1 {
   font-size: 64px;
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
-body > :first-child img {
+header img {
   filter: brightness(0);
   height: 2.6vw;
   width: 2.6vw;
-  transition: all ease 0s 0;
+  margin-right: 2.6vw;
 }
-body > :first-child img:hover {
+header img:hover {
   filter: brightness(1);
-  transform: scale(101%);
+  transform: scale(1.01);
 }
 
-h2 {
-  font-size: 48px;
+#container {
+  width: 100%;
+  height: 82vh;
 }
 
-.panels {
+#leftPanel {
+  overflow: hidden;
+  height: 100%;
+  float: left;
+  margin-left: 6vw;
+}
+#leftPanel .panels {
   display: flex;
+  flex-direction: column;
+  height: -moz-fit-content;
+  height: fit-content;
 }
-
-.panel {
+#leftPanel .panel {
   background-color: rgba(255, 94, 0, 0.25);
   width: 12.7vw;
   height: 13.5vh;
@@ -44,27 +53,39 @@ h2 {
   align-content: center;
   border-radius: 10px;
   padding: 2.5vh;
-  margin: 2.5vh;
+  margin-bottom: 2.5vh;
   transition: all ease 0.33s 0;
 }
-.panel img {
+#leftPanel .panel img {
   transition: 0.33s;
   width: 7vh;
   height: 7vh;
 }
-.panel p {
+#leftPanel .panel p {
   font-size: 36px;
   margin-top: -2vh;
 }
-
-.panel:hover {
+#leftPanel .panel:hover {
   background-color: rgba(255, 94, 0, 0.4);
   transform: scale(101%);
 }
-.panel:hover img {
+#leftPanel .panel:hover img {
   transform: rotateZ(13deg);
 }
 
-h3 {
-  font-size: 40px;
+#rightPanel {
+  float: right;
+  width: 41vw;
+  height: 100%;
+  margin-right: 20vw;
+}
+#rightPanel h2 {
+  margin-top: 2vh;
+  font-size: 42px;
+  justify-self: center;
+  text-align: center;
+}
+#rightPanel #listContainer {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=administrator.css.map */

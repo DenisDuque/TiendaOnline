@@ -8,64 +8,98 @@
     font-family: Kanit;
 }
 
-body {
-    margin: 3vh 3vw;
-    >:first-child {
+// Header Styles
+
+header {
+	display: flex;
+	width: 100%;
+	align-items: center;
+    
+	h1 {
+    	font-size: 64px;
+    	margin: 0;
+    	flex: 1;
+    	text-align: center;
+	}
+
+	img {
+    	filter: brightness(0);
+    	height: 2.6vw;
+    	width: 2.6vw;
+        margin-right: 2.6vw;
+
+    	&:hover {
+        	filter: brightness(1);
+        	transform: scale(1.01);
+    	}
+	}
+}
+
+#container {
+    width: 100%;
+    height: 82vh;
+}
+
+// Left Panel Styles
+
+#leftPanel {
+    overflow: hidden;
+    height: 100%;
+    float: left;
+    margin-left: 6vw;
+    .panels {
         display: flex;
-        width: 100%;
-        align-items: center;
-        h1 {
-            font-size: 64px;
-        }
+        flex-direction: column;
+        height: fit-content;
+    }
+    .panel {
+        background-color: $adminOrange;
+        width: 12.7vw;
+        height: 13.5vh;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        border-radius: $radius;
+        padding: 2.5vh;
+        margin-bottom: 2.5vh;
+        transition: all ease 0.33s 0;
         img {
-            filter: brightness(0);
-            height: 2.6vw;
-            width: 2.6vw;
-            transition: all ease 0s 0;
+            transition: 0.33s;
+            width: 7vh;
+            height: 7vh;
         }
-        img:hover {
-            filter: brightness(1);
-            transform: scale(101%);
+        p {
+            font-size: 36px;
+            margin-top: -2vh;
         }
     }
-}
-h2 {
-    font-size: 48px;
-}
-.panels {
-    display: flex;
-}
-.panel {
-    background-color: $adminOrange;
-    width: 12.7vw;
-    height: 13.5vh;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    border-radius: $radius;
-    padding: 2.5vh;
-    margin: 2.5vh;
-    transition: all ease 0.33s 0;
-    img {
-        transition: 0.33s;
-        width: 7vh;
-        height: 7vh;
-    }
-    p {
-        font-size: 36px;
-        margin-top: -2vh;
+    
+    .panel:hover {
+        background-color: $adminOrangeHover;
+        transform: scale(101%);
+        img {
+            transform: rotateZ(13deg);
+        }
     }
 }
 
-.panel:hover {
-    background-color: $adminOrangeHover;
-    transform: scale(101%);
-    img {
-        transform: rotateZ(13deg);
+// Right Panel Style
+
+#rightPanel {
+    float: right;
+    width: 41vw;
+    height: 100%;
+    margin-right: 20vw;
+    h2 {
+        margin-top: 2vh;
+        font-size: 42px;
+        justify-self: center;
+        text-align: center;
     }
-}
-h3 {
-    font-size: 40px;
+    #listContainer {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 // Search bar

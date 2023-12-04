@@ -7,6 +7,10 @@ class AdminCategoriesController {
         // Mostrar la vista de inicio de sesión
         include __DIR__.'/../views/Administrator/AdminCategoriesView.php';
     }
+
+    public static function showCategories() {
+        $fetchedCategories = CategoryModel::listCategories();
+    }
 }
 
 $AdminCategoriesController = new AdminCategoriesController();
