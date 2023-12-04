@@ -1,6 +1,6 @@
 <?php
 // Controlador para gestionar el proceso de inicio de sesión
-require_once __DIR__.'/../models/ProductModel.php';
+require_once __DIR__.'/../models/CategoryModel.php';
 
 class AdminCategoriesController {
     public function showAdminCategories() {

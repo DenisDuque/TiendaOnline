@@ -27,7 +27,7 @@
                 <h2>Orders</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
-                    <?php // AdminOrdersController::listOrders(); ?>
+                    <?php AdminOrdersController::showOrders(); ?>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         
         <!--
             <div>
-                <!--<div>
+                <div>
                     <div id='productImage'>
                         <img src="../assets/images/utils/customer.png" alt="Customer's Image">
                     </div>
@@ -97,6 +97,6 @@
                     </div>
                 </div>-->
             </div>
-        </div> -->
+        </div>
     </body>
 </html>
