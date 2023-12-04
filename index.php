@@ -17,7 +17,7 @@ switch($action){
 	case 'main':
 	default:
 	//To-do
-		include 'controllers/LoginController.php';		
+		echo 'Pagina no encontrada';
 		break;
 
 }
