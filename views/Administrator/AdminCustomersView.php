@@ -46,50 +46,7 @@
                 </form>
             </div>
             <div>
-                <div>
-                    <div id='productImage'>
-                        <img src="../assets/images/utils/customer.png" alt="Customer's Image">
-                    </div>
-                    <div>
-                        <p>Customer Name and Surname</p>
-                        <p>Email: mail</p>
-                        <p>Phone Number: XXX XXX XXX</p>
-                        <p>Adress: Customer Adress</p>
-                    </div>
-                </div>
-                <div>
-                    <div id='productImage'>
-                        <img src="../assets/images/utils/customer.png" alt="Customer's Image">
-                    </div>
-                    <div>
-                        <p>Customer Name and Surname</p>
-                        <p>Email: mail</p>
-                        <p>Phone Number: XXX XXX XXX</p>
-                        <p>Adress: Customer Adress</p>
-                    </div>
-                </div>
-                <div>
-                    <div id='productImage'>
-                        <img src="../assets/images/utils/customer.png" alt="Customer's Image">
-                    </div>
-                    <div>
-                        <p>Customer Name and Surname</p>
-                        <p>Email: mail</p>
-                        <p>Phone Number: XXX XXX XXX</p>
-                        <p>Adress: Customer Adress</p>
-                    </div>
-                </div>
-                <div>
-                    <div id='productImage'>
-                        <img src="../assets/images/utils/customer.png" alt="Customer's Image">
-                    </div>
-                    <div>
-                        <p>Customer Name and Surname</p>
-                        <p>Email: mail</p>
-                        <p>Phone Number: XXX XXX XXX</p>
-                        <p>Adress: Customer Adress</p>
-                    </div>
-                </div>
+                <?php AdminCustomersController::listCustomers(); ?>
             </div>
         </div>
     </body>
