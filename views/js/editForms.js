@@ -7,7 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     function fillDataCategory(code){
         var myDiv = document.getElementById("placeHolder");
-        myDiv.innerHTML = "<h1>"+code+"</h1>";
+
+        fetch("views/Administrator/components/FormCategorias.html")
+            .then(response => response.text())
+            .then(html => {
+                myDiv.innerHTML = html;
+            })
     }
 
     
