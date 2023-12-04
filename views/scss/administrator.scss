@@ -43,6 +43,7 @@ header {
 // Left Panel Styles
 
 #leftPanel {
+    border: 1px solid black;
     overflow: hidden;
     height: 100%;
     float: left;
@@ -63,6 +64,8 @@ header {
         padding: 2.5vh;
         margin-bottom: 2.5vh;
         transition: all ease 0.33s 0;
+        cursor: pointer;
+        user-select: none;
         img {
             transition: 0.33s;
             width: 7vh;
@@ -103,3 +106,13 @@ header {
 }
 
 // Search bar
+
+#searcher {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    #search {
+        border-radius: $radius 0 0 $radius;
+    }
+    
+}

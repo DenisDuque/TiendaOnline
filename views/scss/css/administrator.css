@@ -33,6 +33,7 @@ header img:hover {
 }
 
 #leftPanel {
+  border: 1px solid black;
   overflow: hidden;
   height: 100%;
   float: left;
@@ -55,6 +56,10 @@ header img:hover {
   padding: 2.5vh;
   margin-bottom: 2.5vh;
   transition: all ease 0.33s 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #leftPanel .panel img {
   transition: 0.33s;
@@ -88,4 +93,13 @@ header img:hover {
 #rightPanel #listContainer {
   width: 100%;
   height: 100%;
+}
+
+#searcher {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+#searcher #search {
+  border-radius: 10px 0 0 10px;
 }/*# sourceMappingURL=administrator.css.map */
