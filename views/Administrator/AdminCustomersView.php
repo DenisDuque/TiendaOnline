@@ -8,46 +8,27 @@
         <title>Customers</title>
     </head>
     <body>
-        <div>
+        <header>
+            <h1>Urban Store</h1>
             <img src="views/assets/images/utils/signout.png" alt="Sign out">
-        </div>
-        <h1>Urban Store</h1>
-        <div>
-            <div class='panel' id='categories'>
-                <div class='image'>
-                    <img src="views/assets/images/utils/categories.png" alt="Categories">
+        </header>
+        <div id="container">
+            <div id="leftPanel">
+                <div class="panels">
+                    <?php 
+                        include("views/Administrator/Components/categoriesPanel.html");
+                        include("views/Administrator/Components/productsPanel.html");
+                        include("views/Administrator/Components/dashboardPanel.html");
+                        include("views/Administrator/Components/ordersPanel.html");
+                    ?>
                 </div>
-                <p>Categories</p>
             </div>
-            <div class='panel' id='products'>
-                <div class='image'>
-                    <img src="views/assets/images/utils/products.png" alt="Products">
+            <div id="rightPanel">
+                <h2>Customers</h2>
+                <?php include("views/Administrator/Components/searchBar.php");?>
+                <div id="listContainer">
+                    <?php AdminCustomersController::listCustomers(); ?>
                 </div>
-                <p>Products</p>
-            </div>
-            <div class='panel' id='dashboard'>
-                <div class='image'>
-                    <img src="views/assets/images/utils/dashboard.png" alt="Dashboard">
-                </div>
-                <p>Dashboard</p>
-            </div>
-            <div class='panel' id='orders'>
-                <div class='image'>
-                    <img src="views/assets/images/utils/orders.png" alt="Orders">
-                </div>
-                <p>Orders</p>
-            </div>
-        </div>
-        <div>
-            <h2>Customers</h2>
-            <div id='searcher'>
-                <?php $value = isset($_GET['search']) ? $_GET['search'] : ''; 
-                    echo '<input id="search" type="text" name="search" value="'.$value.'" placeholder="Search">';
-                ?>
-                <div id="searchBtn"><img src="views/assets/images/utils/search.png" alt="Search"></a></div>
-            </div>
-            <div>
-                <?php AdminCustomersController::listCustomers(); ?>
             </div>
         </div>
     </body>

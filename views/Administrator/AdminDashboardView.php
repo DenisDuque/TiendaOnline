@@ -15,30 +15,12 @@
         <div id="container">
             <div id="leftPanel">
                 <div class="panels">
-                    <div class='panel' id='categories'>
-                        <div class='image'>
-                            <img src="views/assets/images/utils/categories.png" alt="Categories">
-                        </div>
-                        <p>Categories</p>
-                    </div>
-                    <div class='panel' id='products'>
-                        <div class='image'>
-                            <img src="views/assets/images/utils/products.png" alt="Products">
-                        </div>
-                        <p>Products</p>
-                    </div>
-                    <div class='panel' id='customers'>
-                        <div class='image'>
-                            <img src="views/assets/images/utils/customers.png" alt="Customers">
-                        </div>
-                        <p>Customers</p>
-                    </div>
-                    <div class='panel' id='orders'>
-                        <div class='image'>
-                            <img src="views/assets/images/utils/orders.png" alt="Orders">
-                        </div>
-                        <p>Orders</p>
-                    </div>
+                    <?php 
+                        include("views/Administrator/Components/categoriesPanel.html");
+                        include("views/Administrator/Components/productsPanel.html");
+                        include("views/Administrator/Components/customersPanel.html");
+                        include("views/Administrator/Components/ordersPanel.html");
+                    ?>
                 </div>
             </div>
             <div id="rightPanel">
