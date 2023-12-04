@@ -6,45 +6,46 @@
         <title>Categories</title>
     </head>
     <body>
+        <script src="views/js/editForms.js"></script>
         <div>
-            <img src="../assets/images/utils/signout.png" alt="Sign out">
+            <img src="views/assets/images/utils/signout.png" alt="Sign out">
         </div>
         <h1>Urban Store</h1>
         <form action="#" method='POST'>
-            <div>
+            <div id="placeHolder">
                 <div>
                     <div class='panel' id='categories'>
                         <div class='image'>
-                            <img src="../assets/images/utils/dashboard.png" alt="Dashboard">
+                            <img src="views/assets/images/utils/dashboard.png" alt="Dashboard">
                         </div>
                         <p>Dashboard</p>
                     </div>
                     <div class='panel' id='products'>
                         <div class='image'>
-                            <img src="../assets/images/utils/products.png" alt="Products">
+                            <img src="views/assets/images/utils/products.png" alt="Products">
                         </div>
                         <p>Products</p>
                     </div>
                     <div class='panel' id='customers'>
                         <div class='image'>
-                            <img src="../assets/images/utils/customers.png" alt="Customers">
+                            <img src="views/assets/images/utils/customers.png" alt="Customers">
                         </div>
                         <p>Customers</p>
                     </div>
                     <div class='panel' id='orders'>
                         <div class='image'>
-                            <img src="../assets/images/utils/orders.png" alt="Orders">
+                            <img src="views/assets/images/utils/orders.png" alt="Orders">
                         </div>
                         <p>Orders</p>
                     </div>
                 </div>
                 <div>
                     <div id='row'>
-                        <img src="../assets/images/utils/row.png" alt="Dashboard">
+                        <img src="views/assets/images/utils/row.png" alt="Dashboard">
                     </div>
                     <div>
                         <div id='productImage'>
-                            <img src="../assets/images/utils/productImage.png" alt="Product's Image">
+                            <img src="views/assets/images/utils/productImage.png" alt="Product's Image">
                         </div>
                         <p>Product's Name</p>
                     </div>

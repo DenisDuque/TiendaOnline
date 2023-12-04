@@ -29,11 +29,24 @@
                 $categories->execute();
                 $fetchedCategories = $categories->fetchAll(PDO::FETCH_ASSOC);
 
+                echo "<ul>";
                 foreach($fetchedCategories as $fetchedCategory){
                     $category = new CategoryModel($fetchedCategory["code"],$fetchedCategory["name"]);
-                    echo $category->getCode();
-                    echo $category->getName();
+                    $code = $category->getCode();
+                    $name = $category->getName();
+
+                    $query = "SELECT * FROM products WHERE codecategory LIKE :code";
+                    $countProducts = self::getConnection()->prepare($query);
+                    $countProducts->bindParam(':code', $code, PDO::PARAM_STR);
+                    $countProducts->execute();
+                    $numProducts = $countProducts->rowCount();
+
+                    echo "
+                        <li>".$name.$code." Productes amb aquesta categoria: ".$numProducts."<button type='button' class='buttons' id='$code'>Editar</button></li>
+                    ";
                 }
+                
+                echo "</ul>";
             }catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
