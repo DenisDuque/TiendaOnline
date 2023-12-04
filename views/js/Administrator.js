@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var panels = document.getElementsByClassName("panel");
-    var editButtons = document.getElementsByClassName("editButtons");
+    var editButtons = document.getElementsByClassName("editBtn");
+    var billButtons = document.getElementsByClassName("billBtn");
     var searchBtn = document.getElementById("searchBtn");
 
     for (let i = 0; i < panels.length; i++) {

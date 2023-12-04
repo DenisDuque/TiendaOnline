@@ -7,16 +7,16 @@ class UserModel extends Database {
     private $surname;
     private $address;
     private $rol;
-
     private $image;
 
-    public function __construct($email, $phone, $name, $surname, $address, $rol){
+    public function __construct($email, $phone, $name, $surname, $address, $rol, $image = null){
         $this->email = $email;
         $this->phone = (string) $phone;
         $this->name = $name;
         $this->surname = $surname;
         $this->address = $address;
         $this->rol = $rol;
+        $this->image = $image;
     }
 
     public function setEmail($email) {
@@ -132,6 +132,29 @@ class UserModel extends Database {
             $fetchedCustomers = $customers->fetchAll(PDO::FETCH_ASSOC);
 
             return $fetchedCustomers;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    
+    public static function getSpecifiedUser($email) {
+        try {
+            $query = "SELECT * image FROM users WHERE :email = $email";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $user = new UserModel(
+                $row[0]['email'],
+                $row[0]['phone'],
+                $row[0]['name'],
+                $row[0]['surname'],
+                $row[0]['address'],
+                $row[0]['rol'],
+                $row[0]['image']
+            );
+            return $user;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

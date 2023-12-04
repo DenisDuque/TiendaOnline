@@ -12,7 +12,7 @@
         }
         public function setName($name) {
             $this->name = $name;
-        } 
+        }
         public function getName() {
             return $this->name;
         }
@@ -22,13 +22,12 @@
             $this->name = $name;
         }
 
-        public function listCategories(){
+        public static function listCategories() {
             try{
                 $query = "SELECT * FROM categories";
                 $categories = self::getConnection()->prepare($query);
                 $categories->execute();
                 $fetchedCategories = $categories->fetchAll(PDO::FETCH_ASSOC);
-
                 echo "<ul>";
                 foreach($fetchedCategories as $fetchedCategory){
                     $category = new CategoryModel($fetchedCategory["code"],$fetchedCategory["name"]);
@@ -47,7 +46,10 @@
                 }
                 
                 echo "</ul>";
-            }catch (PDOException $e) {
+
+                
+                return $fetchedCategories;
+            } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
             }

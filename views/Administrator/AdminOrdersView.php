@@ -3,50 +3,40 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="views/scss/css/administrator.css">
+        <script src="views/js/Administrator.js"></script>
         <title>Orders</title>
     </head>
     <body>
-        <div>
-            <img src="../assets/images/utils/signout.png" alt="Sign out">
-        </div>
-        <h1>Urban Store</h1>
-        <div>
-            <div class='panel' id='categories'>
-                <div class='image'>
-                    <img src="../assets/images/utils/categories.png" alt="Categories">
+    <header>
+            <h1>Urban Store</h1>
+            <img src="views/assets/images/utils/signout.png" alt="Sign out">
+        </header>
+        <div id="container">
+            <div id="leftPanel">
+                <div class="panels">
+                    <?php 
+                        include("views/Administrator/Components/categoriesPanel.html");
+                        include("views/Administrator/Components/productsPanel.html");
+                        include("views/Administrator/Components/customersPanel.html");
+                        include("views/Administrator/Components/dashboardPanel.html");
+                    ?>
                 </div>
-                <p>Categories</p>
             </div>
-            <div class='panel' id='products'>
-                <div class='image'>
-                    <img src="../assets/images/utils/products.png" alt="Products">
+            <div id="rightPanel">
+                <h2>Orders</h2>
+                <?php include("views/Administrator/Components/searchBar.php");?>
+                <div id="listContainer">
+                    <?php // AdminOrdersController::listOrders(); ?>
                 </div>
-                <p>Products</p>
-            </div>
-            <div class='panel' id='customers'>
-                <div class='image'>
-                    <img src="../assets/images/utils/customers.png" alt="Customers">
-                </div>
-                <p>Customers</p>
-            </div>
-            <div class='panel' id='dashboard'>
-                <div class='image'>
-                    <img src="../assets/images/utils/dashboard.png" alt="Dashboard">
-                </div>
-                <p>Dashboard</p>
             </div>
         </div>
-        <div>
-            <h2>Orders</h2>
-            <div id='searcher'>
-                <form action="#" method='POST'>
-                    <input type="text" name="q" placeholder="Search">
-                    <!-- LA IMAGEN SE PONE DESDE EL CSS CON EL BACKGROUND-IMAGE, AQUI SE DEJARIA EL BOTON SOLO -->
-                    <button type="submit"><img src="../assets/images/utils/search.png" alt="Search"></a></button>
-                </form>
-            </div>
+
+
+        
+        <!--
             <div>
-                <div>
+                <!--<div>
                     <div id='productImage'>
                         <img src="../assets/images/utils/customer.png" alt="Customer's Image">
                     </div>
@@ -105,8 +95,8 @@
                         <p><button type="submit"><img src="../assets/images/utils/factura.png" alt="Factura"></a></button></p>
                         <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                     </div>
-                </div>
+                </div>-->
             </div>
-        </div>
+        </div> -->
     </body>
 </html>
