@@ -84,34 +84,11 @@
             </div>
             <div>
                 <h2>Categories</h2>
-                <div id='searcher'>
-                    <input type="text" name="q" placeholder="Search">
-                    <!-- LA IMAGEN SE PONE DESDE EL CSS CON EL BACKGROUND-IMAGE, AQUI SE DEJARIA EL BOTON SOLO -->
-                    <button type="submit"><img src="../assets/images/utils/search.png" alt="Search"></a></button>
-                    <button type="submit"><img src="../assets/images/utils/addProduct.png" alt="Add Product"></a></button>
-                </div>
-                <div>
-                    <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
-                    </div>
-                    <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
-                    </div>
-                    <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
-                    </div>
-                    <div>
-                        <label>Sneakers</label>
-                        <label>Products: 202</label>
-                        <button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button>
-                    </div>
-                </div>
+                <?php
+                    include(__DIR__."/../../models/CategoryModel.php");
+                    $category = new CategoryModel("","");
+                    $category->listCategories();
+                ?>
             </div>
         </form>
     </body>

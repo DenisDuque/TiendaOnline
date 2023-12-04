@@ -4,7 +4,6 @@ $action = isset($_GET['page']) ? $_GET['page'] : '';
 
 // Seleccionar la pagina actual segun el valor de $action
 switch($action){
-
 	case 'login':
 		include 'controllers/LoginController.php';
 		break;
@@ -13,6 +12,7 @@ switch($action){
 	case 'administrator':
 		include 'controllers/AdminDashboardController.php';
 		break;
+		
 
 	case 'main':
 	default:
