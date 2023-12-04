@@ -1,6 +1,6 @@
 <?php
-// Controlador para gestionar el proceso de inicio de sesión: ERROR AL INCLUIR DOS O MAS MODELOS A LA VEZ.
-//require_once __DIR__.'/../models/UserModel.php';
+// Controlador para gestionar el proceso de inicio de sesión
+require_once __DIR__.'/../models/UserModel.php';
 
 class AdminProductsController {
     public function showAdminProducts() {

@@ -46,7 +46,7 @@
                 </form>
             </div>
             <div>
-                <div>
+                <!--<div>
                     <div id='productImage'>
                         <img src="../assets/images/utils/customer.png" alt="Customer's Image">
                     </div>
@@ -105,7 +105,7 @@
                         <p><button type="submit"><img src="../assets/images/utils/factura.png" alt="Factura"></a></button></p>
                         <p><button type="submit"><img src="../assets/images/utils/edit.png" alt="Edit"></a></button></p>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </body>
