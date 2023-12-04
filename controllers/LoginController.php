@@ -14,9 +14,7 @@ class LoginController {
         $userEmail = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
 
-        $userModel = new UserModel();
-
-        $rol = $userModel->authenticate($userEmail, $password);
+        $rol = UserModel::authenticate($userEmail, $password);
         if ($rol) {
             //Creacion de las variables de sesion.
             $_SESSION['email'] = $userEmail;
@@ -42,8 +40,6 @@ class LoginController {
         $userEmail = $_POST['registerEmail'];
         $password = $_POST['registerPassword'];
 
-        $userModel = new UserModel();
-
         // Validar que los campos no estén vacíos (hay que añadir mas condiciones)
         if (empty($userName) || empty($userSurnames) || empty($userEmail) || empty($password)) {
             // Mostrar pop-up con mensaje: "¡Todos los campos son obligatorios!"
@@ -62,7 +58,7 @@ class LoginController {
         $hashedPassword = md5($password);
 
         // Guardar el usuario en la base de datos
-        if ($userModel->register($userName, $userSurnames, $userEmail, $hashedPassword)) {
+        if (UserModel::register($userName, $userSurnames, $userEmail, $hashedPassword)) {
             $_SESSION['email'] = $userEmail;
             //$_SESSION['rol'] = 'customer';
 
