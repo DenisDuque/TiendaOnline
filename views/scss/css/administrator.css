@@ -1,5 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Kanit';
-* {
+body {
+  background-color: #ECECEC;
   margin: 0;
   padding: 0;
   font-family: Kanit;
@@ -95,11 +96,39 @@ header img:hover {
   height: 100%;
 }
 
-#searcher {
+#navBar {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  height: auto;
 }
-#searcher #search {
-  border-radius: 10px 0 0 10px;
+#navBar #searchBar {
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-right: 2vh;
+}
+#navBar #searchBar input {
+  background-color: transparent;
+  padding-left: 2vh;
+  width: 100%;
+  height: 6vh;
+  border: none;
+}
+#navBar #searchBar #searchBtn {
+  height: 6vh;
+}
+#navBar img {
+  filter: brightness(0);
+  width: 6vh;
+}
+#navBar img:hover {
+  filter: brightness(1);
+  transform: scale(1.01);
+}
+#navBar #addBtn {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
 }/*# sourceMappingURL=administrator.css.map */
