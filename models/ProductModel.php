@@ -188,13 +188,17 @@ class ProductModel extends Database {
 
     public static function getProductImage($perspective, $product) {
         try {
-            $query = "SELECT route FROM images WHERE perspective = :perspective AND product = :product";
+            $query = "SELECT route FROM images WHERE perspectives = :perspectives AND product = :product";
             $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(':perspective', $perspective);
+            $stmt->bindParam(':perspectives', $perspective);
             $stmt->bindParam(':product', $product);
             $stmt->execute();
             $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $img['route'];
+            if($img['route'] != NULL) {
+                return $img['route'];
+            } else {
+                return null;
+            }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

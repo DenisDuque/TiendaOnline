@@ -22,23 +22,43 @@ class AdminDashboardController {
         $Products = ProductModel::getTopProducts(10);
         foreach($Products as $product) {
             $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
-            echo "
-                <div>
+            if($img != null) {
+                echo "
                     <div>
-                        <img src='/views/assets/images/products/".$img."'>
+                        <div>
+                            <img src='/views/assets/images/products/".$img."' alt='productImage'>
+                        </div>
+                        <div>
+                            <div>". $product->getName() ."</div>
+                            <div>Category: ". $product->getCategory() ."</div>
+                            <div>Product Code: ". $product->getCode() ."</div>
+                            <div>". $product->getPrice() ."</div>
+                        </div>
+                        <div>
+                            <div>Sold: ". $product->getSold() ."</div>
+                            <div>Stock: ". $product->getStock() ."</div>
+                        </div>
                     </div>
+                ";
+            } else {
+                echo "
                     <div>
-                        <div>". $product->getName() ."</div>
-                        <div>Category: ". $product->getCategory() ."</div>
-                        <div>Product Code: ". $product->getCode() ."</div>
-                        <div>". $product->getPrice() ."</div>
+                        <div>
+                            <img src='/views/assets/images/utils/defaultProductImage.jpg' alt='productImage'>
+                        </div>
+                        <div>
+                            <div>". $product->getName() ."</div>
+                            <div>Category: ". $product->getCategory() ."</div>
+                            <div>Product Code: ". $product->getCode() ."</div>
+                            <div>". $product->getPrice() ."</div>
+                        </div>
+                        <div>
+                            <div>Sold: ". $product->getSold() ."</div>
+                            <div>Stock: ". $product->getStock() ."</div>
+                        </div>
                     </div>
-                    <div>
-                        <div>Sold: ". $product->getSold() ."</div>
-                        <div>Stock: ". $product->getStock() ."</div>
-                    </div>
-                </div>
-            ";
+                ";
+            }
         }
     }
 }
