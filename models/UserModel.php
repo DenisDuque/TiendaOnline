@@ -8,6 +8,17 @@ class UserModel extends Database {
     private $address;
     private $rol;
 
+    private $image;
+
+    public function __construct($email, $phone, $name, $surname, $address, $rol){
+        $this->email = $email;
+        $this->phone = (string) $phone;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->address = $address;
+        $this->rol = $rol;
+    }
+
     public function setEmail($email) {
         $this->email = $email;
     }
@@ -56,7 +67,15 @@ class UserModel extends Database {
         return $this->rol;
     }
 
-    public function authenticate($userEmail, $password) {
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public static function authenticate($userEmail, $password) {
         try {
             $hashedPassword = md5($password);
             $query = "SELECT rol FROM users WHERE email = :email AND password = :password";
@@ -76,7 +95,7 @@ class UserModel extends Database {
         }
     }
 
-    public function register($userName, $userSurnames, $userEmail, $userPassword) {
+    public static function register($userName, $userSurnames, $userEmail, $userPassword) {
         try {
             $validRegister = false;
             $query = "SELECT * FROM users WHERE email LIKE :email";
@@ -102,5 +121,21 @@ class UserModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }   
    }
+
+   public static function showCustomers($search) {
+        try {
+            $search = '%' . $search . '%';
+            $query = "SELECT email, phone, name, surnames, address FROM users WHERE (name::text LIKE :search OR surnames::text LIKE :search OR phone::text LIKE :search OR email::text LIKE :search OR address::text LIKE :search) AND rol LIKE 'user'";
+            $customers = self::getConnection()->prepare($query);
+            $customers->bindParam(':search', $search, PDO::PARAM_STR);
+            $customers->execute();
+            $fetchedCustomers = $customers->fetchAll(PDO::FETCH_ASSOC);
+
+            return $fetchedCustomers;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>
