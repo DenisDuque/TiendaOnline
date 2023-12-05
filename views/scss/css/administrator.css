@@ -15,6 +15,9 @@
     Components
         Categories
         Default (El resto de componentes)
+        Scrollbar
+            Firefox
+            Chrome, Edge, Safari
 
 */
 body {
@@ -28,6 +31,9 @@ header {
   display: flex;
   width: 100%;
   align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 header h1 {
   font-size: 64px;
@@ -108,6 +114,9 @@ header img:hover {
   font-size: 42px;
   justify-self: center;
   text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #rightPanel #listContainer {
   width: 100%;
@@ -120,6 +129,9 @@ header img:hover {
   display: flex;
   height: auto;
   margin-bottom: 3vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 #navBar #searchBar {
   background-color: white;
@@ -188,31 +200,123 @@ header img:hover {
 .categoryComponent h5 {
   margin-left: 2vh;
   font-size: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .categoryComponent p {
   color: #ABABAB;
   text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .categoryComponent div {
   margin-right: 2vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
+.defaultComponent {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 94, 0, 0.25);
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 3vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .imageComponent {
+  background-color: #ECECEC;
+  width: 12vh;
+  height: 12vh;
+  border-radius: 10px;
+  margin-left: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .imageComponent img {
+  width: 12vh;
+}
+.defaultComponent h4 {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent p {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: #ABABAB;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent h5 {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnLeft {
+  margin-left: 2vh;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 80%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnRight {
+  margin-right: 2vh;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 80%;
+  align-items: right;
+  text-align: end;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnRight .editBtn {
+  align-self: end;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ABABAB #ECECEC;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
+*::-webkit-scrollbar {
+  width: 14px;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-track {
+  background: #ECECEC;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ABABAB;
+  border-radius: 10px;
+  border: 3px solid #ECECEC;
+}
+
+*::-webkit-scrollbar-thumb:hover {
   background: #555;
 }/*# sourceMappingURL=administrator.css.map */
