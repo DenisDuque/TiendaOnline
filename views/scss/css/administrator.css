@@ -1,4 +1,22 @@
+@charset "UTF-8";
 @import 'https://fonts.googleapis.com/css?family=Kanit';
+/*  IMPORTANTE
+
+    El código está seccionado con los siguientes comentarios
+    Abre el buscador utilizando Ctrl + F y busca:
+
+    General
+        Header Styles
+        Container
+        Left Panel Styles
+        Right Panel Styles
+        Search Bar
+
+    Components
+        Categories
+        Default (El resto de componentes)
+
+*/
 body {
   background-color: #ECECEC;
   margin: 0;
@@ -93,13 +111,15 @@ header img:hover {
 }
 #rightPanel #listContainer {
   width: 100%;
-  height: 100%;
+  height: 56vh;
+  overflow-y: scroll;
 }
 
 #navBar {
   width: 100%;
   display: flex;
   height: auto;
+  margin-bottom: 3vh;
 }
 #navBar #searchBar {
   background-color: white;
@@ -131,4 +151,68 @@ header img:hover {
   display: flex;
   background-color: white;
   border-radius: 10px;
+}
+
+.editBtn {
+  width: 4vh;
+  height: 4vh;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editBtn img {
+  width: 2.5vh;
+  height: 2.5vh;
+  filter: brightness(0);
+}
+.editBtn:hover {
+  transform: scale(1.01);
+}
+.editBtn:hover img {
+  filter: brightness(1);
+}
+
+.categoryComponent {
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 94, 0, 0.25);
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 3vh;
+}
+.categoryComponent h5 {
+  margin-left: 2vh;
+  font-size: 16px;
+}
+.categoryComponent p {
+  color: #ABABAB;
+  text-align: center;
+}
+.categoryComponent div {
+  margin-right: 2vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }/*# sourceMappingURL=administrator.css.map */

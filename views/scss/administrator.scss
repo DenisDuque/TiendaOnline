@@ -2,6 +2,25 @@
 @import 'mixins.scss';
 @import 'https://fonts.googleapis.com/css?family=Kanit';
 
+/*  IMPORTANTE
+
+    El código está seccionado con los siguientes comentarios
+    Abre el buscador utilizando Ctrl + F y busca:
+
+    General
+        Header Styles
+        Container
+        Left Panel Styles
+        Right Panel Styles
+        Search Bar
+    
+    Components
+        Categories
+        Default (El resto de componentes)
+
+*/
+
+// General
 
 body {
     background-color: $white;
@@ -36,6 +55,8 @@ header {
     	}
 	}
 }
+
+// Container
 
 #container {
     width: 100%;
@@ -103,7 +124,9 @@ header {
     }
     #listContainer {
         width: 100%;
-        height: 100%;
+        height: 56vh;
+        
+        overflow-y: scroll;
     }
 }
 
@@ -113,6 +136,7 @@ header {
     width: 100%;
     display: flex;
     height: auto;
+    margin-bottom: 3vh;
     #searchBar {
         background-color: white;
         width: 100%;
@@ -150,3 +174,77 @@ header {
     }
     
 }
+
+// Components
+
+.editBtn {
+    width: 4vh;
+    height: 4vh;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 2.5vh;
+        height: 2.5vh;
+        filter: brightness(0);
+    }
+
+    &:hover {
+        transform: scale(1.01);
+        img {
+            filter: brightness(1);
+        }
+    }
+}
+
+// Categories
+
+.categoryComponent {
+    width: 100%;
+    height: 6vh;
+    display: flex;
+    flex-direction: row;
+    background-color: $adminOrange;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: $radius;
+    margin-bottom: 3vh;
+    h5 {
+        margin-left: 2vh;
+        font-size: 16px;
+    }
+
+    p {
+        color: $grey;
+        text-align: center;
+    }
+
+    div {
+        margin-right: 2vh;
+    }
+}
+
+// Default
+
+// Scrollbar
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
