@@ -9,7 +9,8 @@ class AdminCategoriesController {
     }
 
     public static function showCategories() {
-        $fetchedCategories = CategoryModel::listCategories();
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $Categories = CategoryModel::listCategories($search);
     }
 }
 

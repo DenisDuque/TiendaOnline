@@ -58,18 +58,24 @@ class OrdersModel extends Database {
 
     
     public function __construct($id,$user,$price = null,$status,$date = null,$sentDate = null){
-        $this->id = $id;
+        $this->id = (string) $id;
         $this->user = $user;
-        $this->price = $price;
-        $this->status = $status;
-        $this->date = $date;
-        $this->sentDate = $sentDate;
+        $this->price = (string) $price;
+        $this->status = (string) $status;
+        $this->date = (string) $date;
+        $this->sentDate = (string) $sentDate;
     }
 
-    public static function getOrders() {
+    public static function getOrders($search) {
         try {
-            $query = "SELECT * FROM shopping WHERE ";
+
+            $query = "SELECT * FROM shopping 
+                        WHERE id::text LIKE :search OR useremail::text LIKE :search 
+                        OR price::text LIKE :search OR status::text LIKE :search 
+                        OR datepurchase::text LIKE :search OR dateend::text LIKE :search";
+
             $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':search', $search);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $Orders = [];
