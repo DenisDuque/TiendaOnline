@@ -131,6 +131,9 @@ header {
         
         overflow-y: scroll;
     }
+    .dashboardList {
+        margin-top: 14vh;
+    }
 }
 
 // Search bar
@@ -181,6 +184,28 @@ header {
 // Components
 
 .editBtn {
+    width: 4vh;
+    height: 4vh;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 2.5vh;
+        height: 2.5vh;
+        filter: brightness(0);
+    }
+
+    &:hover {
+        transform: scale(1.01);
+        img {
+            filter: brightness(1);
+        }
+    }
+}
+
+.downloadBillBtn {
     width: 4vh;
     height: 4vh;
     background-color: white;
@@ -273,6 +298,15 @@ header {
         padding: 0;
         color: $grey;
         user-select: none;
+
+        span {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            color: $grey;
+            user-select: none;
+            margin-left: 2vh;
+        }
     }
 
     h5 {
@@ -286,7 +320,7 @@ header {
         margin-left: 2vh;
         display: flex;
         flex-direction: column;
-        width: 20vw;
+        width: 40vw;
         height: 80%;
         user-select: none;
     }
@@ -297,9 +331,15 @@ header {
         flex-direction: column;
         width: 20vw;
         height: 80%;
+        justify-content: center;
         align-items: right;
         text-align: end;
         user-select: none;
+
+        .downloadBillBtn {
+            align-self: end;
+            margin-bottom: 2vh;
+        }
 
         .editBtn {
             align-self: end;

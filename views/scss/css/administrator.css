@@ -123,6 +123,9 @@ header img:hover {
   height: 56vh;
   overflow-y: scroll;
 }
+#rightPanel .dashboardList {
+  margin-top: 14vh;
+}
 
 #navBar {
   width: 100%;
@@ -183,6 +186,27 @@ header img:hover {
   transform: scale(1.01);
 }
 .editBtn:hover img {
+  filter: brightness(1);
+}
+
+.downloadBillBtn {
+  width: 4vh;
+  height: 4vh;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.downloadBillBtn img {
+  width: 2.5vh;
+  height: 2.5vh;
+  filter: brightness(0);
+}
+.downloadBillBtn:hover {
+  transform: scale(1.01);
+}
+.downloadBillBtn:hover img {
   filter: brightness(1);
 }
 
@@ -264,6 +288,16 @@ header img:hover {
      -moz-user-select: none;
           user-select: none;
 }
+.defaultComponent p span {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: #ABABAB;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin-left: 2vh;
+}
 .defaultComponent h5 {
   font-size: 14px;
   margin: 0;
@@ -276,7 +310,7 @@ header img:hover {
   margin-left: 2vh;
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  width: 40vw;
   height: 80%;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -288,11 +322,16 @@ header img:hover {
   flex-direction: column;
   width: 20vw;
   height: 80%;
+  justify-content: center;
   align-items: right;
   text-align: end;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+.defaultComponent .textOnRight .downloadBillBtn {
+  align-self: end;
+  margin-bottom: 2vh;
 }
 .defaultComponent .textOnRight .editBtn {
   align-self: end;
