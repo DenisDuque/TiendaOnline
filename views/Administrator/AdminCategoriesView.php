@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
-        <script src="views/js/Administrator.js"></script>
+        <script src="views/js/editForms.js"></script>
         <title>Categories</title>
     </head>
     <body>
@@ -22,78 +22,14 @@
                         include("views/Administrator/Components/ordersPanel.html");
                     ?>
                 </div>
+                <div id="formCat">
+                    <h1>ME CAGO EN LOS MUERTOS DEL IKER</h1>
+                </div>
             </div>
             <div id="rightPanel">
                 <h2>Categories</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
-
-
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-                <div class="categoryComponent">
-                    <h5 class="categoryName">Sneakers</h5>
-                    <p class="categoryCount">Products: 212</p>
-                    <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                    <input class="status" type="hidden" value="Enabled">
-                    <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                </div>
-
-
                     <?php AdminCategoriesController::showCategories(); ?>
                 </div>
             </div>

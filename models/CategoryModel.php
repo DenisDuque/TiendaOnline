@@ -28,7 +28,6 @@
                 $categories = self::getConnection()->prepare($query);
                 $categories->execute();
                 $fetchedCategories = $categories->fetchAll(PDO::FETCH_ASSOC);
-                echo "<ul>";
                 foreach($fetchedCategories as $fetchedCategory){
                     $category = new CategoryModel($fetchedCategory["code"],$fetchedCategory["name"]);
                     $code = $category->getCode();
@@ -40,14 +39,17 @@
                     $countProducts->execute();
                     $numProducts = $countProducts->rowCount();
 
-                    echo "
-                        <li>".$name.$code." Productes amb aquesta categoria: ".$numProducts."<button type='button' class='buttons' id='$code'>Editar</button></li>
-                    ";
-                }
-                
-                echo "</ul>";
+                    echo 
+                        '<div class="categoryComponent">
+                                <h5 class="categoryName">'.$name.'</h5>
+                                <p class="categoryCount">Products: '.$numProducts.'</p>
+                                <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
+                                <input class="status" type="hidden" value="Enabled">
+                                <button type="button" class="editBtn" id="'.$code.'"><img src="views/assets/images/utils/edit.png" alt="Edit"></button>
+                        </div>
+                    ';
 
-                
+                }
                 return $fetchedCategories;
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
