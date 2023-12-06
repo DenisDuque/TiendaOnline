@@ -9,7 +9,8 @@ class AdminOrdersController {
         include __DIR__.'/../views/Administrator/AdminOrdersView.php';
     }
     public static function showOrders() {
-        $Orders = OrdersModel::getOrders();
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $Orders = OrdersModel::getOrders($search);
         foreach($Orders as $order) {
             $userInfo = UserModel::getSpecifiedUser($order->getUser());
             $productsID = OrdersModel::getMyProducts($order->getId());

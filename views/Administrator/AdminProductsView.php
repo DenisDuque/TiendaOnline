@@ -27,6 +27,127 @@
                 <h2>Products</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+                <div class="defaultComponent">
+                    <div class="imageComponent">
+                        <img src="views/assets/images/utils/productImage.png" alt="Product">
+                    </div>
+                    <div class="textOnLeft">
+                        <h4 class="productName">Nike Air Force 1 VL</h4>
+                        <p class="productCategory">Category: Sneakers</p>
+                        <p class="productCode">Product Code: NI001NIK</p>
+                        <h5 class="productPrice">$120.00</h5>
+                    </div>
+                    <div class="textOnRight">
+                        <h4 class="productSold">Sold: 222</h4>
+                        <h4 class="productStock">Stock: 125</h4>
+                        <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
+                    </div>
+                </div>
+
+
                     <?php AdminProductsController::showProducts(); ?>
                 </div>
             </div>

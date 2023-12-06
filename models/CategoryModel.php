@@ -22,7 +22,7 @@
             $this->name = $name;
         }
 
-        public static function listCategories() {
+        public static function listCategories($search) {
             try{
                 $query = "SELECT * FROM categories";
                 $categories = self::getConnection()->prepare($query);
