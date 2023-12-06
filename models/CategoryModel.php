@@ -56,5 +56,39 @@
                 throw new Exception("Database error: " . $e->getMessage());
             }
         }
+
+        public static function getProductsFromCategory($category) {
+            try {
+                $query = "SELECT name FROM products WHERE codecategory LIKE :category";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+                $stmt->execute();
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $names[] = "";
+                foreach($rows as $row) {
+                    $names[] = $row["name"];
+                }
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
+            return $names;
+        }
+
+        public static function getCategory($code){
+            try {
+                $query = "SELECT * FROM categories WHERE code = :codigo;";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':codigo', $code, PDO::PARAM_INT);
+                $stmt->execute();
+                while($stmt = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    print_r($stmt);
+                }
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
+            //return $category;
+        }
     }
 ?>

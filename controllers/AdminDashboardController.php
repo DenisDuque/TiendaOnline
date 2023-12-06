@@ -74,6 +74,7 @@ if(isset($_SESSION['user'])) {
     switch ($panel) {
         case 'categories':
             include __DIR__.'/AdminCategoriesController.php';
+            AdminCategoriesController::start();
             break;
         case 'products':
             include __DIR__.'/AdminProductsController.php';

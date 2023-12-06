@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function fillDataCategory(code){
         var divForm = document.getElementById("formCat");
 
-        fetch("views/Administrator/components/FormCategorias.html")
+        fetch("views/Administrator/components/FormCategorias.php")
             .then(response => response.text())
             .then(html => {
+                html = html.replace("%categoria%", code)
                 divForm.innerHTML = html;
             })
     }

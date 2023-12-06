@@ -12,7 +12,21 @@ class AdminCategoriesController {
         $search = isset($_GET['search']) ? $_GET['search'] : '';
         $Categories = CategoryModel::listCategories($search);
     }
+
+    public static function showProductsFromCategory($category){
+        $products = CategoryModel::getProductsFromCategory($category);
+        return $products;
+    }
+
+    public static function getCategoryInfo($code){
+        $info = CategoryModel::getCategory($code);
+        return $info;
+    }
+
+    public static function start()
+    {
+        $AdminCategoriesController = new AdminCategoriesController();
+        $AdminCategoriesController->showAdminCategories();
+    }
 }
 
-$AdminCategoriesController = new AdminCategoriesController();
-$AdminCategoriesController->showAdminCategories();
