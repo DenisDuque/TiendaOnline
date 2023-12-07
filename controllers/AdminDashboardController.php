@@ -22,43 +22,26 @@ class AdminDashboardController {
         $Products = ProductModel::getTopProducts(10);
         foreach($Products as $product) {
             $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
-            if($img != null) {
-                echo "
-                    <div>
-                        <div>
-                            <img src='/views/assets/images/products/".$img."' alt='productImage'>
-                        </div>
-                        <div>
-                            <div>". $product->getName() ."</div>
-                            <div>Category: ". $product->getCategory() ."</div>
-                            <div>Product Code: ". $product->getCode() ."</div>
-                            <div>". $product->getPrice() ."</div>
-                        </div>
-                        <div>
-                            <div>Sold: ". $product->getSold() ."</div>
-                            <div>Stock: ". $product->getStock() ."</div>
-                        </div>
-                    </div>
-                ";
-            } else {
-                echo "
-                    <div>
-                        <div>
-                            <img src='/views/assets/images/utils/defaultProductImage.jpg' alt='productImage'>
-                        </div>
-                        <div>
-                            <div>". $product->getName() ."</div>
-                            <div>Category: ". $product->getCategory() ."</div>
-                            <div>Product Code: ". $product->getCode() ."</div>
-                            <div>". $product->getPrice() ."</div>
-                        </div>
-                        <div>
-                            <div>Sold: ". $product->getSold() ."</div>
-                            <div>Stock: ". $product->getStock() ."</div>
-                        </div>
-                    </div>
-                ";
+            if($img == null) {
+                $img = '../utils/productImage.png';
             }
+            echo "
+                <div class='defaultComponent'>
+                    <div class='imageComponent'>
+                        <img src='views/assets/images/products/".$img."' alt='Product'>
+                    </div>
+                    <div class='textOnLeft'>
+                        <h4>". $product->getName() ."</h4>
+                        <p>Category: ". $product->getCategory() ."</p>
+                        <p>Product Code: ". $product->getCode() ."</p>
+                        <h5>$". $product->getPrice() ."</h5>
+                    </div>
+                    <div class='textOnRight'>
+                        <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
+                        <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
+                    </div>
+                </div>
+            ";
         }
     }
 }

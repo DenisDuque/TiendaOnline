@@ -10,6 +10,7 @@ class ProductModel extends Database {
     private $size;
     private $outstanding;
     private $sold;
+    private $status;
 
     public function setCode($code) {
         $this->code = $code;
@@ -66,6 +67,13 @@ class ProductModel extends Database {
     public function getSize() {
         return $this->size;
     }
+    public function setSold($sold) {
+        $this->sold = $sold;
+    } 
+
+    public function getSold() {
+        return $this->sold;
+    }
 
     public function setOutstanding($outstanding) {
         $this->outstanding = $outstanding;
@@ -75,20 +83,22 @@ class ProductModel extends Database {
         return $this->outstanding;
     }
 
-    public function setSold($sold) {
-        $this->sold = $sold;
-    } 
-
-    public function getSold() {
-        return $this->sold;
+    public function setStatus($status) {
+        $this->status = $status;
     }
-    public function __construct($code,$category,$name,$price,$sold,$stock){
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function __construct($code,$category,$name,$price,$sold,$stock,$status){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
         $this->price = $price;
         $this->sold = $sold;
         $this->stock = $stock;
+        $this->status = $status;
     }
     
     public static function generateCode($name, $category){
@@ -134,7 +144,7 @@ class ProductModel extends Database {
 
     public static function getAllProducts() {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock FROM products";
+            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products";
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +156,8 @@ class ProductModel extends Database {
                     $row['name'],
                     $row['price'],
                     $row['sold'],
-                    $row['stock']
+                    $row['stock'],
+                    $row['status']
                 );
                 $Products[] = $product;
             }
@@ -158,7 +169,7 @@ class ProductModel extends Database {
     }
     public static function getTopProducts($limit = 10) {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock FROM products ORDER BY sold DESC LIMIT :limit";
+            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
@@ -173,7 +184,8 @@ class ProductModel extends Database {
                     $row['name'],
                     $row['price'],
                     $row['sold'],
-                    $row['stock']
+                    $row['stock'],
+                    $row['status']
                 );
                 $topProducts[] = $product;
             }
@@ -193,12 +205,31 @@ class ProductModel extends Database {
             $stmt->bindParam(':perspectives', $perspective);
             $stmt->bindParam(':product', $product);
             $stmt->execute();
-            $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if($img['route'] != NULL) {
-                return $img['route'];
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!empty($result)) {
+                $img = array_map(function($item) {
+                    return $item['route'];
+                }, $result);
+                return $img[0];
             } else {
                 return null;
             }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    public static function getCategoryProductId($category) {
+        try {
+            $query = "SELECT code FROM products WHERE codeCategory = :codeCategory";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':codeCategory', $category);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $products = array_map(function($item) {
+                return $item['code'];
+            }, $result);
+            return $products;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

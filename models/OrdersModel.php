@@ -68,25 +68,32 @@ class OrdersModel extends Database {
 
     public static function getOrders($search) {
         try {
-
-            $query = "SELECT * FROM shopping 
-                        WHERE id::text LIKE :search OR useremail::text LIKE :search 
-                        OR price::text LIKE :search OR status::text LIKE :search 
-                        OR datepurchase::text LIKE :search OR dateend::text LIKE :search";
-
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(':search', $search);
+            $badStatus='cart';
+            if($search != null) {
+                $query = "SELECT * FROM shopping 
+                            WHERE (id::text LIKE :search OR useremail::text LIKE :search 
+                            OR price::text LIKE :search OR status::text LIKE :search 
+                            OR datepurchase::text LIKE :search OR dateend::text LIKE :search) AND status::text NOT LIKE :status";
+                            $stmt = self::getConnection()->prepare($query);
+                            $stmt->bindParam(':search', $search);
+                            $stmt->bindParam(':status', $badStatus);
+            } else {
+                $query = "SELECT * FROM shopping 
+                            WHERE status::text NOT LIKE :status";
+                            $stmt = self::getConnection()->prepare($query);
+                            $stmt->bindParam(':status', $badStatus);
+            }
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $Orders = [];
             foreach($rows as $row) {
                 $order = new OrdersModel(
                     $row['id'],
-                    $row['userEmail'],
+                    $row['useremail'],
                     $row['price'],
                     $row['status'],
-                    $row['datePurchase'],
-                    $row['dateEnd']
+                    $row['datepurchase'],
+                    $row['dateend']
                 );
                 $Orders[] = $order;
             }
@@ -97,13 +104,15 @@ class OrdersModel extends Database {
         }
     }
     public static function getMyProducts($order) {
-        require_once(__DIR__.'/ProductModel.php');
         try {
-            $query = "SELECT product, amount FROM inCart WHERE shop = :shop";
+            $query = "SELECT product FROM inCart WHERE shop = :shop";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':shop', $order);
             $stmt->execute();
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $products = array_map(function($item) {
+                return $item['product'];
+            }, $result);
             return $products;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());

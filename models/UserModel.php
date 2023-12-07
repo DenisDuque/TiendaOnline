@@ -122,43 +122,61 @@ class UserModel extends Database {
         }   
    }
 
-   public static function showCustomers($search) {
-        try {
+    public static function showCustomers($search) {
+    try {
+        if($search != null) {
             $search = '%' . $search . '%';
-            $query = "SELECT email, phone, name, surnames, address FROM users WHERE (name::text LIKE :search OR surnames::text LIKE :search OR phone::text LIKE :search OR email::text LIKE :search OR address::text LIKE :search) AND rol LIKE 'user'";
+            $query = "SELECT * FROM users WHERE (name::text LIKE :search OR surnames::text LIKE :search OR phone::text LIKE :search OR email::text LIKE :search OR address::text LIKE :search) AND rol LIKE 'customer'";
             $customers = self::getConnection()->prepare($query);
             $customers->bindParam(':search', $search, PDO::PARAM_STR);
-            $customers->execute();
-            $fetchedCustomers = $customers->fetchAll(PDO::FETCH_ASSOC);
-
-            return $fetchedCustomers;
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
+        } else {
+            $query = "SELECT * FROM users WHERE rol LIKE 'customer'";
+            $customers = self::getConnection()->prepare($query);
         }
-    }
-    
-    public static function getSpecifiedUser($email) {
-        try {
-            $query = "SELECT * image FROM users WHERE :email = $email";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $customers->execute();
+        //
+        $rows = $customers->fetchAll(PDO::FETCH_ASSOC);
+        $users = [];
+        foreach($rows as $row) {
             $user = new UserModel(
-                $row[0]['email'],
-                $row[0]['phone'],
-                $row[0]['name'],
-                $row[0]['surname'],
-                $row[0]['address'],
-                $row[0]['rol'],
-                $row[0]['image']
+                $row['email'],
+                $row['phone'],
+                $row['name'],
+                $row['surnames'],
+                $row['address'],
+                $row['rol'],
+                $row['image']
             );
-            return $user;
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
+            $users[] = $user;
         }
+        return $users;
+    } catch (PDOException $e) {
+        error_log("Error: " . $e->getMessage());
+        throw new Exception("Database error: " . $e->getMessage());
     }
+}
+    
+public static function getSpecifiedUser($email) {
+    try {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = self::getConnection()->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $user = new UserModel(
+            $row[0]['email'],
+            $row[0]['phone'],
+            $row[0]['name'],
+            $row[0]['surnames'],
+            $row[0]['address'],
+            $row[0]['rol'],
+            $row[0]['image']
+        );
+        return $user;
+    } catch (PDOException $e) {
+        error_log("Error: " . $e->getMessage());
+        throw new Exception("Database error: " . $e->getMessage());
+    }
+}
 }
 ?>

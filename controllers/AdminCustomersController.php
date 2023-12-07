@@ -9,24 +9,25 @@ class AdminCustomersController {
     }
 
     public static function listCustomers() {
-        $search = isset($_GET['search']) ? $_GET['search'] : '';
-        $fetchedCustomers = UserModel::showCustomers($search);
-        foreach($fetchedCustomers as $fetchedCustomer){
-            $customer = new UserModel($fetchedCustomer["email"], $fetchedCustomer["phone"], $fetchedCustomer["name"], $fetchedCustomer["surnames"], $fetchedCustomer["address"], 'user');
-            // Imprimir customers
-            echo $customer->getEmail();
-            echo $customer->getName();
-            echo '  <div>
-                        <div class="customerImage">
-                            <img src="/assets/images/users/'. $customer->getImage() .'" alt="Customer Image">
-                        </div>
-                        <div>
-                            <p>'. $customer->getName() .' '. $customer->getSurname() .'</p>
-                            <p>Email: '. $customer->getEmail() .'</p>
-                            <p>Phone Number: '. $customer->getPhone() .'</p>
-                            <p>Adress: '. $customer->getAddress() .'</p>
-                        </div>
-                    </div>';
+        $search = isset($_GET['search']) ? $_GET['search'] : null;
+        $customers = UserModel::showcustomers($search);
+        foreach($customers as $customer){
+            if($customer->getImage() == null) {
+                $image = "../utils/customers.png";
+            } else {
+                $image = $customer->getImage();
+            }
+            echo "
+                <div id='". $customer->getEmail() ."' class='defaultComponent'>
+                    <div class='imageComponent'><img src='views/assets/images/users/". $image ."'></div>
+                    <div class='textOnLeft'>
+                        <h4 class='name'>". $customer->getName() ." ". $customer->getSurname() ."</h4>
+                        <p class='userEmail'>Email: ". $customer->getEmail() ."</p>
+                        <p class='userPhone'>". $customer->getPhone()."</p>
+                        <p class='userAddress'>". $customer->getAddress() ."</p>
+                    </div>
+                </div>
+            ";
         }
     }
 }

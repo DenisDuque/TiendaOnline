@@ -9,7 +9,7 @@ class AdminOrdersController {
         include __DIR__.'/../views/Administrator/AdminOrdersView.php';
     }
     public static function showOrders() {
-        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $search = isset($_GET['search']) ? $_GET['search'] : null;
         $Orders = OrdersModel::getOrders($search);
         foreach($Orders as $order) {
             $userInfo = UserModel::getSpecifiedUser($order->getUser());
@@ -19,27 +19,27 @@ class AdminOrdersController {
                 $showProducts = implode(", ", $productsID);
             } else {
                 $firstProducts = array_slice($productsID, 0, 3);
-                $showProducts = implode(", ", $firstProducts) + "...";
+                $showProducts = implode(", ", $firstProducts) . "...";
             }
             $userImage = $userInfo->getImage();
             if ($userImage == null) {
-                $userImage = '../assets/images/utils/customer.png';
+                $userImage = '../utils/customers.png';
             }
 
             echo "
-                <div>
-                    <div>
-                        <img src='../assets/images/users/". $userImage ."' alt='Customer's Image'>
+                <div id='". $order->getId() ."' class='defaultComponent'>
+                    <div class='imageComponent'>
+                        <img src='views/assets/images/users/". $userImage ."' alt='Customer'>
                     </div>
-                    <div>
-                        <div>". $userInfo->getName() ." ". $userInfo->getSurname() ."</div>
-                        <div>Email: ". $userInfo->getEmail() ."</div>
-                        <div>Products: ". $showProducts ."</div>
-                        <div><div>Total Amount: ". $order->getPrice() ."</div><div>Status: ". $order->getStatus() ."</div></div>
+                    <div class='textOnLeft'>
+                        <h4 class='name'>". $userInfo->getName() ." ". $userInfo->getSurname() ."</h4>
+                        <p class='userEmail'>Email: ". $userInfo->getEmail() ."</p>
+                        <p class='userPhone'>Products: ". $showProducts ."</p>
+                        <p class='userAddress'>Total Amount: ". $order->getPrice() ."<span>Status: ". $order->getStatus() ."</span></p>
                     </div>
-                    <div>
-                        <div><button type='submit' id='". $order->getId() ." bill'><img src='../assets/images/utils/factura.png' alt='Factura'></button></div>
-                        <div><button type='submit' id='". $order->getId() ." edit'><img src='../assets/images/utils/edit.png' alt='Edit'></button></div>
+                    <div class='textOnRight'>
+                        <div id='downloadBill_". $order->getId() ."' class='downloadBillBtn'><img src='views/assets/images/utils/downloadBill.png' alt='Download Bill'></div>
+                        <div id='editBtn_". $order->getId() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                     </div>
                 </div>
             ";

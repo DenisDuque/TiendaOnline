@@ -10,21 +10,24 @@ class AdminProductsController {
         $Products = ProductModel::getAllProducts();
         foreach($Products as $product) {
             $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
+            if($img == null) {
+                $img = '../utils/productImage.png';
+            }
             echo "
-                <div>
-                    <div>
-                        <img src='/views/assets/images/products/".$img."'>
+                <div id='". $product->getCode() ."' class='defaultComponent'>
+                    <div class='imageComponent'>
+                        <img src='views/assets/images/products/".$img."'>
                     </div>
-                    <div>
-                        <div>". $product->getName() ."</div>
-                        <div>Category: ". $product->getCategory() ."</div>
-                        <div>Product Code: ". $product->getCode() ."</div>
-                        <div>". $product->getPrice() ."</div>
+                    <div class='textOnLeft'>
+                        <h4>". $product->getName() ."</h4>
+                        <p>Category: ". $product->getCategory() ."</p>
+                        <p>Product Code: ". $product->getCode() ."</p>
+                        <h5>$". $product->getPrice() ."</h5>
                     </div>
-                    <div>
-                        <div>Sold: ". $product->getSold() ."</div>
-                        <div>Stock: ". $product->getStock() ."</div>
-                        <div><button type='submit'><img src='../assets/images/utils/edit.png' alt='Edit'></button></div>
+                    <div class='textOnRight'>
+                        <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
+                        <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
+                        <div id='editBtn_". $product->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                     </div>
                 </div>
             ";

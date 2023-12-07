@@ -3,6 +3,7 @@
     class CategoryModel extends Database {
         private $code;
         private $name;
+        private $status;
 
         public function setCode($code) {
             $this->code = $code;
@@ -16,10 +17,16 @@
         public function getName() {
             return $this->name;
         }
-
-        public function __construct($code,$name){
+        public function setStatus($status) {
+            $this->status = $status;
+        }
+        public function getStatus() {
+            return $this->status;
+        }
+        public function __construct($code,$name,$status){
             $this->code = $code;
             $this->name = $name;
+            $this->status = $status;
         }
 
         public static function listCategories($search) {
@@ -27,30 +34,18 @@
                 $query = "SELECT * FROM categories";
                 $categories = self::getConnection()->prepare($query);
                 $categories->execute();
-                $fetchedCategories = $categories->fetchAll(PDO::FETCH_ASSOC);
-                foreach($fetchedCategories as $fetchedCategory){
-                    $category = new CategoryModel($fetchedCategory["code"],$fetchedCategory["name"]);
-                    $code = $category->getCode();
-                    $name = $category->getName();
-
-                    $query = "SELECT * FROM products WHERE codecategory LIKE :code";
-                    $countProducts = self::getConnection()->prepare($query);
-                    $countProducts->bindParam(':code', $code, PDO::PARAM_STR);
-                    $countProducts->execute();
-                    $numProducts = $countProducts->rowCount();
-
-                    echo 
-                        '<div class="categoryComponent">
-                                <h5 class="categoryName">'.$name.'</h5>
-                                <p class="categoryCount">Products: '.$numProducts.'</p>
-                                <input class="products" type="hidden" value="NI001NIK,NI002NIK,NI003NIK">
-                                <input class="status" type="hidden" value="Enabled">
-                                <button type="button" class="editBtn" id="'.$code.'"><img src="views/assets/images/utils/edit.png" alt="Edit"></button>
-                        </div>
-                    ';
-
+                $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
+                $allCategories = [];
+                foreach ($rows as $row) {
+                    $category = new CategoryModel(
+                        $row['code'],
+                        $row['name'],
+                        $row['status']
+                    );
+                    $allCategories[] = $category;
                 }
-                return $fetchedCategories;
+        
+                return $allCategories;
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
