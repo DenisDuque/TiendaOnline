@@ -1,20 +1,20 @@
+<html>
 <?php
     require_once("../../../controllers/AdminCategoriesController.php");
-    $category = AdminCategoriesController::getCategoryInfo("'%categoria%'");
-    
+    $category = AdminCategoriesController::getCategoryInfo($id);
 ?>
 <table>
     <tr>
         <td>
             <h3>
-                <?php //echo $category["code"]; ?>
+               
             </h3>
         </td>
     </tr>
     <form action="" method="">
         <tr>
             <td>
-                <input type="text" name="name" value=<?php //echo $category["name"]; ?>>
+                <input type="text" name="name" value=>
             </td>
         </tr>
         <tr>
@@ -22,7 +22,7 @@
                 <select name="active">
                     <option value="enabled">enabled</option>
                     <option value="disabled">disabled</option>
-                </select>
+                </select>s
             </td>
         </tr>
         <tr>
@@ -42,3 +42,4 @@
         </tr>
     </form>
 </table>
+</html>

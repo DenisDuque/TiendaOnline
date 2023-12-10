@@ -38,6 +38,7 @@ class AdminCategoriesController {
     }
 
     public static function getCategoryInfo($code){
+        echo $code;
         $info = CategoryModel::getCategory($code);
         return $info;
     }

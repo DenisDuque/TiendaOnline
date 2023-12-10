@@ -72,6 +72,7 @@
 
         public static function getCategory($code){
             try {
+                echo $code;
                 $query = "SELECT * FROM categories WHERE code = :codigo;";
                 $stmt = self::getConnection()->prepare($query);
                 $stmt->bindParam(':codigo', $code, PDO::PARAM_INT);

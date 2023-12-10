@@ -7,13 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fillDataCategory(code){
+        code = code.replace("editBtn_", "");
         var divForm = document.getElementById("formCat");
 
-        fetch("views/Administrator/components/FormCategorias.php")
-            .then(response => response.text())
-            .then(html => {
-                html = html.replace("%categoria%", code)
-                divForm.innerHTML = html;
-            })
+        const tabla = document.createElement("table");
+        const form = document.createElement("form");
+        
+        const trTitulo = document.createElement("tr");
+        const tdTitulo = document.createElement("td");
+        const titulo = document.createElement("h3");
+        titulo.innerHTML = code;
+
+        tdTitulo.appendChild(titulo);
+        trTitulo.appendChild(tdTitulo);
+        tabla.appendChild(trTitulo);
+
+        divForm.appendChild(tabla);
     }
 });
