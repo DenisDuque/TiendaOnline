@@ -55,7 +55,22 @@
                 <h2>Categories</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
-                    <?php AdminCategoriesController::showCategories(); ?>
+                    <?php
+                    foreach($categories as $category) {
+                        $ProductsID = ProductModel::getCategoryProductId($category->getCode());
+                        $ProductsTextValue = implode(',', $ProductsID);
+                        $ProductsTextValue = str_replace(' ','',$ProductsTextValue);
+                        echo "
+                            <div id='". $category->getCode() ."' class='categoryComponent'>
+                                <h5 class='categoryName'>". $category->getName() ."</h5>
+                                <p class='categoryCount'>Products: ". count($ProductsID) ."</p>
+                                <input class='products' type='hidden' value='". $ProductsTextValue ."'>
+                                <input class='status' type='hidden' value='". $category->getStatus() ."'>
+                                <div id='editCatBtn_". $category->getCode() .",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                            </div>
+                        ";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

@@ -11,7 +11,7 @@
         <select name="category">
             <?php
                 require_once __DIR__.'/../../../controllers/AdminCategoriesController.php';
-                AdminCategoriesController::generateCategoriesOptions();
+                CategoryController::generateCategoriesOptions();
             ?>
         </select>
         <label>Images</label>

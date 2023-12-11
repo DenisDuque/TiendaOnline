@@ -7,12 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
             let id = panels[i].id;
-            window.location.href = "index.php?page=administrator&panel=" + id;
+            let action = "showAdmin" + id;
+            window.location.href = "index.php?page="+ id +"&action=" + action;
         });
     }
 
 
-    for(var i = 0; i < editButtons.length; i++){
+    for(let i = 0; i < editButtons.length; i++){
         editButtons[i].addEventListener("click", function(e){
            
         });
@@ -23,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let search = document.getElementById("search");
         let currentURL = window.location.href;
         let url = new URL(currentURL);
-        let panelValue = url.searchParams.get("panel");
-        window.location.href = "index.php?page=administrator&panel=" + panelValue + "&search=" + search.value;
+        let action = url.searchParams.get("action");
+        window.location.href = "index.php?page=User&action=" + action + "&search=" + search.value;
     });
 
 });

@@ -65,7 +65,31 @@
                 <h2>Products</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
-                    <?php AdminProductsController::showProducts(); ?>
+                    <?php 
+                        foreach($products as $product) {
+                            $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
+                            if($img == null) {
+                                $img = '../utils/productImage.png';
+                            }
+                            echo "
+                                <div id='". $product->getCode() ."' class='defaultComponent'>
+                                    <div class='imageComponent'>
+                                        <img src='views/assets/images/products/".$img."'>
+                                    </div>
+                                    <div class='textOnLeft'>
+                                        <h4>". $product->getName() ."</h4>
+                                        <p>Category: ". $product->getCategory() ."</p>
+                                        <p>Product Code: ". $product->getCode() ."</p>
+                                        <h5>$". $product->getPrice() ."</h5>
+                                    </div>
+                                    <div class='textOnRight'>
+                                        <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
+                                        <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
+                                        <div id='editProdBtn_". $product->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                    </div>
+                                </div>
+                            ";
+                        } ?>
                 </div>
             </div>
         </div>

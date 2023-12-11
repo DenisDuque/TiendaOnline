@@ -1,24 +1,30 @@
-<?php
-// Asignar variable action a el valor $_GET['page'] si esta asignada.
-$action = isset($_GET['page']) ? $_GET['page'] : '';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Store</title>
+</head>
+<body>
+<?php 
+require_once "autoload.php";
+// require_once "views/general/cabecera.html";
+// require_once "views/general/menu.php";
 
-// Seleccionar la pagina actual segun el valor de $action
-switch($action){
-	case 'login':
-		include 'controllers/LoginController.php';
-		break;
-	/* etc */
-
-	case 'administrator':
-		include 'controllers/AdminDashboardController.php';
-		break;
-		
-
-	case 'main':
-	default:
-	//To-do
-		echo 'Pagina no encontrada';
-		break;
-
+if(isset($_GET['page'])) {
+    $controllerName = $_GET['page']."Controller";
+} else {
+    $controllerName = "UserController";
 }
+if(class_exists($controllerName)) {
+    $controller = new $controllerName(); 
+	$action = isset($_GET['action']) ? $_GET['action'] : 'default';
+    $controller->$action();   
+} else {
+    echo "No existe el controlador";
+}
+// require_once "views/general/pie.html";
 ?>
+</body>
+</html>

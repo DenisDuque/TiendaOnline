@@ -1,7 +1,7 @@
 <html>
 <?php
     require_once("../../../controllers/AdminCategoriesController.php");
-    $category = AdminCategoriesController::getCategoryInfo($id);
+    $category = CategoryController::getCategoryInfo($id);
 ?>
 <table>
     <tr>
@@ -30,7 +30,7 @@
             <td>
                 <?php
                    
-                    $products = AdminCategoriesController::showProductsFromCategory("%categoria%");
+                    $products = CategoryController::showProductsFromCategory("%categoria%");
                 
                     echo "<ul>";
                     foreach($products as $product){

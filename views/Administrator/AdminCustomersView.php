@@ -86,7 +86,26 @@
                             <p class="userAddress">Carrer de la Batllòria 76-78 1º4</p>
                         </div>
                     </div>
-                    <?php AdminCustomersController::listCustomers(); ?>
+                    <?php
+                    foreach($customers as $customer){
+                        if($customer->getImage() == null) {
+                            $image = "../utils/customers.png";
+                        } else {
+                            $image = $customer->getImage();
+                        }
+                        echo "
+                            <div id='". $customer->getEmail() ."' class='defaultComponent'>
+                                <div class='imageComponent'><img src='views/assets/images/users/". $image ."'></div>
+                                <div class='textOnLeft'>
+                                    <h4 class='name'>". $customer->getName() ." ". $customer->getSurname() ."</h4>
+                                    <p class='userEmail'>Email: ". $customer->getEmail() ."</p>
+                                    <p class='userPhone'>". $customer->getPhone()."</p>
+                                    <p class='userAddress'>". $customer->getAddress() ."</p>
+                                </div>
+                            </div>
+                        ";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

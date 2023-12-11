@@ -117,8 +117,31 @@
                         <h4 class="productStock">Stock: 125</h4>
                     </div>
                 </div>
-
-                    <?php AdminDashboardController::bestSellers(); ?>
+                    <?php
+                        foreach($products as $product) {
+                            $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
+                            if($img == null) {
+                                $img = '../utils/productImage.png';
+                            }
+                            echo "
+                                <div class='defaultComponent'>
+                                    <div class='imageComponent'>
+                                        <img src='views/assets/images/products/".$img."' alt='Product'>
+                                    </div>
+                                    <div class='textOnLeft'>
+                                        <h4>". $product->getName() ."</h4>
+                                        <p>Category: ". $product->getCategory() ."</p>
+                                        <p>Product Code: ". $product->getCode() ."</p>
+                                        <h5>$". $product->getPrice() ."</h5>
+                                    </div>
+                                    <div class='textOnRight'>
+                                        <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
+                                        <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
+                                    </div>
+                                </div>
+                            ";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
