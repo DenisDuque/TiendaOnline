@@ -78,7 +78,7 @@ class UserModel extends Database {
     public static function authenticate($userEmail, $password) {
         try {
             $hashedPassword = md5($password);
-            $query = "SELECT rol FROM users WHERE email = :email AND password = :password";
+            $query = "SELECT rol FROM users WHERE email LIKE :email AND password LIKE :password";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $userEmail);
             $stmt->bindParam(':password', $hashedPassword);
@@ -158,7 +158,7 @@ class UserModel extends Database {
     
 public static function getSpecifiedUser($email) {
     try {
-        $query = "SELECT * FROM users WHERE email = :email";
+        $query = "SELECT * FROM users WHERE email LIKE :email";
         $stmt = self::getConnection()->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

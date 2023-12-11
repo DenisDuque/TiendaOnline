@@ -200,7 +200,7 @@ class ProductModel extends Database {
 
     public static function getProductImage($perspective, $product) {
         try {
-            $query = "SELECT route FROM images WHERE perspectives = :perspectives AND product = :product";
+            $query = "SELECT route FROM images WHERE perspectives LIKE :perspectives AND product = :product";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':perspectives', $perspective);
             $stmt->bindParam(':product', $product);
