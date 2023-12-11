@@ -1,27 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var buttons = document.getElementsByClassName("editBtn");
-    for(let i = 0; i < buttons.length; i++){
-        buttons[i].addEventListener("click", function (e) {
-            fillDataCategory(buttons[i].id);
-        });    
-    }
-
     function fillDataCategory(code){
         code = code.replace("editBtn_", "");
-        var divForm = document.getElementById("formCat");
+        var datos = code.split(",");
+        let name = datos[1];
+        let status = datos[2];
+        document.getElementById("name").value = name;
+        if(status=="enabled"){
+            document.getElementById("select").selectedIndex = "enabled";
+        }else{
+            document.getElementById("select").selectedIndex = "disabled"; 
+        }
 
-        const tabla = document.createElement("table");
-        const form = document.createElement("form");
+        var listado = document.getElementById("listado");
+        for(let i = 3; i < datos.length; i++){
+            console.log(datos[i]);
+            let item = document.createElement("li");
+            item.innerHTML = datos[i];
+            listado.appendChild(item);
+        }   
         
-        const trTitulo = document.createElement("tr");
-        const tdTitulo = document.createElement("td");
-        const titulo = document.createElement("h3");
-        titulo.innerHTML = code;
 
-        tdTitulo.appendChild(titulo);
-        trTitulo.appendChild(tdTitulo);
-        tabla.appendChild(trTitulo);
-
-        divForm.appendChild(tabla);
     }
+    
+    document.querySelectorAll('.editBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            fillDataCategory(button.id.replace('editBtn_', ''));
+        });
+    });
 });

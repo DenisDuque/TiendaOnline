@@ -23,7 +23,32 @@
                     ?>
                 </div>
                 <div id="formCat">
-                    <h1>ME CAGO EN LOS MUERTOS DEL IKER</h1>
+                    <table>
+                        <form action="" method="">
+                            <input type="hidden" name="code" id="code" value="">
+                            <tr>
+                                <td>
+                                    <input type="text" name="name" id="name" value="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="active" id="select">
+                                        <option id="enabled" value="enabled">enabled</option>
+                                        <option id="disabled" value="disabled">disabled</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr><td><h1>Products</h1></td></tr>
+                            <tr>
+                                
+                                <td>
+                                    <ul id="listado">
+                                    </ul>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
                 </div>
             </div>
             <div id="rightPanel">

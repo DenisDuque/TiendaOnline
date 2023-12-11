@@ -21,7 +21,7 @@ class AdminCategoriesController {
                     <p class='categoryCount'>Products: ". count($ProductsID) ."</p>
                     <input class='products' type='hidden' value='". $ProductsTextValue ."'>
                     <input class='status' type='hidden' value='". $category->getStatus() ."'>
-                    <div id='editBtn_". $category->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                    <div id='editBtn_". $category->getCode() .",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                 </div>
             ";
         }
@@ -38,7 +38,6 @@ class AdminCategoriesController {
     }
 
     public static function getCategoryInfo($code){
-        echo $code;
         $info = CategoryModel::getCategory($code);
         return $info;
     }
