@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
     
-    document.querySelectorAll('.editBtn').forEach(button => {
+    document.querySelectorAll('.editCatBtn').forEach(button => {
         button.addEventListener('click', function() {
             fillDataCategory(button.id.replace('editBtn_', ''));
         });

@@ -27,7 +27,7 @@ class AdminProductsController {
                     <div class='textOnRight'>
                         <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
                         <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
-                        <div id='editBtn_". $product->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                        <div id='editProdBtn_". $product->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                     </div>
                 </div>
             ";

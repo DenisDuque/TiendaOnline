@@ -21,7 +21,7 @@ class AdminCategoriesController {
                     <p class='categoryCount'>Products: ". count($ProductsID) ."</p>
                     <input class='products' type='hidden' value='". $ProductsTextValue ."'>
                     <input class='status' type='hidden' value='". $category->getStatus() ."'>
-                    <div id='editBtn_". $category->getCode() .",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                    <div id='editCatBtn_". $category->getCode() .",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                 </div>
             ";
         }

@@ -25,10 +25,10 @@
                 <div id="formCat">
                     <table>
                         <form action="" method="">
-                            <input type="hidden" name="code" id="code" value="">
+                            <input type="hidden" name="code" id="code">
                             <tr>
                                 <td>
-                                    <input type="text" name="name" id="name" value="">
+                                    <input type="text" name="name" id="name">
                                 </td>
                             </tr>
                             <tr>
