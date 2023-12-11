@@ -60,7 +60,9 @@ ALTER SEQUENCE public.bill_id_seq OWNED BY public.bill.id;
 
 CREATE TABLE public.categories (
     code integer NOT NULL,
-    name character(50) NOT NULL
+    name character(50) NOT NULL,
+    status character varying(10) NOT NULL,
+    CONSTRAINT categories_status_check CHECK (((status)::text = ANY ((ARRAY['enabled'::character varying, 'disabled'::character varying])::text[])))
 );
 
 
@@ -312,9 +314,9 @@ COPY public.bill (id, purchase) FROM stdin;
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categories (code, name) FROM stdin;
-1	zapatos                                           
-2	sandalias                                         
+COPY public.categories (code, name, status) FROM stdin;
+1	zapatos                                           	enabled
+2	sandalias                                         	enabled
 \.
 
 
@@ -401,7 +403,7 @@ SELECT pg_catalog.setval('public.bill_id_seq', 1, false);
 -- Name: categories_code_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categories_code_seq', 2, true);
+SELECT pg_catalog.setval('public.categories_code_seq', 3, true);
 
 
 --
