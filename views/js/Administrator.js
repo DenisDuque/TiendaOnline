@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var panels = document.getElementsByClassName("panel");
-    var editButtons = document.getElementsByClassName("editBtn");
+    var editButtons = document.getElementsByClassName("editProdBtn");
     var billButtons = document.getElementsByClassName("billBtn");
     var searchBtn = document.getElementById("searchBtn");
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for(var i = 0; i < editButtons.length; i++){
         editButtons[i].addEventListener("click", function(e){
-            let div = document.getElementById("panelContainer");
+           
         });
     }
     
