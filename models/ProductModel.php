@@ -235,5 +235,71 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+    public static function createProduct($name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView) {
+        try{
+            $query = "SELECT * FROM products WHERE name = :name;";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':name', $name, PDO::PARAM_INT);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(count($rows) >= 1){
+                // avisar de que ya hay un producto con el mismo nombre
+                echo "nombre ya en uso e otro producto";
+            }else{
+                // Realizar la inserción
+                $insertQuery = "INSERT INTO products (name, price, stock, status, category, sideView, aboveView, bottomView) VALUES (:name, :price, :stock, :status, :category, :sideView, :aboveView, :bottomView);";
+                $insertStatement = self::getConnection()->prepare($insertQuery);
+                $insertStatement->bindParam(':name', $name, PDO::PARAM_STR);
+                $insertStatement->bindParam(':price', $price, PDO::PARAM_INT);
+                $insertStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
+                $insertStatement->bindParam(':status', $status, PDO::PARAM_INT);
+                $insertStatement->bindParam(':category', $category, PDO::PARAM_STR);
+                $insertStatement->bindParam(':sideView', $sideView, PDO::PARAM_STR);
+                $insertStatement->bindParam(':aboveView', $aboveView, PDO::PARAM_STR);
+                $insertStatement->bindParam(':bottomView', $bottomView, PDO::PARAM_STR);
+                $insertStatement->execute();
+                echo "Producto agregado correctamente";
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public static function editProduct($id, $name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView) {
+        try {
+            // Realizar la actualización
+            $updateQuery = "UPDATE products 
+            SET name = :name, price = :price, stock = :stock, status = :status, 
+                category = :category, sideView = :sideView, 
+                aboveView = :aboveView, bottomView = :bottomView
+            WHERE id = :id";
+
+            $updateStatement = self::getConnection()->prepare($updateQuery);
+            $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
+            $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
+            $updateStatement->bindParam(':price', $price, PDO::PARAM_INT);
+            $updateStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
+            $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
+            $updateStatement->bindParam(':category', $category, PDO::PARAM_STR);
+            $updateStatement->bindParam(':sideView', $sideView, PDO::PARAM_STR);
+            $updateStatement->bindParam(':aboveView', $aboveView, PDO::PARAM_STR);
+            $updateStatement->bindParam(':bottomView', $bottomView, PDO::PARAM_STR);
+            $updateStatement->execute();
+            
+            if ($updateStatement->rowCount() > 0) {
+
+                echo "Producto actualizado correctamente";
+
+            } else {
+                // Avisar de que el producto no se encuentra
+                echo "El producto no se encuentra en la base de datos";
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>

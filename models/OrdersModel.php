@@ -119,5 +119,28 @@ class OrdersModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+    public static function editOrder($id, $status) {
+        try {
+            // Realizar la actualización
+            $updateQuery = "UPDATE orders SET status = :status WHERE id = :id";
+
+            $updateStatement = self::getConnection()->prepare($updateQuery);
+            $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
+            $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
+            $updateStatement->execute();
+            
+            if ($updateStatement->rowCount() > 0) {
+
+                echo "Order actualizado correctamente";
+
+            } else {
+                echo "La order no se encuentra en la base de datos";
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>
