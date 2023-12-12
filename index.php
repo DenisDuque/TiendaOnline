@@ -20,7 +20,7 @@ if(isset($_GET['page'])) {
 if(class_exists($controllerName)) {
     $controller = new $controllerName(); 
 	$action = isset($_GET['action']) ? $_GET['action'] : 'default';
-    $controller->$action();   
+    $controller->$action(); 
 } else {
     echo "No existe el controlador";
 }

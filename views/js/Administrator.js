@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
-            let id = panels[i].id;
+            let id = e.currentTarget.id;
             let action = "showAdmin" + id;
+            if(id == 'Dashboard') {
+                id = 'Product';
+            }
             window.location.href = "index.php?page="+ id +"&action=" + action;
         });
     }

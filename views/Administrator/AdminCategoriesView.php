@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
+        <script src="views/js/Administrator.js"></script>
         <script src="views/js/editForms.js"></script>
         <title>Categories</title>
     </head>
