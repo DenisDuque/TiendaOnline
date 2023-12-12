@@ -1,0 +1,7 @@
+body {
+  background-color: #141414;
+}
+body body > div:nth-child(2) {
+  background-color: #FF5E00;
+  border: 2px solid #ABABAB;
+}/*# sourceMappingURL=main.css.map */

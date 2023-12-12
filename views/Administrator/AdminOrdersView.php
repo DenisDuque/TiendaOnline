@@ -22,26 +22,14 @@
                         include("views/Administrator/Components/dashboardPanel.html");
                     ?>
                 </div>
+                <div class="orderInfo">
+
+                </div>
             </div>
             <div id="rightPanel">
                 <h2>Orders</h2>
                 <?php include("views/Administrator/Components/searchBar.php");?>
                 <div id="listContainer">
-                    <!--<div class="defaultComponent">
-                        <div class="imageComponent">
-                            <img src="views/assets/images/utils/customers.png" alt="Customer">
-                        </div>
-                        <div class="textOnLeft">
-                            <h4 class="name">Denis Duque Villanueva</h4>
-                            <p class="userEmail">Email: denis.duque@inslapineda.cat</p>
-                            <p class="userPhone">612239942</p>
-                            <p class="userAddress">Carrer de la Batllòria 76-78 1º4<span class="orderStatus">Status: Pending</span></p>
-                        </div>
-                        <div class="textOnRight">
-                            <div class="downloadBillBtn"><img src="views/assets/images/utils/downloadBill.png" alt="Download Bill"></div>
-                            <div class="editBtn"><img src="views/assets/images/utils/edit.png" alt="Edit"></div>
-                        </div>
-                    </div>-->
                     <?php 
                         foreach($Orders as $order) {
                             $userInfo = UserModel::getSpecifiedUser($order->getUser());

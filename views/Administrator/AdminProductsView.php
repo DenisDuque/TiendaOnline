@@ -54,7 +54,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    
+                                    <select name="category" id="category"> 
+                                        <?php 
+                                            $categories = CategoryModel::listCategories("");
+                                            foreach ($categories as $category) {
+                                                echo "<option id='".$category->getCode()."' value='".$category->getCode()."'>".$category->getName()."</option>";
+                                            }
+                                        ?>
+                                    </select>
                                 </td>
                             </tr>
                         </form>
@@ -85,11 +92,12 @@
                                     <div class='textOnRight'>
                                         <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
                                         <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
-                                        <div id='editProdBtn_". $product->getCode() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                        <div id='".$product->getCode().",".$product->getName().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory()."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                                     </div>
                                 </div>
                             ";
-                        } ?>
+                        }
+                    ?>
                 </div>
             </div>
         </div>
