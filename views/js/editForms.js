@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         var listado = document.getElementById("listado");
+        listado.innerHTML = "";
         for(let i = 3; i < datos.length; i++){
             console.log(datos[i]);
             let item = document.createElement("li");
@@ -22,9 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
     
-    document.querySelectorAll('.editCatBtn').forEach(button => {
+    document.querySelectorAll('.editBtn').forEach(button => {
         button.addEventListener('click', function() {
-            fillDataCategory(button.id.replace('editBtn_', ''));
+            fillDataCategory(button.id.replace('editBtn', ''));
         });
     });
 });
