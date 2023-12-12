@@ -23,8 +23,8 @@
                     ?>
                 </div>
                 <div class="formProd">
-                    <table>
-                        <form action="" method="">
+                    <form action="" method="">
+                        <table> 
                             <input type="hidden" name="code" id="code">
                             <tr><td><label for="name">Name product</label></td></tr>
                             <tr>
@@ -56,7 +56,7 @@
                                 <td>
                                     <select name="category" id="category"> 
                                         <?php 
-                                            $categories = CategoryModel::listCategories("");
+                                            $categories = CategoryController::generateCategoriesOptions();
                                             foreach ($categories as $category) {
                                                 echo "<option id='".$category->getCode()."' value='".$category->getCode()."'>".$category->getName()."</option>";
                                             }
@@ -64,8 +64,8 @@
                                     </select>
                                 </td>
                             </tr>
-                        </form>
-                    </table>
+                        </table>
+                    </form>
                 </div>
             </div>
             <div id="rightPanel">

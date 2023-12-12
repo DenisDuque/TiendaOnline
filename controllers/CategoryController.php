@@ -10,9 +10,7 @@ class CategoryController {
     }
     public static function generateCategoriesOptions() {
         $categories = CategoryModel::listCategories(null);
-        foreach($categories as $category) {
-            echo "<option value='". $category->getCode() ."'>". $category->getName() ."</option>";
-        }
+        return $categories;
     }
     public static function showProductsFromCategory($category){
         $products = CategoryModel::getProductsFromCategory($category);
