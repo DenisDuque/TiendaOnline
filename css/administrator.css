@@ -1,0 +1,360 @@
+@charset "UTF-8";
+@import 'https://fonts.googleapis.com/css?family=Kanit';
+/*  IMPORTANTE
+
+    El código está seccionado con los siguientes comentarios
+    Abre el buscador utilizando Ctrl + F y busca:
+
+    General
+        Header Styles
+        Container
+        Left Panel Styles
+        Right Panel Styles
+        Search Bar
+
+    Components
+        Categories
+        Default (El resto de componentes)
+        Scrollbar
+            Firefox
+            Chrome, Edge, Safari
+
+*/
+body {
+  background-color: #ECECEC;
+  margin: 0;
+  padding: 0;
+  font-family: Kanit;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+header h1 {
+  font-size: 64px;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+header img {
+  filter: brightness(0);
+  height: 2.6vw;
+  width: 2.6vw;
+  margin-right: 2.6vw;
+}
+header img:hover {
+  filter: brightness(1);
+  transform: scale(1.01);
+}
+
+#container {
+  width: 100%;
+  height: 82vh;
+}
+
+#leftPanel {
+  border: 1px solid black;
+  height: 100%;
+  float: left;
+  margin-left: 6vw;
+}
+#leftPanel .panels {
+  display: flex;
+  flex-direction: column;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+#leftPanel .panel {
+  background-color: rgba(255, 94, 0, 0.25);
+  width: 12.7vw;
+  height: 13.5vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-radius: 10px;
+  padding: 2.5vh;
+  margin-bottom: 2.5vh;
+  transition: all ease 0.33s 0;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+#leftPanel .panel img {
+  transition: 0.33s;
+  width: 7vh;
+  height: 7vh;
+}
+#leftPanel .panel p {
+  font-size: 36px;
+  margin-top: -2vh;
+}
+#leftPanel .panel:hover {
+  background-color: rgba(255, 94, 0, 0.4);
+  transform: scale(101%);
+}
+#leftPanel .panel:hover img {
+  transform: rotateZ(13deg);
+}
+
+#rightPanel {
+  float: right;
+  width: 41vw;
+  height: 100%;
+  margin-right: 20vw;
+}
+#rightPanel h2 {
+  margin-top: 2vh;
+  font-size: 42px;
+  justify-self: center;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+#rightPanel #listContainer {
+  width: 100%;
+  height: 56vh;
+  overflow-y: scroll;
+}
+#rightPanel .dashboardList {
+  margin-top: 14vh;
+}
+
+#navBar {
+  width: 100%;
+  display: flex;
+  height: auto;
+  margin-bottom: 3vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+#navBar #searchBar {
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-right: 2vh;
+}
+#navBar #searchBar input {
+  background-color: transparent;
+  padding-left: 2vh;
+  width: 100%;
+  height: 6vh;
+  border: none;
+}
+#navBar #searchBar #searchBtn {
+  height: 6vh;
+}
+#navBar img {
+  filter: brightness(0);
+  width: 6vh;
+}
+#navBar img:hover {
+  filter: brightness(1);
+  transform: scale(1.01);
+}
+#navBar #addBtn {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.editBtn {
+  width: 4vh;
+  height: 4vh;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.editBtn img {
+  width: 2.5vh;
+  height: 2.5vh;
+  filter: brightness(0);
+}
+.editBtn:hover {
+  transform: scale(1.01);
+}
+.editBtn:hover img {
+  filter: brightness(1);
+}
+
+.downloadBillBtn {
+  width: 4vh;
+  height: 4vh;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.downloadBillBtn img {
+  width: 2.5vh;
+  height: 2.5vh;
+  filter: brightness(0);
+}
+.downloadBillBtn:hover {
+  transform: scale(1.01);
+}
+.downloadBillBtn:hover img {
+  filter: brightness(1);
+}
+
+.categoryComponent {
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 94, 0, 0.25);
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 3vh;
+}
+.categoryComponent h5 {
+  margin-left: 2vh;
+  font-size: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.categoryComponent p {
+  color: #ABABAB;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.categoryComponent div {
+  margin-right: 2vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.defaultComponent {
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 94, 0, 0.25);
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 3vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .imageComponent {
+  background-color: #ECECEC;
+  width: 12vh;
+  height: 12vh;
+  border-radius: 10px;
+  margin-left: 2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .imageComponent img {
+  width: 12vh;
+}
+.defaultComponent h4 {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent p {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: #ABABAB;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent p span {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: #ABABAB;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin-left: 2vh;
+}
+.defaultComponent h5 {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnLeft {
+  margin-left: 2vh;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 80%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnRight {
+  margin-right: 2vh;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 80%;
+  justify-content: center;
+  align-items: right;
+  text-align: end;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.defaultComponent .textOnRight .downloadBillBtn {
+  align-self: end;
+  margin-bottom: 2vh;
+}
+.defaultComponent .textOnRight .editBtn {
+  align-self: end;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ABABAB #ECECEC;
+}
+
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ECECEC;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #ABABAB;
+  border-radius: 10px;
+  border: 3px solid #ECECEC;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}/*# sourceMappingURL=administrator.css.map */
