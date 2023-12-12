@@ -23,33 +23,24 @@
                         include("views/Administrator/Components/ordersPanel.html");
                     ?>
                 </div>
-                <div id="formCat">
-                    <table>
-                        <form action="" method="">
+                <div id="formEditCategory" class="adminForm">
+                    <h4 id="editCategoryTitle">Sneakers</h4>
+                        <form action="index.php?page=Category&action=editCategory" method="POST">
                             <input type="hidden" name="code" id="code">
-                            <tr>
-                                <td>
-                                    <input type="text" name="name" id="name">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="active" id="select">
-                                        <option id="enabled" value="enabled">enabled</option>
-                                        <option id="disabled" value="disabled">disabled</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr><td><h1>Products</h1></td></tr>
-                            <tr>
-                                
-                                <td>
-                                    <ul id="listado">
-                                    </ul>
-                                </td>
-                            </tr>
+                            <label for="name">Category name</label>
+                            <input type="text" name="name" id="name">
+                            <div>
+                                <label for="active">Status</label>
+                                <select name="active" id="select">
+                                    <option id="enabled" value="enabled">enabled</option>
+                                    <option id="disabled" value="disabled">disabled</option>
+                                </select>
+                            </div>
+                            <label for="">Products</label>
+                            <ul id="listado" class="productsList">
+                            </ul>
+                            <input type="submit" class="submitBtn" value="Save changes"></input>
                         </form>
-                    </table>
                 </div>
             </div>
             <div id="rightPanel">

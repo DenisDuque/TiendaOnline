@@ -11,6 +11,7 @@
         Header Styles
         Container
         Left Panel Styles
+            Forms
         Right Panel Styles
         Search Bar
     
@@ -77,36 +78,107 @@ header {
         display: flex;
         flex-direction: column;
         height: fit-content;
-    }
-    .panel {
-        background-color: $adminOrange;
-        width: 12.7vw;
-        height: 13.5vh;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        border-radius: $radius;
-        padding: 2.5vh;
-        margin-bottom: 2.5vh;
-        transition: all ease 0.33s 0;
-        cursor: pointer;
-        user-select: none;
-        img {
-            transition: 0.33s;
-            width: 7vh;
-            height: 7vh;
+        .panel {
+            background-color: $adminOrange;
+            width: 12.7vw;
+            height: 13.5vh;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            border-radius: $radius;
+            padding: 2.5vh;
+            margin-bottom: 2.5vh;
+            transition: all ease 0.33s 0;
+            cursor: pointer;
+            user-select: none;
+            img {
+                transition: 0.33s;
+                width: 7vh;
+                height: 7vh;
+            }
+            p {
+                font-size: 36px;
+                margin-top: -2vh;
+            }
         }
-        p {
-            font-size: 36px;
-            margin-top: -2vh;
+        .panel:hover {
+            background-color: $adminOrangeHover;
+            transform: scale(101%);
+            img {
+                transform: rotateZ(13deg);
+            }
         }
     }
     
-    .panel:hover {
-        background-color: $adminOrangeHover;
-        transform: scale(101%);
-        img {
-            transform: rotateZ(13deg);
+    .adminForm {
+        height: 100%;
+        padding: 5vh 1vw;
+        background-color: $adminOrange;
+        border-radius: $radius;
+        display: flex;
+        flex-direction: column;
+        h4 {
+            margin: 0;
+            padding: 0;
+            font-size: 32px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    #formEditCategory {
+        #editCategoryTitle {
+            margin-bottom: 5vh;
+        }
+        label {
+            font-size: 20px;
+        }
+        input {
+            border-radius: $radius;
+            border: none;
+            height: 3vh;
+        }
+        div {
+            margin-bottom: 2.5vh;
+            label {
+                margin-right: 3vw;
+            }
+        }
+        select {
+            background-image: url("../../assets/images/utils/selectArrow.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-position: 100%;
+            appearance: none;
+            border: none;
+            border-bottom: 1px solid black;
+            width: 6vw;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        #name {
+            width: 10vw;
+            margin-bottom: 2.5vh;
+        }
+        #listado {
+            margin: 0;
+            padding: 1vw;
+            height: 45vh;
+            overflow-y: scroll;
+            li {
+                list-style: none;
+                margin: 0;
+            }
+        }
+
+        .submitBtn {
+            margin-top: 2vh;
+            height: 4vh;
+            background-color: $greenSave;
+            font-size: 16px;
         }
     }
 }
@@ -353,7 +425,7 @@ header {
     // Firefox
     * {
         scrollbar-width: auto;
-        scrollbar-color: $grey $white;
+        scrollbar-color: $grey transparent;
     }
 
     // Chrome, Edge, Safari
