@@ -11,6 +11,11 @@ class ProductModel extends Database {
     private $outstanding;
     private $sold;
     private $status;
+    private $image = [
+        "lateral" => "",
+        "top" => "",
+        "bottom" => ""
+    ];
 
     public function setCode($code) {
         $this->code = $code;
@@ -89,6 +94,14 @@ class ProductModel extends Database {
 
     public function getStatus() {
         return $this->status;
+    }
+
+    public function getImage($side) {
+        return $this->image[$side];
+    }
+
+    public function getImagesArray($side) {
+        return $this->image;
     }
 
     public function __construct($code,$category,$name,$price,$sold,$stock,$status){

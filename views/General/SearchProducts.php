@@ -1,6 +1,7 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
+<script src="../js/search.js"></script>
 <nav>
-    <!--Search bar-->
+    <input type="text" class="search" placeholder="Search">
     <h3>Sort by</h3>
     <select name="active" id="select">
         <option id="outstanding" value="outstanding">Outstanding</option>
@@ -19,7 +20,7 @@
         ?>
     </ul>
 </nav>
-<section>
+<section class="itemsContainer">
     <?php
         foreach ($products as $product) {
             $inWishlist = "../assets/utils/defaultHeart";

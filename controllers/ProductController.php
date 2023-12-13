@@ -16,6 +16,19 @@ class ProductController {
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
         $products = ProductModel::getAllProducts();
+        $productArray = [];
+        foreach ($products as $product) {
+            $productJSON = [
+                'productCode' => $product->getCode(),
+                'productName' => $product->getName(),
+                'productPrice' => $product->getPrice(),
+                'productImage' => $product->getImage("lateral"),
+                'inWishlist' => false // TODO: Funcion para saber si se encuentra en la wishlist del user
+            ];
+            $productArray[] = $productJSON;
+        }
+        header("Content-Type: application/json");
+        $jsonResult = json_encode($productArray);
         include __DIR__.'/../views/General/SearchProducts.php';
     }
 }
