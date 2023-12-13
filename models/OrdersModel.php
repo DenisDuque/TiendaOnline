@@ -7,6 +7,7 @@ class OrdersModel extends Database {
     private $status;
     private $date; //Puede ser null
     private $sentDate; //Puede ser null
+    private $products;
 
     public function setId($id) {
         $this->id = $id;
@@ -56,29 +57,40 @@ class OrdersModel extends Database {
         return $this->sentDate;
     }
 
+    public function setProducts($products) {
+        $this->products = $products;
+    } 
+
+    public function getProducts() {
+        return $this->products;
+    }
+
     
-    public function __construct($id,$user,$price = null,$status,$date = null,$sentDate = null){
+    public function __construct($id,$user,$price = null,$status,$date = null,$sentDate = null, $products){
         $this->id = (string) $id;
         $this->user = $user;
         $this->price = (string) $price;
         $this->status = (string) $status;
         $this->date = (string) $date;
         $this->sentDate = (string) $sentDate;
+        $this->products = $products;
     }
 
-    public static function getOrders($search) {
+    public static function getOrdersWithDetail($search) {
         try {
             $badStatus='cart';
             if($search != null) {
-                $query = "SELECT * FROM shopping 
-                            WHERE (id::text LIKE :search OR useremail::text LIKE :search 
-                            OR price::text LIKE :search OR status::text LIKE :search 
-                            OR datepurchase::text LIKE :search OR dateend::text LIKE :search) AND status::text NOT LIKE :status";
-                            $stmt = self::getConnection()->prepare($query);
-                            $stmt->bindParam(':search', $search);
-                            $stmt->bindParam(':status', $badStatus);
+                $query = "SELECT * FROM (shopping INNER JOIN users
+                            ON shopping.useremail = users.email)
+                            WHERE (shopping.id::text LIKE :search OR shopping.useremail::text LIKE :search 
+                            OR shopping.price::text LIKE :search OR shopping.status::text LIKE :search 
+                            OR shopping.datepurchase::text LIKE :search OR shopping.dateend::text LIKE :search) AND status::text NOT LIKE :status";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':search', $search);
+                $stmt->bindParam(':status', $badStatus);
             } else {
-                $query = "SELECT * FROM shopping 
+                $query = "SELECT * FROM shopping INNER JOIN users
+                            ON shopping.useremail = users.email
                             WHERE status::text NOT LIKE :status";
                             $stmt = self::getConnection()->prepare($query);
                             $stmt->bindParam(':status', $badStatus);
@@ -87,13 +99,16 @@ class OrdersModel extends Database {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $Orders = [];
             foreach($rows as $row) {
+                $client = new UserModel($row['email'],$row['phone'], $row['name'],$row['surnames'],$row['address'],$row['rol'],$row['image']);
+                $products = self::getMyProducts($row['id']);
                 $order = new OrdersModel(
                     $row['id'],
-                    $row['useremail'],
+                    $client,
                     $row['price'],
                     $row['status'],
                     $row['datepurchase'],
-                    $row['dateend']
+                    $row['dateend'],
+                    $products
                 );
                 $Orders[] = $order;
             }
@@ -105,14 +120,23 @@ class OrdersModel extends Database {
     }
     public static function getMyProducts($order) {
         try {
-            $query = "SELECT product FROM inCart WHERE shop = :shop";
+            $query = "SELECT product,amount FROM inCart WHERE shop = :shop";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':shop', $order);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $products = array_map(function($item) {
-                return $item['product'];
-            }, $result);
+            $products = [];
+            foreach($result as $product){
+                $query = "SELECT name FROM products WHERE code = :code";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':code', $product["product"]);
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $name = $result[0]["name"];
+                $products[$name] = $product["amount"];
+
+                
+            }
             return $products;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());

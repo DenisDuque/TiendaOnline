@@ -9,6 +9,7 @@
         Header Styles
         Container
         Left Panel Styles
+            Forms
         Right Panel Styles
         Search Bar
 
@@ -58,8 +59,9 @@ header img:hover {
 }
 
 #leftPanel {
-  border: 1px solid black;
+  display: flex;
   height: 100%;
+  width: 16vw;
   float: left;
   margin-left: 6vw;
 }
@@ -68,8 +70,9 @@ header img:hover {
   flex-direction: column;
   height: -moz-fit-content;
   height: fit-content;
+  transition: all 0.5s ease;
 }
-#leftPanel .panel {
+#leftPanel .panels .panel {
   background-color: rgba(255, 94, 0, 0.25);
   width: 12.7vw;
   height: 13.5vh;
@@ -85,21 +88,96 @@ header img:hover {
      -moz-user-select: none;
           user-select: none;
 }
-#leftPanel .panel img {
+#leftPanel .panels .panel img {
   transition: 0.33s;
   width: 7vh;
   height: 7vh;
 }
-#leftPanel .panel p {
+#leftPanel .panels .panel p {
   font-size: 36px;
   margin-top: -2vh;
 }
-#leftPanel .panel:hover {
+#leftPanel .panels .panel:hover {
   background-color: rgba(255, 94, 0, 0.4);
   transform: scale(101%);
 }
-#leftPanel .panel:hover img {
+#leftPanel .panels .panel:hover img {
   transform: rotateZ(13deg);
+}
+#leftPanel .adminForm {
+  height: 71.5vh;
+  width: 30vw;
+  padding: 5vh 1vw;
+  background-color: rgba(255, 94, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease;
+}
+#leftPanel .adminForm h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 32px;
+  text-align: center;
+}
+#leftPanel .adminForm form {
+  display: flex;
+  flex-direction: column;
+}
+#leftPanel #formEditCategory {
+  margin-left: 2vw;
+}
+#leftPanel #formEditCategory #editCategoryTitle {
+  margin-bottom: 5vh;
+}
+#leftPanel #formEditCategory label {
+  font-size: 20px;
+}
+#leftPanel #formEditCategory input {
+  border-radius: 10px;
+  border: none;
+  height: 3vh;
+}
+#leftPanel #formEditCategory div {
+  margin-bottom: 2.5vh;
+}
+#leftPanel #formEditCategory div label {
+  margin-right: 3vw;
+}
+#leftPanel #formEditCategory select {
+  background-image: url("../../assets/images/utils/selectArrow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 6vw;
+  font-size: 16px;
+  font-weight: 500;
+}
+#leftPanel #formEditCategory #name {
+  width: 10vw;
+  margin-bottom: 2.5vh;
+}
+#leftPanel #formEditCategory #listado {
+  margin: 0;
+  padding: 1vw;
+  height: 32.5vh;
+  overflow-y: scroll;
+}
+#leftPanel #formEditCategory #listado li {
+  list-style: none;
+  margin: 0;
+}
+#leftPanel #formEditCategory .submitBtn {
+  margin-top: 2vh;
+  height: 4vh;
+  background-color: #B7FFB0;
+  font-size: 16px;
 }
 
 #rightPanel {
@@ -338,7 +416,7 @@ header img:hover {
 
 * {
   scrollbar-width: auto;
-  scrollbar-color: #ABABAB #ECECEC;
+  scrollbar-color: #ABABAB transparent;
 }
 
 *::-webkit-scrollbar {
