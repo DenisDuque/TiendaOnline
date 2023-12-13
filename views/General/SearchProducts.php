@@ -1,5 +1,10 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
-<script src="../js/search.js"></script>
+<?php echo '<script src="'.__DIR__.'/../js/search.js"></script>'; ?>
+
+<script id="productData" type="application/json">
+    <?php echo $jsonResult; ?>
+</script>
+
 <nav>
     <input type="text" class="search" placeholder="Search">
     <h3>Sort by</h3>
@@ -20,18 +25,4 @@
         ?>
     </ul>
 </nav>
-<section class="itemsContainer">
-    <?php
-        foreach ($products as $product) {
-            $inWishlist = "../assets/utils/defaultHeart";
-            echo '
-                <article>
-                    <img src="'.$inWishlist.'" alt="Wishlist">
-                    <img src="'.$product->getImage("lateral").'" alt="Wishlist">
-                    <p>'.$product->getName().'</p>
-                    <p>$'.$product->getPrice().'</p>
-                </article>
-            ';
-        }
-    ?>
-</section>
+<section class="itemsContainer"></section>
