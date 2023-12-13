@@ -1,5 +1,5 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
-<?php echo '<script src="'.__DIR__.'/../js/search.js"></script>'; ?>
+<?php echo '<script src="/TiendaOnline/views/js/search.js"></script>'; ?>
 
 <script id="productData" type="application/json">
     <?php echo $jsonResult; ?>

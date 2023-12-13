@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("Script search cargado.");
   const searchInput = document.querySelector('.search');
   const itemsContainer = document.querySelector('.itemsContainer');
   searchInput.addEventListener('change', displayMatches);
@@ -21,24 +22,29 @@ document.addEventListener('DOMContentLoaded', function() {
       // Llamar a displayMatches inicialmente
       displayMatches();
   }
-
-
   function findMatches(wordToMatch, data) {
-      return data.filter(element => {
-        // here we need to figure out if the city or state matches what was searched
+    try {
         const regex = new RegExp(wordToMatch, 'gi');
-        return element.productName.match(regex) || element.id.match(regex)
-      });
+        const filteredData = data.filter(element => {
+            // Check if productName and id properties exist before calling match
+            const productNameMatch = element.productName && element.productName.match(regex);
+            const idMatch = element.id && element.id.match(regex);
+            return productNameMatch || idMatch;
+        });
+        return filteredData;
+    } catch (error) {
+        console.error('Error during filtering:', error);
+        return [];
     }
+  }
 
   function displayMatches() {
       const matchArray = findMatches(this.value, data);
       const html = matchArray.map(element => {
-          const regex = new RegExp(this.value, 'gi');
-          const productName = element.productName.replace(regex, `${this.value}`);
-          const productPrice = element.productPrice.replace(regex, `${this.value}`);
+          const productName = element.productName;
+          const productPrice = element.productPrice;
           const inWishlist = element.inWishlist ? "inWishlist.png" : "defaultHeart.png";
-          const productImage = element.productImage.replace(regex, `${this.value}`);
+          const productImage = element.productImage;
           return `
               <article>
                   <img src="${inWishlist}" alt="Wishlist">

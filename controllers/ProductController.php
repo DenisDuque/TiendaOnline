@@ -17,6 +17,7 @@ class ProductController {
         $categories = CategoryModel::listCategories("");
         $products = ProductModel::getAllProducts();
         $productArray = [];
+
         foreach ($products as $product) {
             $productJSON = [
                 'productCode' => $product->getCode(),
@@ -27,7 +28,7 @@ class ProductController {
             ];
             $productArray[] = $productJSON;
         }
-        header("Content-Type: application/json");
+        //header("Content-Type: application/json");
         $jsonResult = json_encode($productArray);
         include __DIR__.'/../views/General/SearchProducts.php';
     }
