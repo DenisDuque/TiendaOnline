@@ -23,7 +23,19 @@
                     ?>
                 </div>
                 <div class="orderInfo">
-
+                    <form action="" method="">
+                        <input type="hidden" name="orderId" id="orderId">
+                        <label for="email">Email</label>
+                        <div id="email"></div>
+                        <label for="phone">Phone</label>
+                        <div id="phone"></div>
+                        <label for="products">Products</label>
+                        <label for="prodAmount">Amount</label>
+                        <ul id="products"></ul>
+                        <label for="status"></label>
+                        <div id="status"></div>
+                        <input type="submit" value="Pedido enviado">
+                    </form>
                 </div>
             </div>
             <div id="rightPanel">

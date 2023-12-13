@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     var panels = document.getElementsByClassName("panel");
-    var editButtons = document.getElementsByClassName("editBtn");
-    var billButtons = document.getElementsByClassName("billBtn");
     var searchBtn = document.getElementById("searchBtn");
 
     function fillDataProduct(code){
@@ -29,8 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        
-
         var listado = document.getElementById("listado");
         listado.innerHTML = "";
         for(let i = 3; i < datos.length; i++){
@@ -41,6 +37,52 @@ document.addEventListener('DOMContentLoaded', function() {
         }   
         
     }
+
+    function fillDataCategory(code){
+        var datos = code.split(",");
+        let name = datos[1];
+        let status = datos[2];
+        document.getElementById("name").value = name;
+        if(status=="enabled"){
+            document.getElementById("select").selectedIndex = "enabled";
+        }else{
+            document.getElementById("select").selectedIndex = "disabled"; 
+        }
+
+        var listado = document.getElementById("listado");
+        listado.innerHTML = "";
+        for(let i = 3; i < datos.length; i++){
+            console.log(datos[i]);
+            let item = document.createElement("li");
+            item.innerHTML = datos[i];
+            listado.appendChild(item);
+        }   
+        
+
+    }
+
+    function fillDataOrder(code){
+
+    }
+
+    document.querySelectorAll('.editCatBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            fillDataCategory(button.id);
+        });
+    });
+
+    document.querySelectorAll('.editProdBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            fillDataProduct(button.id);
+        });
+    });
+
+    document.querySelectorAll('.editOrderBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            fillDataOrder(button.id);
+        });
+    });
+
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
@@ -53,13 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-
-    for(let i = 0; i < editButtons.length; i++){
-        editButtons[i].addEventListener("click", function(e){
-           fillDataProduct(editButtons[i].id);
-        });
-    }
-    
     /*searchBtn.addEventListener("click", function(e){
         console.log("Boton clickado");
         let search = document.getElementById("search");

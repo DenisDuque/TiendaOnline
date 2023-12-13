@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
         <script src="views/js/Administrator.js"></script>
-        <script src="views/js/editForms.js"></script>
         <title>Categories</title>
     </head>
     <body>
@@ -58,7 +57,7 @@
                                 <p class='categoryCount'>Products: ". count($ProductsID) ."</p>
                                 <input class='products' type='hidden' value='". $ProductsTextValue ."'>
                                 <input class='status' type='hidden' value='". $category->getStatus() ."'>
-                                <div id='editCatBtn_". $category->getCode() .",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                <div id='".$category->getCode().",".$category->getName().",".$category->getStatus().",".$ProductsTextValue."' class='editBtn editCatBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                             </div>
                         ";
                     }
