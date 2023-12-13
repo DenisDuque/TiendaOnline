@@ -23,6 +23,8 @@
                     ?>
                 </div>
                 <div class="orderInfo">
+                    <h2 id="name">Name</h2>
+                    <h2 id="surname">Surname</h2>
                     <form action="" method="">
                         <input type="hidden" name="orderId" id="orderId">
                         <label for="email">Email</label>
@@ -32,8 +34,10 @@
                         <label for="products">Products</label>
                         <label for="prodAmount">Amount</label>
                         <ul id="products"></ul>
-                        <label for="status"></label>
+                        <label for="status">Status</label>
                         <div id="status"></div>
+                        <label for="price">Total amount</label>
+                        <div id="price"></div>
                         <input type="submit" value="Pedido enviado">
                     </form>
                 </div>
@@ -44,34 +48,48 @@
                 <div id="listContainer">
                     <?php 
                         foreach($Orders as $order) {
-                            $userInfo = UserModel::getSpecifiedUser($order->getUser());
-                            $productsID = OrdersModel::getMyProducts($order->getId());
-                            $showProducts = "";
-                            if (count($productsID) <= 3) {
+                            //DATOS DEL PEDIDO
+                            $orderId = $order->getId();
+                            $orderStatus = $order->getStatus();
+                            $orderPrice = $order->getPrice();
+
+                            //DATOS DEL USUARIO
+                            $userName = $order->getUser()->getName();
+                            $userSurname = $order->getUser()->getSurname();
+                            $userEmail = $order->getUser()->getEmail();
+                            $userPhone = $order->getUser()->getPhone();
+
+                            //PRODUCTOS
+                            $products = $order->getProducts();
+                            $prodList = "";
+                            foreach($products as $name=>$amount) {
+                                $prodList = $prodList."/".$name.":".$amount;
+                            }
+                            /*if (count($productsID) <= 3) {
                                 $showProducts = implode(", ", $productsID);
                             } else {
                                 $firstProducts = array_slice($productsID, 0, 3);
                                 $showProducts = implode(", ", $firstProducts) . "...";
                             }
-                            $userImage = $userInfo->getImage();
+                            $userImage =  $order->getUser()->getImage();
                             if ($userImage == null) {
                                 $userImage = '../utils/customers.png';
-                            }
+                            }*/
                 
                             echo "
-                                <div id='". $order->getId() ."' class='defaultComponent'>
+                                <div id='". $orderId ."' class='defaultComponent'>
                                     <div class='imageComponent'>
-                                        <img src='views/assets/images/users/". $userImage ."' alt='Customer'>
+                                        <img src='views/assets/images/users/"/*. $userImage */."' alt='Customer'>
                                     </div>
                                     <div class='textOnLeft'>
-                                        <h4 class='name'>". $userInfo->getName() ." ". $userInfo->getSurname() ."</h4>
-                                        <p class='userEmail'>Email: ". $userInfo->getEmail() ."</p>
-                                        <p class='userPhone'>Products: ". $showProducts ."</p>
-                                        <p class='userAddress'>Total Amount: ". $order->getPrice() ."<span>Status: ". $order->getStatus() ."</span></p>
+                                        <h4 class='name'>". $userName ." ". $userSurname ."</h4>
+                                        <p class='userEmail'>Email: ".  $userEmail ."</p>
+                                        <p class='userPhone'>Products: "./* $showProducts .*/"</p>
+                                        <p class='userAddress'>Total Amount: ". $orderPrice ."<span>Status: ". $orderStatus ."</span></p>
                                     </div>
                                     <div class='textOnRight'>
-                                        <div id='downloadBill_". $order->getId() ."' class='downloadBillBtn'><img src='views/assets/images/utils/downloadBill.png' alt='Download Bill'></div>
-                                        <div id='editBtn_". $order->getId() ."' class='editBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                        <div id='downloadBill_". $orderId ."' class='downloadBillBtn'><img src='views/assets/images/utils/downloadBill.png' alt='Download Bill'></div>
+                                        <div id='".$orderId.",".$userName.",".$userSurname.",".$userEmail.",".$userPhone.",".$orderStatus.",".$orderPrice.",".$prodList."' class='editBtn editOrderBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                                     </div>
                                 </div>
                             ";

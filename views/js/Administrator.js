@@ -62,7 +62,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function fillDataOrder(code){
+        var datos = code.split(",");
+        var titleName = document.getElementById("name");
+        var titleSurname = document.getElementById("surname");
+        var divEmail = document.getElementById("email");
+        var divPhone = document.getElementById("phone");
+        var listProd = document.getElementById("products");
+        listProd.innerHTML="";
+        var divStatus = document.getElementById("status");
+        var divPrice = document.getElementById("price");
 
+        titleName.innerHTML = datos[1];
+        titleSurname.innerHTML = datos[2];
+        divEmail.innerHTML = datos[3];
+        divPhone.innerHTML = datos[4];
+        divStatus.innerHTML = datos[5];
+        divPrice.innerHTML = datos[6];
+
+        var products = datos[7].split("/");
+        for(let i = 1; i<products.length;i++){
+            let product = products[i].split(":");
+            let item = document.createElement("li");
+            item.innerHTML = product[0] + " " + product[1];
+            listProd.appendChild(item);
+        }
+        
+    
     }
 
     document.querySelectorAll('.editCatBtn').forEach(button => {
