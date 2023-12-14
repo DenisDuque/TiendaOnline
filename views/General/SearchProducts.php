@@ -1,6 +1,5 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
-<?php echo '<script src="/TiendaOnline/views/js/search.js"></script>'; ?>
-
+<script src="views/js/search.js"></script>
 <script id="productData" type="application/json">
     <?php echo $jsonResult; ?>
 </script>
@@ -20,7 +19,7 @@
     <ul id="categories">
         <?php
             foreach ($categories as $category) {
-                echo '<li id="'.$category->getCode().'">'.$category->getName().'</li>';
+                echo '<li id="'.$category->getCode().'" class="category">'.$category->getName().'</li>';
             }
         ?>
     </ul>

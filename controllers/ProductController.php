@@ -17,13 +17,14 @@ class ProductController {
         $categories = CategoryModel::listCategories("");
         $products = ProductModel::getAllProducts();
         $productArray = [];
-
+        //TODO: Mirar si se puede optimizar con .map
         foreach ($products as $product) {
             $productJSON = [
                 'productCode' => $product->getCode(),
                 'productName' => $product->getName(),
                 'productPrice' => $product->getPrice(),
                 'productImage' => $product->getImage("lateral"),
+                'productCategory' => $product->getCategory(),
                 'inWishlist' => false // TODO: Funcion para saber si se encuentra en la wishlist del user
             ];
             $productArray[] = $productJSON;
