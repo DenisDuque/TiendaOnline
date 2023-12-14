@@ -1,0 +1,26 @@
+@import 'variables.scss';
+// Scrollbar
+
+    // Firefox
+    * {
+        scrollbar-width: auto;
+        scrollbar-color: $grey transparent;
+    }
+
+    // Chrome, Edge, Safari
+    *::-webkit-scrollbar {
+        width: 14px;
+    }
+    /*
+    *::-webkit-scrollbar-track {
+        background: $white;
+    }
+    */
+    *::-webkit-scrollbar-thumb {
+        background-color: $grey;
+        border-radius: 10px;
+        border: 3px solid $white;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

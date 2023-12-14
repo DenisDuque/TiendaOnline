@@ -1,7 +1,69 @@
-body {
-  background-color: #141414;
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ABABAB transparent;
 }
-body body > div:nth-child(2) {
+
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+/*
+*::-webkit-scrollbar-track {
+    background: $white;
+}
+*/
+*::-webkit-scrollbar-thumb {
+  background-color: #ABABAB;
+  border-radius: 10px;
+  border: 3px solid #ECECEC;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body nav {
+  display: flex;
+  justify-content: center;
+}
+body #categories {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  height: 15vh;
+  overflow-x: auto;
+}
+body #categories .category {
+  display: grid;
+  place-items: center;
+  background-color: #F6F6F6;
+  width: 8vw;
+  min-width: 8vw;
+  height: 10vh;
+  margin-right: 1vw;
+  color: #ABABAB;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  border-radius: 10px;
+  text-align: center;
+  align-content: center;
+  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  list-style: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  transition: all ease 0.2s;
+}
+body #categories .category:hover {
+  transform: scale(0.95);
+}
+body #categories .selectedCategory {
   background-color: #FF5E00;
-  border: 2px solid #ABABAB;
+  color: #ECECEC;
+  box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  list-style: none;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

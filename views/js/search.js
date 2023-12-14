@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Almacenar la variable 'data' en el ámbito superior para que esté disponible en displayMatches
     window.totalData = data;
-
+    console.log(data);
     // Llamar a displayMatches inicialmente
     displayMatches();
   }
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
         const regex = new RegExp(wordToMatch, 'gi');
         const filteredData = data.filter(element => {
-            // Check if productName and id properties exist before calling match
+            // Buscar coincidencias en productName o productCode
             const productNameMatch = element.productName && element.productName.match(regex);
             const idMatch = element.productCode && element.productCode.match(regex);
             return productNameMatch || idMatch;
