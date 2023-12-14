@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const filteredData = data.filter(element => {
             // Check if productName and id properties exist before calling match
             const productNameMatch = element.productName && element.productName.match(regex);
-            const idMatch = element.id && element.id.match(regex);
+            const idMatch = element.productCode && element.productCode.match(regex);
             return productNameMatch || idMatch;
         });
         return filteredData;
