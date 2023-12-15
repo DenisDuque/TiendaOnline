@@ -35,15 +35,13 @@
                 $categories = self::getConnection()->prepare($query);
                 $categories->execute();
                 $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
-                $allCategories = [];
-                foreach ($rows as $row) {
-                    $category = new CategoryModel(
+                $allCategories = array_map(function($row) {
+                    return new CategoryModel(
                         $row['code'],
                         $row['name'],
                         $row['status']
                     );
-                    $allCategories[] = $category;
-                }
+                }, $rows);
         
                 return $allCategories;
             } catch (PDOException $e) {
@@ -59,10 +57,7 @@
                 $stmt->bindParam(':category', $category, PDO::PARAM_INT);
                 $stmt->execute();
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $names[] = "";
-                foreach($rows as $row) {
-                    $names[] = $row["name"];
-                }
+                $names = array_column($rows, 'name');
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());

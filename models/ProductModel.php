@@ -100,7 +100,7 @@ class ProductModel extends Database {
         return $this->image[$side];
     }
 
-    public function getImagesArray($side) {
+    public function getImagesArray() {
         return $this->image;
     }
 
@@ -161,9 +161,9 @@ class ProductModel extends Database {
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $Products = [];
-            foreach($rows as $row) {
-                $product = new ProductModel(
+
+            $Products = array_map(function($row) {
+                return new ProductModel(
                     $row['code'],
                     $row['codecategory'],
                     $row['name'],
@@ -172,8 +172,8 @@ class ProductModel extends Database {
                     $row['stock'],
                     $row['status']
                 );
-                $Products[] = $product;
-            }
+            }, $rows);
+            
             return $Products;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
@@ -187,11 +187,8 @@ class ProductModel extends Database {
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
     
-            $topProducts = [];
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            foreach ($rows as $row) {
-                $product = new ProductModel(
+            $topProducts = array_map(function($row) {
+                return new ProductModel(
                     $row['code'],
                     $row['codecategory'],
                     $row['name'],
@@ -200,9 +197,8 @@ class ProductModel extends Database {
                     $row['stock'],
                     $row['status']
                 );
-                $topProducts[] = $product;
-            }
-    
+            }, $stmt->fetchAll(PDO::FETCH_ASSOC));
+            
             return $topProducts;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());

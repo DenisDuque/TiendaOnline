@@ -136,9 +136,8 @@ class UserModel extends Database {
         $customers->execute();
         //
         $rows = $customers->fetchAll(PDO::FETCH_ASSOC);
-        $users = [];
-        foreach($rows as $row) {
-            $user = new UserModel(
+        $users = array_map(function($row) {
+            return new UserModel(
                 $row['email'],
                 $row['phone'],
                 $row['name'],
@@ -147,8 +146,8 @@ class UserModel extends Database {
                 $row['rol'],
                 $row['image']
             );
-            $users[] = $user;
-        }
+        }, $rows);
+        
         return $users;
     } catch (PDOException $e) {
         error_log("Error: " . $e->getMessage());
