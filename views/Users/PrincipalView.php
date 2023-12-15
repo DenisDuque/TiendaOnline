@@ -35,7 +35,7 @@
             <!--Categories list code-->
         </div>
     </div>
-    <!--All products-->
+    <!--All products container-->
     <div>
         <!--Products list-->
     </div>
