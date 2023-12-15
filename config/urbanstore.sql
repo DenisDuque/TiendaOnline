@@ -438,12 +438,12 @@ COPY public.images (id, product, route, perspectives, color) FROM stdin;
 --
 
 COPY public.incart (shop, product, amount) FROM stdin;
-1	PROD-UCT1                                                                                                                                                                                               	5
-1	PROD-UCT2                                                                                                                                                                                               	5
-2	PROD-UCT3                                                                                                                                                                                               	10
-2	PROD-UCT4                                                                                                                                                                                               	10
-2	PROD-UCT5                                                                                                                                                                                               	10
-2	PROD-UCT6                                                                                                                                                                                               	10
+1	za123-za                                                                                                                                                                                                	5
+1	za321-za                                                                                                                                                                                                	5
+2	sa789-sa                                                                                                                                                                                                	10
+2	sa987-sa                                                                                                                                                                                                	10
+2	de789-ba                                                                                                                                                                                                	10
+2	de835-ba                                                                                                                                                                                                	10
 \.
 
 
