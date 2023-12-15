@@ -64,6 +64,14 @@
                                     </select>
                                 </td>
                             </tr>
+                            <tr>
+                                <td><img src="" alt="side-view" id="side"></td>
+                                <td><img src="" alt="above-view" id="top"></td>
+                            </tr>
+                            <tr>
+                                <td><img src="" alt="bottom-view" id="bottom"></td>
+                                <td><img src="" alt="above-view" id="3D"></td>
+                            </tr>
                         </table>
                     </form>
                 </div>
@@ -78,6 +86,7 @@
                             if($img == null) {
                                 $img = '../utils/productImage.png';
                             }
+                            $img = '../utils/productImage.png';
                             echo "
                                 <div id='". $product->getCode() ."' class='defaultComponent'>
                                     <div class='imageComponent'>
@@ -92,7 +101,7 @@
                                     <div class='textOnRight'>
                                         <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
                                         <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
-                                        <div id='".$product->getCode().",".$product->getName().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory()."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                        <div id='".$product->getCode().",".$product->getName().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory().","."views/assets/images/products/".$img."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                                     </div>
                                 </div>
                             ";
