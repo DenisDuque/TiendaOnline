@@ -4,15 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillDataProduct(code){
         var datos = code.split(",");
-        let id = datos[0]
         let name = datos[1];
         let price = datos[2];
         let status = datos[3];
         let stock = datos[4];
         let category = datos[5];
+        let sideView = document.getElementById("side");
+        let topVIew = document.getElementById("top");
+        let bottomView = document.getElementById("bottom");
         document.getElementById("name").value = name;
         document.getElementById("price").value = price;
         document.getElementById("stock").value = stock;
+        
+        sideView.src = datos[6];
+        
 
         if(status=="enabled"){
             document.getElementById("select").selectedIndex = "enabled";
@@ -26,15 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectCategory.options.selectedIndex = opcion.index;
             }
         }
+        
 
-        var listado = document.getElementById("listado");
-        listado.innerHTML = "";
-        for(let i = 3; i < datos.length; i++){
-            console.log(datos[i]);
-            let item = document.createElement("li");
-            item.innerHTML = datos[i];
-            listado.appendChild(item);
-        }   
         
     }
 
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var listado = document.getElementById("listado");
         listado.innerHTML = "";
         for(let i = 3; i < datos.length; i++){
-            console.log(datos[i]);
             let item = document.createElement("li");
             item.innerHTML = datos[i];
             listado.appendChild(item);
