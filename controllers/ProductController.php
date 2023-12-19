@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../models/ProductModel.php';
+require_once __DIR__.'/../models/CategoryModel.php';
 class ProductController {
     public function showAdminProduct() {
         $products = ProductModel::getAllProducts();
@@ -29,6 +30,13 @@ class ProductController {
         //header("Content-Type: application/json");
         $jsonResult = json_encode($productArray);
         include __DIR__.'/../views/General/SearchProducts.php';
+    }
+
+    public function showProduct() {
+        require_once __DIR__.'/../models/ProductModel.php';
+        $product = ProductModel::getProductWithCode();
+        $product["category"] = CategoryModel::getCategory($product["codecategory"]);
+        include __DIR__.'/../views/General/productPage.php';
     }
 }
 ?>

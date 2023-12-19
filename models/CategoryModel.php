@@ -67,13 +67,12 @@
 
         public static function getCategory($code){
             try {
-                echo $code;
                 $query = "SELECT * FROM categories WHERE code = :codigo";
                 $stmt = self::getConnection()->prepare($query);
                 $stmt->bindParam(':codigo', $code, PDO::PARAM_INT);
                 $stmt->execute();
-                $stmt = $stmt->fetch(PDO::FETCH_ASSOC);
-                $category = $stmt[0];
+                $stmt = $stmt->fetch(PDO::FETCH_BOTH);
+                $category = $stmt;
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());

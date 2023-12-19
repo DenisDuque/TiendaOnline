@@ -113,12 +113,29 @@ class ProductModel extends Database {
         $this->stock = $stock;
         $this->status = $status;
     }
+
+    public static function getProductWithCode(){
+        try {
+            $code = isset($_GET['code']) ? $_GET['code'] : 'za123-za';
+            $query = "SELECT * FROM products WHERE code = :code";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+            $stmt->execute();
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            $product["img"] = self::getProductImage("lateralperspective",$code);
+            return $product;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
     
     public static function generateCode($name, $category){
         //Dos primeras letras categoria--numero 3 cifras--Tres primeras letras producto
         try {
             $query = "SELECT * FROM products WHERE category LIKE :category";
-            $categoryCount = self::$conn->prepare($query);
+            $categoryCount = self::getConnection()->prepare($query);
             $categoryCount->bindParam(':category', $category, PDO::PARAM_STR);
             $categoryCount->execute();
             $numId = $categoryCount->rowCount();
@@ -126,7 +143,7 @@ class ProductModel extends Database {
             $numId = (string) $numId;
 
             $query = "SELECT name FROM categories WHERE code LIKE :code";
-            $categoryName = self::$conn->prepare($query);
+            $categoryName = self::getConnection()->prepare($query);
             $categoryName->bindParam(':code', $category, PDO::PARAM_STR);
             $categoryName->execute();
             $catName = $categoryName->fetchAll(PDO::FETCH_NUM);

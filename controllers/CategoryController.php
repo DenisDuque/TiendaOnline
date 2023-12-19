@@ -19,7 +19,7 @@ class CategoryController {
     
     public static function getCategoryInfo($code){
         $info = CategoryModel::getCategory($code);
-        return $info;
+        return $info[0];
     }
 }
 ?>
