@@ -4,47 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="views\js\productPage.js"></script>
     <style>
         body{
             background-color: #ABABAB;
-            justify-content: left;
             display: grid;
             grid-gap: 40px;
-            grid-template-columns: 10% 40% 40%;
-
+            grid-template-columns: 50% 50%;
         }
         .image{
             background-color: white;
             border-radius: 30px;
-            img{
-                size: 80%;
-            }
             margin-left: auto;
         }
         .image:hover{
             background-color: rgba(255, 94, 0, 0.40);
         }
-        #images{
-            grid-column-start: 1;
-            grid-column-end: 1;
+
+        .clicked{
+            background-color: rgba(255, 94, 0, 0.40);
+            border-radius: 30px;
+            margin-left: auto;
+        }
+      
+        #allImages{
             display: grid;
-            grid-template-rows: repeat(25%,4);
-            grid-gap: 20px;
-            .image{
-                width: 50%;
+            grid-template-columns: 40% 60%;
+            #images{
+                width: 40%;
+                height: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-self: right;
+                align-self: center;
+                justify-content: space-around;
+                padding-right: 40px;
+                .image{
+                    width: 60%;
+                    img{
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+                .clicked{
+                    width: 60%;
+                    img{
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+            }
+            #mainImage{
+                width: 100%;
+                height: 100%;
                 img{
                     width: 100%;
-                    height: auto;
+                    height: 100%;
                 }
             }
         }
-        #mainImage{
+        #info{
             grid-column-start: 2;
             grid-column-end: 3;
-        }
-        #info{
-            grid-column-start: 3;
-            grid-column-end: 4;
             #sizes{
                 justify-content: space-around;
             }
@@ -57,30 +78,32 @@
     </style>
 </head>
 <body>
-    <?php 
-        echo "<div id='images'>";
+    <?php
+        echo "<div id='allImages'>";
+            echo "<div id='images'>";
+                echo 
+                    "<div class='image'>
+                        <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
+                    </div>";
+                echo 
+                    "<div class='image'>
+                        <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
+                    </div>";
+                echo 
+                    "<div class='image'>
+                        <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
+                    </div>";
+                echo 
+                    "<div class='image'>
+                        <img src='views\assets\images\utils\perro.jpg' alt='perro'>
+                    </div>";
+            echo "</div>";
             echo 
-                "<div class='image'>
-                    <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
-                </div>";
-            echo 
-                "<div class='image'>
-                    <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
-                </div>";
-            echo 
-                "<div class='image'>
-                    <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
-                </div>";
-            echo 
-                "<div class='image'>
-                    <img src='views/assets/images/products/../utils/perro.jpg' alt='perro'>
-                </div>";
+            "<div class='image' id='mainImage'>
+                <img src='views/assets/images/products/..".$product["img"]."' alt='producto' id='main'>
+            </div>";
         echo "</div>";
-        echo "<h1>".$product["img"]."</h1>";
-        echo 
-        "<div class='image' id='mainImage'>
-            <img src='views/assets/images/products/..".$product["img"]."' alt='producto'>
-        </div>";
+
         
         echo "<div id='info'>";
             echo "<h1>".$product["name"]."</h1>";
