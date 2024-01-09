@@ -7,19 +7,7 @@
 </head>
 <body>
     <header>
-        <!--Logo Image-->
-        <img src="../assets/images/utils/logo.png" alt="Urban store logo">
-        <!--Title-->
-        <h1>Urban store</h1>
-        <!--Options-->
-        <div id="buttons">
-            <img src="../assets/images/utils/home.png" alt="Home">
-            <img src="../assets/images/utils/search.png" alt="Search">
-            <img src="../assets/images/utils/outstanding.png" alt="Outstanding">
-            <img src="../assets/images/utils/cart.png" alt="Cart">
-            <img src="../assets/images/utils/bell.png" alt="Notifications">
-            <img src="../assets/images/utils/customers.png" alt="Profile">
-        </div>
+        <!--Header include-->
     </header>
     <!--Image slider-->
     <div>

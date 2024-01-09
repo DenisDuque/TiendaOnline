@@ -14,7 +14,8 @@ require_once "autoload.php";
 // require_once "views/general/menu.php";
 
 if(isset($_GET['page'])) {
-    $controllerName = $_GET['page']."Controller";
+    //$controllerName = $_GET['page']."Controller";
+    $controllerName = "UserController";
 } else {
     $controllerName = "UserController";
 }
