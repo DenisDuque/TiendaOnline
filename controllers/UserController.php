@@ -10,9 +10,11 @@ class UserController {
         // Procesar el formulario de inicio de sesión
         $userEmail = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
-    
+        var_dump($userEmail, $password);
         $rol = UserModel::authenticate($userEmail, $password);
-        if ($rol) {
+        var_dump($rol); // Check the value of $rol
+
+        if ($rol !== null) {
             //Creacion de las variables de sesion.
             $_SESSION['email'] = $userEmail;
             $_SESSION['rol'] = $rol;
@@ -20,11 +22,12 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=home'>";
+                echo ("<p>Sesión iniciada</p>");
+                //echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=default'>";
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
-            include 'views/LoginView.html';
+            //include 'views/LoginView.html';
             echo '<p>Invalid userEmail or password</p>';
         }
     }
@@ -49,8 +52,8 @@ class UserController {
             return;
         }
     
-        // Cifrado de contraseña
-        $hashedPassword = md5($password);
+        // Cifrado de contraseña utilizando password_hash
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
         // Guardar el usuario en la base de datos
         if (UserModel::register($userName, $userSurnames, $userEmail, $hashedPassword)) {
@@ -59,13 +62,11 @@ class UserController {
     
             //Aqui la redireccion futura a la pagina principal de customer logeado.
             //echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=customer'>";
-            
         }
     
         // Redirigir a otra página después del registro exitoso
         echo 'Registro realizado';
-    
-    }
+    }    
 
     public function showAdminUser() {
         $search = isset($_GET['search']) ? $_GET['search'] : null;
