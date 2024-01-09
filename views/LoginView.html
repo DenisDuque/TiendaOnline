@@ -13,24 +13,7 @@
             <div class="form-container sign-up-container">
                 <form action="index.php?page=login&action=register" method="POST">
                     <h1>Sign Up</h1>
-                    <div class="social-container">
-                        <a href="https://github.com/DenisDuque" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/github.png" alt="GitHub">
-                            </div>
-                        </a>
-                        <a href="https://www.linkedin.com/in/denis-duque-4145b5282/" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/linkedin.png" alt="LinkedIn">
-                            </div>
-                        </a>
-                        <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/google.png" alt="Google">
-                            </div>
-                        </a>
-                    </div>
-                    <span>Or use your Email for registration</span>
+                    
                     <label>
                         <input type="text" name="registerUsername" placeholder="Name">
                     </label>
@@ -43,30 +26,21 @@
                     <label>
                         <input type="password" name="registerPassword" placeholder="Password">
                     </label>
+                    <span>or</span>
+                    <button class="social-container button-expand">
+                        <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
+                            <div>
+                                <img src="views/assets/images/utils/google.png" alt="Google">
+                                <p>Sign up with Google</p>
+                            </div>
+                        </a>
+                    </button>
                     <button style="margin-top: 9px">Sign Up</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="index.php?page=login&action=login" method="POST">
-                    <h1>Sign in</h1>
-                    <div class="social-container">
-                        <a href="https://github.com/DenisDuque" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/github.png" alt="GitHub">
-                            </div>
-                        </a>
-                        <a href="https://www.linkedin.com/in/denis-duque-4145b5282/" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/linkedin.png" alt="LinkedIn">
-                            </div>
-                        </a>
-                        <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
-                            <div>
-                                <img src="views/assets/images/utils/google.png" alt="Google">
-                            </div>
-                        </a>
-                    </div>
-                    <span>Or sign in using Email Address</span>
+                    <h1>Sign In</h1>
                     <label>
                         <input type="email" name="loginEmail" placeholder="Email">
                     </label>
@@ -74,6 +48,15 @@
                         <input type="password" name="loginPassword" placeholder="Password">
                     </label>
                     <a href="#">Forgot your password?</a>
+                    <span>or</span>
+                    <div class="social-container">
+                        <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
+                            <div class="button-expand">
+                                <img src="views/assets/images/utils/google.png" alt="Google">
+                                <p>Sign in with Google</p>
+                            </div>
+                        </a>
+                    </div>
                     <button>Sign In</button>
                 </form>
             </div>
