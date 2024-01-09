@@ -5,6 +5,50 @@ html, body {
   padding: 0;
 }
 
+<<<<<<< HEAD
+=======
+body {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background-size: 300% 300%;
+  background-image: linear-gradient(-45deg, #FF5E00 0%, #FD9346 25%, #FDA766 51%, #FFCB74 100%);
+  -webkit-animation: AnimateBackground 20s ease infinite;
+  animation: AnimateBackground 20s ease infinite;
+  height: 100vh;
+  margin: -2vh 0 6vh;
+  margin-top: 2vh;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@-webkit-keyframes AnimateBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes AnimateBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+>>>>>>> 4ada6f3dd1ce60cd847cd7c272d04287927ce57b
 * {
   box-sizing: border-box;
   overflow: hidden;
