@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             let item = document.createElement("li");
             item.innerHTML = datos[i];
             listado.appendChild(item);
-        }   
+        }
+        
         
 
     }

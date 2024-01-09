@@ -59,6 +59,7 @@ header img:hover {
 }
 
 #leftPanel {
+  position: relative;
   display: flex;
   height: 100%;
   width: 16vw;
@@ -126,6 +127,8 @@ header img:hover {
 }
 #leftPanel #formEditCategory {
   margin-left: 2vw;
+  position: absolute;
+  animation: slideLeft 2s ease-in-out forwards;
 }
 #leftPanel #formEditCategory #editCategoryTitle {
   margin-bottom: 5vh;
@@ -180,6 +183,14 @@ header img:hover {
   font-size: 16px;
 }
 
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 #rightPanel {
   float: right;
   width: 41vw;

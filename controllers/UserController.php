@@ -20,9 +20,7 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                /* 
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=home'>";
-                */
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
