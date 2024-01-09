@@ -1,8 +1,12 @@
 html, body {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+<<<<<<< HEAD
+=======
 body {
   font-family: "Montserrat", sans-serif;
   display: flex;
@@ -44,11 +48,13 @@ body {
     background-position: 0% 50%;
   }
 }
+>>>>>>> 4ada6f3dd1ce60cd847cd7c272d04287927ce57b
 * {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-h1 {
+h2 {
   font-weight: bold;
   margin: 0;
 }
@@ -74,15 +80,11 @@ a {
 
 .container {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 2vw 1.9vh 28px rgba(0, 0, 5, 0.2), 0 1.3vh 10px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
-  opacity: 85%;
-  width: 50vw;
-  max-width: 100%;
-  min-height: 65vh;
-  transition: 333ms;
+  width: 100vw;
+  height: 100vh;
+  transition: 0.3s;
 }
 
 .form-container form {
@@ -99,38 +101,37 @@ a {
 .social-container {
   margin: 2.7vh 0;
   display: block;
+  width: 9.6vw;
 }
 
 .social-container a {
   border: 1px solid #ABABAB;
-  border-radius: 50%;
-  display: inline-flex;
+  border-radius: 0.2vw;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 0 0.3vw;
+  margin: 0;
   height: 5vh;
-  width: 5vh;
-  transition: 0.33s;
-}
-.social-container a:hover {
-  transform: rotateZ(13deg);
-  border: 1px solid #FF5E00;
+  width: 100%;
 }
 .social-container a div {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  filter: grayscale(100);
-  transition: filter 1s ease;
   justify-content: center;
 }
-.social-container a div:hover {
-  filter: grayscale(0);
-}
 .social-container a div img {
-  width: 50%;
-  height: 50%;
+  width: 2vh;
+  height: 2vh;
+}
+.social-container a div p {
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  padding-left: 0.5vw;
 }
 
 .form-container input {
