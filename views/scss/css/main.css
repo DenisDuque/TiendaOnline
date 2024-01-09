@@ -68,7 +68,7 @@ body #categories .selectedCategory {
 
 main {
   width: 100vw;
-  height: 100vh;
+  height: 88vh;
   background-color: #ececec;
   display: flex;
   flex-direction: row;
@@ -144,20 +144,34 @@ main {
   grid-column-start: 2;
   grid-column-end: 3;
 }
-#info #sizes {
-  width: auto;
+#info h2 {
+  opacity: 0.3;
+}
+#info #options {
+  width: 100%;
+}
+#info #options #sizes {
+  width: 80%;
   display: flex;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
-#info #sizes button {
-  width: 30%;
+#info #options #sizes button {
+  width: 20%;
   margin: 3px;
+  font-size: larger;
 }
-#info #buttons {
-  width: 100%;
+#info #options #buttons {
+  width: 80%;
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
+}
+#info #options #buttons button {
+  font-size: larger;
+}
+#info #options #description h4 {
+  opacity: 0.6;
 }
 #info h1 {
   font-size: 50px;
@@ -176,4 +190,5 @@ button, button:hover {
 
 button:hover {
   background-color: #ff5e00;
+  color: #FFFFFF;
 }/*# sourceMappingURL=main.css.map */

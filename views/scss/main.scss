@@ -50,7 +50,7 @@ body {
 
     main{
         width: 100vw;
-        height: 100vh;
+        height: 88vh;
         background-color: #ececec;
         display: flex;
         flex-direction: row;
@@ -121,20 +121,38 @@ body {
         width: 70%;
         grid-column-start: 2;
         grid-column-end: 3;
-        #sizes{
-            width: auto;
-            display: flex;
-            flex-wrap: wrap;
-            button{
-                width: 30%;
-                margin: 3px;
-            }
+        h2{
+            opacity: 0.3;
         }
-        #buttons{
+        #options{
             width: 100%;
-            padding-top:10px;
-            display: flex;
-            justify-content: space-between;
+            #sizes{
+                width: 80%;
+                display: flex;
+                justify-content: space-between	;
+                flex-wrap: wrap;
+                button{
+                    width: 20%;
+                    margin: 3px;
+                    font-size:larger;
+                }
+            }
+            #buttons{
+                width: 80%;
+                padding-top:10px;
+                display: flex;
+                justify-content: space-between;
+
+                button{
+                    font-size:larger;
+                }
+            }
+
+            #description{
+                h4{
+                    opacity: 0.6;
+                }
+            }
         }
         h1{
             font-size: 50px;
@@ -152,4 +170,5 @@ body {
     }
     button:hover{
         background-color: #ff5e00;
+        color: #FFFFFF;
     }
