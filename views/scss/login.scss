@@ -1,64 +1,18 @@
 @import 'variables.scss';
-// Animated Wave Background Style
 html, body {
     width: 100%;
     height: 100%;
-}
-
-// Background Section Style
-body {
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-    background-size: 300% 300%;
-    // Make gradient transition from dark to light
-    background-image: linear-gradient(-45deg, $orange 0%, #FD9346 25%, #FDA766 51%, $yellow 100%);
-    -webkit-animation: AnimateBackground 20s ease infinite;
-    animation: AnimateBackground 20s ease infinite;
-    height: 100vh;
-    margin: -2vh 0 6vh;
-    margin-top: 2vh;
-
-    -webkit-user-select: none; // Safari
-    -ms-user-select: none; // IE 10 and IE 11
-    user-select: none; // Standard syntax
-}
-
-// Google Chrome, Safari
-@-webkit-keyframes AnimateBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-// Others
-@keyframes AnimateBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    margin: 0;
+    padding: 0;
 }
 
 // Login Section Style
 * {
     box-sizing: border-box;
+    overflow: hidden;
 }
 
-h1 {
+h2 {
     font-weight: bold;
     margin: 0;
 }
@@ -84,15 +38,11 @@ a {
 
 .container {
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 2vw 1.9vh 28px rgba(0, 0, 5, .2), 0 1.3vh 10px rgba(0, 0, 0, .2);
     position: relative;
     overflow: hidden;
-    opacity: 85%;
-    width: 50vw;
-    max-width: 100%;
-    min-height: 65vh;
-    transition: 333ms;
+    width: 100vw;
+    height: 100vh;
+    transition: 0.3s;
 }
 
 .form-container form {
@@ -109,40 +59,52 @@ a {
 .social-container {
     margin: 2.7vh 0;
     display: block;
+    width: 9.6vw;
+}
+
+.button-expand {
+    transition: all 0.25s ease;
+    &::after{
+      box-shadow: inset 0 0 0 1px $orange;
+    }
+    &::before{
+      background: $orange;
+      box-shadow: inset 0 0 0 $icon-size $white;
+    }
+    &:hover::before{
+      box-shadow: inset 0 0 0 1px $white;
+    }
 }
 
 .social-container a {
     border: 1px solid $grey;
-    border-radius: 50%;
-    display: inline-flex;
+    border-radius: 0.2vw;
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0 0.3vw;
+    margin: 0;
     height: 5vh;
-    width: 5vh;
-    transition: 0.33s;
-
-    &:hover {
-        transform: rotateZ(13deg);
-        border: 1px solid $orange;
-    }
+    width: 100%;
 
     div {
         width: 100%;
         height: 100%;
         display: flex;
+        flex-direction: row;
         align-items: center;
-        filter: grayscale(100);
-        transition: filter 1s ease;
         justify-content: center;
 
-        &:hover {
-            filter: grayscale(0);
+        img {
+            width: 2vh;
+            height: 2vh;
         }
 
-        img {
-            width: 50%;
-            height: 50%;
+        p {
+            font-size: 13px;
+            margin: 0;
+            padding: 0;
+            padding-left: 0.5vw;
         }
     }
 }

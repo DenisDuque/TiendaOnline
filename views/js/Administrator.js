@@ -38,8 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillDataCategory(code){
         var datos = code.split(",");
+        let id = datos[0];
         let name = datos[1];
         let status = datos[2];
+        document.getElementById("code").value = id;
         document.getElementById("name").value = name;
         if(status=="enabled"){
             document.getElementById("select").selectedIndex = "enabled";
@@ -85,9 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let item = document.createElement("li");
             item.innerHTML = product[0] + " " + product[1];
             listProd.appendChild(item);
-        }
-        
-    
+        }  
     }
 
     document.querySelectorAll('.editCatBtn').forEach(button => {

@@ -105,16 +105,18 @@
             }
         }
 
-        public static function editCategory($id, $name, $status) {
+        public static function editCategory($code, $name, $status) {
             try {
-                $updateQuery = "UPDATE categories SET name = :name, status = :status WHERE id = :id";
+                $codeStr = strval($code);
+                $updateQuery = "UPDATE categories SET name = :name, status = :status WHERE code = :code";
                 $updateStatement = self::getConnection()->prepare($updateQuery);
                 $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
                 $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
+                $updateStatement->bindParam(':code', $codeStr, PDO::PARAM_INT);
         
                 if ($updateStatement->execute()) {
                     $rowCount = $updateStatement->rowCount();
-                    if ($$rowCount > 0) {
+                    if ($rowCount > 0) {
                         echo "Categoría actualizada correctamente";
                     } else {
                         // Avisar que la categoría no existe o esta no se ha visto afectada.
@@ -124,6 +126,7 @@
                 } else {
                     echo "Error al actualizar la categoria.";
                 }
+                echo"<meta http-equiv='refresh' content='0.1;index.php?page=Category&action=showAdminCategory'>";
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
