@@ -142,9 +142,21 @@ body {
                 padding-top:10px;
                 display: flex;
                 justify-content: space-between;
-
                 button{
                     font-size:larger;
+                    width: 30%;
+                }
+                #wishlist{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    svg{
+                        width:  1.5vw;
+                        height: auto;
+                        fill: black;
+                    }
+                    
                 }
             }
 
@@ -171,4 +183,8 @@ body {
     button:hover{
         background-color: #ff5e00;
         color: #FFFFFF;
+    }
+
+    button:hover > svg *{
+        fill:white;
     }
