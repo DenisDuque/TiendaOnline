@@ -77,26 +77,30 @@ class UserModel extends Database {
 
     public static function authenticate($userEmail, $password) {
         try {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-            $query = "SELECT rol FROM users WHERE email LIKE :email AND password = :password";
-
+            $query = "SELECT rol, password FROM users WHERE LOWER(email) LIKE LOWER(:email)";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindValue(':email', $userEmail);
-            $stmt->bindValue(':password', $hashedPassword);
             $stmt->execute();
     
             if ($stmt->rowCount() > 0) {
-                $rol = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $rol['rol'];
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $hashedPasswordFromDatabase = $user['password'];
+                var_dump($password);
+                var_dump($hashedPasswordFromDatabase);
+                if (password_verify($password, $hashedPasswordFromDatabase)) {
+                    return $user['rol'];
+                } else {
+                    echo('Contraseña incorrecta');
+                }
             } else {
-                return null;
+                echo('Usuario no encontrado');
             }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
-    }
+        return null;
+    }    
     
 
     public static function register($userName, $userSurnames, $userEmail, $userPassword) {

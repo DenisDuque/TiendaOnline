@@ -10,7 +10,6 @@ class UserController {
         // Procesar el formulario de inicio de sesión
         $userEmail = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
-        var_dump($userEmail, $password);
         $rol = UserModel::authenticate($userEmail, $password);
         var_dump($rol); // Check the value of $rol
 
