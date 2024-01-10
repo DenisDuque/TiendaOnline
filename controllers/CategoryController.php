@@ -21,5 +21,15 @@ class CategoryController {
         $info = CategoryModel::getCategory($code);
         return $info[0];
     }
+    public static function editCategory() {
+        if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'editCategory') {
+            CategoryModel::editCategory($_POST['code'], $_POST['name'], $_POST['active']);
+        }
+    }
+    public static function createCategory() {
+        if(isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'createCategory') {
+            CategoryModel::createCategory($_POST['name'], $_POST['active']);
+        }
+    }
 }
 ?>
