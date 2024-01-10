@@ -318,7 +318,7 @@ CREATE TABLE public.users (
     surnames character(50) NOT NULL,
     address character(50),
     rol character varying(20) NOT NULL,
-    password character(255) NOT NULL,
+    password character varying(255) NOT NULL,
     signature character(200),
     image character(200),
     CONSTRAINT users_rol_check CHECK (((rol)::text = ANY ((ARRAY['admin'::character varying, 'customer'::character varying])::text[])))
@@ -513,8 +513,8 @@ COPY public.shopping (id, useremail, price, datepurchase, dateend, status) FROM 
 --
 
 COPY public.users (email, phone, name, surnames, address, rol, password, signature, image) FROM stdin;
-alex.alcala@inslapineda.cat                       	123456789	alex                                              	alcala garcia                                     	calle berenjena                                   	customer	1234                                                                                                                                                                                                                                                           	\N	\N
-customer@gmail.com                                	124456789	custo                                             	mer                                               	\N	customer	1234                                                                                                                                                                                                                                                           	\N	\N
+alex.alcala@inslapineda.cat                       	123456789	alex                                              	alcala garcia                                     	calle berenjena                                   	customer	1234	\N	\N
+customer@gmail.com                                	124456789	custo                                             	mer                                               	\N	customer	1234	\N	\N
 \.
 
 

@@ -171,6 +171,18 @@ main {
 }
 #info #options #buttons button {
   font-size: larger;
+  width: 30%;
+}
+#info #options #buttons #wishlist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#info #options #buttons #wishlist svg {
+  width: 1.5vw;
+  height: auto;
+  fill: black;
 }
 #info #options #description h4 {
   opacity: 0.6;
@@ -193,4 +205,8 @@ button, button:hover {
 button:hover {
   background-color: #ff5e00;
   color: #FFFFFF;
+}
+
+button:hover > svg * {
+  fill: white;
 }/*# sourceMappingURL=main.css.map */

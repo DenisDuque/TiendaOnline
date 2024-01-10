@@ -25,6 +25,8 @@
                 <div class="formProd">
                     <form action="" method="">
                         <table> 
+                            <tr><td><div>Product code</div></td></tr>
+                            <tr><td><div id="productCode"></div></td></tr>
                             <input type="hidden" name="code" id="code">
                             <tr><td><label for="name">Name product</label></td></tr>
                             <tr>
