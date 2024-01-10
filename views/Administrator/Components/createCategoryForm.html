@@ -1,14 +1,15 @@
-<div id="createCategoryForm">
-    <form>
-        <label for="name">Product Name</label>
-        <input name="name" class="name" type="text">
-        <label for="price">Price</label>
-        <input type="text" name="price" class="price">
-        <label for="stock">stock</label>
-        <input type="text" name="stock" class="stock">
-        <select name="status">
-            <option value="enabled">Enabled</option>
-            <option value="disabled">Disabled</option>
-        </select>
-    </form>
+<div id="formCreateCategory" class="adminForm">
+    <h4 id="editCategoryTitle">Create Category</h4>
+        <form action="index.php?page=Category&action=createCategory" method="POST">
+            <label for="name">Category name</label>
+            <input type="text" name="name" id="name">
+            <div>
+                <label for="active">Status</label>
+                <select name="active" id="select">
+                    <option id="enabled" value="enabled">enabled</option>
+                    <option id="disabled" value="disabled">disabled</option>
+                </select>
+            </div>
+            <input type="submit" class="submitBtn" value="Save changes"></input>
+        </form>
 </div>

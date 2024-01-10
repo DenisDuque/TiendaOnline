@@ -22,25 +22,11 @@
                         include("views/Administrator/Components/ordersPanel.html");
                     ?>
                 </div>
-                <div id="formEditCategory" class="adminForm">
-                    <h4 id="editCategoryTitle">Sneakers</h4>
-                        <form action="index.php?page=Category&action=editCategory" method="POST">
-                            <input type="hidden" name="code" id="code">
-                            <label for="name">Category name</label>
-                            <input type="text" name="name" id="name">
-                            <div>
-                                <label for="active">Status</label>
-                                <select name="active" id="select">
-                                    <option id="enabled" value="enabled">enabled</option>
-                                    <option id="disabled" value="disabled">disabled</option>
-                                </select>
-                            </div>
-                            <label for="">Products</label>
-                            <ul id="listado" class="productsList">
-                            </ul>
-                            <input type="submit" class="submitBtn" value="Save changes"></input>
-                        </form>
-                </div>
+                <?php
+                    //SOLUCION TEMPORAL: comentar uno y descomentar el otro para ver los formularios.
+                    include('views/Administrator/Components/editCategoryForm.html');
+                    //include('views/Administrator/Components/createCategoryForm.html');
+                ?>
             </div>
             <div id="rightPanel">
                 <h2>Categories</h2>

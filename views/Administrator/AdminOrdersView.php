@@ -25,7 +25,7 @@
                 <div class="orderInfo">
                     <h2 id="name">Name</h2>
                     <h2 id="surname">Surname</h2>
-                    <form action="" method="">
+                    <form action="index.php?page=Orders&action=editOrders" method="POST">
                         <input type="hidden" name="orderId" id="orderId">
                         <label for="email">Email</label>
                         <div id="email"></div>
