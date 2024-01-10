@@ -36,6 +36,9 @@
                         </a>
                     </div>
                     <button style="margin-top: 9px">Sign Up</button>
+                    <?php if ($incorrectPassword) {
+                        echo "Incorrect password";
+                    } ?>
                 </form>
             </div>
             <div class="form-container sign-in-container">

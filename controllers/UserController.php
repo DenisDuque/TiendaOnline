@@ -3,7 +3,7 @@ require_once __DIR__."/../models/UserModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
-        include 'views/LoginView.html';
+        include 'views/LoginView.php';
     }
 
     public function processLogin() {
