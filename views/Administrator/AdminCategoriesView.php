@@ -22,7 +22,7 @@
                         include("views/Administrator/Components/ordersPanel.html");
                     ?>
                 </div>
-                <div id="formEditCategory" class="adminForm">
+                <!--<div id="formEditCategory" class="adminForm">
                     <h4 id="editCategoryTitle">Sneakers</h4>
                         <form action="index.php?page=Category&action=editCategory" method="POST">
                             <input type="hidden" name="code" id="code">
@@ -38,6 +38,21 @@
                             <label for="">Products</label>
                             <ul id="listado" class="productsList">
                             </ul>
+                            <input type="submit" class="submitBtn" value="Save changes"></input>
+                        </form>
+                </div>-->
+                <div id="formCreateCategory" class="adminForm">
+                    <h4 id="editCategoryTitle">Sneakers</h4>
+                        <form action="index.php?page=Category&action=createCategory" method="POST">
+                            <label for="name">Category name</label>
+                            <input type="text" name="name" id="name">
+                            <div>
+                                <label for="active">Status</label>
+                                <select name="active" id="select">
+                                    <option id="enabled" value="enabled">enabled</option>
+                                    <option id="disabled" value="disabled">disabled</option>
+                                </select>
+                            </div>
                             <input type="submit" class="submitBtn" value="Save changes"></input>
                         </form>
                 </div>
