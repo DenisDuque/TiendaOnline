@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var divPhone = document.getElementById("phone");
         var listProd = document.getElementById("products");
         listProd.innerHTML="";
+        var listAmount = document.getElementById("amount");
+        listAmount.innerHTML = "";
         var divStatus = document.getElementById("status");
         var divPrice = document.getElementById("price");
 
@@ -79,15 +81,26 @@ document.addEventListener('DOMContentLoaded', function() {
         divEmail.innerHTML = datos[3];
         divPhone.innerHTML = datos[4];
         divStatus.innerHTML = datos[5];
-        divPrice.innerHTML = datos[6];
+        divPrice.innerHTML = "$"+datos[6];
 
         var products = datos[7].split("/");
         for(let i = 1; i<products.length;i++){
             let product = products[i].split(":");
             let item = document.createElement("li");
-            item.innerHTML = product[0] + " " + product[1];
+            item.innerHTML = product[0];
             listProd.appendChild(item);
-        }  
+            let amounts = document.createElement("dt");
+            amounts.innerHTML = product[1];
+            listAmount.appendChild(amounts);
+        }
+
+        // Deshabilitar el botón si el estado es "shipped"
+        var submitButton = document.getElementById("pedidoEnviado");
+        if (datos[5] === "shipped") {
+            submitButton.style.display = "none";
+        } else {
+            submitButton.style.display = "block";
+        }
     }
 
     document.querySelectorAll('.editCatBtn').forEach(button => {

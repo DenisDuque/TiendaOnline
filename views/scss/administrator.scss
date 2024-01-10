@@ -74,13 +74,14 @@ header {
     position: relative;
     display: flex;
     height: 100%;
-    width: 16vw;
+    width: 32vw;
     float: left;
     margin-left: 6vw;
     .panels {
         display: flex;
         flex-direction: column;
-        height: fit-content;
+        height: 100%;
+        justify-content: space-between;
         transition: all 0.5s ease;
         .panel {
             background-color: $adminOrange;
@@ -91,7 +92,6 @@ header {
             align-content: center;
             border-radius: $radius;
             padding: 2.5vh;
-            margin-bottom: 2.5vh;
             transition: all ease 0.33s 0;
             cursor: pointer;
             user-select: none;
@@ -183,14 +183,80 @@ header {
                 margin: 0;
             }
         }
-
+        
         .submitBtn {
             margin-top: 2vh;
             height: 4vh;
             background-color: $greenSave;
             font-size: 16px;
         }
-
+        
+    }
+    .orderInfo {
+        background-color: $adminOrange;
+        height: 100%;
+        width: 16vw;  // Ajustar al ancho deseado
+        margin-left: 1vh;  // Agregar margen a la izquierda
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        border-radius: $radius;
+        margin-bottom: 2.5vh;
+        transition: all ease 0.33s 0;
+        cursor: pointer;
+        user-select: none;
+        h2, form{
+            padding-left: 2.5vh;
+            label{
+                text-decoration: underline;
+            }
+            label[for="status"], label[for="price"] {
+                text-decoration: none;
+            }
+        }
+        h2{
+            text-align: center;
+        }
+        #name{
+            padding-top: 2.5vh;
+        }
+        ul{
+            padding-left: 4vh;
+        }
+        div{
+            padding-left: 2vh;
+            padding-right: 2vh;
+        }
+        #productsAmount {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 4vh;
+            #text, #list{
+                padding-right: 4vh;
+                padding-left: 0;
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+                text-align: center;
+            }
+            #text::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 4vh;
+                bottom: 0;
+                height: 2px; /* Ajusta el grosor del subrayado según sea necesario */
+                background-color: black; /* Ajusta el color del subrayado según sea necesario */
+            }
+            #text label{
+                text-decoration: none; /* Desactiva el subrayado en las etiquetas individuales si es necesario */
+            }
+        }
+        #divStatus, #divPrice{
+            padding-left: 0;
+            display: flex;
+            justify-content: space-between;
+        }    
     }
 }
 @keyframes slideLeft {

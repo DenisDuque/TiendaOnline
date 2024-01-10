@@ -60,14 +60,15 @@ header img:hover {
   position: relative;
   display: flex;
   height: 100%;
-  width: 16vw;
+  width: 32vw;
   float: left;
   margin-left: 6vw;
 }
 #leftPanel .panels {
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: 100%;
+  justify-content: space-between;
   transition: all 0.5s ease;
 }
 #leftPanel .panels .panel {
@@ -79,7 +80,6 @@ header img:hover {
   align-content: center;
   border-radius: 10px;
   padding: 2.5vh;
-  margin-bottom: 2.5vh;
   transition: all ease 0.33s 0;
   cursor: pointer;
   user-select: none;
@@ -174,6 +174,72 @@ header img:hover {
   height: 4vh;
   background-color: #B7FFB0;
   font-size: 16px;
+}
+#leftPanel .orderInfo {
+  background-color: rgba(255, 94, 0, 0.25);
+  height: 100%;
+  width: 16vw;
+  margin-left: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  border-radius: 10px;
+  margin-bottom: 2.5vh;
+  transition: all ease 0.33s 0;
+  cursor: pointer;
+  user-select: none;
+}
+#leftPanel .orderInfo h2, #leftPanel .orderInfo form {
+  padding-left: 2.5vh;
+}
+#leftPanel .orderInfo h2 label, #leftPanel .orderInfo form label {
+  text-decoration: underline;
+}
+#leftPanel .orderInfo h2 label[for=status], #leftPanel .orderInfo h2 label[for=price], #leftPanel .orderInfo form label[for=status], #leftPanel .orderInfo form label[for=price] {
+  text-decoration: none;
+}
+#leftPanel .orderInfo h2 {
+  text-align: center;
+}
+#leftPanel .orderInfo #name {
+  padding-top: 2.5vh;
+}
+#leftPanel .orderInfo ul {
+  padding-left: 4vh;
+}
+#leftPanel .orderInfo div {
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
+#leftPanel .orderInfo #productsAmount {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 4vh;
+}
+#leftPanel .orderInfo #productsAmount #text, #leftPanel .orderInfo #productsAmount #list {
+  padding-right: 4vh;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+}
+#leftPanel .orderInfo #productsAmount #text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 4vh;
+  bottom: 0;
+  height: 2px; /* Ajusta el grosor del subrayado según sea necesario */
+  background-color: black; /* Ajusta el color del subrayado según sea necesario */
+}
+#leftPanel .orderInfo #productsAmount #text label {
+  text-decoration: none; /* Desactiva el subrayado en las etiquetas individuales si es necesario */
+}
+#leftPanel .orderInfo #divStatus, #leftPanel .orderInfo #divPrice {
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 @keyframes slideLeft {

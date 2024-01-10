@@ -31,14 +31,25 @@
                         <div id="email"></div>
                         <label for="phone">Phone</label>
                         <div id="phone"></div>
-                        <label for="products">Products</label>
-                        <label for="prodAmount">Amount</label>
-                        <ul id="products"></ul>
-                        <label for="status">Status</label>
-                        <div id="status"></div>
-                        <label for="price">Total amount</label>
-                        <div id="price"></div>
-                        <input type="submit" value="Pedido enviado">
+                        <div id="productsAmount">
+                            <div id="text">
+                                <label for="products">Products</label>
+                                <label for="prodAmount">Amount</label>
+                            </div>
+                            <div id="list">
+                                <ul id="products"></ul>
+                                <dl id="amount"></dl>
+                            </div>
+                        </div>
+                        <div id="divStatus">
+                            <label for="status">Status</label>
+                            <div id="status"></div>
+                        </div>
+                        <div id="divPrice">
+                            <label for="price">Total amount</label>
+                            <div id="price"></div>
+                        </div>
+                        <input type="submit" value="Pedido enviado" id="pedidoEnviado">
                     </form>
                 </div>
             </div>
