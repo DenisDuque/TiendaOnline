@@ -11,7 +11,6 @@ class UserController {
         $userEmail = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
         $rol = UserModel::authenticate($userEmail, $password);
-        var_dump($rol); // Check the value of $rol
 
         if ($rol !== null) {
             //Creacion de las variables de sesion.
@@ -21,13 +20,12 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                echo ("<p>Sesión iniciada</p>");
-                //echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=default'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=default'>";
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
-            //include 'views/LoginView.html';
-            echo '<p>Invalid userEmail or password</p>';
+            $incorrectPassword = true;
+            include 'views/LoginView.php';
         }
     }
     

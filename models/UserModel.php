@@ -83,10 +83,9 @@ class UserModel extends Database {
             $stmt->execute();
     
             if ($stmt->rowCount() > 0) {
+                
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 $hashedPasswordFromDatabase = $user['password'];
-                var_dump($password);
-                var_dump($hashedPasswordFromDatabase);
                 if (password_verify($password, $hashedPasswordFromDatabase)) {
                     return $user['rol'];
                 } else {

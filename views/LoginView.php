@@ -59,6 +59,9 @@
                         </a>
                     </div>
                     <button>Sign In</button>
+                    <p><?php if ($incorrectPassword) {
+                        echo "Incorrect password";
+                    } ?></p>
                 </form>
             </div>
             <div class="overlay-container">
