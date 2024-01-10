@@ -89,7 +89,7 @@ class UserModel extends Database {
                 if (password_verify($password, $hashedPasswordFromDatabase)) {
                     return $user['rol'];
                 } else {
-                    echo('Contraseña incorrecta');
+                    //echo('Contraseña incorrecta');
                 }
             } else {
                 echo('Usuario no encontrado');

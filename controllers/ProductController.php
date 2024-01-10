@@ -31,6 +31,40 @@ class ProductController {
         include __DIR__.'/../views/General/SearchProducts.php';
     }
 
+    public function fetchProducts() {
+        try {
+            $condition = $_REQUEST['condition'];
+            $products = ProductModel::getProductsWhere($condition);
+    
+            if (!empty($products)) {
+                // cambiar map por for each
+                $data = array_map(function($product) {
+                    return [
+                        'code' => $product->getCode(),
+                        'codecategory' => $product->getCodeCategory(),
+                        'name' => $product->getName(),
+                        'price' => $product->getPrice(),
+                        'sold' => $product->getSold(),
+                        'stock' => $product->getStock(),
+                        'status' => $product->getStatus(),
+                    ];
+                }, $products);
+    
+               // header('Content-Type: application/json');
+                $jsonData = json_encode($data);
+
+                echo $jsonData;
+            } else {
+                
+                return [];
+            }
+        } catch (Exception $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Fetch data error: " . $e->getMessage());
+        }
+    }
+    
+
     public function showProduct() {
         require_once __DIR__.'/../models/CategoryModel.php';
         $product = ProductModel::getProductWithCode();
