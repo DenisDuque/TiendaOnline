@@ -51,9 +51,7 @@ body #categories .category {
   align-content: center;
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
   list-style: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   cursor: pointer;
   transition: all ease 0.2s;
 }
@@ -66,4 +64,131 @@ body #categories .selectedCategory {
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
   list-style: none;
   cursor: pointer;
+}
+
+main {
+  width: 100vw;
+  height: 88vh;
+  background-color: #ececec;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+* {
+  font-family: "Kanit";
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: 50vw 50vw;
+  justify-content: left;
+  justify-self: left;
+}
+
+.image {
+  background-color: white;
+  border-radius: 15px;
+  margin-left: auto;
+}
+
+#allImages {
+  width: 65vw;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-self: right;
+  padding-right: 1vw;
+}
+#allImages #images {
+  height: 60%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 1vw;
+}
+#allImages #images .image {
+  width: 5vw;
+  height: auto;
+  display: flex;
+}
+#allImages #images .image img {
+  width: 100%;
+  height: auto;
+}
+#allImages #images .image:hover {
+  background-color: #ff5e00;
+}
+#allImages #images .clicked {
+  background-color: rgba(255, 94, 0, 0.4);
+}
+#allImages #mainImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#allImages #mainImage img {
+  width: 100%;
+}
+
+#info {
+  width: 70%;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+#info h2 {
+  opacity: 0.3;
+}
+#info #options {
+  width: 100%;
+}
+#info #options #sizes {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+#info #options #sizes button {
+  width: 20%;
+  margin: 3px;
+  font-size: larger;
+}
+#info #options #buttons {
+  width: 80%;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+#info #options #buttons button {
+  font-size: larger;
+}
+#info #options #description h4 {
+  opacity: 0.6;
+}
+#info h1 {
+  font-size: 50px;
+}
+#info h3 {
+  font-size: 30px;
+}
+
+button, button:hover {
+  border: none;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  font-size: 20px;
+  width: 20%;
+}
+
+button:hover {
+  background-color: #ff5e00;
+  color: #FFFFFF;
 }/*# sourceMappingURL=main.css.map */
