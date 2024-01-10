@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillDataOrder(code){
         var datos = code.split(",");
+        var orderId = document.getElementById("orderId");
         var titleName = document.getElementById("name");
         var titleSurname = document.getElementById("surname");
         var divEmail = document.getElementById("email");
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var divStatus = document.getElementById("status");
         var divPrice = document.getElementById("price");
 
+        orderId.value = parseInt(datos[0], 10);
         titleName.innerHTML = datos[1];
         titleSurname.innerHTML = datos[2];
         divEmail.innerHTML = datos[3];

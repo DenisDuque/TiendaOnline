@@ -147,7 +147,7 @@ class OrdersModel extends Database {
     public static function editOrder($id, $status) {
         try {
             // Realizar la actualización
-            $updateQuery = "UPDATE orders SET status = :status WHERE id = :id";
+            $updateQuery = "UPDATE shopping SET status = :status WHERE id = :id";
 
             $updateStatement = self::getConnection()->prepare($updateQuery);
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);

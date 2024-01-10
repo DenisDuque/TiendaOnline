@@ -15,5 +15,11 @@ class OrdersController {
         $result = OrdersModel::getMyProducts($order);
         return $result;
     }
+
+    public function editOrders(){
+        if(isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action']== 'editOrders'){
+            OrdersModel::editOrder($_POST['orderId'], 'shipped');
+        }
+    }
 }
 ?>
