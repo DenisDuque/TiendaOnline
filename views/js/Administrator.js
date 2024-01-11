@@ -4,21 +4,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillDataProduct(code){
         var datos = code.split(",");
+        let id = datos[0];
         let name = datos[1];
         let price = datos[2];
         let status = datos[3];
         let stock = datos[4];
         let category = datos[5];
-        let sideView = document.getElementById("side");
-        let topVIew = document.getElementById("top");
-        let bottomView = document.getElementById("bottom");
+        let sizes = datos[6];
+        var sizesArray = sizes.split('!');
+        console.log(sizes);
+        document.getElementById("code").value = id;
         document.getElementById("name").value = name;
         document.getElementById("price").value = price;
         document.getElementById("stock").value = stock;
-        
-        sideView.src = datos[6];
-        
-
+        $('#sizeList').empty();
+        for (let i = 0 ; i != sizesArray.length-1 ; i++) {
+            var newSize = sizesArray[i];
+            if (newSize.trim() !== "") {
+                $('#sizeList').append('<div class="size">' + newSize + '</div>');
+            }
+        }
         if(status=="enabled"){
             document.getElementById("select").selectedIndex = "enabled";
         }else{
@@ -103,6 +108,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function addSize() {
+        var newSize = $('#sizeInput').val();
+        if (newSize.trim() !== "") {
+            $('#sizeList').append('<div class="size">' + newSize + '</div>');
+            $('#sizeInput').val(""); 
+        }
+    }
+    
+    function preparePost() {
+        var sizeDivs = $('.size');
+        if (sizeDivs.length > 0) {
+            var sizesStrings = sizeDivs.map(function() {
+                return $(this).text();
+            }).get().join(',');
+            $('#sizeInp').val(sizesStrings);
+        } else {
+            $('#sizeInp').val("");
+        }
+        return true;
+    }
+
     document.querySelectorAll('.editCatBtn').forEach(button => {
         button.addEventListener('click', function() {
             fillDataCategory(button.id);
@@ -121,6 +147,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.querySelectorAll('.addSizeBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            addSize();
+        });
+    });
+
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        preparePost();
+    });    
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
