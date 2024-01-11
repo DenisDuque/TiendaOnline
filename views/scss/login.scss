@@ -12,145 +12,171 @@ html, body {
     overflow: hidden;
 }
 
+h1 {
+    font-weight: bold;
+    margin: 0;
+    font-size: 42px;
+}
+
+
+
 h2 {
     font-weight: bold;
     margin: 0;
+    font-size: 32px;
 }
 
-p {
-    font-size: 1.9vh;
-    font-weight: 100;
-    line-height: 3vh;
-    letter-spacing: 0.03vw;
-    margin: 2.7vh 0 4vh;
-}
-
-span {
-    font-size: 1.5vh;
-}
-
-a {
-    color: $orange;
-    font-size: 1.9vh;
-    text-decoration: none;
-    margin: 2vh 0;
-}
-
-.container {
+#container {
     background: #fff;
     position: relative;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
     transition: 0.3s;
-}
 
-.form-container form {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    padding:  0 3vw;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.social-container {
-    margin: 2.7vh 0;
-    display: block;
-    width: 9.6vw;
-}
-
-.button-expand {
-    transition: all 0.25s ease;
-    &::after{
-      box-shadow: inset 0 0 0 1px $orange;
+    p {
+        font-size: 1.9vh;
+        font-weight: 100;
+        line-height: 3vh;
+        letter-spacing: 0.03vw;
+        margin: 2.7vh 0 4vh;
     }
-    &::before{
-      background: $orange;
-      box-shadow: inset 0 0 0 $icon-size $white;
+    
+    span {
+        width: 10vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        div {
+            border: 1px solid $grey;
+            height: 0.1vh;
+            width: 4vw;
+        }
+        font-size: 1.5vh;
     }
-    &:hover::before{
-      box-shadow: inset 0 0 0 1px $white;
+    
+    a {
+        color: $orange;
+        font-size: 1.9vh;
+        text-decoration: none;
+        margin: 2vh 0;
     }
-}
 
-.social-container a {
-    border: 1px solid $grey;
-    border-radius: 0.2vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 5vh;
-    width: 100%;
-
-    div {
-        width: 100%;
+    .form-container form {
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        padding:  0 3vw;
         height: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        h1 {
+            position: absolute;
+            top: 10%;
+        }
+    }
+    
+    .social-container {
+        margin: 2.7vh 0;
+        display: block;
+        width: 9.6vw;
+    }
+    
+    
+    
+    .social-container a {
+        border: 1px solid #FD9346;
+        border-radius: 0.2vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        height: 5vh;
+        width: 100%;
+    
+        div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+    
+            img {
+                width: 2vh;
+                height: 2vh;
+            }
+    
+            p {
+                font-size: 13px;
+                margin: 0;
+                padding: 0;
+                padding-left: 0.5vw;
+            }
+        }
+    }
+    
+    .form-container input {
+        background: #eee;
+        border: none;
+        border-radius: 10px;
+        padding: 1vh 15px;
+        margin: 1vh 0;
+        width: 100%;
+    
+        &:hover {
+            transform: scale(101%);
+        }
+    }
+
+    .button-expand {
+        transition: all 0.25s ease;
+        background: #FD9346;
+        box-shadow: inset 0 0 10px 3vw white;
+        
+        &::after{
+          box-shadow: inset 0 0 0 1px #FD9346;
+        }
+        &:hover{
+            box-shadow: inset 0 0 1px 0px white;
+            color: white;
+        }
+    }
+    
+    button {
+        border-radius: 10px;
+        box-shadow: 0 1px 1px;
+        border: 1px solid #FD9346;
+        background: #FD9346;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-
-        img {
-            width: 2vh;
-            height: 2vh;
+        color: #fff;
+        font-size: 1.6vh;
+        font-weight: bold;
+        padding: 1.6vh 2vw;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 0.1s ease-in;
+        cursor: pointer;
+    
+        &:active {
+            transform: scale(0.95);
         }
-
-        p {
-            font-size: 13px;
-            margin: 0;
-            padding: 0;
-            padding-left: 0.5vw;
+    
+    
+        &:focus {
+            outline: none;
         }
-    }
-}
-
-.form-container input {
-    background: #eee;
-    border: none;
-    border-radius: 10px;
-    padding: 1vh 15px;
-    margin: 1vh 0;
-    width: 100%;
-
-    &:hover {
-        transform: scale(101%);
-    }
-}
-
-button {
-    border-radius: 10px;
-    box-shadow: 0 1px 1px;
-    border: 1px solid #FD9346;
-    background: #FD9346;
-    color: #fff;
-    font-size: 1.6vh;
-    font-weight: bold;
-    padding: 1.6vh 2.9vw;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 0.1s ease-in;
-    cursor: pointer;
-
-    &:active {
-        transform: scale(0.95);
-    }
-
-    &:hover {
-        transform: scale(1.01);
-    }
-
-    &:focus {
-        outline: none;
-    }
-
-    &.ghost {
-        background: transparent;
-        border-color: #fff;
+    
+        &.ghost {
+            background: transparent;
+            border-color: #fff;
+        }
     }
 }
 
@@ -160,7 +186,6 @@ button {
     height: 100%;
     transition: all .6s ease-in-out;
 }
-
 .sign-in-container {
     left: 0;
     width: 50%;
@@ -210,7 +235,6 @@ button {
     transform: translateY(0);
     transition: transform .6s ease-in-out;
 }
-
 .overlay-right {
     right: 0;
     transform: translateY(0);
@@ -219,35 +243,34 @@ button {
 .overlay-left {
     transform: translateY(-20%);
 }
-
 // Move signIn to right
-.container.right-panel-active .sign-in-container {
+#container.right-panel-active .sign-in-container {
     transform: translateY(100%);
 }
 
 // Move overlay to left
-.container.right-panel-active .overlay-container {
+#container.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
 // Bring signUp over signIn
-.container.right-panel-active .sign-up-container {
+#container.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
 }
 
 // Move overlay back to right
-.container.right-panel-active .overlay {
+#container.right-panel-active .overlay {
     transform: translateX(50%);
 }
 
 // Bring back the text to center
-.container.right-panel-active .overlay-left {
+#container.right-panel-active .overlay-left {
     transform: translateY(0);
 }
 
 // Same effect for right
-.container.right-panel-active .overlay-right {
+#container.right-panel-active .overlay-right {
     transform: translateY(20%);
 }

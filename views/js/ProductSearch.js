@@ -13,24 +13,12 @@ class ProductSearch {
     init() {
       // Obtener el elemento script que contiene el JSON
       const scriptElement = document.getElementById('productData');
-  
-      // Verificar si el elemento script existe
-      if (scriptElement) {
-        // Obtener el contenido JSON
-        const jsonContent = scriptElement.textContent || scriptElement.innerText;
-  
-        // Convertir el JSON a un objeto JavaScript
-        this.data = JSON.parse(jsonContent);
-        this.totalData = this.data;
-        console.log(this.data);
-  
-        // Llamar a displayMatches inicialmente
-        this.displayMatches();
-      }
+
+      this.fetchProducts("");
   
       // Agregar event listeners
-      this.searchInput.addEventListener('change', this.displayMatches.bind(this));
-      this.searchInput.addEventListener('keyup', this.displayMatches.bind(this));
+      this.searchInput.addEventListener('change', this.fetchProducts.bind(this));
+      this.searchInput.addEventListener('keyup', this.fetchProducts.bind(this));
   
       this.categories.forEach(element => {
         element.addEventListener('click', () => {
@@ -53,7 +41,43 @@ class ProductSearch {
         return [];
       }
     }
+
+    generateProductHTML(product) {
+      const productName = product.productName;
+        const productPrice = product.productPrice;
+        const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
+        const productImage = product.productImage;
+        return `
+          <article>
+            <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
+            <img src="views/assets/images/products/${productImage}" alt="ProductImage">
+            <p>${productName}</p>
+            <p>${productPrice}</p>
+          </article>`
+    }
   
+    async fetchProducts(condition) {
+      try {
+          // Hacer una solicitud al servidor para obtener los datos
+          const response = await fetch(`ajax.php?page=Product&action=searchProducts&condition=${condition}`);
+          
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          // Obtener los datos en formato JSON
+          const products = await response.json();
+          console.log(products);
+          // Generar HTML utilizando los datos obtenidos
+          const htmlCode = products.map(generateProductHTML).join('');
+          
+          // Insertar el HTML generado en el DOM o hacer lo que necesites
+          // Ejemplo de inserción en un elemento con id "productContainer":
+          document.getElementById('productContainer').innerHTML = htmlCode;
+      } catch (error) {
+          console.error('Error fetching or generating HTML:', error.message);
+      }
+    }
     displayMatches() {
       const matchArray = this.findMatches(this.searchInput.value, this.data);
       const html = matchArray.map(element => {

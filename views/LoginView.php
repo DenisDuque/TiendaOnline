@@ -9,11 +9,11 @@
     <script src="views/js/Login.js"></script>
 </head>
 <body>
-        <div class="container" id="container">
+        <div id="container">
             <div class="form-container sign-up-container">
-                <form action="index.php?page=login&action=register" method="POST">
-                    <h1>Sign Up</h1>
-                    
+                <form action="index.php?page=User&action=processRegistration" method="POST">
+                    <h1>Urban Store</h1>
+                    <h2>Sign Up</h2>
                     <label>
                         <input type="text" name="registerUsername" placeholder="Name">
                     </label>
@@ -26,21 +26,25 @@
                     <label>
                         <input type="password" name="registerPassword" placeholder="Password">
                     </label>
-                    <span>or</span>
-                    <button class="social-container button-expand">
+                    <span><div></div>or<div></div></span>
+                    <div class="social-container">
                         <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
-                            <div>
+                            <div class="button-expand">
                                 <img src="views/assets/images/utils/google.png" alt="Google">
-                                <p>Sign up with Google</p>
+                                <p>Sign in with Google</p>
                             </div>
                         </a>
-                    </button>
+                    </div>
                     <button style="margin-top: 9px">Sign Up</button>
+                    <?php if ($incorrectPassword) {
+                        echo "Incorrect password";
+                    } ?>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <form action="index.php?page=login&action=login" method="POST">
-                    <h1>Sign In</h1>
+                <form action="index.php?page=User&action=processLogin" method="POST">
+                    <h1>Urban Store</h1>
+                    <h2>Sign In</h2>
                     <label>
                         <input type="email" name="loginEmail" placeholder="Email">
                     </label>
@@ -48,7 +52,7 @@
                         <input type="password" name="loginPassword" placeholder="Password">
                     </label>
                     <a href="#">Forgot your password?</a>
-                    <span>or</span>
+                    <span><div></div>or<div></div></span>
                     <div class="social-container">
                         <a href="mailto:d.duque.dev@gmail.com" target="_blank" class="social">
                             <div class="button-expand">
@@ -58,6 +62,9 @@
                         </a>
                     </div>
                     <button>Sign In</button>
+                    <p><?php if ($incorrectPassword) {
+                        echo "Incorrect password";
+                    } ?></p>
                 </form>
             </div>
             <div class="overlay-container">
