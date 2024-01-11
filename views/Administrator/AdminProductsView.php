@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="views/js/Administrator.js"></script>
         <title>Products</title>
     </head>
@@ -23,29 +24,30 @@
                     ?>
                 </div>
                 <div class="formProd">
-                    <form action="" method="">
+                    <form action="index.php?page=Product&action=editProduct" method="POST">
                         <table> 
+                            <input type="hidden" name="code" id="code">
                             <tr><td><div>Product code</div></td></tr>
                             <tr><td><div id="productCode"></div></td></tr>
-                            <input type="hidden" name="code" id="code">
                             <tr><td><label for="name">Name product</label></td></tr>
                             <tr>
                                 <td>
                                     <input type="text" name="name" id="name">
                                 </td>
                             </tr>
-                            <tr><td><label for="name">Price</label></td></tr>
+                            <tr><td><label for="price">Price</label></td></tr>
                             <tr>
                                 <td>
                                     <input type="text" name="price" id="price">
                                 </td>
                             </tr>
-                            <tr><td><label for="name">Stock</label></td></tr>
+                            <tr><td><label for="stock">Stock</label></td></tr>
                             <tr>
                                 <td>
                                     <input type="text" name="stock" id="stock">
                                 </td>
                             </tr>
+                            <tr><td><label for="">Status</label></td></tr>
                             <tr>
                                 <td>
                                     <select name="active" id="select">
@@ -54,6 +56,7 @@
                                     </select>
                                 </td>
                             </tr>
+                            <tr><td><label for="">Category</label></td></tr>
                             <tr>
                                 <td>
                                     <select name="category" id="category"> 
@@ -66,14 +69,35 @@
                                     </select>
                                 </td>
                             </tr>
+                            <tr><td><label for="">Perspectives</label></td></tr>
                             <tr>
-                                <td><img src="" alt="side-view" id="side"></td>
-                                <td><img src="" alt="above-view" id="top"></td>
+                                <td>
+                                    <label for="Side">Side</label>
+                                    <input type="file" id="Side" name="Side" style='display:none;'>
+                                </td>
+                                <td>
+                                    <label for="Bottom">Bottom</label>
+                                    <input type="file" id="Bottom" name="Bottom" style='display:none;'>
+                                </td>
+                                <td>
+                                    <label for="Up">Up</label>
+                                    <input type="file" id="Up" name="Up" style='display:none;'>
+                                </td>
+                                <td>
+                                    <label for="3D">3D</label>
+                                    <input type="file" id="3D" name="3D" style='display:none;'>
+                                </td>
                             </tr>
                             <tr>
-                                <td><img src="" alt="bottom-view" id="bottom"></td>
-                                <td><img src="" alt="above-view" id="3D"></td>
+                                <td><label for="">Sizes</label></td>
+                                <td><input type="text" id="sizeInput" placeholder="Add a size"></td>
+                                <td><button type="button" class='addSizeBtn'>+</button></td>
                             </tr>
+                            <tr>
+                                <td><div id="sizeList"></div></td>
+                            </tr>
+                            <input type="hidden" id="sizeInp" name="sizes">
+                            <tr><td><input type="submit" class="submitBtn" value="Save changes"></td></tr>
                         </table>
                     </form>
                 </div>
@@ -85,6 +109,9 @@
                     <?php 
                         foreach($products as $product) {
                             $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
+                            $sizes = $product->getSize();
+                            $stringSinComas = str_replace([',','{','}','"'], '', $sizes);
+                            $stringProcesada = preg_replace('/\s+/', '!', $stringSinComas);
                             if($img == null) {
                                 $img = '../utils/productImage.png';
                             }
@@ -103,7 +130,7 @@
                                     <div class='textOnRight'>
                                         <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
                                         <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
-                                        <div id='".$product->getCode().",".$product->getName().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory().","."views/assets/images/products/".$img."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                        <div id='".$product->getCode().",".$product->getName().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory().",".$stringProcesada.","."views/assets/images/products/".$img."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                                     </div>
                                 </div>
                             ";

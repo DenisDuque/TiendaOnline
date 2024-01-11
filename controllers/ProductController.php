@@ -37,5 +37,7 @@ class ProductController {
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);
         include __DIR__.'/../views/General/productPage.php';
     }
+    public function createProduct() {
+    }
 }
 ?>

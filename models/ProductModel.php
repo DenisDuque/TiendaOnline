@@ -104,7 +104,7 @@ class ProductModel extends Database {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$price,$sold,$stock,$status){
+    public function __construct($code,$category,$name,$price,$sold,$stock,$status,$size){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
@@ -112,6 +112,7 @@ class ProductModel extends Database {
         $this->sold = $sold;
         $this->stock = $stock;
         $this->status = $status;
+        $this->size = $size;
     }
 
     public static function getProductWithCode(){
@@ -174,7 +175,7 @@ class ProductModel extends Database {
 
     public static function getAllProducts() {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products";
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products";
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -187,7 +188,8 @@ class ProductModel extends Database {
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
-                    $row['status']
+                    $row['status'],
+                    $row['size']
                 );
             }, $rows);
             
@@ -199,7 +201,7 @@ class ProductModel extends Database {
     }
     public static function getTopProducts($limit = 10) {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products ORDER BY sold DESC LIMIT :limit";
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
@@ -212,7 +214,8 @@ class ProductModel extends Database {
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
-                    $row['status']
+                    $row['status'],
+                    $row['size']
                 );
             }, $stmt->fetchAll(PDO::FETCH_ASSOC));
             
