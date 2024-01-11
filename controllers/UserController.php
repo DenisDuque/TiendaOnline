@@ -3,16 +3,16 @@ require_once __DIR__."/../models/UserModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
-        include 'views/LoginView.html';
+        include 'views/LoginView.php';
     }
 
     public function processLogin() {
         // Procesar el formulario de inicio de sesión
         $userEmail = $_POST['loginEmail'];
         $password = $_POST['loginPassword'];
-    
         $rol = UserModel::authenticate($userEmail, $password);
-        if ($rol) {
+
+        if ($rol !== null) {
             //Creacion de las variables de sesion.
             $_SESSION['email'] = $userEmail;
             $_SESSION['rol'] = $rol;
@@ -20,12 +20,12 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=home'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=default'>";
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
-            include 'views/LoginView.html';
-            echo '<p>Invalid userEmail or password</p>';
+            $incorrectPassword = true;
+            include 'views/LoginView.php';
         }
     }
     
@@ -49,8 +49,8 @@ class UserController {
             return;
         }
     
-        // Cifrado de contraseña
-        $hashedPassword = md5($password);
+        // Cifrado de contraseña utilizando password_hash
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     
         // Guardar el usuario en la base de datos
         if (UserModel::register($userName, $userSurnames, $userEmail, $hashedPassword)) {
@@ -59,13 +59,11 @@ class UserController {
     
             //Aqui la redireccion futura a la pagina principal de customer logeado.
             //echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=../index.php?page=customer'>";
-            
         }
     
         // Redirigir a otra página después del registro exitoso
         echo 'Registro realizado';
-    
-    }
+    }    
 
     public function showAdminUser() {
         $search = isset($_GET['search']) ? $_GET['search'] : null;

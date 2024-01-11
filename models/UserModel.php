@@ -77,27 +77,33 @@ class UserModel extends Database {
 
     public static function authenticate($userEmail, $password) {
         try {
-            $hashedPassword = md5($password);
-            $query = "SELECT rol FROM users WHERE email LIKE :email AND password LIKE :password";
+            $query = "SELECT rol, password FROM users WHERE LOWER(email) LIKE LOWER(:email)";
             $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(':email', $userEmail);
-            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->bindValue(':email', $userEmail);
             $stmt->execute();
-            if($stmt->rowCount() > 0) {
-                $rol = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $rol['rol'];
+    
+            if ($stmt->rowCount() > 0) {
+                
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                $hashedPasswordFromDatabase = $user['password'];
+                if (password_verify($password, $hashedPasswordFromDatabase)) {
+                    return $user['rol'];
+                } else {
+                    echo('Contraseña incorrecta');
+                }
             } else {
-                return false;
+                echo('Usuario no encontrado');
             }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
-    }
+        return null;
+    }    
+    
 
     public static function register($userName, $userSurnames, $userEmail, $userPassword) {
         try {
-            $validRegister = false;
             $query = "SELECT * FROM users WHERE email LIKE :email";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $userEmail);
@@ -120,7 +126,7 @@ class UserModel extends Database {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }   
-   }
+    }
 
     public static function showCustomers($search) {
     try {
@@ -134,10 +140,9 @@ class UserModel extends Database {
             $customers = self::getConnection()->prepare($query);
         }
         $customers->execute();
-        //
         $rows = $customers->fetchAll(PDO::FETCH_ASSOC);
         $users = array_map(function($row) {
-            return new UserModel(
+            return new UserModel (
                 $row['email'],
                 $row['phone'],
                 $row['name'],

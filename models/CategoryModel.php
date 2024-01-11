@@ -86,8 +86,8 @@
                 $stmt = self::getConnection()->prepare($query);
                 $stmt->bindParam(':name', $name, PDO::PARAM_INT);
                 $stmt->execute();
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                if($rows > 0){
+                $rowCount = $stmt->rowCount();
+                if($rowCount != 0){
                     // avisar de que ya hay una categoria con el mismo nombre
                     echo "La categoria ya existe!";
                 } else {
@@ -103,6 +103,7 @@
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
             }
+            echo"<meta http-equiv='refresh' content='0.1;index.php?page=Category&action=showAdminCategory'>";
         }
 
         public static function editCategory($code, $name, $status) {
