@@ -389,7 +389,11 @@ class ProductModel extends Database {
         $stmt->bindParam(":user",$user,PDO::PARAM_STR);
         $stmt->bindParam(":product",$product,PDO::PARAM_STR);
         $stmt->execute();
-
+        $exists = false;
+        if($stmt->rowCount() > 0){
+            $exists = true;
+        }
+        return $exists; 
     }
 }
 ?>

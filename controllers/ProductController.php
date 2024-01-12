@@ -1,6 +1,9 @@
 <?php
 require_once __DIR__.'/../models/ProductModel.php';
 class ProductController {
+    public function default(){
+        require_once "views\General\PrincipalView.php";
+    }
     public function showAdminProduct() {
         $products = ProductModel::getAllProducts();
         include __DIR__.'/../views/Administrator/AdminProductsView.php';
