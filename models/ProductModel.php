@@ -219,7 +219,8 @@ class ProductModel extends Database {
                 $row['price'],
                 $row['sold'],
                 $row['stock'],
-                $row['status']
+                $row['status'],
+                $row['size']
             );
         }, $rows);
 
@@ -365,6 +366,30 @@ class ProductModel extends Database {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
+    }
+
+    
+    public static function putInWishList($user, $product){
+        try {
+            $query = "INSERT INTO wishlist (useremail,productcode) VALUES (:user, :product)";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':user',$user, PDO::PARAM_STR);
+            $stmt->bindParam(':product',$product, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        } 
+        
+    }
+
+    public static function checkWishList($user, $product){
+        $query = "SELECT * FROM wishlist WHERE useremail = :user AND productcode = :product";
+        $stmt = self::getConnection()->prepare($query);
+        $stmt->bindParam(":user",$user,PDO::PARAM_STR);
+        $stmt->bindParam(":product",$product,PDO::PARAM_STR);
+        $stmt->execute();
+
     }
 }
 ?>
