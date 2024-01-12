@@ -161,6 +161,7 @@ class OrdersModel extends Database {
             } else {
                 echo "La order no se encuentra en la base de datos";
             }
+            echo"<meta http-equiv='refresh' content='0.1;index.php?page=Orders&action=showAdminOrders'>";
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

@@ -3,6 +3,7 @@ require_once __DIR__."/../models/UserModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
+        $incorrectPassword = false;
         include 'views/LoginView.php';
     }
 
@@ -20,7 +21,13 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=default'>";
+                if(!isset($_GET["origin"])){
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
+                }else{
+                    //En caso de que se nos haya redirigido al login desde una pagina de producto, este se almacenara en el origen
+                    //y despues de loguear volveremos a la pagina de ese producto
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&product=".$_GET["origin"]."'>";
+                }
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión

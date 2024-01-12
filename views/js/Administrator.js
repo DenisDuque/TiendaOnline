@@ -4,21 +4,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function fillDataProduct(code){
         var datos = code.split(",");
+        let id = datos[0];
         let name = datos[1];
         let price = datos[2];
         let status = datos[3];
         let stock = datos[4];
         let category = datos[5];
-        let sideView = document.getElementById("side");
-        let topVIew = document.getElementById("top");
-        let bottomView = document.getElementById("bottom");
+        let sizes = datos[6];
+        var sizesArray = sizes.split('!');
+        console.log(sizes);
+        document.getElementById("code").value = id;
         document.getElementById("name").value = name;
         document.getElementById("price").value = price;
         document.getElementById("stock").value = stock;
-        
-        sideView.src = datos[6];
-        
-
+        $('#sizeList').empty();
+        for (let i = 0 ; i != sizesArray.length-1 ; i++) {
+            var newSize = sizesArray[i];
+            if (newSize.trim() !== "") {
+                $('#sizeList').append('<div class="size">' + newSize + '</div>');
+            }
+        }
         if(status=="enabled"){
             document.getElementById("select").selectedIndex = "enabled";
         }else{
@@ -70,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var divPhone = document.getElementById("phone");
         var listProd = document.getElementById("products");
         listProd.innerHTML="";
+        var listAmount = document.getElementById("amount");
+        listAmount.innerHTML = "";
         var divStatus = document.getElementById("status");
         var divPrice = document.getElementById("price");
 
@@ -79,15 +86,47 @@ document.addEventListener('DOMContentLoaded', function() {
         divEmail.innerHTML = datos[3];
         divPhone.innerHTML = datos[4];
         divStatus.innerHTML = datos[5];
-        divPrice.innerHTML = datos[6];
+        divPrice.innerHTML = "$"+datos[6];
 
         var products = datos[7].split("/");
         for(let i = 1; i<products.length;i++){
             let product = products[i].split(":");
             let item = document.createElement("li");
-            item.innerHTML = product[0] + " " + product[1];
+            item.innerHTML = product[0];
             listProd.appendChild(item);
-        }  
+            let amounts = document.createElement("dt");
+            amounts.innerHTML = product[1];
+            listAmount.appendChild(amounts);
+        }
+
+        // Deshabilitar el botón si el estado es "shipped"
+        var submitButton = document.getElementById("pedidoEnviado");
+        if (datos[5] === "shipped") {
+            submitButton.style.display = "none";
+        } else {
+            submitButton.style.display = "block";
+        }
+    }
+
+    function addSize() {
+        var newSize = $('#sizeInput').val();
+        if (newSize.trim() !== "") {
+            $('#sizeList').append('<div class="size">' + newSize + '</div>');
+            $('#sizeInput').val(""); 
+        }
+    }
+    
+    function preparePost() {
+        var sizeDivs = $('.size');
+        if (sizeDivs.length > 0) {
+            var sizesStrings = sizeDivs.map(function() {
+                return $(this).text();
+            }).get().join(',');
+            $('#sizeInp').val(sizesStrings);
+        } else {
+            $('#sizeInp').val("");
+        }
+        return true;
     }
 
     document.querySelectorAll('.editCatBtn').forEach(button => {
@@ -108,6 +147,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    document.querySelectorAll('.addSizeBtn').forEach(button => {
+        button.addEventListener('click', function() {
+            addSize();
+        });
+    });
+
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        preparePost();
+    });    
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
