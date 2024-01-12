@@ -4,6 +4,8 @@ class ProductSearch {
       this.categories = document.querySelectorAll('.category');
       this.itemsContainer = document.querySelector('.itemsContainer');
       this.category = null;
+      this.sortInput = document.querySelector('#sortInput');
+      this.sort = null;
   
       // Inicializar el objeto cuando se crea una instancia
       this.init();
@@ -16,6 +18,11 @@ class ProductSearch {
       // Agregar event listeners
       this.searchInput.addEventListener('change', (event) => this.fetchProducts(event.target.value));
       this.searchInput.addEventListener('keyup', (event) => this.fetchProducts(event.target.value));
+      this.sortInput.addEventListener('change', (event) => {
+        this.sort = event.target.value;
+        this.fetchProducts(this.searchInput.value);
+      });
+    
 
       this.categories.forEach(element => {
         element.addEventListener('click', () => {
@@ -52,7 +59,7 @@ class ProductSearch {
         }
         
         const responseData = await response.json();
-
+        console.log("Sort: " + this.sort);
         console.log("ResponseData: " + responseData);  // Imprime la respuesta para verificar su contenido
         if (responseData.length > 0) {
           const productsJSON = responseData.map(product => {
@@ -67,6 +74,17 @@ class ProductSearch {
                   status: product.status
               };
           });
+          switch (this.sort) {
+            case "high-low":
+              productsJSON.sort((a, b) => b.price - a.price);
+              break;
+
+            case "low-high":
+              productsJSON.sort((a, b) => a.price - b.price);
+              break;
+            default:
+              break;
+          }
           const htmlCode = productsJSON.map(product => this.generateProductHTML(product)).join('');
           document.getElementById('itemsContainer').innerHTML = htmlCode;
         } else {

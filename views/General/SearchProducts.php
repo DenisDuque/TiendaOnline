@@ -7,11 +7,10 @@
 <nav>
     <input type="text" class="search" placeholder="Search">
     <h3>Sort by</h3>
-    <select name="active" id="select">
-        <option id="outstanding" value="outstanding">Outstanding</option>
-        <option id="newest" value="newest">Newest</option>
-        <option id="high-low" value="high-low">Price: High-low</option>
-        <option id="low-high" value="low-high">Price: Low-high</option>
+    <select id="sortInput" name="active" id="select">
+        <option id="noSort" value="none">None</option>
+        <option value="high-low">Price: High-low</option>
+        <option value="low-high">Price: Low-high</option>
     </select>
 </nav>
 
