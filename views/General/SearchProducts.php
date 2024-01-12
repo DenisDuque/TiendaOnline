@@ -24,4 +24,4 @@
         ?>
     </ul>
 </nav>
-<section class="itemsContainer"></section>
+<section id="itemsContainer"></section>

@@ -72,6 +72,7 @@ class ProductModel extends Database {
     public function getSize() {
         return $this->size;
     }
+
     public function setSold($sold) {
         $this->sold = $sold;
     } 
@@ -200,10 +201,16 @@ class ProductModel extends Database {
 
     public static function getProductsWhere($condition) {
     try {
-        // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products WHERE name LIKE :condition OR name = :condition";
-
-        $stmt = self::getConnection()->prepare($query);
+        if (isset($_GET['category'])) {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products WHERE codecategory = :category AND (name LIKE :condition OR name = :condition)";
+            $stmt = self::getConnection()->prepare($query);
+            $category = $_GET['category'];
+            $stmt->bindValue(':category', $category, PDO::PARAM_INT);
+        } else {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products WHERE name LIKE :condition OR name = :condition";
+            $stmt = self::getConnection()->prepare($query);
+        }        
+        
         $search = '%' . $condition . '%';
         $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
         $stmt->execute();
@@ -221,7 +228,7 @@ class ProductModel extends Database {
             );
         }, $rows);
 
-        // Devolver los datos en formato JSON
+        return $Products;
         
     } catch (PDOException $e) {
         error_log("Error: " . $e->getMessage());

@@ -15,19 +15,6 @@ class ProductController {
         require_once __DIR__.'/../models/CategoryModel.php';
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
-        $productArray = array_map(function($product) {
-            return [
-                'productCode' => $product->getCode(),
-                'productName' => $product->getName(),
-                'productPrice' => $product->getPrice(),
-                'productImage' => $product->getImage("lateral"),
-                'productCategory' => $product->getCategory(),
-                'inWishlist' => false // TODO: Función para saber si se encuentra en la wishlist del usuario
-            ];
-        }, $products);
-        //header("Content-Type: application/json");
-        $jsonResult = json_encode($productArray);
         include __DIR__.'/../views/General/SearchProducts.php';
     }
 
@@ -35,28 +22,28 @@ class ProductController {
         try {
             $condition = $_REQUEST['condition'];
             $products = ProductModel::getProductsWhere($condition);
-    
             if (!empty($products)) {
-                // cambiar map por for each
                 $data = array_map(function($product) {
                     return [
                         'code' => $product->getCode(),
-                        'codecategory' => $product->getCodeCategory(),
+                        'codecategory' => $product->getCategory(),
                         'name' => $product->getName(),
                         'price' => $product->getPrice(),
                         'sold' => $product->getSold(),
+                        'image' => $product->getImage("lateral"),
                         'stock' => $product->getStock(),
                         'status' => $product->getStatus(),
                     ];
                 }, $products);
-    
-               // header('Content-Type: application/json');
                 $jsonData = json_encode($data);
+                header('Content-Type: application/json');
 
+                // Devolver el JSON
                 echo $jsonData;
             } else {
-                
-                return [];
+                header('Content-Type: application/json');
+                $jsonData = json_encode([]);
+                echo $jsonData;
             }
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());
