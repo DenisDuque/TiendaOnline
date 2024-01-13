@@ -47,6 +47,7 @@ class ProductController {
                         'sold' => $product->getSold(),
                         'stock' => $product->getStock(),
                         'status' => $product->getStatus(),
+                        'size' => $product->getSize(),
                     ];
                 }, $products);
     
@@ -63,7 +64,29 @@ class ProductController {
             throw new Exception("Fetch data error: " . $e->getMessage());
         }
     }
-    
+    public function adaptImage($data, $name, $tmpname, $perspective) {
+        $imagename = $name;
+        $extension = pathinfo($imagename, PATHINFO_EXTENSION);
+        $data = str_replace(" ","_",$data);
+        $image = $data . "-" . $perspective . "." . $extension;
+
+        $image = str_replace(" ","_",$image);
+
+        $image_tmp = $tmpname;
+        if($perspective != "3D") {
+            $image_path = "views/assets/images/products/".$image;
+            $imageToDelete = "views/assets/images/products/".$data."-".$perspective.".*";
+        } else {
+            $image_path = "views/assets/3dmodels/".$image;
+            $imageToDelete = "views/assets/3dmodels/".$data."-".$perspective.".*";
+        }
+        $matchingFiles = glob($imageToDelete);
+        foreach ($matchingFiles as $file) {
+            unlink($file);
+        }
+        move_uploaded_file($image_tmp, $image_path);
+        return $image;
+    }
 
     public function showProduct() {
         require_once __DIR__.'/../models/CategoryModel.php';
@@ -71,7 +94,23 @@ class ProductController {
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);
         include __DIR__.'/../views/General/productPage.php';
     }
-    public function createProduct() {
+    public function editProduct() {
+        $Sideimage = null;
+        $Bottomimage = null;
+        $Upimage = null;
+        $image3D = null;
+        if(isset($_FILES['Side']) && $_FILES['Side']['error'] === UPLOAD_ERR_OK){
+            $Sideimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Side']['name'], $_FILES['Side']['tmp_name'], "Side"); 
+        } if(isset($_FILES['Bottom']) && $_FILES['Bottom']['error'] === UPLOAD_ERR_OK){
+            $Bottomimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Bottom']['name'], $_FILES['Bottom']['tmp_name'], "Bottom"); 
+        } if(isset($_FILES['Up']) && $_FILES['Up']['error'] === UPLOAD_ERR_OK){
+            $Upimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Up']['name'], $_FILES['Up']['tmp_name'], "Up");
+        } if(isset($_FILES['3D']) && $_FILES['3D']['error'] === UPLOAD_ERR_OK){
+            $image3D = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
+        }
+        if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'editProduct') {
+            ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
+        }
     }
 }
 ?>

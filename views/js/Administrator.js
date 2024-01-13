@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let category = datos[5];
         let sizes = datos[6];
         var sizesArray = sizes.split('!');
-        console.log(sizes);
+        document.getElementById("EditProdForm").reset();
         document.getElementById("code").value = id;
         document.getElementById("name").value = name;
         document.getElementById("price").value = price;
@@ -35,10 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(opcion.id == category){
                 selectCategory.options.selectedIndex = opcion.index;
             }
-        }
-        
-
-        
+        }     
     }
 
     function fillDataCategory(code){
@@ -152,11 +149,20 @@ document.addEventListener('DOMContentLoaded', function() {
             addSize();
         });
     });
-
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    /*var url = window.location.href;
+    var urlObj = new URL(url);
+    var action = urlObj.searchParams.get('action');
+    if(action == 'showAdminProduct') {
+        document.getElementById('EditProdForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            preparePost();
+        });
+    }*/
+    $('#EditProdForm').submit(function(event) {
+        console.log("Evento de submit capturado");
         preparePost();
-    });    
+    });
+    
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
@@ -177,5 +183,4 @@ document.addEventListener('DOMContentLoaded', function() {
         let action = url.searchParams.get("action");
         window.location.href = "index.php?page=User&action=" + action + "&search=" + search.value;
     });*/
-
 });

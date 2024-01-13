@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="views/scss/css/main.css">
+    <link rel="stylesheet" href="views/scss/css/administrator.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="views/js/Administrator.js"></script>
     <title>Urban Store</title>
 </head>
 <body>

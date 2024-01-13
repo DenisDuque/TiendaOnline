@@ -203,7 +203,7 @@ class ProductModel extends Database {
     public static function getProductsWhere($condition) {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        $query = "SELECT code, codecategory, name, price, sold, stock, status FROM products WHERE name LIKE :condition OR name = :condition";
+        $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
 
         $stmt = self::getConnection()->prepare($query);
         $search = '%' . $condition . '%';
@@ -219,10 +219,11 @@ class ProductModel extends Database {
                 $row['price'],
                 $row['sold'],
                 $row['stock'],
-                $row['status']
+                $row['status'],
+                $row['size']
             );
         }, $rows);
-
+        return $Products;
         // Devolver los datos en formato JSON
         
     } catch (PDOException $e) {
@@ -331,16 +332,45 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-
-    public static function editProduct($id, $name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView) {
+    public static function insertOrUpdateImage($image, $id, $perspective) {
+        if($image != NULL) {
+            try {
+                $query = "SELECT * FROM images WHERE product = :product AND perspectives = :perspectives";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':product', $id, PDO::PARAM_STR);
+                $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);
+                $stmt->execute();
+                $numRows = $stmt->rowCount();
+                if($numRows > 0) {
+                    $updateQuery = "UPDATE images
+                    SET route = :route
+                    WHERE product = :product AND perspectives = :perspectives";
+                    $stmt = self::getConnection()->prepare($updateQuery);
+                    $stmt->bindParam(':route', $image, PDO::PARAM_STR);
+                    $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);
+                    $stmt->bindParam(':product', $id, PDO::PARAM_STR);
+                    $stmt->execute();
+                } else {
+                    $insertQuery = "INSERT INTO images (product, route, perspectives) VALUES (:product, :route, :perspectives)";
+                    $stmt = self::getConnection()->prepare($insertQuery);
+                    $stmt->bindParam(':product', $id, PDO::PARAM_STR);
+                    $stmt->bindParam(':route', $image, PDO::PARAM_STR);
+                    $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);   
+                    $stmt->execute();             
+                }
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
+        }
+    }
+    public static function editProduct($id, $name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
         try {
-            // Realizar la actualización
             $updateQuery = "UPDATE products 
-            SET name = :name, price = :price, stock = :stock, status = :status, 
-                category = :category, sideView = :sideView, 
-                aboveView = :aboveView, bottomView = :bottomView
-            WHERE id = :id";
-
+            SET name = :name, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
+            WHERE code = :id";
+            $sizesArray = explode(',', $sizes); 
+            $sizeString = "{" . implode(",", $sizesArray) . "}";
             $updateStatement = self::getConnection()->prepare($updateQuery);
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
             $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
@@ -348,19 +378,18 @@ class ProductModel extends Database {
             $updateStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
             $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
             $updateStatement->bindParam(':category', $category, PDO::PARAM_STR);
-            $updateStatement->bindParam(':sideView', $sideView, PDO::PARAM_STR);
-            $updateStatement->bindParam(':aboveView', $aboveView, PDO::PARAM_STR);
-            $updateStatement->bindParam(':bottomView', $bottomView, PDO::PARAM_STR);
-            $updateStatement->execute();
-            
-            if ($updateStatement->rowCount() > 0) {
-
-                echo "Producto actualizado correctamente";
-
+            $updateStatement->bindParam(':sizes', $sizeString);
+            $result = $updateStatement->execute();
+            if ($result) {
+                echo "Category updated correctly";
             } else {
-                // Avisar de que el producto no se encuentra
-                echo "El producto no se encuentra en la base de datos";
+                echo "Error";
             }
+            self::insertOrUpdateImage($sideView, $id, "lateralperspective");
+            self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
+            self::insertOrUpdateImage($bottomView, $id, "belowperspective");
+            self::insertOrUpdateImage($View3D, $id, "3dmodel");
+            echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
