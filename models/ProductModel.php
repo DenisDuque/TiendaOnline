@@ -72,6 +72,7 @@ class ProductModel extends Database {
     public function getSize() {
         return $this->size;
     }
+
     public function setSold($sold) {
         $this->sold = $sold;
     } 
@@ -104,7 +105,7 @@ class ProductModel extends Database {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$price,$sold,$stock,$status,$size){
+    public function __construct($code,$category,$name,$price,$sold,$stock,$status, $size){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
@@ -223,9 +224,9 @@ class ProductModel extends Database {
                 $row['size']
             );
         }, $rows);
-        return $Products;
+
         // Devolver los datos en formato JSON
-        
+        return $Products;
     } catch (PDOException $e) {
         error_log("Error: " . $e->getMessage());
         // Devolver un mensaje de error en formato JSON

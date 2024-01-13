@@ -3,124 +3,143 @@ class ProductSearch {
       this.searchInput = document.querySelector('.search');
       this.categories = document.querySelectorAll('.category');
       this.itemsContainer = document.querySelector('.itemsContainer');
-      this.data = null;
-      this.totalData = null;
+      this.category = null;
+      this.sortInput = document.querySelector('#sortInput');
+      this.sort = null;
   
       // Inicializar el objeto cuando se crea una instancia
       this.init();
     }
 
     init() {
-      // Obtener el elemento script que contiene el JSON
-      const scriptElement = document.getElementById('productData');
 
-      this.fetchProducts("");
+      this.executeAsyncFunctions("");
   
       // Agregar event listeners
-      this.searchInput.addEventListener('change', this.fetchProducts.bind(this));
-      this.searchInput.addEventListener('keyup', this.fetchProducts.bind(this));
-  
+      this.searchInput.addEventListener('change', (event) => this.executeAsyncFunctions(event.target.value));
+      this.searchInput.addEventListener('keyup', (event) => this.executeAsyncFunctions(event.target.value));
+      this.sortInput.addEventListener('change', (event) => {
+        this.sort = event.target.value;
+        this.executeAsyncFunctions(this.searchInput.value);
+      });
+    
+
       this.categories.forEach(element => {
         element.addEventListener('click', () => {
           this.handleCategoryClick(element);
         });
       });
     }
-  
-    findMatches(wordToMatch, data) {
-      try {
-        const regex = new RegExp(wordToMatch, 'gi');
-        const filteredData = data.filter(element => {
-          const productNameMatch = element.productName && element.productName.match(regex);
-          const idMatch = element.productCode && element.productCode.match(regex);
-          return productNameMatch || idMatch;
-        });
-        return filteredData;
-      } catch (error) {
-        console.error('Error during filtering:', error);
-        return [];
-      }
-    }
 
     generateProductHTML(product) {
-      const productName = product.productName;
-        const productPrice = product.productPrice;
-        const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
-        const productImage = product.productImage;
-        return `
-          <article>
-            <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
-            <img src="views/assets/images/products/${productImage}" alt="ProductImage">
-            <p>${productName}</p>
-            <p>${productPrice}</p>
-          </article>`
+      const productName = product.name;
+      const productPrice = product.price;
+      const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
+      const productImage = product.productImage;
+      return `
+        <article>
+          <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
+          <img src="views/assets/images/products/${productImage}" alt="ProductImage">
+          <p>${productName}</p>
+          <p>${productPrice}</p>
+        </article>`
     }
-  
+
+    async executeAsyncFunctions(condition) {
+      const fetchData2 = this.fetchData2();
+      const fetchProducts = this.fetchProducts(condition);
+      document.getElementById('itemsContainer').innerHTML  = await Promise.race([fetchProducts, fetchData2]);
+
+      // Esperar a que la segunda promesa se resuelva
+      const result2 = await fetchData2;
+
+      // Mostrar el resultado de la segunda promesa
+      console.log(result2);
+    }
+    
     async fetchProducts(condition) {
-      try {
-          // Hacer una solicitud al servidor para obtener los datos
-          const response = await fetch(`ajax.php?page=Product&action=searchProducts&condition=${condition}`);
-          
-          if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-          }
+      return new Promise(async (resolve, reject) => {
+          try {
+              let response;
+              if (this.category !== null) {
+                  response = await fetch(`ajax.php?page=Product&action=fetchProducts&condition=${condition}&category=${this.category}`);
+              } else {
+                  response = await fetch(`ajax.php?page=Product&action=fetchProducts&condition=${condition}`);
+              }
   
-          // Obtener los datos en formato JSON
-          const products = await response.json();
-          console.log(products);
-          // Generar HTML utilizando los datos obtenidos
-          const htmlCode = products.map(generateProductHTML).join('');
-          
-          // Insertar el HTML generado en el DOM o hacer lo que necesites
-          // Ejemplo de inserción en un elemento con id "productContainer":
-          document.getElementById('productContainer').innerHTML = htmlCode;
-      } catch (error) {
-          console.error('Error fetching or generating HTML:', error.message);
-      }
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+  
+              const responseData = await response.json();
+              console.log("Sort: " + this.sort);
+              console.log("ResponseData: " + responseData);
+  
+              if (responseData.length > 0) {
+                  const productsJSON = responseData.map(product => {
+                      return {
+                          code: product.code,
+                          codecategory: product.codecategory,
+                          name: product.name,
+                          price: product.price,
+                          sold: product.sold,
+                          image: product.image,
+                          stock: product.stock,
+                          status: product.status
+                      };
+                  });
+  
+                  switch (this.sort) {
+                      case "high-low":
+                          productsJSON.sort((a, b) => b.price - a.price);
+                          break;
+  
+                      case "low-high":
+                          productsJSON.sort((a, b) => a.price - b.price);
+                          break;
+  
+                      default:
+                          break;
+                  }
+  
+                  const htmlCode = productsJSON.map(product => this.generateProductHTML(product)).join('');
+                  resolve(htmlCode);
+              } else {
+                  resolve("<p>No hay resultados que coincidan con tu búsqueda</p>");
+              }
+          } catch (error) {
+              console.error('Error fetching or generating HTML:', error.message);
+              reject(error.message);
+          }
+      });
     }
-    displayMatches() {
-      const matchArray = this.findMatches(this.searchInput.value, this.data);
-      const html = matchArray.map(element => {
-        const productName = element.productName;
-        const productPrice = element.productPrice;
-        const inWishlist = element.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
-        const productImage = element.productImage;
-        return `
-          <article>
-            <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
-            <img src="views/assets/images/products/${productImage}" alt="ProductImage">
-            <p>${productName}</p>
-            <p>${productPrice}</p>
-          </article>
-        `;
-      }).join('');
-      this.itemsContainer.innerHTML = html;
+  
+
+    async fetchData2() {
+      return new Promise(resolve => {
+          setTimeout(() => {
+              resolve("Otros Datos (fetchData2)");
+          }, 4000);  // Simulando un tiempo de ejecución de 4 segundos
+      });
     }
   
     handleCategoryClick(element) {
-      let category = document.querySelector('.selectedCategory');
-  
-      if (category !== null) {
-        category.classList.remove('selectedCategory');
-        this.data = (category === element) ? this.totalData : this.categoryMatches(element);
+      let selectedCategory = document.querySelector('.selectedCategory');
+      console.log("Categoria previa: " + selectedCategory);
+      if (selectedCategory !== null) {
+        selectedCategory.classList.remove('selectedCategory');
+        if (element.id === selectedCategory.id) {
+          this.category = null;
+        } else {
+          element.classList.add('selectedCategory');
+          this.category = element.id;
+        }
       } else {
-        this.data = this.categoryMatches(element);
+        element.classList.add('selectedCategory');
+        this.category = element.id;
       }
-      this.displayMatches();
-    }
-  
-    categoryMatches(element) {
-      element.classList.add('selectedCategory');
-  
-      try {
-        const filteredData = this.totalData.filter(item => {
-          return item.productCategory === parseInt(element.id);
-        });
-        return filteredData;
-      } catch (error) {
-        console.error('Error during filtering:', error);
-        return [];
-      }
+      console.log("Categoria posterior: " + this.category);
+      this.executeAsyncFunctions(this.searchInput.value);
     }
   }
   
