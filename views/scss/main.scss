@@ -188,3 +188,112 @@ body {
     button:hover > svg *{
         fill:white;
     }
+
+    // slider images
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      
+      .swiper-container {
+        position: relative;
+        width: 100%;
+        height: 40%;
+        overflow: hidden;
+        // border: 2px solid black;
+      }
+      
+      .swiper-wrapper {
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      
+      .swiper-slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        // background-color: #87CEEB;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+      
+        .text {
+          background-color: rgb(249, 179, 48);
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 70%;
+          width: 60%; // Adjusted width for better layout
+          // border: solid 2px black;
+          border-radius: 1vh;
+          margin-bottom: 2%;
+          margin: 0 auto; // Center the text horizontally
+      
+          h5 {
+            width: fit-content; // Full width within the .text div
+            height: fit-content;
+            margin-left: 5%;
+            // border: solid 2px red;
+            margin-top: 5%;
+            font-size: 30px;
+          }
+      
+          .ExploreNow {
+            color: #ececec;
+            // border: 2px solid black;
+            border-radius: 10px;
+            padding: 10px 25px;
+            background-color: black;
+            width: fit-content; // Full width within the .text div
+            margin-bottom: 5%;
+            margin-left: 5%;
+      
+            p {
+              margin: 0;
+            }
+          }
+        }
+      
+        .foto {
+          width: 40%;
+          // border: solid 2px black;
+          position: absolute;
+          top: -5%; // Position at the top
+          right: 4%; // Position at the right
+      
+          img {
+            width: 50%; // Make the image take the full width of its parent (.foto)
+            height: 50%; // Make the image take the full height of its parent (.foto)
+            object-fit: cover; // Maintain the aspect ratio and cover the container
+          }
+        }
+      }
+      
+      .swiper-buttons {
+        position: absolute;
+        bottom: 10px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        // border: 2px solid black;
+      }
+      
+      .swiper-button {
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+        border: 3px solid black;
+        border-radius: 50%;
+        background-color: #ececec;
+      }
+      
+      .swiper-button-active {
+        background-color: #ababab !important;
+      }
+      
