@@ -97,15 +97,25 @@ class ProductModel extends Database {
         return $this->status;
     }
 
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
     public function getImage($side) {
         return $this->image[$side];
+    }
+
+    public function setImagesArray($images) {
+        $this->image["lateral"] = $images[0];
+        $this->image["top"] = $images[1];
+        $this->image["bottom"] = $images[2];
     }
 
     public function getImagesArray() {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$price,$sold,$stock,$status, $size){
+    public function __construct($code,$category,$name,$price,$sold,$stock,$status,$size,$image){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
@@ -114,6 +124,7 @@ class ProductModel extends Database {
         $this->stock = $stock;
         $this->status = $status;
         $this->size = $size;
+        $this->image["lateral"] = $image;
     }
 
     public static function getProductWithCode(){
@@ -190,7 +201,8 @@ class ProductModel extends Database {
                     $row['sold'],
                     $row['stock'],
                     $row['status'],
-                    $row['size']
+                    $row['size'],
+                    $row['code']."-Side"
                 );
             }, $rows);
             
@@ -221,7 +233,9 @@ class ProductModel extends Database {
                 $row['sold'],
                 $row['stock'],
                 $row['status'],
-                $row['size']
+                $row['size'],
+                $row['code']."-Side"
+
             );
         }, $rows);
 
@@ -253,7 +267,8 @@ class ProductModel extends Database {
                     $row['sold'],
                     $row['stock'],
                     $row['status'],
-                    $row['size']
+                    $row['size'],
+                    $row['code']."-Side"
                 );
             }, $stmt->fetchAll(PDO::FETCH_ASSOC));
             
