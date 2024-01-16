@@ -41,13 +41,13 @@ class ProductController {
                 $data = array_map(function($product) {
                     return [
                         'code' => $product->getCode(),
-                        'codecategory' => $product->getCodeCategory(),
+                        'codecategory' => $product->getCategory(),
                         'name' => $product->getName(),
                         'price' => $product->getPrice(),
                         'sold' => $product->getSold(),
                         'stock' => $product->getStock(),
                         'status' => $product->getStatus(),
-                        'size' => $product->getSize(),
+                        'image' => $product->getImage("lateral"),
                     ];
                 }, $products);
     
