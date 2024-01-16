@@ -216,9 +216,15 @@ class ProductModel extends Database {
     public static function getProductsWhere($condition) {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
-
-        $stmt = self::getConnection()->prepare($query);
+        if (isset($_GET['category']) && $_GET['category'] !== "null") {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
+        } else {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+            $stmt = self::getConnection()->prepare($query);
+        }
+        
         $search = '%' . $condition . '%';
         $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
         $stmt->execute();
