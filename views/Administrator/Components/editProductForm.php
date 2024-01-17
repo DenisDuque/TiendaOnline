@@ -1,12 +1,19 @@
-<form id="CreateProdForm" action="index.php?page=Product&action=createProduct" method="POST" enctype="multipart/form-data">
-    <table>
+<form id="EditProdForm" action="index.php?page=Product&action=editProduct" method="POST" enctype="multipart/form-data">
+    <table> 
+        <input type="hidden" name="code" id="code">
+        <tr><td><div>Product code</div></td></tr>
+        <tr><td><div id="productCode"></div></td></tr>
+        <tr>
+            <td>
+                <div id="productCode"></div>
+            </td>
+        </tr>
         <tr><td><label for="name">Name product</label></td></tr>
         <tr>
             <td>
                 <input type="text" name="name" id="name">
             </td>
         </tr>
-        <tr></tr>
         <tr><td><label for="price">Price</label></td></tr>
         <tr>
             <td>
@@ -25,7 +32,7 @@
                 <input type="text" name="description" id="description">
             </td>
         </tr>
-        
+
         <tr><td><label for="">Status</label></td></tr>
         <tr>
             <td>

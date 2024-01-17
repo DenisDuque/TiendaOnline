@@ -357,13 +357,23 @@ class ProductModel extends Database {
                 $insertStatement = self::getConnection()->prepare($insertQuery);
                 $insertStatement->bindParam(':code', $id, PDO::PARAM_STR);
                 $insertStatement->bindParam(':name', $name, PDO::PARAM_STR);
+                $insertStatement->bindParam(':description', $description, PDO::PARAM_STR);
                 $insertStatement->bindParam(':price', $price, PDO::PARAM_INT);
                 $insertStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
                 $insertStatement->bindParam(':status', $status, PDO::PARAM_STR);
-                $insertStatement->bindParam(':category', $category, PDO::PARAM_STR);
+                $insertStatement->bindParam(':codecategory', $category, PDO::PARAM_STR);
                 $insertStatement->bindParam(':size', $sizeString, PDO::PARAM_STR);
-                $insertStatement->execute();
-                echo "Producto agregado correctamente";
+                $result = $insertStatement->execute();
+                if ($result) {
+                    echo "Product added correctly";
+                } else {
+                    echo "Error";
+                }
+                self::insertOrUpdateImage($sideView, $id, "lateralperspective");
+                self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
+                self::insertOrUpdateImage($bottomView, $id, "belowperspective");
+                self::insertOrUpdateImage($View3D, $id, "3dmodel");
+                echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
             }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
@@ -388,7 +398,7 @@ class ProductModel extends Database {
             $updateStatement->bindParam(':sizes', $sizeString);
             $result = $updateStatement->execute();
             if ($result) {
-                echo "Category updated correctly";
+                echo "Product updated correctly";
             } else {
                 echo "Error";
             }

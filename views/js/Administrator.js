@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var sizesArray = sizes.split('!');
         document.getElementById("EditProdForm").reset();
         document.getElementById("code").value = id;
+        $('#productCode').empty();
+        $('#productCode').append(id);
         document.getElementById("name").value = name;
         document.getElementById("description").value = description;
         document.getElementById("price").value = price;
@@ -161,6 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }*/
     $('#EditProdForm').submit(function(event) {
+        console.log("Evento de submit capturado");
+        preparePost();
+    });
+
+    $('#CreateProdForm').submit(function(event) {
         console.log("Evento de submit capturado");
         preparePost();
     });
