@@ -97,15 +97,25 @@ class ProductModel extends Database {
         return $this->status;
     }
 
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
     public function getImage($side) {
         return $this->image[$side];
+    }
+
+    public function setImagesArray($images) {
+        $this->image["lateral"] = $images[0];
+        $this->image["top"] = $images[1];
+        $this->image["bottom"] = $images[2];
     }
 
     public function getImagesArray() {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$price,$sold,$stock,$status, $size){
+    public function __construct($code,$category,$name,$price,$sold,$stock,$status,$size,$image){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
@@ -114,6 +124,7 @@ class ProductModel extends Database {
         $this->stock = $stock;
         $this->status = $status;
         $this->size = $size;
+        $this->image["lateral"] = $image;
     }
 
     public static function getProductWithCode(){
@@ -194,7 +205,8 @@ class ProductModel extends Database {
                     $row['sold'],
                     $row['stock'],
                     $row['status'],
-                    $row['size']
+                    $row['size'],
+                    $row['code']."-Side"
                 );
             }, $rows);
             
@@ -208,9 +220,15 @@ class ProductModel extends Database {
     public static function getProductsWhere($condition) {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
-
-        $stmt = self::getConnection()->prepare($query);
+        if (isset($_GET['category']) && $_GET['category'] !== "null") {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
+        } else {
+            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+            $stmt = self::getConnection()->prepare($query);
+        }
+        
         $search = '%' . $condition . '%';
         $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
         $stmt->execute();
@@ -225,7 +243,9 @@ class ProductModel extends Database {
                 $row['sold'],
                 $row['stock'],
                 $row['status'],
-                $row['size']
+                $row['size'],
+                $row['code']."-Side"
+
             );
         }, $rows);
 
@@ -257,7 +277,8 @@ class ProductModel extends Database {
                     $row['sold'],
                     $row['stock'],
                     $row['status'],
-                    $row['size']
+                    $row['size'],
+                    $row['code']."-Side"
                 );
             }, $stmt->fetchAll(PDO::FETCH_ASSOC));
             
