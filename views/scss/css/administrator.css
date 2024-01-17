@@ -42,13 +42,13 @@ header h1 {
   flex: 1;
   text-align: center;
 }
-header img {
+header ul li img {
   filter: brightness(0);
   height: 2.6vw;
   width: 2.6vw;
   margin-right: 2.6vw;
 }
-header img:hover {
+header ul li img:hover {
   filter: brightness(1);
   transform: scale(1.01);
 }

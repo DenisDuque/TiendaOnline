@@ -22,6 +22,50 @@
   background: #555;
 }
 
+body header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  margin: 1vh 2vw 1vh 2vw;
+}
+body header div {
+  display: flex;
+  flex-direction: row;
+}
+body header div h1 {
+  font-size: 3.5em;
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  border-left: 0.1em solid #ABABAB;
+  width: auto;
+  flex: none;
+}
+body header div img {
+  width: 5vw;
+}
+body header nav {
+  float: right;
+}
+body header nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+}
+body header nav ul li {
+  margin-right: 2vw;
+}
+body header nav ul li a {
+  display: flex;
+  height: auto;
+}
+body header nav ul li a img {
+  width: 2em;
+  height: 2em;
+  margin: 0;
+}
 body nav {
   display: flex;
   justify-content: center;

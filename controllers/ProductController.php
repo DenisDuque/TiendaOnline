@@ -57,7 +57,7 @@ class ProductController {
                 echo $jsonData;
             } else {
                 
-                return [];
+                echo "";
             }
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());

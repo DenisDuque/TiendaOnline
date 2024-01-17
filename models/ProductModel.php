@@ -135,7 +135,7 @@ class ProductModel extends Database {
             $stmt->bindParam(':code', $code, PDO::PARAM_STR);
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
-            $product["img"] = self::getProductImage("lateralperspective",$code);
+            $product["img"] = self::getProductImage("lateral",$code);
             return $product;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());

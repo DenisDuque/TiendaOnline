@@ -3,6 +3,52 @@
 @import 'scrollbar.scss';
 
 body {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: auto;
+        margin: 1vh 2vw 1vh 2vw;
+        div {
+            display: flex;
+            flex-direction: row;
+
+            h1 {
+                font-size: 3.5em;
+                padding-left: 0.5em;
+                margin-left: 0.5em;
+                border-left: 0.1em solid $grey;
+                width: auto;
+                flex: none;
+            }
+            img {
+                width: 5vw;
+            }
+        }
+        nav {
+            float: right;
+            ul {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                list-style: none;
+                li {
+                    
+                    margin-right: 2vw;
+                    a {
+                        display: flex;
+                        height: auto;
+                        img {
+                            width: 2em;
+                            height: 2em;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
     nav {
         display: flex;
         justify-content: center;
@@ -48,6 +94,7 @@ body {
             cursor: pointer;
         }
     }
+    
 }
 
     main{
