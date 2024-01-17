@@ -18,11 +18,11 @@ class ProductController {
         $products = ProductModel::getAllProducts();
         $productArray = array_map(function($product) {
             return [
-                'productCode' => $product->getCode(),
-                'productName' => $product->getName(),
-                'productPrice' => $product->getPrice(),
-                'productImage' => $product->getImage("lateral"),
-                'productCategory' => $product->getCategory(),
+                'code' => $product->getCode(),
+                'name' => $product->getName(),
+                'price' => $product->getPrice(),
+                'image' => $product->getImage("lateral"),
+                'codecategory' => $product->getCategory(),
                 'inWishlist' => false // TODO: Función para saber si se encuentra en la wishlist del usuario
             ];
         }, $products);
@@ -41,13 +41,13 @@ class ProductController {
                 $data = array_map(function($product) {
                     return [
                         'code' => $product->getCode(),
-                        'codecategory' => $product->getCodeCategory(),
+                        'codecategory' => $product->getCategory(),
                         'name' => $product->getName(),
                         'price' => $product->getPrice(),
                         'sold' => $product->getSold(),
                         'stock' => $product->getStock(),
                         'status' => $product->getStatus(),
-                        'size' => $product->getSize(),
+                        'image' => $product->getImage("lateral"),
                     ];
                 }, $products);
     
