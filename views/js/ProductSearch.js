@@ -46,10 +46,8 @@ class ProductSearch {
     }
 
     async executeAsyncFunctions(condition) {
-      const fetchData2 = this.fetchData2();
-      const fetchProducts = this.fetchProducts(condition);
       document.getElementById('itemsContainer').innerHTML = await this.fetchProducts(condition);
-      const result2 = await fetchData2;
+      const result2 = await this.fetchData2();
 
       // Mostrar el resultado de la segunda promesa
       console.log(result2);

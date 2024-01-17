@@ -10,7 +10,9 @@
     <body>
         <header>
             <h1>Urban Store</h1>
-            <img src="views/assets/images/utils/signout.png" alt="Sign out">
+            <ul>
+                <li><img src="views/assets/images/utils/signout.png" alt="Sign out"></li>
+            </ul>
         </header>
         <div id="container">
             <div id="leftPanel">

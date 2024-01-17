@@ -26,7 +26,7 @@ class UserController {
                 }else{
                     //En caso de que se nos haya redirigido al login desde una pagina de producto, este se almacenara en el origen
                     //y despues de loguear volveremos a la pagina de ese producto
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&product=".$_GET["origin"]."'>";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&funtion=&code=".$_GET["origin"]."'>";
                 }
             }
         } else {
@@ -76,6 +76,10 @@ class UserController {
         $search = isset($_GET['search']) ? $_GET['search'] : null;
         $customers = UserModel::showcustomers($search);
         include __DIR__.'/../views/Administrator/AdminCustomersView.php';
+    }
+
+    public function showPrincipalUser() {
+        include __DIR__.'/../views/General/PrincipalView.php';
     }
 }
 ?>
