@@ -396,5 +396,25 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+    public static function inWishlist(){
+        $query = "SELECT * FROM wishlist WHERE useremail LIKE :user AND productcode LIKE :product";
+        $stmt = self::getConnection()->prepare($query);
+        $stmt->bindParam(':user', $_SESSION['email']);
+        $stmt->bindParam(':product', $_GET['code']);
+    }
+
+    public static function addToWishList(){
+        try {
+            $query = "INSERT INTO wishlist (useremail,productcode) VALUES (:user, :product)";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':user', $_SESSION['email']);
+            $stmt->bindParam(':user', $_GET['product']);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>
