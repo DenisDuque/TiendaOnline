@@ -35,8 +35,10 @@ body #categories {
   overflow-x: auto;
 }
 body #categories .category {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: #F6F6F6;
   width: 8vw;
   min-width: 8vw;
