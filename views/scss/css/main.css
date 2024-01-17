@@ -22,6 +22,50 @@
   background: #555;
 }
 
+body header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  margin: 1vh 2vw 1vh 2vw;
+}
+body header div {
+  display: flex;
+  flex-direction: row;
+}
+body header div h1 {
+  font-size: 3.5em;
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  border-left: 0.1em solid #ABABAB;
+  width: auto;
+  flex: none;
+}
+body header div img {
+  width: 5vw;
+}
+body header nav {
+  float: right;
+}
+body header nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+}
+body header nav ul li {
+  margin-right: 2vw;
+}
+body header nav ul li a {
+  display: flex;
+  height: auto;
+}
+body header nav ul li a img {
+  width: 2em;
+  height: 2em;
+  margin: 0;
+}
 body nav {
   display: flex;
   justify-content: center;
@@ -35,8 +79,10 @@ body #categories {
   overflow-x: auto;
 }
 body #categories .category {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: #F6F6F6;
   width: 8vw;
   min-width: 8vw;
@@ -207,4 +253,81 @@ button:hover {
 
 button:hover > svg * {
   fill: white;
+}
+
+body .swiper-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body .swiper-container .swiper-wrapper {
+  height: 100%;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+body .swiper-container .swiper-wrapper .swiper-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .text {
+  background-color: rgb(249, 179, 48);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60%;
+  width: 60%;
+  border-radius: 1vh;
+  margin: 0 auto;
+  padding: 10px;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .text h5 {
+  margin-bottom: 5%;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .text .ExploreNow {
+  color: #ececec;
+  border-radius: 10px;
+  padding: 10px 25px;
+  background-color: black;
+  width: fit-content;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .text .ExploreNow p {
+  margin: 0;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .foto {
+  width: 40%;
+  height: 40%;
+  position: absolute;
+  top: 60%;
+  right: 0;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+body .swiper-container .swiper-buttons {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+body .swiper-container .swiper-button {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+  border: 3px solid black;
+  border-radius: 50%;
+  background-color: #ececec;
+}
+body .swiper-container .swiper-button-active {
+  background-color: #ababab !important;
 }/*# sourceMappingURL=main.css.map */
