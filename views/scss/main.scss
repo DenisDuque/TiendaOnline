@@ -13,7 +13,7 @@ body {
         div {
             display: flex;
             flex-direction: row;
-
+            align-items: center;
             h1 {
                 font-size: 3.5em;
                 padding-left: 0.5em;
@@ -23,7 +23,8 @@ body {
                 flex: none;
             }
             img {
-                width: 5vw;
+                width: 4.8vw;
+                height: auto;
             }
         }
         nav {

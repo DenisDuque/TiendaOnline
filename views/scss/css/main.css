@@ -33,6 +33,7 @@ body header {
 body header div {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 body header div h1 {
   font-size: 3.5em;
@@ -43,7 +44,8 @@ body header div h1 {
   flex: none;
 }
 body header div img {
-  width: 5vw;
+  width: 4.8vw;
+  height: auto;
 }
 body header nav {
   float: right;
