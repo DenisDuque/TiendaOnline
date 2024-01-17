@@ -135,18 +135,19 @@ class ProductModel extends Database {
     
     public static function generateCode($name, $category){
         //Dos primeras letras categoria--numero 3 cifras--Tres primeras letras producto
+        $categoryNum = intval($category);
         try {
-            $query = "SELECT * FROM products WHERE category LIKE :category";
+            /*$query = "SELECT * FROM products WHERE codecategory = :codecategory";
             $categoryCount = self::getConnection()->prepare($query);
-            $categoryCount->bindParam(':category', $category, PDO::PARAM_STR);
+            $categoryCount->bindParam(':codecategory', $categoryNum, PDO::PARAM_INT);
             $categoryCount->execute();
             $numId = $categoryCount->rowCount();
             $numId += 1;
             $numId = (string) $numId;
 
-            $query = "SELECT name FROM categories WHERE code LIKE :code";
+            $query = "SELECT name FROM categories WHERE code = :code";
             $categoryName = self::getConnection()->prepare($query);
-            $categoryName->bindParam(':code', $category, PDO::PARAM_STR);
+            $categoryName->bindParam(':code', $categoryNum, PDO::PARAM_INT);
             $categoryName->execute();
             $catName = $categoryName->fetchAll(PDO::FETCH_NUM);
             $catName = $categoryName[0][0];
@@ -167,6 +168,9 @@ class ProductModel extends Database {
             $code = $catName[0].$catName[1].$numId.$name[0].$name[1].$name[2];
 
             return $code;
+            $query = "SELECT name FROM products WHERE codecategory = :codecategory";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':codecategory')*/
             
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
