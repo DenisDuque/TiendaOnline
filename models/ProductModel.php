@@ -115,10 +115,11 @@ class ProductModel extends Database {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$price,$sold,$stock,$status,$size,$image){
+    public function __construct($code,$category,$name,$description,$price,$sold,$stock,$status,$size,$image){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
+        $this->description = $description;
         $this->price = $price;
         $this->sold = $sold;
         $this->stock = $stock;
@@ -135,7 +136,7 @@ class ProductModel extends Database {
             $stmt->bindParam(':code', $code, PDO::PARAM_STR);
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
-            $product["img"] = self::getProductImage("lateralperspective",$code);
+            $product["img"] = self::getProductImage("lateral",$code);
             return $product;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
@@ -146,38 +147,19 @@ class ProductModel extends Database {
     
     public static function generateCode($name, $category){
         //Dos primeras letras categoria--numero 3 cifras--Tres primeras letras producto
+        $categoryNum = intval($category);
         try {
-            $query = "SELECT * FROM products WHERE category LIKE :category";
-            $categoryCount = self::getConnection()->prepare($query);
-            $categoryCount->bindParam(':category', $category, PDO::PARAM_STR);
-            $categoryCount->execute();
-            $numId = $categoryCount->rowCount();
-            $numId += 1;
-            $numId = (string) $numId;
-
-            $query = "SELECT name FROM categories WHERE code LIKE :code";
-            $categoryName = self::getConnection()->prepare($query);
-            $categoryName->bindParam(':code', $category, PDO::PARAM_STR);
-            $categoryName->execute();
-            $catName = $categoryName->fetchAll(PDO::FETCH_NUM);
-            $catName = $categoryName[0][0];
-
-            $catName = strtoupper($catName);
-            $catName = str_split($catName);
-
-            $name = strtoupper($name);
-            $name = str_split($name);
-
-            for($i = 0; $i<3; $i++) {
-                if(strlen($numId) < 3) {
-                    $numId = "0".$numId;
-                }
-                
-            }
-
-            $code = $catName[0].$catName[1].$numId.$name[0].$name[1].$name[2];
-
-            return $code;
+            $query = "SELECT name FROM categories WHERE code = :code";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':code', $categoryNum, PDO::PARAM_INT);
+            $stmt->execute();
+            $categoryRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            $categoryName = $categoryRow['name'];
+            $randNum = str_pad(rand(0, 999), 3, '0', STR_PAD_LEFT);
+            $randNumStr = strval($randNum);
+            $categoryStr = substr($categoryName, 0, 2);
+            $productStr = substr($name, 0, 2);
+            return strtolower($categoryStr) . $randNumStr . "-" . strtolower($productStr);
             
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
@@ -187,7 +169,7 @@ class ProductModel extends Database {
 
     public static function getAllProducts() {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products";
+            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products";
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -197,6 +179,7 @@ class ProductModel extends Database {
                     $row['code'],
                     $row['codecategory'],
                     $row['name'],
+                    $row['description'],
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
@@ -235,6 +218,7 @@ class ProductModel extends Database {
                 $row['code'],
                 $row['codecategory'],
                 $row['name'],
+                $row['description'],
                 $row['price'],
                 $row['sold'],
                 $row['stock'],
@@ -269,6 +253,7 @@ class ProductModel extends Database {
                     $row['code'],
                     $row['codecategory'],
                     $row['name'],
+                    $row['description'],
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
@@ -323,37 +308,6 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-
-    public static function createProduct($name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView) {
-        try{
-            $query = "SELECT * FROM products WHERE name = :name;";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(':name', $name, PDO::PARAM_INT);
-            $stmt->execute();
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if(count($rows) >= 1){
-                // avisar de que ya hay un producto con el mismo nombre
-                echo "nombre ya en uso e otro producto";
-            }else{
-                // Realizar la inserción
-                $insertQuery = "INSERT INTO products (name, price, stock, status, category, sideView, aboveView, bottomView) VALUES (:name, :price, :stock, :status, :category, :sideView, :aboveView, :bottomView);";
-                $insertStatement = self::getConnection()->prepare($insertQuery);
-                $insertStatement->bindParam(':name', $name, PDO::PARAM_STR);
-                $insertStatement->bindParam(':price', $price, PDO::PARAM_INT);
-                $insertStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
-                $insertStatement->bindParam(':status', $status, PDO::PARAM_INT);
-                $insertStatement->bindParam(':category', $category, PDO::PARAM_STR);
-                $insertStatement->bindParam(':sideView', $sideView, PDO::PARAM_STR);
-                $insertStatement->bindParam(':aboveView', $aboveView, PDO::PARAM_STR);
-                $insertStatement->bindParam(':bottomView', $bottomView, PDO::PARAM_STR);
-                $insertStatement->execute();
-                echo "Producto agregado correctamente";
-            }
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
-        }
-    }
     public static function insertOrUpdateImage($image, $id, $perspective) {
         if($image != NULL) {
             try {
@@ -386,16 +340,57 @@ class ProductModel extends Database {
             }
         }
     }
-    public static function editProduct($id, $name, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
+    public static function createProduct($id, $name, $description, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
+        try{
+            $query = "SELECT * FROM products WHERE code = :code";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':code', $id, PDO::PARAM_STR);
+            $stmt->execute();
+            $rows = $stmt->rowCount();
+            if($rows >= 1){
+                echo "Ya existe este producto.";
+            }else{
+                // Realizar la inserción
+                $sizesArray = explode(',', $sizes); 
+                $sizeString = "{" . implode(",", $sizesArray) . "}";
+                $insertQuery = "INSERT INTO products (code, name, description, price, stock, status, codecategory, size, sold) VALUES (:code, :name, :description, :price, :stock, :status, :codecategory, :size, 0);";
+                $insertStatement = self::getConnection()->prepare($insertQuery);
+                $insertStatement->bindParam(':code', $id, PDO::PARAM_STR);
+                $insertStatement->bindParam(':name', $name, PDO::PARAM_STR);
+                $insertStatement->bindParam(':description', $description, PDO::PARAM_STR);
+                $insertStatement->bindParam(':price', $price, PDO::PARAM_INT);
+                $insertStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
+                $insertStatement->bindParam(':status', $status, PDO::PARAM_STR);
+                $insertStatement->bindParam(':codecategory', $category, PDO::PARAM_STR);
+                $insertStatement->bindParam(':size', $sizeString, PDO::PARAM_STR);
+                $result = $insertStatement->execute();
+                if ($result) {
+                    echo "Product added correctly";
+                } else {
+                    echo "Error";
+                }
+                self::insertOrUpdateImage($sideView, $id, "lateralperspective");
+                self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
+                self::insertOrUpdateImage($bottomView, $id, "belowperspective");
+                self::insertOrUpdateImage($View3D, $id, "3dmodel");
+                echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    public static function editProduct($id, $name, $description, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
         try {
             $updateQuery = "UPDATE products 
-            SET name = :name, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
+            SET name = :name, description = :description, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
             WHERE code = :id";
             $sizesArray = explode(',', $sizes); 
             $sizeString = "{" . implode(",", $sizesArray) . "}";
             $updateStatement = self::getConnection()->prepare($updateQuery);
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
             $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
+            $updateStatement->bindParam(':description', $description, PDO::PARAM_STR);
             $updateStatement->bindParam(':price', $price, PDO::PARAM_INT);
             $updateStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
             $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
@@ -403,7 +398,7 @@ class ProductModel extends Database {
             $updateStatement->bindParam(':sizes', $sizeString);
             $result = $updateStatement->execute();
             if ($result) {
-                echo "Category updated correctly";
+                echo "Product updated correctly";
             } else {
                 echo "Error";
             }

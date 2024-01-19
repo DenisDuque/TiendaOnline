@@ -6,15 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
         var datos = code.split(",");
         let id = datos[0];
         let name = datos[1];
-        let price = datos[2];
-        let status = datos[3];
-        let stock = datos[4];
-        let category = datos[5];
-        let sizes = datos[6];
+        let description = datos[2];
+        let price = datos[3];
+        let status = datos[4];
+        let stock = datos[5];
+        let category = datos[6];
+        let sizes = datos[7];
         var sizesArray = sizes.split('!');
         document.getElementById("EditProdForm").reset();
         document.getElementById("code").value = id;
+        $('#productCode').empty();
+        $('#productCode').append(id);
         document.getElementById("name").value = name;
+        document.getElementById("description").value = description;
         document.getElementById("price").value = price;
         document.getElementById("stock").value = stock;
         $('#sizeList').empty();
@@ -159,6 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }*/
     $('#EditProdForm').submit(function(event) {
+        console.log("Evento de submit capturado");
+        preparePost();
+    });
+
+    $('#CreateProdForm').submit(function(event) {
         console.log("Evento de submit capturado");
         preparePost();
     });

@@ -77,5 +77,9 @@ class UserController {
         $customers = UserModel::showcustomers($search);
         include __DIR__.'/../views/Administrator/AdminCustomersView.php';
     }
+
+    public function showPrincipalUser() {
+        include __DIR__.'/../views/General/PrincipalView.php';
+    }
 }
 ?>

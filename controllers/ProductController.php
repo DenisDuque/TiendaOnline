@@ -57,7 +57,7 @@ class ProductController {
                 echo $jsonData;
             } else {
                 
-                return [];
+                echo "";
             }
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());
@@ -110,7 +110,28 @@ class ProductController {
             $image3D = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
         }
         if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'editProduct') {
-            ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
+            ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['description'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
+        }
+    }
+    public function createProduct() {
+        $Sideimage = null;
+        $Bottomimage = null;
+        $Upimage = null;
+        $image3D = null;
+        $name = $_POST['name'];
+        $category = $_POST['category'];
+        $code = ProductModel::generateCode($name, $category);
+        if(isset($_FILES['Side']) && $_FILES['Side']['error'] === UPLOAD_ERR_OK){
+            $Sideimage = $this->adaptImage($code, $_FILES['Side']['name'], $_FILES['Side']['tmp_name'], "Side"); 
+        } if(isset($_FILES['Bottom']) && $_FILES['Bottom']['error'] === UPLOAD_ERR_OK){
+            $Bottomimage = $this->adaptImage($code, $_FILES['Bottom']['name'], $_FILES['Bottom']['tmp_name'], "Bottom"); 
+        } if(isset($_FILES['Up']) && $_FILES['Up']['error'] === UPLOAD_ERR_OK){
+            $Upimage = $this->adaptImage($code, $_FILES['Up']['name'], $_FILES['Up']['tmp_name'], "Up");
+        } if(isset($_FILES['3D']) && $_FILES['3D']['error'] === UPLOAD_ERR_OK){
+            $image3D = $this->adaptImage($code, $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
+        }
+        if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'createProduct') {
+            ProductModel::createProduct($code, $_POST['name'], $_POST['description'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
     }
 }
