@@ -53,9 +53,7 @@ body #categories .category {
   align-content: center;
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
   list-style: none;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   cursor: pointer;
   transition: all ease 0.2s;
 }
@@ -160,10 +158,20 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-#info #options #sizes button {
+#info #options #sizes button, #info #options #sizes button:hover {
   width: 20%;
   margin: 3px;
   font-size: larger;
+  border: none;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  font-size: 20px;
+  width: 20%;
+  color: black;
+}
+#info #options #sizes button:hover {
+  background-color: #ff5e00;
+  color: #FFFFFF;
 }
 #info #options #buttons {
   width: 80%;
@@ -171,7 +179,7 @@ main {
   display: flex;
   justify-content: space-between;
 }
-#info #options #buttons button {
+#info #options #buttons a {
   font-size: larger;
   width: 30%;
 }
@@ -180,11 +188,15 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  text-decoration: none;
 }
 #info #options #buttons #wishlist svg {
   width: 1.5vw;
   height: auto;
   fill: black;
+}
+#info #options #buttons #cart {
+  text-align: center;
 }
 #info #options #description h4 {
   opacity: 0.6;
@@ -196,19 +208,20 @@ main {
   font-size: 30px;
 }
 
-button, button:hover {
+a, a:hover {
   border: none;
   border-radius: 10px;
   background-color: #FFFFFF;
   font-size: 20px;
   width: 20%;
+  color: black;
 }
 
-button:hover {
+a:hover {
   background-color: #ff5e00;
   color: #FFFFFF;
 }
 
-button:hover > svg * {
-  fill: white;
+a:hover > svg * {
+  fill: #FFFFFF;
 }/*# sourceMappingURL=main.css.map */

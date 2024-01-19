@@ -133,18 +133,29 @@ body {
                 display: flex;
                 justify-content: space-between	;
                 flex-wrap: wrap;
-                button{
+                button, button:hover{
                     width: 20%;
                     margin: 3px;
                     font-size:larger;
+                    border: none;
+                    border-radius: 10px;
+                    background-color: #FFFFFF;
+                    font-size: 20px;        
+                    width: 20%;
+                    color: black;
                 }
+                button:hover{
+                    background-color: #ff5e00;
+                    color: #FFFFFF;
+                }
+            
             }
             #buttons{
                 width: 80%;
                 padding-top:10px;
                 display: flex;
                 justify-content: space-between;
-                button{
+                a{
                     font-size:larger;
                     width: 30%;
                 }
@@ -153,12 +164,15 @@ body {
                     flex-direction: row;
                     align-items: center;
                     justify-content: space-evenly;
+                    text-decoration: none;
                     svg{
                         width:  1.5vw;
                         height: auto;
                         fill: black;
-                    }
-                    
+                    }     
+                }
+                #cart{
+                    text-align: center;
                 }
             }
 
@@ -175,18 +189,21 @@ body {
             font-size: 30px;
         }
     }
-    button, button:hover{
+    a, a:hover{
         border: none;
         border-radius: 10px;
         background-color: #FFFFFF;
         font-size: 20px;        
         width: 20%;
+        color: black;
     }
-    button:hover{
+    a:hover{
         background-color: #ff5e00;
         color: #FFFFFF;
     }
 
-    button:hover > svg *{
-        fill:white;
+    a:hover > svg *{
+        fill:#FFFFFF;
     }
+
+  

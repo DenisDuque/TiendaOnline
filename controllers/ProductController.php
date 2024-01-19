@@ -93,6 +93,7 @@ class ProductController {
         $product = ProductModel::getProductWithCode();
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);
         include __DIR__.'/../views/General/productPage.php';
+
     }
     public function editProduct() {
         $Sideimage = null;
