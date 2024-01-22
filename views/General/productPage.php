@@ -12,7 +12,7 @@
     <?php         
         require_once("views\Administrator\Components\headerHome.html");
     ?>
-    <main>
+    <main id="productPage">
     <?php
         echo "<div id='main'>";
             echo "<div id='allImages'>";
