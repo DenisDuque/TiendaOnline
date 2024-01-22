@@ -243,7 +243,7 @@ class ProductModel extends Database {
 
     public static function getTopProducts($limit = 10) {
         try {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
+            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();

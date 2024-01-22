@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
         <script src="views/js/Administrator.js"></script>
+        <script src="views/js/canvas.js"></script>
         <title>Dashboard</title>
     </head>
     <body>
@@ -29,7 +30,7 @@
                 <h2>Best Sellers</h2>
                 <div id="listContainer" class="dashboardList">
 
-                <div class="defaultComponent">
+                <!--<div class="defaultComponent">
                     <div class="imageComponent">
                         <img src="views/assets/images/utils/productImage.png" alt="Product">
                     </div>
@@ -118,7 +119,7 @@
                         <h4 class="productSold">Sold: 222</h4>
                         <h4 class="productStock">Stock: 125</h4>
                     </div>
-                </div>
+                </div>-->
                     <?php
                         foreach($products as $product) {
                             $img = ProductModel::getProductImage('lateralPerspective', $product->getCode());
@@ -145,6 +146,16 @@
                         }
                     ?>
                 </div>
+                <h1>Change your signature</h1>
+                <canvas id="pinturaCanvas" width="500" height="300"></canvas>
+                <button id="botonBorrar">Borrar</button>
+                <button id="botonGuardar">Guardar</button>
+              
+                <style>
+                    #pinturaCanvas {
+                        border: 1px solid #000;
+                    }
+                </style>
             </div>
         </div>
     </body>
