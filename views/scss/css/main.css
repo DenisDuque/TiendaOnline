@@ -241,6 +241,9 @@ main {
   height: auto;
   fill: black;
 }
+#info #options #buttons #wishlist svg.inWishList {
+  fill: red;
+}
 #info #options #buttons #cart {
   text-align: center;
 }
