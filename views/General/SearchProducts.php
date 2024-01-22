@@ -1,5 +1,5 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
-<?php include("Components/headerHome.html"); ?>
+<?php //include("Components/headerHome.html"); ?>
 <div>
     <nav>
         <input type="text" class="search" placeholder="Search">
