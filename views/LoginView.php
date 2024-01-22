@@ -44,9 +44,9 @@
             <div class="form-container sign-in-container">
                 <?php 
                 if(!isset($_GET["origin"])){
-                    echo "<form action='index.php?page=User&action=processLogin' method=POST'>";
+                    echo "<form action='index.php?page=User&action=processLogin' method='POST'>";
                 }else{
-                    echo "<form action='index.php?page=User&action=processLogin&origin=".$_GET['origin']."&origin=".$_GET['function']."' method=POST'>";
+                    echo "<form action='index.php?page=User&action=processLogin&origin=".$_GET['origin']."&function=".$_GET['function']."' method='POST'>";
                 }
                 ?>
                     <h1>Urban Store</h1>
