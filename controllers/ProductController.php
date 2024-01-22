@@ -89,9 +89,15 @@ class ProductController {
     }
 
     public function showProduct() {
+        if(isset($_GET["function"])){
+            if($_GET["function"] == "wishlist"){
+                ProductModel::addToWishList();
+            }
+        }
         require_once __DIR__.'/../models/CategoryModel.php';
         $product = ProductModel::getProductWithCode();
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);
+        $product["inWishList"] = ProductModel::inWishList();
         include __DIR__.'/../views/General/productPage.php';
 
     }
