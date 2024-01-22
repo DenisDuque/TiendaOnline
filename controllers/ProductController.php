@@ -107,12 +107,19 @@ class ProductController {
         $Upimage = null;
         $image3D = null;
         if(isset($_FILES['Side']) && $_FILES['Side']['error'] === UPLOAD_ERR_OK){
+
             $Sideimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Side']['name'], $_FILES['Side']['tmp_name'], "Side"); 
+
         } if(isset($_FILES['Bottom']) && $_FILES['Bottom']['error'] === UPLOAD_ERR_OK){
+
             $Bottomimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Bottom']['name'], $_FILES['Bottom']['tmp_name'], "Bottom"); 
+
         } if(isset($_FILES['Up']) && $_FILES['Up']['error'] === UPLOAD_ERR_OK){
+
             $Upimage = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['Up']['name'], $_FILES['Up']['tmp_name'], "Up");
+            
         } if(isset($_FILES['3D']) && $_FILES['3D']['error'] === UPLOAD_ERR_OK){
+            
             $image3D = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
         }
         if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'editProduct') {
