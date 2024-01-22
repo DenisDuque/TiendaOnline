@@ -10,7 +10,7 @@
     <header>
         <!--Header include-->
         <?php
-        require_once("views\Administrator\Components\headerHome.html");
+        require_once("views\General\Components\headerHome.html");
         ?>
     </header>
     <!--Image slider-->
