@@ -200,11 +200,11 @@ class ProductModel extends Database {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
         if (isset($_GET['category']) && $_GET['category'] !== "null") {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
         } else {
-            $query = "SELECT code, codecategory, name, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
             $stmt = self::getConnection()->prepare($query);
         }
         
