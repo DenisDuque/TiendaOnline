@@ -67,9 +67,9 @@
                     echo "</div>";
                     echo "<div id='buttons'>";
                         if(!isset($_SESSION["email"])){
-                            echo "<a id='wishlist' href='index.php?page=user&action=default&origin=".$product["code"]."&function=wishlist'>";
+                            echo "<a id='wishlist' href='index.php?page=user&action=default&code=".$product["code"]."&function=wishlist'>";
                         }else{
-                            echo "<a id='wishlist' href='index.php?page=product&action=showProduct&origin=".$product["code"]."&function=wishlist'>";
+                            echo "<a id='wishlist' href='index.php?page=product&action=showProduct&code=".$product["code"]."&function=wishlist'>";
 
                         }
                             echo "<p>WishList</p>";

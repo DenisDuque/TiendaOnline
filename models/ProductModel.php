@@ -433,7 +433,7 @@ class ProductModel extends Database {
             $query = "INSERT INTO wishlist (useremail,productcode) VALUES (:user, :product)";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':user', $_SESSION['email']);
-            $stmt->bindParam(':product', $_GET['product']);
+            $stmt->bindParam(':product', $_GET['code']);
             $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
