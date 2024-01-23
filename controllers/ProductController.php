@@ -91,7 +91,11 @@ class ProductController {
     public function showProduct() {
         if(isset($_GET["function"])){
             if($_GET["function"] == "wishlist"){
-                ProductModel::addToWishList();
+                if(ProductModel::inWishList()){
+                    ProductModel::dropFromWishList();
+                }else{
+                    ProductModel::addToWishList();
+                }
             }
         }
         require_once __DIR__.'/../models/CategoryModel.php';

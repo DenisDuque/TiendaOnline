@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php         
-        require_once("views\Administrator\Components\headerHome.html");
+        require_once("views\General\Components\headerHome.html");
     ?>
     <main id="productPage">
     <?php
@@ -81,7 +81,7 @@
                                     echo "<path d='M12 20a1 1 0 0 1-.437-.1C11.214 19.73 3 15.671 3 9a5 5 0 0 1 8.535-3.536l.465.465.465-.465A5 5 0 0 1 21 9c0 6.646-8.212 10.728-8.562 10.9A1 1 0 0 1 12 20z'/>";
                                 echo "</svg>";
                             echo "</a>";
-                        echo "<a id='cart' href='index.php?page=user&action=default&origin=".$product["code"]."&function=cart'>Add to cart</a>";
+                        echo "<a id='cart' href='index.php?page=user&action=default&code=".$product["code"]."&function=cart'>Add to cart</a>";
                     echo "</div>";
                 echo "</div>";
             echo "</div>";
