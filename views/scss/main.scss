@@ -260,6 +260,7 @@ body {
     // Slider Principal View
     body {
         .swiper-container {
+            margin-top: 5vh;
             position: relative;
             width: 100%;
             height: 100%;
@@ -277,7 +278,7 @@ body {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
-                    padding: 10px;
+                    padding: 1vh;
                     position: relative;
     
                     .text {
@@ -285,11 +286,11 @@ body {
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        height: 20vh;
-                        width: 140vh;
+                        height: 30vh;
+                        width: 82vw;
                         border-radius: 1vh;
                         margin: 0 auto;
-                        padding: 10px;
+                        padding: 1vh;
                         position: relative;
     
                         h5 {
@@ -315,8 +316,8 @@ body {
     
                     .foto {
                         // border: 2px solid red;
-                        width: 25vh;
-                        height: 25vh;
+                        width: 25em;
+                        height: 25em;
                         position: absolute; /* Cambio a posición absoluta */
                         top: -4vh;
                         right: 27vh;
@@ -324,8 +325,8 @@ body {
                         
                         img {
                             // border: 2px solid blue;
-                            width: 24vh;
-                            height: 24vh;
+                            width: 100%;
+                            height: 100%;
                             object-fit: cover;
                         }
                     }
@@ -340,10 +341,10 @@ body {
             }
     
             .swiper-button {
-                width: 15px;
-                height: 15px;
-                margin: 0 5px;
-                border: 3px solid black;
+                width: 2.3vh;
+                height: 2.3vh;
+                margin: 0 0.2em;
+                border: 0.3em solid black;
                 border-radius: 50%;
                 background-color: #ececec;
             }

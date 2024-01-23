@@ -197,48 +197,85 @@ class ProductModel extends Database {
     }
 
     public static function getProductsWhere($condition) {
-    try {
-        // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        if (isset($_GET['category']) && $_GET['category'] !== "null") {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
-        } else {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
-            $stmt = self::getConnection()->prepare($query);
+        try {
+            // Modificar la consulta SQL para incluir la condición en el nombre del producto
+            if (isset($_GET['category']) && $_GET['category'] !== "null") {
+                $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
+            } else {
+                $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+                $stmt = self::getConnection()->prepare($query);
+            }
+            
+            $search = '%' . $condition . '%';
+            $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $Products = array_map(function($row) {
+                return new ProductModel(
+                    $row['code'],
+                    $row['codecategory'],
+                    $row['name'],
+                    $row['description'],
+                    $row['price'],
+                    $row['sold'],
+                    $row['stock'],
+                    $row['status'],
+                    $row['size'],
+                    $row['code']."-Side"
+
+                );
+            }, $rows);
+
+            // Devolver los datos en formato JSON
+            return $Products;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            // Devolver un mensaje de error en formato JSON
+            header('Content-Type: application/json');
+            http_response_code(500);
+            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
         }
-        
-        $search = '%' . $condition . '%';
-        $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $Products = array_map(function($row) {
-            return new ProductModel(
-                $row['code'],
-                $row['codecategory'],
-                $row['name'],
-                $row['description'],
-                $row['price'],
-                $row['sold'],
-                $row['stock'],
-                $row['status'],
-                $row['size'],
-                $row['code']."-Side"
-
-            );
-        }, $rows);
-
-        // Devolver los datos en formato JSON
-        return $Products;
-    } catch (PDOException $e) {
-        error_log("Error: " . $e->getMessage());
-        // Devolver un mensaje de error en formato JSON
-        header('Content-Type: application/json');
-        http_response_code(500);
-        echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
     }
-}
+
+    public static function getFeaturedProducts() {
+        try {
+            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE featured = true";
+            $stmt = self::getConnection()->prepare($query);
+            
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            $Products = array_map(function($row) {
+                return new ProductModel(
+                    $row['code'],
+                    $row['codecategory'],
+                    $row['name'],
+                    $row['description'],
+                    $row['price'],
+                    $row['sold'],
+                    $row['stock'],
+                    $row['status'],
+                    $row['size'],
+                    $row['code']."-Side"
+    
+                );
+            }, $rows);
+    
+            // Devolver los datos en formato JSON
+            return $Products;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            // Devolver un mensaje de error en formato JSON
+            header('Content-Type: application/json');
+            http_response_code(500);
+            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+        }
+    }
+
+
     
 
     public static function getTopProducts($limit = 10) {

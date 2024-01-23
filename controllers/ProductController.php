@@ -54,8 +54,13 @@ class ProductController {
 
     public function fetchProducts() {
         try {
-            $condition = $_REQUEST['condition'];
-            $products = ProductModel::getProductsWhere($condition);
+            $category = isset($_GET['category']) ? $_GET['category'] : '';
+            if ($category !== 'featured') {
+                $condition = $_REQUEST['condition'];
+                $products = ProductModel::getProductsWhere($condition);
+            } else {
+                $products = ProductModel::getFeaturedProducts();
+            }
     
             if (!empty($products)) {
                 // cambiar map por for each
@@ -77,8 +82,8 @@ class ProductController {
 
                 echo $jsonData;
             } else {
-                
-                echo "";
+                $data = [];
+                echo json_encode($data);
             }
         } catch (Exception $e) {
             error_log("Error: " . $e->getMessage());

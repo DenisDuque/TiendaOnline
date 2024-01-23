@@ -1,3 +1,4 @@
+<!-- http://localhost/TiendaOnline/index.php?page=Product -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,6 +64,7 @@
     <div>
         <nav>
             <ul id="categories">
+                <li id="featured" class="category">Featured</li>
                 <?php
                     foreach ($categories as $category) {
                         echo '<li id="'.$category->getCode().'" class="category">'.$category->getName().'</li>';
