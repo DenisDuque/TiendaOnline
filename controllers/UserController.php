@@ -77,25 +77,5 @@ class UserController {
         $customers = UserModel::showcustomers($search);
         include __DIR__.'/../views/Administrator/AdminCustomersView.php';
     }
-
-    public function showPrincipalUser() {
-        include __DIR__.'/../views/General/PrincipalView.php';
-        require_once __DIR__.'/../models/CategoryModel.php';
-        // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
-        $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
-        $productArray = array_map(function($product) {
-            return [
-                'code' => $product->getCode(),
-                'name' => $product->getName(),
-                'price' => $product->getPrice(),
-                'image' => $product->getImage("lateral"),
-                'codecategory' => $product->getCategory(),
-                'inWishlist' => false // TODO: Función para saber si se encuentra en la wishlist del usuario
-            ];
-        }, $products);
-        //header("Content-Type: application/json");
-        $jsonResult = json_encode($productArray);
-    }
 }
 ?>
