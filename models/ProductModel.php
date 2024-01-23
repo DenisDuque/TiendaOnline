@@ -451,8 +451,9 @@ class ProductModel extends Database {
     }
 
     public static function inWishList(){
+        echo "<script>console.log('tusmuertos');</script>";
         $exists = false;
-        $query = "SELECT * FROM wishlist WHERE useremail LIKE :user AND productcode LIKE :product";
+        $query = "SELECT * FROM wishlist WHERE useremail = :user AND productcode = :product";
         $stmt = self::getConnection()->prepare($query);
         $stmt->bindParam(':user', $_SESSION['email']);
         $stmt->bindParam(':product', $_GET['code']);
@@ -470,7 +471,20 @@ class ProductModel extends Database {
             $query = "INSERT INTO wishlist (useremail,productcode) VALUES (:user, :product)";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':user', $_SESSION['email']);
-            $stmt->bindParam(':product', $_GET['product']);
+            $stmt->bindParam(':product', $_GET['code']);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public static function dropFromWishList(){
+        try {
+            $query = "DELETE FROM wishlist WHERE useremail = :user AND productcode = :product";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':user', $_SESSION['email']);
+            $stmt->bindParam(':product', $_GET['code']);
             $stmt->execute();
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
