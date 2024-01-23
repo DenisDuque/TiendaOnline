@@ -47,7 +47,7 @@
                             <div class='textOnRight'>
                                 <h4 class='productSold'>Sold: ". $product->getSold() ."</h4>
                                 <h4 class='productStock'>Stock: ". $product->getStock() ."</h4>
-                                <div id='".$product->getCode().",".$product->getName().",".$product->getDescription().",".$product->getPrice().",".$product->getStatus().",".$product->getStock().",".$product->getCategory().",".$stringProcesada.","."views/assets/images/products/".$img."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
+                                <div id='".$product->getCode().",".$product->getName().",".$product->getDescription().",".$product->getPrice().",".$product->getFeatured().",".$product->getStatus().",".$product->getStock().",".$product->getCategory().",".$stringProcesada.","."views/assets/images/products/".$img."' class='editBtn editProdBtn'><img src='views/assets/images/utils/edit.png' alt='Edit'></div>
                             </div>
                         </div>
                     ";

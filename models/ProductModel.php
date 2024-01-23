@@ -8,7 +8,7 @@ class ProductModel extends Database {
     private $price;
     private $stock;
     private $size;
-    private $outstanding;
+    private $featured;
     private $sold;
     private $status;
     private $image = [
@@ -81,12 +81,12 @@ class ProductModel extends Database {
         return $this->sold;
     }
 
-    public function setOutstanding($outstanding) {
-        $this->outstanding = $outstanding;
+    public function setFeatured($featured) {
+        $this->featured = $featured;
     } 
 
-    public function getOutstanding() {
-        return $this->outstanding;
+    public function getFeatured() {
+        return $this->featured;
     }
 
     public function setStatus($status) {
@@ -115,11 +115,12 @@ class ProductModel extends Database {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$description,$price,$sold,$stock,$status,$size,$image){
+    public function __construct($code,$category,$name,$description,$featured,$price,$sold,$stock,$status,$size,$image){
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
         $this->description = $description;
+        $this->featured = $featured;
         $this->price = $price;
         $this->sold = $sold;
         $this->stock = $stock;
@@ -169,7 +170,7 @@ class ProductModel extends Database {
 
     public static function getAllProducts() {
         try {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products";
             $stmt = self::getConnection()->prepare($query);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -180,6 +181,7 @@ class ProductModel extends Database {
                     $row['codecategory'],
                     $row['name'],
                     $row['description'],
+                    $row['featured'],
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
@@ -200,11 +202,11 @@ class ProductModel extends Database {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
         if (isset($_GET['category']) && $_GET['category'] !== "null") {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
         } else {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
             $stmt = self::getConnection()->prepare($query);
         }
         
@@ -219,6 +221,7 @@ class ProductModel extends Database {
                 $row['codecategory'],
                 $row['name'],
                 $row['description'],
+                $row['featured'],
                 $row['price'],
                 $row['sold'],
                 $row['stock'],
@@ -243,7 +246,7 @@ class ProductModel extends Database {
 
     public static function getTopProducts($limit = 10) {
         try {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
@@ -254,6 +257,7 @@ class ProductModel extends Database {
                     $row['codecategory'],
                     $row['name'],
                     $row['description'],
+                    $row['featured'],
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
@@ -380,10 +384,10 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function editProduct($id, $name, $description, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
+    public static function editProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
         try {
             $updateQuery = "UPDATE products 
-            SET name = :name, description = :description, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
+            SET name = :name, description = :description, featured = :featured, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
             WHERE code = :id";
             $sizesArray = explode(',', $sizes); 
             $sizeString = "{" . implode(",", $sizesArray) . "}";
@@ -391,6 +395,7 @@ class ProductModel extends Database {
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
             $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
             $updateStatement->bindParam(':description', $description, PDO::PARAM_STR);
+            $updateStatement->bindParam(':featured', $featured, PDO::PARAM_STR);
             $updateStatement->bindParam(':price', $price, PDO::PARAM_INT);
             $updateStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
             $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
