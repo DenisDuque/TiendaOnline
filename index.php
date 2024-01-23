@@ -19,11 +19,12 @@ require_once "autoload.php";
 if(isset($_GET['page'])) {
     $controllerName = $_GET['page']."Controller";
 } else {
-    $controllerName = "UserController";
+    $controllerName = "ProductController";
 }
 if(class_exists($controllerName)) {
     $controller = new $controllerName(); 
 	$action = isset($_GET['action']) ? $_GET['action'] : 'default';
+    session_start();
     $controller->$action(); 
 } else {
     echo "No existe el controlador";

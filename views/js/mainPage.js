@@ -57,7 +57,6 @@ class ProductSearch {
               }
   
               const responseData = await response.json();
-              console.log("Sort: " + this.sort);
               console.log("ResponseData: " + responseData);
   
               if (responseData.length > 0) {
