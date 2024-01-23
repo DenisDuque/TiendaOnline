@@ -24,8 +24,8 @@
                 </div>
                 <?php
                     //SOLUCION TEMPORAL: comentar uno y descomentar el otro para ver los formularios.
-                    include('views/Administrator/Components/editCategoryForm.html');
-                    //include('views/Administrator/Components/createCategoryForm.html');
+                    //include('views/Administrator/Components/editCategoryForm.html');
+                    include('views/Administrator/Components/createCategoryForm.html');
                 ?>
             </div>
             <div id="rightPanel">
