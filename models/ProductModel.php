@@ -202,11 +202,11 @@ class ProductModel extends Database {
     try {
         // Modificar la consulta SQL para incluir la condición en el nombre del producto
         if (isset($_GET['category']) && $_GET['category'] !== "null") {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
         } else {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
             $stmt = self::getConnection()->prepare($query);
         }
         
@@ -221,6 +221,7 @@ class ProductModel extends Database {
                 $row['codecategory'],
                 $row['name'],
                 $row['description'],
+                $row['featured'],
                 $row['price'],
                 $row['sold'],
                 $row['stock'],
@@ -244,7 +245,7 @@ class ProductModel extends Database {
 
     public static function getFeaturedProducts() {
         try {
-            $query = "SELECT code, codecategory, name, description, price, sold, stock, status, size FROM products WHERE featured = true";
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE featured = true";
             $stmt = self::getConnection()->prepare($query);
             
             $stmt->execute();
@@ -256,6 +257,7 @@ class ProductModel extends Database {
                     $row['codecategory'],
                     $row['name'],
                     $row['description'],
+                    $row['featured'],
                     $row['price'],
                     $row['sold'],
                     $row['stock'],
@@ -380,7 +382,7 @@ class ProductModel extends Database {
             }
         }
     }
-    public static function createProduct($id, $name, $description, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
+    public static function createProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
         try{
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
@@ -393,11 +395,12 @@ class ProductModel extends Database {
                 // Realizar la inserción
                 $sizesArray = explode(',', $sizes); 
                 $sizeString = "{" . implode(",", $sizesArray) . "}";
-                $insertQuery = "INSERT INTO products (code, name, description, price, stock, status, codecategory, size, sold) VALUES (:code, :name, :description, :price, :stock, :status, :codecategory, :size, 0);";
+                $insertQuery = "INSERT INTO products (code, name, description, featured, price, stock, status, codecategory, size, sold) VALUES (:code, :name, :description, :featured, :price, :stock, :status, :codecategory, :size, 0);";
                 $insertStatement = self::getConnection()->prepare($insertQuery);
                 $insertStatement->bindParam(':code', $id, PDO::PARAM_STR);
                 $insertStatement->bindParam(':name', $name, PDO::PARAM_STR);
                 $insertStatement->bindParam(':description', $description, PDO::PARAM_STR);
+                $insertStatement->bindParam(':featured', $featured, PDO::PARAM_BOOL);
                 $insertStatement->bindParam(':price', $price, PDO::PARAM_INT);
                 $insertStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
                 $insertStatement->bindParam(':status', $status, PDO::PARAM_STR);
@@ -431,7 +434,7 @@ class ProductModel extends Database {
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
             $updateStatement->bindParam(':name', $name, PDO::PARAM_STR);
             $updateStatement->bindParam(':description', $description, PDO::PARAM_STR);
-            $updateStatement->bindParam(':featured', $featured, PDO::PARAM_STR);
+            $updateStatement->bindParam(':featured', $featured, PDO::PARAM_BOOL);
             $updateStatement->bindParam(':price', $price, PDO::PARAM_INT);
             $updateStatement->bindParam(':stock', $stock, PDO::PARAM_INT);
             $updateStatement->bindParam(':status', $status, PDO::PARAM_INT);
@@ -447,7 +450,7 @@ class ProductModel extends Database {
             self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
             self::insertOrUpdateImage($bottomView, $id, "belowperspective");
             self::insertOrUpdateImage($View3D, $id, "3dmodel");
-            echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
+            //echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());

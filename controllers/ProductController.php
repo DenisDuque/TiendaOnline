@@ -153,7 +153,8 @@ class ProductController {
             $image3D = $this->adaptImage(str_replace(' ', '', $_POST['code']), $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
         }
         if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'editProduct') {
-            ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['description'], $_POST['featured'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
+            $featured = isset($_POST['featured']) ? true : false;
+            ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['description'], $featured, $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
     }
     public function createProduct() {
@@ -174,7 +175,8 @@ class ProductController {
             $image3D = $this->adaptImage($code, $_FILES['3D']['name'], $_FILES['3D']['tmp_name'], "3D"); 
         }
         if (isset($_POST) && isset($_GET['page']) && isset($_GET['action']) && $_GET['action'] == 'createProduct') {
-            ProductModel::createProduct($code, $_POST['name'], $_POST['description'], $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
+            $featured = isset($_POST['featured']) ? true : false;
+            ProductModel::createProduct($code, $_POST['name'], $_POST['description'], $featured, $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
     }
 }

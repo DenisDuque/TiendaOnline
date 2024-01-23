@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("name").value = name;
         document.getElementById("description").value = description;
         document.getElementById("price").value = price;
-        document.getElementById("miCheckbox").checked = featured;
         document.getElementById("stock").value = stock;
+        document.getElementById("featured").checked = featured;
         $('#sizeList').empty();
         for (let i = 0 ; i != sizesArray.length-1 ; i++) {
             var newSize = sizesArray[i];
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(opcion.id == category){
                 selectCategory.options.selectedIndex = opcion.index;
             }
-        }     
+        }    
     }
 
     function fillDataCategory(code){

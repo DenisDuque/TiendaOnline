@@ -35,7 +35,7 @@
         <tr><td><label for="">Featured</label></td></tr>
         <tr>
             <td>
-                <input type="checkbox" name="featured">
+                <input type="checkbox" name="featured" id="featured">
             </td>
         </tr>
 
