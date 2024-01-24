@@ -8,10 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let name = datos[1];
         let description = datos[2];
         let price = datos[3];
-        let status = datos[4];
-        let stock = datos[5];
-        let category = datos[6];
-        let sizes = datos[7];
+        let featured = datos[4];
+        let status = datos[5];
+        let stock = datos[6];
+        let category = datos[7];
+        let sizes = datos[8];
         var sizesArray = sizes.split('!');
         document.getElementById("EditProdForm").reset();
         document.getElementById("code").value = id;
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("description").value = description;
         document.getElementById("price").value = price;
         document.getElementById("stock").value = stock;
+        document.getElementById("featured").checked = featured;
         $('#sizeList').empty();
         for (let i = 0 ; i != sizesArray.length-1 ; i++) {
             var newSize = sizesArray[i];
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(opcion.id == category){
                 selectCategory.options.selectedIndex = opcion.index;
             }
-        }     
+        }    
     }
 
     function fillDataCategory(code){

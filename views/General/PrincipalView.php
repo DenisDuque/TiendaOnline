@@ -1,3 +1,4 @@
+<!-- http://localhost/TiendaOnline/index.php?page=Product -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
         <div class="swiper-wrapper">    
             <div class="swiper-slide">
                 <div class="text">
-                    <h5>New Sales</h5>
+                    <h2>New Sales</h2>
                     <button class="ExploreNow" id="NewSales"><p>Explore Now</p></button>
                 </div>
                 <div class="foto">
@@ -25,7 +26,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="text">
-                    <h5>Athletic Shoes Collection</h5>
+                    <h2>Athletic Shoes Collection</h2>
                     <button class="ExploreNow" id="AthleticShoes"><p>Explore Now</p></button>
                 </div>
                 <div class="foto">
@@ -34,7 +35,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="text">
-                    <h5>Coolest Flip Flops</h5>
+                    <h2>Coolest Flip Flops</h2>
                     <button class="ExploreNow" id="FlipFlops"><p>Explore Now</p></button>
                 </div>
                 <div class="foto">
@@ -43,7 +44,7 @@
             </div>
             <div class="swiper-slide">
                 <div class="text">
-                    <h5>New ST RUNNER V3 NL</h5>
+                    <h2>New ST RUNNER V3 NL</h2>
                     <button class="ExploreNow" id="STRunnerV3NL"><p>Explore Now</p></button>
                 </div>
                 <div class="foto">
@@ -63,6 +64,7 @@
     <div>
         <nav>
             <ul id="categories">
+                <li id="featured" class="category">Featured</li>
                 <?php
                     foreach ($categories as $category) {
                         echo '<li id="'.$category->getCode().'" class="category">'.$category->getName().'</li>';

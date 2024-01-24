@@ -32,6 +32,12 @@
                 <input type="text" name="description" id="description">
             </td>
         </tr>
+        <tr><td><label for="">Featured</label></td></tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="featured" id="featured">
+            </td>
+        </tr>
 
         <tr><td><label for="">Status</label></td></tr>
         <tr>

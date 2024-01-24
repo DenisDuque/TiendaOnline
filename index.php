@@ -19,7 +19,7 @@ require_once "autoload.php";
 if(isset($_GET['page'])) {
     $controllerName = $_GET['page']."Controller";
 } else {
-    $controllerName = "UserController";
+    $controllerName = "ProductController";
 }
 if(class_exists($controllerName)) {
     $controller = new $controllerName(); 
