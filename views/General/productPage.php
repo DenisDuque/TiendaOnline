@@ -69,11 +69,11 @@
                     echo "<div id='buttons'>";
                         //wishlist btn
                         if(!isset($_SESSION["email"])){
-                            echo "<form action='index.php?page=user&action=default&origin=".$_GET["code"]."' method=post>";
+                            echo "<form action='index.php?page=user&action=default&code=".$_GET["code"]."' method='post'>";
                         }else{
-                            echo "<form action='index.php?page=product&action=default&origin=".$_GET["code"]."' method=post>";
+                            echo "<form action='index.php?page=product&action=showProduct&code=".$_GET["code"]."' method='post'>";
                         }
-                                echo "<input type='hidden' name='function' value='wishList'>";
+                                echo "<input type='hidden' name='function' value='wishlist'>";
                                 echo "<button type='submit' id='wishlist'>";
                                     echo "<p>wishlist</p>";
                                     if($product["inWishList"]){
@@ -86,9 +86,9 @@
                         
                         //add to cart btn
                         if(!isset($_SESSION["email"])){
-                            echo "<form action='index.php?page=user&action=default&origin=".$_GET["code"]."' method=post>";
+                            echo "<form action='index.php?page=user&action=default&code=".$_GET["code"]."' method=post>";
                         }else{
-                            echo "<form action='index.php?page=product&action=default&origin=".$_GET["code"]."' method=post>";
+                            echo "<form action='index.php?page=product&action=default&code=".$_GET["code"]."' method=post>";
                         }
                                 echo "<input type='hidden' name='function' value='cart'>";
                                 echo "<button type='submit' id='wishlist'>";
