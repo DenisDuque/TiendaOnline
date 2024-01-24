@@ -3,6 +3,8 @@ class ProductSearch {
       this.categories = document.querySelectorAll('.category');
       this.itemsContainer = document.querySelector('.itemsContainer');
       this.category = null;
+      this.categoriesContainer = document.getElementById('categories');
+      this.categoriesShown = document.getElementById('categories-show');
   
       // Inicializar el objeto cuando se crea una instancia
       this.init();
@@ -12,12 +14,18 @@ class ProductSearch {
 
       this.executeAsyncFunctions();
     
-
       this.categories.forEach(element => {
         element.addEventListener('click', () => {
           this.handleCategoryClick(element);
         });
       });
+
+      this.categoriesShown.addEventListener('click', () => {
+        console.log("Mostrar más/menos categorias");
+        $(this.categoriesContainer).toggleClass('show-more-categories');
+        $(this.categoriesShown).toggleClass('show-less-categories');
+      });
+      
     }
 
     generateProductHTML(product) {
