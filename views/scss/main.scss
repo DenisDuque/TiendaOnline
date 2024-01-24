@@ -202,9 +202,12 @@ body {
                     padding-top:10px;
                     display: flex;
                     justify-content: space-between;
-                    a{
-                        font-size:larger;
+                    form{
                         width: 30%;
+                        button{
+                            font-size:larger;
+                            width: 100%;
+                        }
                     }
                     #wishlist{
                         display: flex;
@@ -212,18 +215,12 @@ body {
                         align-items: center;
                         justify-content: space-evenly;
                         text-decoration: none;
-                        svg{
-                            width:  1.5vw;
+                        img{
+                            width: 18%;
                             height: auto;
-                            fill: black;
-                        }
-                        svg.inWishList{
-                            fill: red;
-                        }     
+                        }  
                     }
-                    #cart{
-                        text-align: center;
-                    }
+                   
                 }
     
                 #description{

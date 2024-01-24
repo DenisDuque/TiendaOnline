@@ -221,9 +221,12 @@ body #categories .selectedCategory {
   display: flex;
   justify-content: space-between;
 }
-#productPage #info #options #buttons a {
-  font-size: larger;
+#productPage #info #options #buttons form {
   width: 30%;
+}
+#productPage #info #options #buttons form button {
+  font-size: larger;
+  width: 100%;
 }
 #productPage #info #options #buttons #wishlist {
   display: flex;
@@ -232,16 +235,9 @@ body #categories .selectedCategory {
   justify-content: space-evenly;
   text-decoration: none;
 }
-#productPage #info #options #buttons #wishlist svg {
-  width: 1.5vw;
+#productPage #info #options #buttons #wishlist img {
+  width: 18%;
   height: auto;
-  fill: black;
-}
-#productPage #info #options #buttons #wishlist svg.inWishList {
-  fill: red;
-}
-#productPage #info #options #buttons #cart {
-  text-align: center;
 }
 #productPage #info #options #description h4 {
   opacity: 0.6;
