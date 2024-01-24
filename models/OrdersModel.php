@@ -167,5 +167,17 @@ class OrdersModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+    public static function obtainMethods() {
+        try{
+            $query = "SELECT * FROM shippingMethod";
+            $categories = self::getConnection()->prepare($query);
+            $categories->execute();
+            $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
+            return $rows;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>
