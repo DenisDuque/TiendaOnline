@@ -21,4 +21,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
+    var sizes = document.getElementsByClassName("sizeBtn");
+
+    for(let i = 0; i<sizes.length; i++){
+        sizes[i].addEventListener("click", function(){
+            sizes[i].classList.add("selected");
+            for(let x = 0; x<sizes.length; x++){
+                if(x!=i){
+                    sizes[x].classList.remove("selected");
+                }
+            }
+        })
+    }
+
+
 });
