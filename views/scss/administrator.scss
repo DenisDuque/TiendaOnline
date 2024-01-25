@@ -47,7 +47,7 @@ header {
     	text-align: center;
 	}
 
-	ul li img {
+	img {
     	filter: brightness(0);
     	height: 2.6vw;
     	width: 2.6vw;
@@ -134,6 +134,83 @@ header {
             flex-direction: column;
         }
     }
+
+    .formProd{
+        height: 71.5vh;
+        width: 30vw;
+        padding: 5vh 1vw;
+        background-color: $adminOrange;
+        border-radius: $radius;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.5s ease;
+        h4 {
+            margin: 0;
+            padding: 0;
+            font-size: 32px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            #status, #category{
+                display: flex;
+                justify-content: space-between;
+                select{
+                    width: 60%;
+                }
+            }
+
+            #views{
+                display: flex;
+                justify-content: space-between;
+                td{
+                    border: 1px solid #ccc;
+                    background-color: white;
+                    text-align: center;
+                }
+            }
+            #sizes{
+                display: flex;
+                justify-content: space-between;
+                #addSize{
+                    width: 100px;
+                    #sizeInput{
+                        width: calc(100% - 31px);
+                    }
+                    button{
+                        width: auto;
+                    }
+                }
+            }
+
+            #sizeList {
+                display: flex;
+                flex-wrap: wrap; /* Permite que los elementos se envuelvan en líneas si no hay suficiente espacio */
+            }
+            
+            .size {
+                text-align: center;
+                width: 30%; /* Hace que cada div ocupe el 50% del ancho del contenedor padre (dos divs por fila) */
+                height: 30%;
+                margin-right: 3%;
+                margin-bottom: 3%;
+                box-sizing: border-box;
+                background-color: white;
+                border-radius: 30px;
+                border: 1px solid #ccc; /* Añade un borde para visualización */
+            }
+            
+            @media (min-width: 600px) {
+                #sizeList {
+                    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+                    max-height: 9vh; /* Establece la altura máxima para mostrar la barra lateral */
+                }
+            }
+            
+        }
+    }
+
     #formEditCategory {
         margin-left: 2vw;
         position: absolute;

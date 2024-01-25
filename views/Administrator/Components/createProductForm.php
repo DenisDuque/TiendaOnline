@@ -32,18 +32,18 @@
             </td>
         </tr>
         
-        <tr><td><label for="">Status</label></td></tr>
         <tr>
-            <td>
+            <td id="status">
+                <label for="">Status</label>
                 <select name="active" id="select">
                     <option id="enabled" value="enabled">enabled</option>
                     <option id="disabled" value="disabled">disabled</option>
                 </select>
             </td>
         </tr>
-        <tr><td><label for="">Category</label></td></tr>
         <tr>
-            <td>
+            <td id="category">
+                <label for="">Category</label>
                 <select name="category" id="category"> 
                     <?php 
                         $categories = CategoryController::generateCategoriesOptions();
@@ -55,7 +55,7 @@
             </td>
         </tr>
         <tr><td><label for="">Perspectives</label></td></tr>
-        <tr>
+        <tr id="views">
             <td>
                 <label for="Side">Side</label>
                 <input type="file" id="Side" name="Side" style='display:none;'>
@@ -73,13 +73,15 @@
                 <input type="file" id="3D" name="3D" style='display:none;'>
             </td>
         </tr>
-        <tr>
+        <tr id="sizes">
             <td><label for="">Sizes</label></td>
-            <td><input type="text" id="sizeInput" placeholder="Add a size"></td>
-            <td><button type="button" class='addSizeBtn'>+</button></td>
+            <td id="addSize"><input type="text" id="sizeInput" placeholder="Add a size"><button type="button" class='addSizeBtn'>+</button></td>
+            <!-- <td></td> -->
         </tr>
         <tr>
-            <td><div id="sizeList"></div></td>
+            <td>
+                <div id="sizeList"></div>
+            </td>
         </tr>
         <input type="hidden" id="sizeInp" name="sizes">
         <tr><td><input type="submit" class="submitBtn" value="Save changes"></td></tr>

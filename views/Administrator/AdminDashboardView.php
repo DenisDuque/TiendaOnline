@@ -11,9 +11,7 @@
     <body>
         <header>
             <h1>Urban Store</h1>
-            <ul>
-                <li><img src="views/assets/images/utils/signout.png" alt="Sign out"></li>
-            </ul>
+            <img src="views/assets/images/utils/signout.png" alt="Sign out">
         </header>
         <div id="container">
             <div id="leftPanel">
