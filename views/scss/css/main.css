@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   scrollbar-width: auto;
   scrollbar-color: #ABABAB transparent;
@@ -69,30 +68,39 @@ body header nav ul li a img {
   height: 2em;
   margin: 0;
 }
+body section .home-products {
+  width: 82vw;
+  height: auto;
+}
 body nav {
   display: flex;
   justify-content: center;
 }
 body #categories {
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: row;
-  width: 80vw;
-  height: 15vh;
-  overflow-x: auto;
+  width: 82vw;
+  max-height: 5.5vh;
+  flex-wrap: wrap;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
 }
 body #categories .category {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   background-color: #F6F6F6;
-  width: 8vw;
+  width: auto;
   min-width: 8vw;
-  height: 10vh;
+  height: 5vh;
   margin-right: 1vw;
+  margin-bottom: 2vh;
   color: #ABABAB;
-  font-size: 24px;
+  font-size: 1.5em;
   font-style: normal;
   font-weight: 500;
   border-radius: 10px;
@@ -113,6 +121,34 @@ body #categories .selectedCategory {
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
   list-style: none;
   cursor: pointer;
+}
+body button {
+  height: 3vh;
+  width: 3vh;
+  margin: 0;
+  padding: 0;
+  margin-top: 1vh;
+  margin-left: -1vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: none;
+  background: transparent;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+body button img {
+  width: 100%;
+  height: 100%;
+}
+body .show-more-categories {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  max-height: 100vh !important;
+}
+body .show-less-categories {
+  transform: scaleY(-1);
 }
 
 #productPage {
@@ -288,22 +324,31 @@ body .swiper-container .swiper-wrapper .swiper-slide {
   box-sizing: border-box;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   padding: 1vh;
   position: relative;
 }
-body .swiper-container .swiper-wrapper .swiper-slide .text {
+body .swiper-container .swiper-wrapper .swiper-slide .content {
   background: var(--GradientYellow, linear-gradient(90deg, #FFCB74 0%, #FF5E00 100%));
+  display: flex;
+  flex-direction: row;
+  height: 30vh;
+  width: 82vw;
+  margin: 0 auto;
+  border-radius: 1vh;
+  padding: 1vh;
+  position: relative;
+  overflow: visible;
+}
+body .swiper-container .swiper-wrapper .swiper-slide .text {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 30vh;
-  width: 82vw;
-  border-radius: 1vh;
-  margin: 0 auto;
-  padding: 1vh;
-  position: relative;
+  height: 100%;
+  width: -moz-max-content;
+  width: max-content;
+  text-align: left;
 }
 body .swiper-container .swiper-wrapper .swiper-slide .text h2 {
   width: fit-content;
@@ -325,11 +370,13 @@ body .swiper-container .swiper-wrapper .swiper-slide .text .ExploreNow p {
   margin: 0;
 }
 body .swiper-container .swiper-wrapper .swiper-slide .foto {
-  width: 40em;
-  height: 40em;
-  position: absolute; /* Cambio a posición absoluta */
-  top: -20vh;
-  right: 0;
+  width: 29vw;
+  height: 100%;
+  overflow: visible;
+  position: absolute;
+  right: -10vw;
+  float: right;
+  top: 0;
 }
 body .swiper-container .swiper-wrapper .swiper-slide .foto img {
   width: 100%;
@@ -352,4 +399,17 @@ body .swiper-container .swiper-button {
 }
 body .swiper-container .swiper-button-active {
   background-color: #ababab !important;
+}
+
+.categories-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.5em;
+  width: 82vw;
+  align-items: center;
+  margin: 0 auto;
+}
+.categories-title a {
+  color: #ABABAB;
 }/*# sourceMappingURL=main.css.map */
