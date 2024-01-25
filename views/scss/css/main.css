@@ -251,6 +251,9 @@ body .show-less-categories {
   background-color: #ff5e00;
   color: #FFFFFF;
 }
+#productPage #info #options #sizes button.selected {
+  background-color: rgba(255, 94, 0, 0.4);
+}
 #productPage #info #options #buttons {
   width: 80%;
   padding-top: 10px;

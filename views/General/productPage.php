@@ -51,15 +51,9 @@
                 $sizes = explode(",",$product["size"]);
                 echo "<div id='options'>";
                     echo "<div id='sizes'>";
+                        $chars = array("{", "}", '"');
                         foreach($sizes as $size){
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
+                            echo "<button class='sizeBtn'>EU".str_replace($chars, "", $size)."</button>";
                         }
                     echo "</div>";
                     echo "<div id='description'>";
