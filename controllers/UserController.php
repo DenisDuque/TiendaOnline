@@ -21,12 +21,13 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
             } else {
-                if(!isset($_GET["code"])){
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct'>";
-                }else{
+                if(isset($_GET["code"])){
                     //En caso de que se nos haya redirigido al login desde una pagina de producto, este se almacenara en el origen
                     //y despues de loguear volveremos a la pagina de ese producto
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&function=".$_GET["function"]."&code=".$_GET["code"]."'>";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&code=".$_GET["code"]."'>";
+                    $_SESSION["function"] = $_POST["function"];
+                }else{
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
                 }
             }
         } else {

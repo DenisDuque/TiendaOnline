@@ -21,5 +21,12 @@ class OrdersController {
             OrdersModel::editOrder($_POST['orderId'], 'shipped');
         }
     }
+    public static function shippingMethodOptions() {
+        $result = OrdersModel::obtainMethods();
+        return $result;
+    }
+    public function showCart() {
+        include __DIR__.'/../views/General/CartView.php';
+    }
 }
 ?>

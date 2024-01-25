@@ -50,29 +50,40 @@ body {
             }
         }
     }
+
+    section .home-products {
+        width: 82vw;
+        height: auto;
+    }
+
     nav {
         display: flex;
         justify-content: center;
     }
     #categories {
+        margin: 0;
         padding: 0;
         display: flex;
         flex-direction: row;
-        width: 80vw;
-        height: 15vh;
-        overflow-x: auto;
+        width: 82vw;
+        max-height: 5.5vh;
+        flex-wrap: wrap;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
         .category {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
             background-color: #F6F6F6;
-            width: 8vw;
+            width: auto;
             min-width: 8vw;
-            height: 10vh;
+            height: 5vh;
             margin-right: 1vw;
+            margin-bottom: 2vh;
             color: $grey;
-            font-size: 24px;
+            font-size: 1.5em;
             font-style: normal;
             font-weight: 500;
             border-radius: $radius;
@@ -95,7 +106,34 @@ body {
             cursor: pointer;
         }
     }
-    
+    button {
+        height: 3vh;
+        width: 3vh;
+        margin: 0;
+        padding: 0;
+        margin-top: 1vh;
+        margin-left: -1vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: none;
+        background: transparent;
+        justify-content: center;
+        transition: all 0.5s ease-in-out;
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .show-more-categories {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        max-height: 100vh !important;
+    }
+    .show-less-categories {
+        transform: scaleY(-1);
+    }
 }
 
     #productPage{
@@ -107,7 +145,7 @@ body {
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        *{
+        * {
             font-family: 'Kanit';
             margin: 0;
             padding: 0;
@@ -202,9 +240,12 @@ body {
                     padding-top:10px;
                     display: flex;
                     justify-content: space-between;
-                    a{
-                        font-size:larger;
+                    form{
                         width: 30%;
+                        button{
+                            font-size:larger;
+                            width: 100%;
+                        }
                     }
                     #wishlist{
                         display: flex;
@@ -212,18 +253,12 @@ body {
                         align-items: center;
                         justify-content: space-evenly;
                         text-decoration: none;
-                        svg{
-                            width:  1.5vw;
+                        img{
+                            width: 18%;
                             height: auto;
-                            fill: black;
-                        }
-                        svg.inWishList{
-                            fill: red;
-                        }     
+                        }  
                     }
-                    #cart{
-                        text-align: center;
-                    }
+                   
                 }
     
                 #description{
@@ -276,25 +311,34 @@ body {
                     box-sizing: border-box;
                     text-align: center;
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
                     justify-content: center;
                     padding: 1vh;
                     position: relative;
+
+                    .content {
+                        background: var(--GradientYellow, linear-gradient(90deg, #FFCB74 0%, #FF5E00 100%));
+                        display: flex;
+                        flex-direction: row;
+                        height: 30vh;
+                        width: 82vw;
+                        margin: 0 auto;
+                        border-radius: 1vh;
+                        padding: 1vh;
+                        position: relative;
+                        overflow: visible;
+                    }
     
                     .text {
-                        background: var(--GradientYellow, linear-gradient(90deg, #FFCB74 0%, #FF5E00 100%));
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        height: 30vh;
-                        width: 82vw;
-                        border-radius: 1vh;
-                        margin: 0 auto;
-                        padding: 1vh;
-                        position: relative;
+                        height: 100%;
+                        width: max-content;
+                        text-align: left;
     
                         h2 {
-                            width: fit-content;
+                            width: max-content;
                             font-size: 4em;
                             margin-left: 5%;
                             margin-top: 1.5%;
@@ -318,17 +362,19 @@ body {
     
                     .foto {
                         // border: 2px solid red;
-                        width: 40em;
-                        height: 40em;
-                        position: absolute; /* Cambio a posición absoluta */
-                        top: -20vh;
-                        right: 0;
+                        width: 29vw;
+                        height: 100%;
+                        overflow: visible;
+                        position: absolute;
+                        right: -10vw;
+                        float: right;
+                        top: 0;
                         
                         img {
                             // border: 2px solid blue;
                             width: 100%;
                             height: 100%;
-                            object-fit: contain;
+                            object-fit: cover;
                         }
                     }
                 }
@@ -356,6 +402,17 @@ body {
         }
     }
     
-
+.categories-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.5em;
+    width: 82vw;
+    align-items: center;
+    margin: 0 auto;
+    a {
+        color: $grey;
+    }
+}
     
     

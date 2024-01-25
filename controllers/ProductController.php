@@ -115,8 +115,18 @@ class ProductController {
     }
 
     public function showProduct() {
-        if(isset($_GET["function"])){
-            if($_GET["function"] == "wishlist"){
+        if(isset($_SESSION["function"])){
+            if($_SESSION["function"] == "wishlist"){
+                if(ProductModel::inWishList()){
+                    ProductModel::dropFromWishList();
+                }else{
+                    ProductModel::addToWishList();
+                }
+                unset($_SESSION["function"]);
+            }
+        }
+        if(isset($_POST["function"])){
+            if($_POST["function"] == "wishlist"){
                 if(ProductModel::inWishList()){
                     ProductModel::dropFromWishList();
                 }else{
