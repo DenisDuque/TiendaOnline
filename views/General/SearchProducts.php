@@ -2,10 +2,10 @@
 <!--Header include-->
 <?php
         require_once("views\General\Components\headerHome.html");
-    ?>
+?>
 <div>
     <nav>
-        <input type="text" class="search" placeholder="Search">
+        <input type="text" id="searchInput" class="search" placeholder="Search">
         <h3>Sort by</h3>
         <select id="sortInput" name="active" id="select">
             <option id="noSort" value="none">None</option>
@@ -22,7 +22,9 @@
                 }
             ?>
         </ul>
+        <button id="categories-show"><img src="views/assets/images/utils/selectArrow.png" alt="Flecha desplegable"/></button>
     </nav>
     <section id="itemsContainer"></section>
 </div>
-<script src="views/js/ProductSearch.js"></script>
+<script src="views/js/search.js"></script>
+<script src="views/js/initSearch.js"></script>
