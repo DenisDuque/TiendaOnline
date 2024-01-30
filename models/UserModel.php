@@ -163,7 +163,7 @@ class UserModel extends Database {
     
     public static function getSpecifiedUser($email) {
         try {
-            $query = "SELECT * FROM users WHERE email LIKE :email";
+            $query = "SELECT * FROM users WHERE email = :email";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $email);
             $stmt->execute();

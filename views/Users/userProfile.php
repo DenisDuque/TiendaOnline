@@ -6,6 +6,9 @@
     <title>My profile</title>
 </head>
 <body>
-    <h1>Buenas tardes</h1>
+    <?php
+        
+    
+    ?> 
 </body>
 </html>
