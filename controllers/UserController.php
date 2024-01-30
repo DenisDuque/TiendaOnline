@@ -80,6 +80,9 @@ class UserController {
     }
 
     public function showProfile(){
+        $user = UserModel::getSpecifiedUser($_SESSION["email"]);
+        $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
+        include "views/Users/userProfile.php";
         
     }
 }
