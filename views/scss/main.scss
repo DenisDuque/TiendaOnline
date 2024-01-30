@@ -56,6 +56,21 @@ body {
         height: auto;
     }
 
+    .search {
+        width: 60vw;
+        border-radius: $radius;
+        border: none;
+        background: #FFF;
+        background-image: url("../../assets/images/utils/search.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        font-family: Kanit;
+        font-size: 1em;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+
     nav {
         display: flex;
         justify-content: center;
