@@ -456,9 +456,28 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+    public static function getProductInfoForCart($code) {
+        try {
+            $query = "SELECT * FROM products WHERE code = :code";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $routeImage = self::getProductImage('lateral', $code);
+            if (!empty($rows)) {
+                $rows[0]['image'] = $routeImage;
+            } else {
+                $rows[0]['image'] = null;
+            }
+            return $rows;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 
     public static function inWishList(){
-        echo "<script>console.log('tusmuertos');</script>";
+        //echo "<script>console.log('tusmuertos');</script>";
         $exists = false;
         $query = "SELECT * FROM wishlist WHERE useremail = :user AND productcode = :product";
         $stmt = self::getConnection()->prepare($query);

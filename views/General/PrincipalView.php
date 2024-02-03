@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Urban Store</title>
     <link rel="stylesheet" href="views/scss/css/main.css">
+    <script src="views/js/cart.js"></script>
 </head>
 <body>
     <!--Header include-->
     <?php
+        //session_destroy();
+        if(isset($_SESSION['email'])) {
+            echo "<input type='hidden' name='loggedCheck' id='loggedCheck' value='".$_SESSION['email']."'>";
+        } else {
+            echo "<input type='hidden' name='loggedCheck' id='loggedCheck' value='unlogged'>";
+        }
         include("views\General\Components\headerHome.html");
     ?>
     <!--Image slider-->

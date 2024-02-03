@@ -168,13 +168,37 @@ ALTER SEQUENCE public.images_id_seq OWNED BY public.images.id;
 --
 
 CREATE TABLE public.incart (
+    id integer NOT NULL,
     shop integer NOT NULL,
-    product character(200) NOT NULL,
-    amount integer NOT NULL
+    product character varying(200),
+    amount integer NOT NULL,
+    size character varying(200)
 );
 
 
 ALTER TABLE public.incart OWNER TO postgres;
+
+--
+-- Name: incart_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.incart_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.incart_id_seq OWNER TO postgres;
+
+--
+-- Name: incart_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.incart_id_seq OWNED BY public.incart.id;
+
 
 --
 -- Name: notifications; Type: TABLE; Schema: public; Owner: postgres
@@ -368,6 +392,13 @@ ALTER TABLE ONLY public.images ALTER COLUMN id SET DEFAULT nextval('public.image
 
 
 --
+-- Name: incart id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.incart ALTER COLUMN id SET DEFAULT nextval('public.incart_id_seq'::regclass);
+
+
+--
 -- Name: notifications id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -401,7 +432,6 @@ COPY public.bill (id, purchase) FROM stdin;
 --
 
 COPY public.categories (code, name, status) FROM stdin;
-5	elegantes                                         	enabled
 7	botas                                             	enabled
 8	heels                                             	enabled
 9	sandals                                           	enabled
@@ -416,6 +446,7 @@ COPY public.categories (code, name, status) FROM stdin;
 15	elegantess                                        	enabled
 16	zapatoss                                          	enabled
 6	simples                                           	enabled
+5	elegantes                                         	enabled
 \.
 
 
@@ -424,6 +455,11 @@ COPY public.categories (code, name, status) FROM stdin;
 --
 
 COPY public.discountcodes (id, code, discount, dateexpiration) FROM stdin;
+1	UrbanStore                                        	10	2025-01-01
+5	paplo                                             	33	2025-01-01
+3	AF1                                               	10	2025-01-01
+4	running                                           	18	2025-01-01
+2	croissant                                         	15	2023-01-01
 \.
 
 
@@ -432,7 +468,10 @@ COPY public.discountcodes (id, code, discount, dateexpiration) FROM stdin;
 --
 
 COPY public.images (id, product, route, perspectives) FROM stdin;
-2	za123-za                                          	ruta                                                                                                                                                                                                    	lateralperspective
+35	za741-za                                          	za741-za-Bottom.png                                                                                                                                                                                     	belowperspective
+36	za741-za                                          	za741-za-3D.jpeg                                                                                                                                                                                        	3dmodel
+33	za741-za                                          	za741-za-Side.png                                                                                                                                                                                       	lateralperspective
+34	za741-za                                          	za741-za-Up.png                                                                                                                                                                                         	aboveperspective
 \.
 
 
@@ -440,13 +479,13 @@ COPY public.images (id, product, route, perspectives) FROM stdin;
 -- Data for Name: incart; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.incart (shop, product, amount) FROM stdin;
-1	za123-za                                                                                                                                                                                                	5
-1	za321-za                                                                                                                                                                                                	5
-2	sa789-sa                                                                                                                                                                                                	10
-2	sa987-sa                                                                                                                                                                                                	10
-2	de789-ba                                                                                                                                                                                                	10
-2	de835-ba                                                                                                                                                                                                	10
+COPY public.incart (id, shop, product, amount, size) FROM stdin;
+3	2	de835-ba	10	42EU
+4	2	de789-ba	10	42EU
+5	2	sa987-sa	10	42EU
+6	2	sa789-sa	10	42EU
+49	1	za123-za	3	40EU
+50	1	za123-za	4	42EU
 \.
 
 
@@ -463,30 +502,31 @@ COPY public.notifications (id, useremail, message, title) FROM stdin;
 --
 
 COPY public.products (code, name, description, codecategory, price, stock, sold, status, featured, size) FROM stdin;
-za123-za                                                                                                                                                                                                	zapatos PREMIUM                                   	zapatos muy comodos                                                                                                                                                                                     	1	25.00	10	102	enabled	f	\N
-za321-za                                                                                                                                                                                                	zapatos LIMITED                                   	zapatos muy incomodos                                                                                                                                                                                   	1	30.00	20	100	enabled	f	\N
-sa789-sa                                                                                                                                                                                                	sandalias PREMIUM                                 	sandalias muy comodos                                                                                                                                                                                   	2	35.00	10	99	enabled	f	\N
+si989-za                                                                                                                                                                                                	zapatos simples PREMIUM                           	zapatos simples muy comodas                                                                                                                                                                             	6	20.00	10	99	enabled	t	{}
+ki919-za                                                                                                                                                                                                	zapatos para crios PREMIUM                        	zapatos de crios muy comodas                                                                                                                                                                            	13	30.00	15	99	enabled	t	{}
+za321-za                                                                                                                                                                                                	zapatos LIMITED                                   	zapatos muy incomodos y bonitos                                                                                                                                                                         	1	30.00	20	100	enabled	f	{"33EU                                                                                                                                                                                                                                                           ","43EU                                                                                                                                                                                                                                                           "}
 sa987-sa                                                                                                                                                                                                	sandalias LIMITED                                 	sandalias muy incomodos                                                                                                                                                                                 	2	30.00	20	100	enabled	f	\N
 de789-ba                                                                                                                                                                                                	bambas PREMIUM                                    	bambas muy comodas                                                                                                                                                                                      	4	45.00	10	99	enabled	f	\N
 de835-ba                                                                                                                                                                                                	bambas LIMITED                                    	bambas muy incomodas                                                                                                                                                                                    	4	45.00	20	100	enabled	f	\N
-el826-za                                                                                                                                                                                                	zapatos elegantes PREMIUM                         	zapatos elegantes muy comodas                                                                                                                                                                           	5	50.00	10	99	enabled	f	\N
-el917-za                                                                                                                                                                                                	zapatos LIMITED                                   	zapatos elegantes muy incomodas                                                                                                                                                                         	5	45.00	20	100	enabled	f	\N
-si989-za                                                                                                                                                                                                	zapatos simples PREMIUM                           	zapatos simples muy comodas                                                                                                                                                                             	6	20.00	10	99	enabled	f	\N
-si911-za                                                                                                                                                                                                	zapatos simples LIMITED                           	zapatos simples muy incomodas                                                                                                                                                                           	6	15.00	20	100	enabled	f	\N
-bo110-bo                                                                                                                                                                                                	botas PREMIUM                                     	botas muy comodas                                                                                                                                                                                       	7	30.00	10	99	enabled	f	\N
+wo901-za                                                                                                                                                                                                	zapatos de mujer PREMIUM                          	zapatos de mujer muy comodas                                                                                                                                                                            	12	30.00	15	99	enabled	f	\N
 bo911-bo                                                                                                                                                                                                	botas LIMITED                                     	botas muy incomodas                                                                                                                                                                                     	7	35.00	20	100	enabled	f	\N
 he224-ta                                                                                                                                                                                                	tacones PREMIUM                                   	tacones muy comodas                                                                                                                                                                                     	8	33.00	10	99	enabled	f	\N
+za741-za                                                                                                                                                                                                	zapatos NORMAL                                    	Zapatos humildes                                                                                                                                                                                        	1	15.00	10	0	enabled	f	{"35EU                                                                                                                                                                                                                                                           "}
+za123-za                                                                                                                                                                                                	zapatos PREMIUM PLUS                              	zapatos muy comodos                                                                                                                                                                                     	1	33.00	20	102	enabled	f	{"40EU                                                                                                                                                                                                                                                           ","41EU                                                                                                                                                                                                                                                           ","42EU                                                                                                                                                                                                                                                           ","43EU                                                                                                                                                                                                                                                           ","44EU                                                                                                                                                                                                                                                           "}
 he236-ta                                                                                                                                                                                                	tacones LIMITED                                   	tacones muy incomodas                                                                                                                                                                                   	8	35.00	20	100	enabled	f	\N
+ma901-za                                                                                                                                                                                                	zapatos de hombre PREMIUM                         	zapatos de hombre muy comodas                                                                                                                                                                           	11	30.00	15	99	enabled	f	\N
+sa789-sa                                                                                                                                                                                                	sandalias PREMIUM                                 	sandalias muy comodos                                                                                                                                                                                   	2	35.00	10	99	enabled	f	{"40EU                                                                                                                                                                                                                                                           ","41EU                                                                                                                                                                                                                                                           ","42EU                                                                                                                                                                                                                                                           ","43EU                                                                                                                                                                                                                                                           ","44EU                                                                                                                                                                                                                                                           "}
+el826-za                                                                                                                                                                                                	zapatos elegantes PREMIUM                         	zapatos elegantes muy comodas                                                                                                                                                                           	5	50.00	10	99	enabled	f	\N
+ma980-za                                                                                                                                                                                                	zapatos de hombre LIMITED                         	zapatos de hombre muy incomodas                                                                                                                                                                         	11	30.00	20	100	enabled	f	\N
+bo110-bo                                                                                                                                                                                                	botas PREMIUM                                     	botas muy comodas                                                                                                                                                                                       	7	30.00	10	99	enabled	f	\N
+wo124-za                                                                                                                                                                                                	zapatos de mujer LIMITED                          	zapatos de mujer muy incomodas                                                                                                                                                                          	12	30.00	20	100	enabled	f	\N
+el917-za                                                                                                                                                                                                	zapatos LIMITED                                   	zapatos elegantes muy incomodas                                                                                                                                                                         	5	45.00	20	100	enabled	f	\N
+ki190-za                                                                                                                                                                                                	zapatos de crios LIMITED                          	zapatos de crios muy incomodas                                                                                                                                                                          	13	30.00	20	100	enabled	f	\N
+si911-za                                                                                                                                                                                                	zapatos simples LIMITED                           	zapatos simples muy incomodas                                                                                                                                                                           	6	15.00	20	100	enabled	f	\N
 sa457-sa                                                                                                                                                                                                	sandalias PREMIUM                                 	sandalias muy comodas                                                                                                                                                                                   	9	32.00	10	99	enabled	f	\N
 sa231-sa                                                                                                                                                                                                	sandalias LIMITED                                 	sandalias muy incomodas                                                                                                                                                                                 	9	30.00	20	100	enabled	f	\N
 sn901-za                                                                                                                                                                                                	zapatillas PREMIUM                                	zapatillas muy comodas                                                                                                                                                                                  	10	30.00	15	99	enabled	f	\N
 sn980-za                                                                                                                                                                                                	zapatillas LIMITED                                	zapatillas muy incomodas                                                                                                                                                                                	10	30.00	20	100	enabled	f	\N
-ma901-za                                                                                                                                                                                                	zapatos de hombre PREMIUM                         	zapatos de hombre muy comodas                                                                                                                                                                           	11	30.00	15	99	enabled	f	\N
-ma980-za                                                                                                                                                                                                	zapatos de hombre LIMITED                         	zapatos de hombre muy incomodas                                                                                                                                                                         	11	30.00	20	100	enabled	f	\N
-wo901-za                                                                                                                                                                                                	zapatos de mujer PREMIUM                          	zapatos de mujer muy comodas                                                                                                                                                                            	12	30.00	15	99	enabled	f	\N
-wo124-za                                                                                                                                                                                                	zapatos de mujer LIMITED                          	zapatos de mujer muy incomodas                                                                                                                                                                          	12	30.00	20	100	enabled	f	\N
-ki919-za                                                                                                                                                                                                	zapatos para crios PREMIUM                        	zapatos de crios muy comodas                                                                                                                                                                            	13	30.00	15	99	enabled	f	\N
-ki190-za                                                                                                                                                                                                	zapatos de crios LIMITED                          	zapatos de crios muy incomodas                                                                                                                                                                          	13	30.00	20	100	enabled	f	\N
 \.
 
 
@@ -495,6 +535,8 @@ ki190-za                                                                        
 --
 
 COPY public.shippingmethod (id, name, price) FROM stdin;
+1	LAZZY SHIP                                        	1.00
+2	FAST SHIP                                         	5.00
 \.
 
 
@@ -503,8 +545,8 @@ COPY public.shippingmethod (id, name, price) FROM stdin;
 --
 
 COPY public.shopping (id, useremail, price, datepurchase, dateend, status) FROM stdin;
-1	alex.alcala@inslapineda.cat                       	100	\N	\N	pending
-2	customer@gmail.com                                	100	\N	\N	pending
+2	customer@gmail.com                                	\N	\N	\N	cart
+1	alexalcala@gmail.com                              	\N	\N	\N	cart
 \.
 
 
@@ -515,6 +557,8 @@ COPY public.shopping (id, useremail, price, datepurchase, dateend, status) FROM 
 COPY public.users (email, phone, name, surnames, address, rol, password, signature, image) FROM stdin;
 alex.alcala@inslapineda.cat                       	123456789	alex                                              	alcala garcia                                     	calle berenjena                                   	customer	1234	\N	\N
 customer@gmail.com                                	124456789	custo                                             	mer                                               	\N	customer	1234	\N	\N
+alexag04@gmail.com                                	\N	Alex                                              	Alcala                                            	\N	customer	$2y$10$hgj5iUwM6K94IWB6sm7ZH.586mAK/rcWzFRnA.mE4ZBwmRpDX5pLi	\N	\N
+alexalcala@gmail.com                              	\N	Alex                                              	Alcala                                            	\N	customer	$2y$10$OAYt3XOGqt09TeEOwwE9qujVM1WkjXpgAug.YhGwkUh4KB3D4710C	\N	\N
 \.
 
 
@@ -544,14 +588,21 @@ SELECT pg_catalog.setval('public.categories_code_seq', 16, true);
 -- Name: discountcodes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.discountcodes_id_seq', 1, false);
+SELECT pg_catalog.setval('public.discountcodes_id_seq', 5, true);
 
 
 --
 -- Name: images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.images_id_seq', 2, true);
+SELECT pg_catalog.setval('public.images_id_seq', 36, true);
+
+
+--
+-- Name: incart_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.incart_id_seq', 52, true);
 
 
 --
@@ -565,14 +616,14 @@ SELECT pg_catalog.setval('public.notifications_id_seq', 1, false);
 -- Name: shippingmethod_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.shippingmethod_id_seq', 1, false);
+SELECT pg_catalog.setval('public.shippingmethod_id_seq', 2, true);
 
 
 --
 -- Name: shopping_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.shopping_id_seq', 2, true);
+SELECT pg_catalog.setval('public.shopping_id_seq', 14, true);
 
 
 --
@@ -612,7 +663,7 @@ ALTER TABLE ONLY public.images
 --
 
 ALTER TABLE ONLY public.incart
-    ADD CONSTRAINT incart_pkey PRIMARY KEY (shop, product);
+    ADD CONSTRAINT incart_pkey PRIMARY KEY (id);
 
 
 --
@@ -722,3 +773,4 @@ ALTER TABLE ONLY public.wishlist
 --
 -- PostgreSQL database dump complete
 --
+
