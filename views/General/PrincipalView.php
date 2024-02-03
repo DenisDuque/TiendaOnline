@@ -94,6 +94,7 @@
         </nav>
         <section id="itemsContainer"></section>
     </section>
+    <script src="views/js/search.js"></script>
     <script src="views/js/mainPage.js"></script>
 </body>
 </html>
