@@ -311,7 +311,19 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    
+    public static function getTopProductsGraph($limit = 10) {
+        try {
+            $query = "SELECT code, sold FROM products ORDER BY sold DESC LIMIT :limit";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 
     public static function getProductImage($perspective, $product) {
         try {

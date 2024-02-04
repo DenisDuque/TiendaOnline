@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     var priceFloat = parseFloat(price);
                     itemsTotalValue += priceFloat;
                 }
-                document.getElementById("itemsPrice").innerHTML = "ITEMS: " + productsArray.length + " $" + itemsTotalValue.toFixed(2);
+                document.getElementById("itemsPrice").innerHTML = "ITEMS: " + itemsTotal.length + " $" + itemsTotalValue.toFixed(2);
                 //Shipping method and final price
                 var selectElement = document.getElementById("selectShippingMethod");
                 var outputDiv = document.getElementById("totalCost");

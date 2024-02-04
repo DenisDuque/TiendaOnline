@@ -7,6 +7,7 @@
         <script src="views/js/Administrator.js"></script>
         <script src="views/js/canvas.js"></script>
         <script src="views/js/insertSignatureAjax.js"></script>
+        <script src="views/js/canvasGraphTop.js"></script>
         <title>Dashboard</title>
     </head>
     <body>
@@ -149,9 +150,9 @@
                 <canvas id="pinturaCanvas" width="500" height="300"></canvas>
                 <button id="botonBorrar">Borrar</button>
                 <button id="botonGuardar">Guardar</button>
-              
+                <canvas id="canvasGraphTopProducts" width="620" height="300"></canvas>
                 <style>
-                    #pinturaCanvas {
+                    canvas {
                         border: 1px solid #000;
                     }
                 </style>

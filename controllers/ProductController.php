@@ -196,5 +196,17 @@ class ProductController {
         $result = UserModel::insertAdminSignature($_SESSION['email'], $imageName);
         echo json_encode(['success' => true, 'info' => $result]);
     }
+    public function getTopProductsForGraph() {
+        ob_clean();
+        $topProducts = ProductModel::getTopProductsGraph();
+        $topProductsString = "&&";
+            foreach ($topProducts as $item) {
+                $topProductsString .= $item["code"] . "_" . $item["sold"] . ",";
+            }
+            $topProductsString = rtrim($topProductsString, ",");
+            $topProductsString .= "&&";
+            $topProductsString = str_replace(' ', '', $topProductsString);
+        echo json_encode(['success' => true, 'info' => $topProductsString]);
+    }
 }
 ?>
