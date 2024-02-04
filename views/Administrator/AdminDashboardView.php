@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="views/scss/css/administrator.css">
         <script src="views/js/Administrator.js"></script>
         <script src="views/js/canvas.js"></script>
+        <script src="views/js/insertSignatureAjax.js"></script>
         <title>Dashboard</title>
     </head>
     <body>
@@ -16,7 +17,7 @@
         <div id="container">
             <div id="leftPanel">
                 <div class="panels">
-                    <?php 
+                    <?php
                         include("views/Administrator/Components/categoriesPanel.html");
                         include("views/Administrator/Components/productsPanel.html");
                         include("views/Administrator/Components/customersPanel.html");

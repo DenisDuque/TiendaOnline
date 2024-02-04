@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../models/ProductModel.php';
+require_once __DIR__.'/../models/UserModel.php';
 class ProductController {
 
     public function default() {
@@ -188,6 +189,12 @@ class ProductController {
             $featured = isset($_POST['featured']) ? true : false;
             ProductModel::createProduct($code, $_POST['name'], $_POST['description'], $featured, $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
+    }
+    public static function adminSignature() {
+        ob_clean();
+        $imageName = $_SESSION['email'] . ".png";
+        $result = UserModel::insertAdminSignature($_SESSION['email'], $imageName);
+        echo json_encode(['success' => true, 'info' => $result]);
     }
 }
 ?>

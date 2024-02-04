@@ -184,7 +184,20 @@ class UserModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-
+    public static function insertAdminSignature($user, $route) {
+        try {
+            $query = "UPDATE users SET signature = :signature WHERE email = :email";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(":email", $user, PDO::PARAM_STR);
+            $stmt->bindParam(":signature", $route, PDO::PARAM_STR);
+            $stmt->execute();
+            return $stmt;
+        } 
+        catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 
     public static function getUserOrders($email){
         try {
