@@ -88,24 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
             botonBorrar.textContent = "Borrar";
         }
     });
-
-    // Botón de guardar
-    /*var botonGuardar = document.getElementById("botonGuardar");
-    botonGuardar.addEventListener("click", function() {
-        var canvas = document.getElementById("pinturaCanvas");
-        var imageData = canvas.toDataURL();  // Obtener la imagen en formato base64
-        console.log(imageData);
-        // Enviar la imagen al servidor
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState === 4 && xhr.status === 200) {
-                console.log(xhr.responseText);
-            }
-        };
-        xhr.open("POST", "../Administrator/Components/canvas.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send("imagen=" + encodeURIComponent(imageData));
-    });*/
+    var botonGuardar = document.getElementById("botonGuardar");
     botonGuardar.addEventListener("click", function() {
         var canvas = document.getElementById("pinturaCanvas");
         var imageData = canvas.toDataURL();  // Obtener la imagen en formato base64

@@ -29,6 +29,7 @@ body header {
   justify-content: space-between;
   width: auto;
   margin: 1vh 2vw 1vh 2vw;
+  margin-bottom: 5vh;
 }
 body header div {
   display: flex;
@@ -48,6 +49,7 @@ body header div img {
   height: auto;
 }
 body header nav {
+  margin: 0;
   float: right;
 }
 body header nav ul {
@@ -74,21 +76,63 @@ body section .home-products {
 }
 body .search {
   width: 60vw;
+  height: 7vh;
   border-radius: 10px;
   border: none;
   background: #FFF;
-  background-image: url("../../assets/images/utils/search.png");
+  background-image: url("../../assets/images/utils/searchBar.svg");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 4vh;
+  background-position-y: center;
+  background-position-x: 1vw;
+  box-sizing: border-box;
+  padding-left: 4vw;
   font-family: Kanit;
-  font-size: 1em;
+  font-size: 1.3em;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 }
+body #sortby {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+body #sortby select {
+  background-color: transparent;
+  background-image: url("../../assets/images/utils/selectArrow.png");
+  background-repeat: no-repeat;
+  background-size: 2.7vh;
+  border-radius: 4px;
+  background-position-y: center;
+  background-position-x: 90%;
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  border: none;
+  /* reset */
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+body #sortby select:focus {
+  border: none;
+}
+body #sortby select:focus-visible {
+  border: none;
+}
 body nav {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5vh;
 }
 body #categories {
   margin: 0;

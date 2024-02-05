@@ -5,13 +5,16 @@
 ?>
 <div>
     <nav>
+        <div></div>
         <input type="text" id="searchInput" class="search" placeholder="Search">
-        <h3>Sort by</h3>
-        <select id="sortInput" name="active" id="select">
-            <option id="noSort" value="none">None</option>
-            <option value="high-low">Price: High-low</option>
-            <option value="low-high">Price: Low-high</option>
-        </select>
+        <div id="sortby">
+            <h3>Sort by: </h3>
+            <select id="sortInput" name="active" id="select">
+                <option id="noSort" value="none">None</option>
+                <option value="high-low">Price: High-low</option>
+                <option value="low-high">Price: Low-high</option>
+            </select>
+        </div>
     </nav>
     
     <nav>

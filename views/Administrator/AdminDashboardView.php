@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="views/scss/css/administrator.css">
         <script src="views/js/Administrator.js"></script>
         <script src="views/js/canvas.js"></script>
+        <script src="views/js/insertSignatureAjax.js"></script>
+        <script src="views/js/canvasGraphTop.js"></script>
         <title>Dashboard</title>
     </head>
     <body>
@@ -16,7 +18,7 @@
         <div id="container">
             <div id="leftPanel">
                 <div class="panels">
-                    <?php 
+                    <?php
                         include("views/Administrator/Components/categoriesPanel.html");
                         include("views/Administrator/Components/productsPanel.html");
                         include("views/Administrator/Components/customersPanel.html");
@@ -148,9 +150,9 @@
                 <canvas id="pinturaCanvas" width="500" height="300"></canvas>
                 <button id="botonBorrar">Borrar</button>
                 <button id="botonGuardar">Guardar</button>
-              
+                <canvas id="canvasGraphTopProducts" width="620" height="300"></canvas>
                 <style>
-                    #pinturaCanvas {
+                    canvas {
                         border: 1px solid #000;
                     }
                 </style>
