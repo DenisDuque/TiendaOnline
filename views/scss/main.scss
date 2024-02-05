@@ -40,16 +40,35 @@ body {
                     margin-right: 2vw;
                     a {
                         display: flex;
-                        height: auto;
+                        flex-direction: column;
+                        height: 2em;
+                        width: 2em;
+                        text-decoration: auto;
                         img {
                             width: 2em;
                             height: 2em;
                             margin: 0;
                         }
+                        .dot {
+                            /* border: 1px solid $orange; */
+                            color: #000;
+                            border-radius: 100%;
+                            text-decoration: none;
+                            width: 1em;
+                            height: 1em;
+                            text-align: center;
+                            font-size: 1em;
+                            font-weight: 600;
+                            position: relative;
+                            bottom: 0;
+                            right: 0;
+                            align-self: self-end;
+                        }
                     }
                 }
             }
         }
+        
         margin-bottom: 5vh;
     }
 

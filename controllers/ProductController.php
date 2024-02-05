@@ -70,6 +70,7 @@ class ProductController {
                         'code' => $product->getCode(),
                         'codecategory' => $product->getCategory(),
                         'name' => $product->getName(),
+                        'description' => $product->getDescription(),
                         'price' => $product->getPrice(),
                         'sold' => $product->getSold(),
                         'stock' => $product->getStock(),

@@ -35,9 +35,8 @@ body {
 
 // Header Styles
 
-header {
+header.admin {
 	display: flex;
-	width: 100%;
 	align-items: center;
     user-select: none;
 	h1 {
@@ -48,11 +47,11 @@ header {
 	}
 
 	img {
-    	filter: brightness(0);
+        filter: brightness(0);
     	height: 2.6vw;
     	width: 2.6vw;
         margin-right: 2.6vw;
-    	&:hover {
+        &:hover {
         	filter: brightness(1);
         	transform: scale(1.01);
     	}
@@ -69,7 +68,7 @@ header {
 // Left Panel Styles
 
 #leftPanel {
-    //border: 1px solid black;
+    // border: 1px solid black;
     //overflow: hidden;
     position: relative;
     display: flex;
@@ -115,8 +114,8 @@ header {
     }
     
     .adminForm {
-        height: 71.5vh;
-        width: 30vw;
+        height: 72vh;
+        width: 16vw;
         padding: 5vh 1vw;
         background-color: $adminOrange;
         border-radius: $radius;
@@ -132,11 +131,12 @@ header {
         form {
             display: flex;
             flex-direction: column;
+            width:15vw;
         }
     }
 
     .formProd{
-        height: 71.5vh;
+        height: 72vh;
         width: 30vw;
         padding: 5vh 1vw;
         background-color: $adminOrange;
@@ -151,6 +151,36 @@ header {
             text-align: center;
         }
         form {
+            label{
+                font-weight: bold;
+            }
+            .underline{
+                text-decoration: underline;
+            }
+            .submitBtn{
+                font-weight: bold;
+                width: 100%;
+                height: 100%;
+                padding: 1.5vh 1.5vw;
+                border-radius: $radius;
+                border: none;
+                background-color: $greenSave;
+            }
+            input{
+                border-radius: $radius;
+                border: none;
+            }
+            select{
+                // appearance: none;
+                border:none;
+                border-bottom: 2px solid black;
+                background-color: transparent;
+                font-weight: bold;
+            }
+            select option{
+                font-weight: bold;
+                background-color: $adminOrange;
+            }
             display: flex;
             flex-direction: column;
             #status, #category{
@@ -165,20 +195,25 @@ header {
                 display: flex;
                 justify-content: space-between;
                 td{
+                    display: flex;
                     border: 1px solid #ccc;
+                    border-radius: $radius;
                     background-color: white;
-                    text-align: center;
+                    align-items: center;
+                    justify-content: center;
+                    height: 6vh;
+                    width: 3.5vw;
                 }
             }
             #sizes{
                 display: flex;
                 justify-content: space-between;
                 #addSize{
-                    width: 100px;
+                    width: 150px;
                     #sizeInput{
                         width: calc(100% - 31px);
                     }
-                    button{
+                    .addSizeBtn{
                         width: auto;
                     }
                 }
@@ -601,7 +636,7 @@ header {
 
     *::-webkit-scrollbar-thumb {
         background-color: $grey;
-        border-radius: 10px;
+        border-radius: $radius;
         border: 3px solid $white;
     }
     *::-webkit-scrollbar-thumb:hover {
