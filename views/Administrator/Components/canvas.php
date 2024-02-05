@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener la imagen en formato base64
     $imagenBase64 = $_POST["imagen"];
@@ -10,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rutaDestino = '../../assets/images/signatures/';
 
     // Nombre de archivo único para evitar conflictos
-    $nombreArchivo = 'IDadminProvisional.png';
+    $nombreArchivo = $_SESSION['email'] . '.png';
 
     // Ruta completa del archivo en el servidor
     $rutaCompleta = $rutaDestino . $nombreArchivo;

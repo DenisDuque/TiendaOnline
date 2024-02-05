@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../models/ProductModel.php';
+require_once __DIR__.'/../models/UserModel.php';
 class ProductController {
 
     public function default() {
@@ -69,6 +70,7 @@ class ProductController {
                         'code' => $product->getCode(),
                         'codecategory' => $product->getCategory(),
                         'name' => $product->getName(),
+                        'description' => $product->getDescription(),
                         'price' => $product->getPrice(),
                         'sold' => $product->getSold(),
                         'stock' => $product->getStock(),
@@ -188,6 +190,24 @@ class ProductController {
             $featured = isset($_POST['featured']) ? true : false;
             ProductModel::createProduct($code, $_POST['name'], $_POST['description'], $featured, $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
+    }
+    public static function adminSignature() {
+        ob_clean();
+        $imageName = $_SESSION['email'] . ".png";
+        $result = UserModel::insertAdminSignature($_SESSION['email'], $imageName);
+        echo json_encode(['success' => true, 'info' => $result]);
+    }
+    public function getTopProductsForGraph() {
+        ob_clean();
+        $topProducts = ProductModel::getTopProductsGraph();
+        $topProductsString = "&&";
+            foreach ($topProducts as $item) {
+                $topProductsString .= $item["code"] . "_" . $item["sold"] . ",";
+            }
+            $topProductsString = rtrim($topProductsString, ",");
+            $topProductsString .= "&&";
+            $topProductsString = str_replace(' ', '', $topProductsString);
+        echo json_encode(['success' => true, 'info' => $topProductsString]);
     }
 }
 ?>

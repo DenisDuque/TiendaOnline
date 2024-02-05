@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__."/../models/UserModel.php";
+require_once __DIR__."/../models/OrdersModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
@@ -26,6 +27,11 @@ class UserController {
                     //y despues de loguear volveremos a la pagina de ese producto
                     echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&code=".$_GET["code"]."'>";
                     $_SESSION["function"] = $_POST["function"];
+                }elseif(isset($_SESSION["origin"])){
+                    if($_SESSION["origin"] = "profile"){
+                        unset($_SESSION["origin"]);
+                        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showProfile'>";
+                    }
                 }else{
                     echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
                 }
@@ -77,6 +83,18 @@ class UserController {
         $search = isset($_GET['search']) ? $_GET['search'] : null;
         $customers = UserModel::showcustomers($search);
         include __DIR__.'/../views/Administrator/AdminCustomersView.php';
+    }
+
+    public function showProfile(){
+        if(isset($_SESSION["email"])){
+            $user = UserModel::getSpecifiedUser($_SESSION["email"]);
+            $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
+            include "views\General\Components\headerHome.html";
+            include "views/Users/userProfile.php";
+        }else{
+            $_SESSION["origin"] = "profile";
+            self::default();
+        }
     }
 }
 ?>

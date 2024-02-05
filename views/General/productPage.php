@@ -51,15 +51,9 @@
                 $sizes = explode(",",$product["size"]);
                 echo "<div id='options'>";
                     echo "<div id='sizes'>";
+                        $chars = array("{", "}", '"', ' ');
                         foreach($sizes as $size){
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
-                            echo "<button>EU$size</button>";
+                            echo "<button class='sizeBtn' value='". str_replace($chars, "", $size) ."&".$product['code']."&".$product['stock']."'>EU".str_replace($chars, "", $size)."</button>";
                         }
                     echo "</div>";
                     echo "<div id='description'>";
@@ -85,15 +79,17 @@
                             echo "</form>";
                         
                         //add to cart btn
-                        if(!isset($_SESSION["email"])){
-                            echo "<form action='index.php?page=user&action=default&code=".$_GET["code"]."' method=post>";
-                        }else{
-                            echo "<form action='index.php?page=product&action=default&code=".$_GET["code"]."' method=post>";
-                        }
-                                echo "<input type='hidden' name='function' value='cart'>";
-                                echo "<button type='submit' id='wishlist'>";
-                                    echo "<p>Add to cart</p>";
-                                echo "</button>";
+                            echo "<form action='index.php?page=orders&action=productForCart' method=post>";
+                                echo "<input type='hidden' name='productDetails' id='productDetails'>";
+                                if(isset($_SESSION['email'])) {
+                                    echo "<button type='submit'>";
+                                        echo "<p>Add to cart</p>";
+                                    echo "</button>";
+                                } else {
+                                    echo "<button type='submit' id='addCart'>";
+                                        echo "<p>Add to cart</p>";
+                                    echo "</button>";
+                                }
                             echo "</form>";
                     echo "</div>";
                 echo "</div>";
