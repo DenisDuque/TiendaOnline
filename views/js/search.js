@@ -21,12 +21,13 @@ class BaseProductSearch {
     generateProductHTML(product) {
       const productName = product.name;
       const productPrice = product.price;
+      const productDescription = product.description;
       const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
       const productImage = product.image;
       return `
         <article>
           <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
-          <img src="views/assets/images/products/${productImage}.png" alt="ProductImage">
+          <img src="views/assets/images/products/${productImage}.png" alt="${productDescription}">
           <p>${productName}</p>
           <p>${productPrice}</p>
         </article>`;
@@ -66,6 +67,7 @@ class BaseProductSearch {
                             code: product.code,
                             codecategory: product.codecategory,
                             name: product.name,
+                            description: product.description,
                             price: product.price,
                             sold: product.sold,
                             image: product.image,
