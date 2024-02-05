@@ -31,5 +31,17 @@ class CategoryController {
             CategoryModel::createCategory($_POST['name'], $_POST['active']);
         }
     }
+    public function getCatProductsForGraph() {
+        ob_clean();
+        $countCatProducts = CategoryModel::getCountCatProducts();
+        $countCatProductsString = "&&";
+        foreach ($countCatProducts as $item) {
+            $countCatProductsString .= $item["name"] . "_" . $item["sales"] . ",";
+        }
+        $countCatProductsString = rtrim($countCatProductsString, ",");
+        $countCatProductsString .= "&&";
+        $countCatProductsString = str_replace(' ', '', $countCatProductsString);
+        echo json_encode(['success' => true, 'info' => $countCatProductsString]);
+    }
 }
 ?>

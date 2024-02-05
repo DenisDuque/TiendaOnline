@@ -150,6 +150,7 @@
                 <canvas id="pinturaCanvas" width="500" height="300"></canvas>
                 <button id="botonBorrar">Borrar</button>
                 <button id="botonGuardar">Guardar</button>
+                <h1>Top products graph</h1>
                 <canvas id="canvasGraphTopProducts" width="620" height="300"></canvas>
                 <style>
                     canvas {
