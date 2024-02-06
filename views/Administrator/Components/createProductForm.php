@@ -1,31 +1,31 @@
 <form id="CreateProdForm" action="index.php?page=Product&action=createProduct" method="POST" enctype="multipart/form-data">
     <table>
-        <tr><td><label for="name">Name product</label></td></tr>
+        <tr><td><label for="name" class="underline">Name product</label></td></tr>
         <tr>
             <td>
                 <input type="text" name="name" id="name">
             </td>
         </tr>
         <tr></tr>
-        <tr><td><label for="price">Price</label></td></tr>
+        <tr><td><label for="price"  class="underline">Price</label></td></tr>
         <tr>
             <td>
                 <input type="text" name="price" id="price">
             </td>
         </tr>
-        <tr><td><label for="stock">Stock</label></td></tr>
+        <tr><td><label for="stock"  class="underline">Stock</label></td></tr>
         <tr>
             <td>
                 <input type="text" name="stock" id="stock">
             </td>
         </tr>
-        <tr><td><label for="description">Description</label></td></tr>
+        <tr><td><label for="description"  class="underline">Description</label></td></tr>
         <tr>
             <td>
                 <input type="text" name="description" id="description">
             </td>
         </tr>
-        <tr><td><label for="">Featured</label></td></tr>
+        <tr><td><label for=""  class="underline">Featured</label></td></tr>
         <tr>
             <td>
                 <input type="checkbox" name="featured" id="featured">
@@ -36,8 +36,8 @@
             <td id="status">
                 <label for="">Status</label>
                 <select name="active" id="select">
-                    <option id="enabled" value="enabled">enabled</option>
-                    <option id="disabled" value="disabled">disabled</option>
+                    <option id="enabled" value="enabled">Enabled</option>
+                    <option id="disabled" value="disabled">Disabled</option>
                 </select>
             </td>
         </tr>
@@ -48,7 +48,7 @@
                     <?php 
                         $categories = CategoryController::generateCategoriesOptions();
                         foreach ($categories as $category) {
-                            echo "<option id='".$category->getCode()."' value='".$category->getCode()."'>".$category->getName()."</option>";
+                            echo "<option id='".$category->getCode()."' value='".$category->getCode()."'>".ucfirst($category->getName())."</option>";
                         }
                     ?>
                 </select>

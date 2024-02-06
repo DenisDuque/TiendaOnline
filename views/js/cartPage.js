@@ -78,6 +78,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    async function updateLocalStorage(productsArray) {
+        localStorage.setItem("products", JSON.stringify(productsArray));  
+        let cartNumber = document.getElementById("cartNumber");
+        let cartAmount = 0;
+
+        productsArray.forEach(function (product) {
+            cartAmount += product.amount;
+        });
+
+        cartNumber.innerHTML = cartAmount;
+    }
     function readLocalStorage() {
         var localStorageValue = localStorage.getItem('products');
         return localStorageValue ? JSON.parse(localStorageValue) : [];
@@ -100,8 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (product.code === idProduct && product.size === size && amounts < stock) {
                     product.amount++;
                 }
-            });   
-            localStorage.setItem("products", JSON.stringify(productsArray));  
+            });
+            updateLocalStorage(productsArray);
             processCart();
         } else {
             $.ajax({ 
@@ -133,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     product.amount--;
                 }
             });   
-            localStorage.setItem("products", JSON.stringify(productsArray));  
+            updateLocalStorage(productsArray);
             processCart();
         } else {
             $.ajax({ 
@@ -173,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (index !== -1) {
                 productsArray.splice(index, 1);
             }
-            localStorage.setItem("products", JSON.stringify(productsArray));  
+            updateLocalStorage(productsArray);  
             processCart();
         } else {
             $.ajax({ 

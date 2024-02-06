@@ -529,5 +529,16 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+    public static function getCategoryFromAllProducts() {
+        try {
+            $query = "SELECT codecategory FROM products";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
 }
 ?>

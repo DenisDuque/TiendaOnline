@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="views/scss/css/administrator.css">
         <script src="views/js/Administrator.js"></script>
+        <script src="views/js/canvasGraphCat.js"></script>
         <title>Categories</title>
     </head>
     <body>
-        <header>
+        <header class="admin">
             <h1>Urban Store</h1>
             <img src="views/assets/images/utils/signout.png" alt="Sign out">
         </header>
@@ -49,6 +50,13 @@
                     }
                     ?>
                 </div>
+                <h1>Popular categories chart</h1>
+                <canvas id="canvasCatTopProducts" width="620" height="300"></canvas>
+                <style>
+                    canvas {
+                        border: 1px solid #000;
+                    }
+                </style>
             </div>
         </div>
     </body>

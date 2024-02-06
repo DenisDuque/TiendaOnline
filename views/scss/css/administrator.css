@@ -28,27 +28,26 @@ body {
   font-family: Kanit;
 }
 
-header {
+header.admin {
   display: flex;
-  width: 100%;
   align-items: center;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
 }
-header h1 {
+header.admin h1 {
   font-size: 64px;
   margin: 0;
   flex: 1;
   text-align: center;
 }
-header img {
+header.admin img {
   filter: brightness(0);
   height: 2.6vw;
   width: 2.6vw;
   margin-right: 2.6vw;
 }
-header img:hover {
+header.admin img:hover {
   filter: brightness(1);
   transform: scale(1.01);
 }
@@ -105,8 +104,8 @@ header img:hover {
   transform: rotateZ(13deg);
 }
 #leftPanel .adminForm {
-  height: 71.5vh;
-  width: 30vw;
+  height: 72vh;
+  width: 16vw;
   padding: 5vh 1vw;
   background-color: rgba(255, 94, 0, 0.25);
   border-radius: 10px;
@@ -123,9 +122,10 @@ header img:hover {
 #leftPanel .adminForm form {
   display: flex;
   flex-direction: column;
+  width: 15vw;
 }
 #leftPanel .formProd {
-  height: 71.5vh;
+  height: 72vh;
   width: 30vw;
   padding: 5vh 1vw;
   background-color: rgba(255, 94, 0, 0.25);
@@ -144,6 +144,35 @@ header img:hover {
   display: flex;
   flex-direction: column;
 }
+#leftPanel .formProd form label {
+  font-weight: bold;
+}
+#leftPanel .formProd form .underline {
+  text-decoration: underline;
+}
+#leftPanel .formProd form .submitBtn {
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  padding: 1.5vh 1.5vw;
+  border-radius: 10px;
+  border: none;
+  background-color: #B7FFB0;
+}
+#leftPanel .formProd form input {
+  border-radius: 10px;
+  border: none;
+}
+#leftPanel .formProd form select {
+  border: none;
+  border-bottom: 2px solid black;
+  background-color: transparent;
+  font-weight: bold;
+}
+#leftPanel .formProd form select option {
+  font-weight: bold;
+  background-color: rgba(255, 94, 0, 0.25);
+}
 #leftPanel .formProd form #status, #leftPanel .formProd form #category {
   display: flex;
   justify-content: space-between;
@@ -156,21 +185,26 @@ header img:hover {
   justify-content: space-between;
 }
 #leftPanel .formProd form #views td {
+  display: flex;
   border: 1px solid #ccc;
+  border-radius: 10px;
   background-color: white;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 6vh;
+  width: 3.5vw;
 }
 #leftPanel .formProd form #sizes {
   display: flex;
   justify-content: space-between;
 }
 #leftPanel .formProd form #sizes #addSize {
-  width: 100px;
+  width: 150px;
 }
 #leftPanel .formProd form #sizes #addSize #sizeInput {
   width: calc(100% - 31px);
 }
-#leftPanel .formProd form #sizes #addSize button {
+#leftPanel .formProd form #sizes #addSize .addSizeBtn {
   width: auto;
 }
 #leftPanel .formProd form #sizeList {

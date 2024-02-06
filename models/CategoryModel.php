@@ -1,5 +1,6 @@
 <?php
     require_once(__DIR__."/../config/Database.php");
+    require_once(__DIR__."/ProductModel.php");
     class CategoryModel extends Database {
         private $code;
         private $name;
@@ -132,6 +133,45 @@
                 error_log("Error: " . $e->getMessage());
                 throw new Exception("Database error: " . $e->getMessage());
             }
+        }
+        public static function getAllCategories() {
+            try {
+                $goodStatus = "enabled";
+                $query = "SELECT code, name FROM categories WHERE status = :status";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':status', $goodStatus, PDO::PARAM_STR);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
+        }
+        public static function getProductsFromCategoriesForGraph($categories) {
+            $products = ProductModel::getCategoryFromAllProducts();
+            $resultArray = [];
+            foreach ($categories as $category) {
+                foreach ($products as $product) {
+                    if ($category["code"] == $product["codecategory"]) {
+                        $categoryName = str_replace(' ', '', $category['name']);
+                        if (array_key_exists($categoryName, $resultArray)) {
+                            $resultArray[$categoryName]["sales"]++;
+                        } else {
+                            $resultArray[$categoryName] = ["name" => $categoryName, "sales" => 1];
+                        }
+                    }
+                }
+            }
+            function compareToProducts($a, $b) {
+                return $b['sales'] - $a['sales'];
+            }
+            usort($resultArray, 'compareToProducts');
+            return array_values($resultArray);
+        }
+        public static function getCountCatProducts() {
+            $categories = self::getAllCategories();
+            $arrayCategoriesProducts = self::getProductsFromCategoriesForGraph($categories);
+            return $arrayCategoriesProducts;
         }
     }
 ?>
