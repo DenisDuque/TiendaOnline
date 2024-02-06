@@ -87,6 +87,9 @@ class UserController {
 
     public function showProfile(){
         if(isset($_SESSION["email"])){
+            if(isset($_POST["name"])){
+                UserModel::updateUser($_SESSION["email"]);
+            }
             $user = UserModel::getSpecifiedUser($_SESSION["email"]);
             $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
             include "views\General\Components\headerHome.html";
