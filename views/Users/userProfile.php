@@ -8,11 +8,11 @@
 <body>
     <main>
     <?php
-        echo "<div>";
-        echo "<div class='titles'>";
-           echo "<h1>My Orders</h1>";
-           echo "<h1>".count($orders)." items</h1>";
-        echo "</div>";
+        echo "<div id='orders'>";
+            echo "<div class='titles'>";
+                echo "<h1>My Orders</h1>";
+                echo "<h1>".count($orders)." items</h1>";
+            echo "</div>";
             echo "<table>";
                 echo "<tr>";
                     echo "<th>DATE</th>";
@@ -24,9 +24,11 @@
                 foreach($orders as $order){
                     echo "<tr class='order'>";
                         echo "<td>".$order->getDate()."</td>";
-                        echo "<td>";
-                            foreach($order->getProducts() as $products){
+                        echo "<td class='products'>";
+                            foreach($order->getProducts() as $product=>$amount){
                                 echo $product;
+                                echo "x$amount";
+                                echo "<br>";
                             }
                         echo "</td>";
                         echo "<td>".$order->getPrice()."</td>";
@@ -34,6 +36,9 @@
                     echo "</tr>";
                 }
             echo "</table>";
+        echo "</div>";
+        echo "<div id='userInfo'>";
+                
         echo "</div>";
     ?>
     </main>
