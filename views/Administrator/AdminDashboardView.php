@@ -13,12 +13,14 @@
     <body>
         <header class="admin">
             <h1>Urban Store</h1>
-            <img src="views/assets/images/utils/signout.png" alt="Sign out">
+            <a href="index.php?page=User&action=LogOut"><img src="views/assets/images/utils/signout.png" alt="Sign out"></a>
         </header>
         <div id="container">
             <div id="leftPanel">
                 <div class="panels">
                     <?php
+                        $_SESSION['email'] = "prueba@gmail.com";
+                        $_SESSION['rol'] = "admin";
                         include("views/Administrator/Components/categoriesPanel.html");
                         include("views/Administrator/Components/productsPanel.html");
                         include("views/Administrator/Components/customersPanel.html");

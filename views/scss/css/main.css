@@ -22,9 +22,9 @@
   background: #555;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1240px) {
   .burguer {
-    display: flex;
+    display: block !important;
   }
   body #categories .category {
     font-size: 0.8em;

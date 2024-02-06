@@ -25,7 +25,7 @@ class BaseProductSearch {
       const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
       const productImage = product.image;
       return `
-        <article>
+        <article id="${product.code}" class="product-article">
           <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
           <img src="views/assets/images/products/${productImage}.png" alt="${productDescription}">
           <p>${productName}</p>
@@ -36,6 +36,22 @@ class BaseProductSearch {
     async executeAsyncFunctions() {
       document.getElementById('itemsContainer').innerHTML = await this.fetchProducts();
       const result2 = await this.fetchData2();
+
+      const productArticles = document.querySelectorAll('.product-article');
+
+      productArticles.forEach(article => {
+        article.addEventListener('click', function () {
+          const productId = this.id;
+          console.log(`Producto con ID ${productId} ha sido clickeado.`);
+          // Crear una etiqueta meta con la propiedad 'http-equiv' para la redirección
+          const metaTag = document.createElement('meta');
+          metaTag.httpEquiv = 'refresh';
+          metaTag.content = '0;url=index.php?page=Product&action=showProduct&code=' + productId;
+
+          document.head.appendChild(metaTag);
+
+        });
+      });
   
       // Mostrar el resultado de la segunda promesa
       console.log(result2);

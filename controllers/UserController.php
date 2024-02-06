@@ -78,6 +78,12 @@ class UserController {
         // Redirigir a otra página después del registro exitoso
         echo 'Registro realizado';
     }    
+    public function logOut() {
+        if(isset($_SESSION['email'])) {
+            session_destroy();
+        }
+        echo"<meta http-equiv='refresh' content='0.1;url=index.php?page=User'>";
+    }
 
     public function showAdminUser() {
         $search = isset($_GET['search']) ? $_GET['search'] : null;
