@@ -10,7 +10,7 @@
     <body>
         <header class="admin">
             <h1>Urban Store</h1>
-            <img src="views/assets/images/utils/signout.png" alt="Sign out">
+            <a href="index.php?page=User&action=LogOut"><img src="views/assets/images/utils/signout.png" alt="Sign out"></a>
         </header>
         <div id="container">
             <div id="leftPanel">

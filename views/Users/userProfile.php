@@ -11,7 +11,7 @@
         echo "<div id='orders'>";
             echo "<div class='titles'>";
                 echo "<h1>My Orders</h1>";
-                echo "<h1>".count($orders)." items</h1>";
+                echo "<h1>".count($orders)." order(s)</h1>";
             echo "</div>";
             echo "<table>";
                 echo "<tr>";
@@ -38,6 +38,33 @@
             echo "</table>";
         echo "</div>";
         echo "<div id='userInfo'>";
+                echo "<h1>Your Profile</h1>";
+                echo "<p>EMAIL</p>";
+                echo "<p>".$_SESSION["email"]."</p>";
+                echo "<form action='index.php?page=User&action=showProfile' method='post'>";
+                    echo "<table>";
+                    echo "<tr>";
+                        echo "<td><label for='name'>NAME</label></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                        echo "<td><input type='text' name='name' id='name' placeholder='".$user->getName()." ".$user->getSurname()."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                        echo "<td><label for='phone'>PHONE</label></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                        echo "<td><input type='tel' name='phone' id='phone' placeholder='".$user->getPhone()."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                        echo "<td><label for='address'>ADDRESS</label></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                        echo "<td><input type='text' name='address' id='address' placeholder='".$user->getAddress()."'></td>";
+                    echo "</tr>";
+                    echo "</table>";
+                    echo "<input type='submit' value='SAVE CHANGES'>";
+                echo "</form>";
+                
                 
         echo "</div>";
     ?>
