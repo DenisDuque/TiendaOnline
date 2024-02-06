@@ -2,6 +2,22 @@
 @import 'variables.scss';
 @import 'scrollbar.scss';
 
+@media (max-width: 1180px) {
+
+    .burguer {
+        display: flex;
+    }
+
+    body {
+        #categories {
+            .category {
+                font-size: 0.8em;
+                text-overflow: clip;
+            }
+        }
+    }
+}
+
 body {
     header {
         display: flex;
@@ -10,6 +26,9 @@ body {
         justify-content: space-between;
         width: auto;
         margin: 1vh 2vw 1vh 2vw;
+        .burguer {
+            display: none;
+        }
         div {
             display: flex;
             flex-direction: row;
@@ -138,11 +157,13 @@ body {
         
     }
 
-    nav {
+    section nav {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        width: 82vw;
+        margin: 0 auto;
         margin-bottom: 5vh;
     }
     #categories {

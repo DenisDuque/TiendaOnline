@@ -22,6 +22,15 @@
   background: #555;
 }
 
+@media (max-width: 1180px) {
+  .burguer {
+    display: flex;
+  }
+  body #categories .category {
+    font-size: 0.8em;
+    text-overflow: clip;
+  }
+}
 body header {
   display: flex;
   flex-direction: row;
@@ -30,6 +39,9 @@ body header {
   width: auto;
   margin: 1vh 2vw 1vh 2vw;
   margin-bottom: 5vh;
+}
+body header .burguer {
+  display: none;
 }
 body header div {
   display: flex;
@@ -146,11 +158,13 @@ body #sortby select:focus {
 body #sortby select:focus-visible {
   border: none;
 }
-body nav {
+body section nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  width: 82vw;
+  margin: 0 auto;
   margin-bottom: 5vh;
 }
 body #categories {
@@ -428,6 +442,7 @@ body .swiper-container .swiper-wrapper .swiper-slide .text {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: -moz-max-content;
   width: max-content;
   text-align: left;
 }
