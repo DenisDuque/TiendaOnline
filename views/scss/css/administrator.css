@@ -31,9 +31,7 @@ body {
 header.admin {
   display: flex;
   align-items: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 header.admin h1 {
   font-size: 64px;
@@ -83,9 +81,7 @@ header.admin img:hover {
   padding: 2.5vh;
   transition: all ease 0.33s 0;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 #leftPanel .panels .panel img {
   transition: 0.33s;
@@ -256,9 +252,7 @@ header.admin img:hover {
   background-repeat: no-repeat;
   background-color: transparent;
   background-position: 100%;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   border: none;
   border-bottom: 1px solid black;
   width: 6vw;
@@ -297,9 +291,7 @@ header.admin img:hover {
   margin-bottom: 2.5vh;
   transition: all ease 0.33s 0;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 #leftPanel .orderInfo h2, #leftPanel .orderInfo form {
   padding-left: 2.5vh;
@@ -373,9 +365,7 @@ header.admin img:hover {
   font-size: 42px;
   justify-self: center;
   text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 #rightPanel #listContainer {
   width: 100%;
@@ -391,9 +381,7 @@ header.admin img:hover {
   display: flex;
   height: auto;
   margin-bottom: 3vh;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 #navBar #searchBar {
   background-color: white;
@@ -483,22 +471,16 @@ header.admin img:hover {
 .categoryComponent h5 {
   margin-left: 2vh;
   font-size: 16px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .categoryComponent p {
   color: #ABABAB;
   text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .categoryComponent div {
   margin-right: 2vh;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 
 .defaultComponent {
@@ -510,9 +492,7 @@ header.admin img:hover {
   align-items: center;
   border-radius: 10px;
   margin-bottom: 3vh;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent .imageComponent {
   background-color: #ECECEC;
@@ -523,9 +503,7 @@ header.admin img:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent .imageComponent img {
   width: 12vh;
@@ -534,36 +512,28 @@ header.admin img:hover {
   font-size: 16px;
   margin: 0;
   padding: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent p {
   font-size: 14px;
   margin: 0;
   padding: 0;
   color: #ABABAB;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent p span {
   font-size: 14px;
   margin: 0;
   padding: 0;
   color: #ABABAB;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   margin-left: 2vh;
 }
 .defaultComponent h5 {
   font-size: 14px;
   margin: 0;
   padding: 0;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent .textOnLeft {
   margin-left: 2vh;
@@ -571,9 +541,7 @@ header.admin img:hover {
   flex-direction: column;
   width: 40vw;
   height: 80%;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent .textOnRight {
   margin-right: 2vh;
@@ -584,9 +552,7 @@ header.admin img:hover {
   justify-content: center;
   align-items: right;
   text-align: end;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .defaultComponent .textOnRight .downloadBillBtn {
   align-self: end;

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My profile</title>
+    <link rel="stylesheet" href="views\scss\css\profilePage.css">
 </head>
 <body>
     <main>
+        <div id="all">
     <?php
         echo "<div id='orders'>";
             echo "<div class='titles'>";
@@ -33,6 +35,7 @@
                         echo "</td>";
                         echo "<td>".$order->getPrice()."</td>";
                         echo "<td>".$order->getStatus()."</td>";
+                        echo "<td><a href='#'>Cancel</a></td>";
                     echo "</tr>";
                 }
             echo "</table>";
@@ -66,6 +69,7 @@
                 echo "</form>";
         echo "</div>";
     ?>
+        </div>
     </main>
 </body>
 </html>
