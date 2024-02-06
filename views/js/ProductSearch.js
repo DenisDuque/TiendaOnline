@@ -32,12 +32,14 @@ class ProductSearch {
     }
 
     generateProductHTML(product) {
+      console.log("Codigo producto: " + product.code);
+      const productCode = product.code;
       const productName = product.name;
       const productPrice = product.price;
       const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
       const productImage = product.image;
       return `
-        <article>
+        <article id="${productCode}" class="product-article">
           <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
           <img src="views/assets/images/products/${productImage}.png" alt="ProductImage">
           <p>${productName}</p>
