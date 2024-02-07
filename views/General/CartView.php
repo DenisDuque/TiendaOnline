@@ -8,6 +8,7 @@
 ?>
 <div>
     <script src="views/js/cartPage.js"></script>
+    <script src="views/js/checkout.js"></script>
     <div id="leftPannel"></div>
     <div id="rightPannel">
         <form id="orderForm" action="index.php?page=Orders&action=purchaseOrder" method="POST" enctype="multipart/form-data">
@@ -30,7 +31,9 @@
                 <button type="button" id='applyPromoCodeBtn'>APPLY</button>
             </div>
             <div id="totalCost"></div>
+            <input type="hidden" name="totalCostInput" id="totalCostInput">
+            <input type="hidden" name="fecha" id="fecha">
             <input type="submit" value="CHECKOUT">
-        <form>
+        </form>
     </div>
 </div>
