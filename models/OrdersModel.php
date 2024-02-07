@@ -207,11 +207,12 @@ class OrdersModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getProductAmount($code) {
+    public static function getProductAmount($code, $shop) {
         try {
-            $query = "SELECT amount FROM inCart WHERE product = :product";
+            $query = "SELECT amount FROM inCart WHERE product = :product AND shop = :shop";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':product', $code, PDO::PARAM_STR);
+            $stmt->bindParam(':shop', $shop, PDO::PARAM_INT);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $suma = 0;
@@ -227,18 +228,18 @@ class OrdersModel extends Database {
     public static function addToCart($size, $product, $stock, $user) { 
         try {
             $stmt = self::searchCart($user);
-            $currentAmount = self::getProductAmount($product);
+            if($stmt->rowCount() == 0) {
+                $defaultStatus = 'cart';
+                $insertQuery = "INSERT INTO shopping (useremail, status) VALUES (:useremail, :status)";
+                $stmtI = self::getConnection()->prepare($insertQuery);
+                $stmtI->bindParam(':useremail', $user, PDO::PARAM_STR);
+                $stmtI->bindParam(':status', $defaultStatus, PDO::PARAM_STR);
+                $stmtI->execute();  
+                $stmt = self::searchCart($user);  
+            }
+            $id = $stmt->fetchColumn();
+            $currentAmount = self::getProductAmount($product, $id);
             if (intval($stock) != intval($currentAmount)) { 
-                if($stmt->rowCount() == 0) {
-                    $defaultStatus = 'cart';
-                    $insertQuery = "INSERT INTO shopping (useremail, status) VALUES (:useremail, :status)";
-                    $stmtI = self::getConnection()->prepare($insertQuery);
-                    $stmtI->bindParam(':useremail', $user, PDO::PARAM_STR);
-                    $stmtI->bindParam(':status', $defaultStatus, PDO::PARAM_STR);
-                    $stmtI->execute();  
-                    $stmt = self::searchCart($user);  
-                }
-                $id = $stmt->fetchColumn();
                 $Cartstmt = self::searchInCart($id, $product, $size);
                 if($Cartstmt->rowCount() == 0) {
                     $defaultAmount = 1;
@@ -261,7 +262,6 @@ class OrdersModel extends Database {
                     $stmtU->execute();
                 }
             }
-            echo"<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
@@ -362,7 +362,7 @@ class OrdersModel extends Database {
         $stmt = self::searchCart($user);
         if($stmt->rowCount() > 0) {
             $id = $stmt->fetchColumn();
-            $currentAmount = self::getProductAmount($code);
+            $currentAmount = self::getProductAmount($code, $id);
             if(($currentAmount + 1) <= $stock) {
                 try {
                     $cant += 1;
