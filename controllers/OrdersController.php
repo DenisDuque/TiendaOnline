@@ -136,7 +136,7 @@ class OrdersController {
     public function purchaseOrder(){
         if(isset($_SESSION['email'])) {
             echo "<input type='hidden' id='hiddenEmail' value='".$_SESSION['email']."'>";
-            $getStock = OrdersModel::getStock();
+            OrdersModel::getStock();
         } else {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
