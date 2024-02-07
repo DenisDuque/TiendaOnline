@@ -1,0 +1,40 @@
+body{
+    main{
+        display: flex;
+        justify-content: center;
+        #all{
+            width: 90%;
+            display: grid;
+            grid-template-columns: 70% 30%;
+            #orders{
+                border-radius: 8px 0 0 8px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .titles{
+                    width: 90%;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid black;
+                }
+                table{
+                    width: 90%;
+                    tbody{
+                        width: 100%;
+                        text-align: center;
+                        .order{
+                            padding: 0;
+                            border: 1px solid red;
+                        }
+                    }
+                }
+            } 
+            #userInfo{
+                background-color: #d4d4d4;
+                border-radius: 0 8px 8px 0;
+            }
+        }
+    }
+
+}

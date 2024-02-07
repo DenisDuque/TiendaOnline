@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My profile</title>
+    <link rel="stylesheet" href="views\scss\css\profilePage.css">
 </head>
 <body>
     <main>
+        <div id="all">
     <?php
         echo "<div id='orders'>";
             echo "<div class='titles'>";
@@ -33,6 +35,7 @@
                         echo "</td>";
                         echo "<td>".$order->getPrice()."</td>";
                         echo "<td>".$order->getStatus()."</td>";
+                        echo "<td><a href='#'>Cancel</a></td>";
                     echo "</tr>";
                 }
             echo "</table>";
@@ -43,31 +46,30 @@
                 echo "<p>".$_SESSION["email"]."</p>";
                 echo "<form action='index.php?page=User&action=showProfile' method='post'>";
                     echo "<table>";
-                    echo "<tr>";
-                        echo "<td><label for='name'>NAME</label></td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                        echo "<td><input type='text' name='name' id='name' placeholder='".$user->getName()." ".$user->getSurname()."'></td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                        echo "<td><label for='phone'>PHONE</label></td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                        echo "<td><input type='tel' name='phone' id='phone' placeholder='".$user->getPhone()."'></td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                        echo "<td><label for='address'>ADDRESS</label></td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                        echo "<td><input type='text' name='address' id='address' placeholder='".$user->getAddress()."'></td>";
-                    echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><label for='name'>NAME</label></td>";
+                        echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><input type='text' name='name' id='name' value='".$user->getName()." ".$user->getSurname()."'></td>";
+                        echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><label for='phone'>PHONE</label></td>";
+                        echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><input type='tel' name='phone' id='phone' value='".$user->getPhone()."'></td>";
+                        echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><label for='address'>ADDRESS</label></td>";
+                        echo "</tr>";
+                        echo "<tr>";
+                            echo "<td><input type='text' name='adress' id='adress' value='".$user->getAddress()."'></td>";
+                        echo "</tr>";
                     echo "</table>";
                     echo "<input type='submit' value='SAVE CHANGES'>";
                 echo "</form>";
-                
-                
         echo "</div>";
     ?>
+        </div>
     </main>
 </body>
 </html>

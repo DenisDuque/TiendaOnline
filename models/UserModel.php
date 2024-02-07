@@ -169,12 +169,12 @@ class UserModel extends Database {
             $stmt->execute();
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $user = new UserModel(
-                $row[0]['email'],
-                $row[0]['phone'],
-                $row[0]['name'],
-                $row[0]['surnames'],
-                $row[0]['address'],
-                $row[0]['rol'],
+                str_replace(' ', '', $row[0]["email"]), 
+                str_replace(' ', '', $row[0]["phone"]), 
+                str_replace(' ', '', $row[0]["name"]), 
+                str_replace(' ', '', $row[0]["surnames"]), 
+                str_replace(' ', '', $row[0]["address"]), 
+                str_replace(' ', '', $row[0]["rol"]), 
                 $row[0]['image']
             );
             return $user;
@@ -210,6 +210,26 @@ class UserModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
 
+    }
+
+
+    public static function updateUser($email){
+        try {
+            $nombreCompleto = explode(" ", $_POST["name"]); 
+            $query = "UPDATE users SET name = :name, surnames = :surname, phone = :phone, address = :adress 
+            WHERE email = :email";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":name", $nombreCompleto[0]);
+            $stmt->bindParam(":surname", $nombreCompleto[1]);
+            $stmt->bindParam(":phone", $_POST["phone"]);
+            $stmt->bindParam(":adress", $_POST["adress"]);
+            $stmt->execute();  
+        } 
+        catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
 }
 ?>
