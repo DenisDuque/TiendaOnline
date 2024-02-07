@@ -68,7 +68,7 @@ class OrdersController {
             str_replace(' ', '', $product[0]);
             OrdersModel::addToCart(str_replace(' ', '', $product[0]), str_replace(' ', '', $product[1]), str_replace(' ', '', $product[2]), $_SESSION['email']);
         }
-        
+        echo"<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
     }
     public function transformToLoggedCart() {
         ob_clean();
@@ -130,6 +130,15 @@ class OrdersController {
             $codesString .= "&&";
             $codesString = str_replace(' ', '', $codesString);
             echo json_encode(['success' => true, 'info' => $codesString]);
+        }
+    }
+
+    public function purchaseOrder(){
+        if(isset($_SESSION['email'])) {
+            echo "<input type='hidden' id='hiddenEmail' value='".$_SESSION['email']."'>";
+            OrdersModel::getStock();
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
     }
 }
