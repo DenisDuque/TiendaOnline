@@ -68,7 +68,7 @@ class OrdersController {
             str_replace(' ', '', $product[0]);
             OrdersModel::addToCart(str_replace(' ', '', $product[0]), str_replace(' ', '', $product[1]), str_replace(' ', '', $product[2]), $_SESSION['email']);
         }
-        
+        echo"<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
     }
     public function transformToLoggedCart() {
         ob_clean();

@@ -261,7 +261,6 @@ class OrdersModel extends Database {
                     $stmtU->execute();
                 }
             }
-            echo"<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
