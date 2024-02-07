@@ -464,14 +464,14 @@ class OrdersModel extends Database {
     }
 
     public static function getStock(){
+        // Recogemos todo lo que hay en el carrito.
         $email=$_SESSION['email'];
-        // $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = 'customer@gmail.com')";
         $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
         $stmt = self::getConnection()->prepare($query);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        // Variable para comprobar que todos los productos tenian stock.
         $allProductsHaveStock = true;
         foreach($result as $key => $product){
             $queryStock = "SELECT stock, sold FROM products WHERE code = :code";
@@ -479,18 +479,11 @@ class OrdersModel extends Database {
             $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
             $stmt->execute();
             $resultStock = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if($resultStock[0]['stock'] >= $product['amount']){
-                // echo "hay stock!";
-                // echo "quieres: ".$product['amount']." -- quedan: ".$resultStock[0]['stock'];
-            }else{
+            if($resultStock[0]['stock'] < self::getProductAmount($product['product'], $result[$key]['shop'])){
                 $allProductsHaveStock = false;
                 echo "Error! No tenemos stock de estos modelos ahora mismo. Lo sentimos!";
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php'>";
             }
-            
-            // print_r($product['product']);
-            // print_r($resultStock[0]['stock']); // Accede al stock utilizando el índice 0
-            // echo "<br>";
         }
         if ($allProductsHaveStock) {
             // Todos los productos tienen suficiente stock, entonces podemos restar la cantidad comprada del stock en la base de datos
@@ -502,22 +495,16 @@ class OrdersModel extends Database {
                 $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
                 $stmt->execute();
             }
+            $date = $_POST['fecha'];
+            $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
+            $stmt = self::getConnection()->prepare($queryUpdateShopping);
+            $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
+            $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            echo "COMPRA REALIZADA CON ÉXITO! Volviendo al inicio";
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='100;URL=index.php'>";
         }
-        // NECESITO LA FUNCION AQUI
-        // echo $_SESSION['email'];
-        // print_r($result);
-        // echo "<br>";
-        $date = $_POST['fecha'];
-        // print_r($_POST);
-        // $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = 'customer@gmail.com'";
-        $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
-        $stmt = self::getConnection()->prepare($queryUpdateShopping);
-        $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
-        $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
-        echo "COMPRA REALIZADA CON ÉXITO! Volviendo al inicio";
-        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1;URL=index.php'>";
     }
     
 }
