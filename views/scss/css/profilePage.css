@@ -40,16 +40,33 @@ body main #all #orders #list .tableHead, body main #all #orders #list .order {
 body main #all #orders #list .tableHead p, body main #all #orders #list .order p {
   align-self: center;
 }
+body main #all #orders #list .tableHead p {
+  font-weight: bolder;
+  color: #5f5f5f;
+}
 body main #all #orders #list .order {
   border: 1px solid black;
   border-radius: 15px;
   height: 100px;
+  margin-bottom: 1%;
 }
 body main #all #orders #list .order .products {
+  height: 90px;
   overflow-y: scroll;
+  scrollbar-width: thin;
+  align-self: flex-start;
 }
-body main #all #orders #list .order .products::-webkit-scrollbar-track {
-  background: red;
+body main #all #orders #list .order .products p {
+  width: auto;
+  height: 10%;
+}
+body main #all #orders #list .order p a {
+  text-decoration: none;
+  background-color: #d4d4d4;
+  padding: 4px;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: black;
 }
 body main #all #userInfo {
   background-color: #d4d4d4;

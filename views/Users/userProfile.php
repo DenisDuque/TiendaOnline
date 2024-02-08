@@ -25,7 +25,7 @@
                 echo "</div>";
                 foreach($orders as $order){
                     echo "<div class='order'>";
-                        echo "<p class='border-left'>".$order->getDate()."</p>";
+                        echo "<p>".$order->getDate()."</p>";
                         echo "<div class='products'>";
                             foreach($order->getProducts() as $product=>$amount){
                                 echo "<p>$product x $amount</p>";
@@ -33,7 +33,7 @@
                         echo "</div>";
                         echo "<p>".$order->getPrice()."</p>";
                         echo "<p>".$order->getStatus()."</p>";
-                        echo "<p class='border-right'><a href='#'>Cancel</a></p>";
+                        echo "<p><a href='index.php?page=User&action=showProfile&deleteOrder=".$order->getId()."'>CANCEL</a></p>";
                     echo "</div>";
                 }
             echo "</div>";
@@ -52,7 +52,7 @@
                     echo "<label for='phone'>PHONE</label>";
                     echo "<input type='tel' class='text'  name='phone' id='phone' value='".$user->getPhone()."'>";
                     echo "<label for='address'>ADDRESS</label>";
-                    echo "<input type='text' class='text' name='address' id='address' value='".$user->getAddress()."'>";
+                    echo "<input type='text' class='text' name='adress' id='adress' value='".$user->getAddress()."'>";
                     echo "<input type='submit' value='SAVE CHANGES' id='button'>";
                 echo "</form>";
         echo "</div>";

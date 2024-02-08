@@ -215,7 +215,7 @@ class UserModel extends Database {
 
     public static function updateUser($email){
         try {
-            $nombreCompleto = explode(" ", $_POST["name"]); 
+            $nombreCompleto = explode(" ", $_POST["name"]);
             $query = "UPDATE users SET name = :name, surnames = :surname, phone = :phone, address = :adress 
             WHERE email = :email";
             $stmt = self::getConnection()->prepare($query);
