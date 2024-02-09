@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Urban Store</title>
     <!-- <link rel="stylesheet" href="views/scss/css/Login.css"> -->
     <link rel="stylesheet" href="views/scss/css/login.css">
     <script src="views/js/Login.js"></script>
@@ -68,8 +68,8 @@
                         </a>
                     </div>
                     <button>Sign In</button>
-                    <a href="index.php">Pagina principal</a>
-                    <a href="index.php?page=Product&action=showAdminDashboard">Admin</a>
+                    <!--<a href="index.php">Pagina principal</a>-->
+                    <!--<a href="index.php?page=Product&action=showAdminDashboard">Admin</a>-->
                     <p><?php if ($incorrectPassword) {
                         echo "Incorrect password";
                     } ?></p>

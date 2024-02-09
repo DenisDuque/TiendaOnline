@@ -90,6 +90,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         cartNumber.innerHTML = cartAmount;
     }
+
+    async function updateDatabase(productsArray) {
+        localStorage.setItem("products", JSON.stringify(productsArray));  
+        let cartNumber = document.getElementById("cartNumber");
+        let cartAmount = 0;
+
+        productsArray.forEach(function (product) {
+            cartAmount += product.amount;
+        });
+
+        cartNumber.innerHTML = cartAmount;
+    }
+
     function readLocalStorage() {
         var localStorageValue = localStorage.getItem('products');
         return localStorageValue ? JSON.parse(localStorageValue) : [];
