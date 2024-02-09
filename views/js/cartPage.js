@@ -75,6 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
                 });
+                // Verificar si el número de elementos es cero y deshabilitar el botón de checkout si es así
+                var checkoutButton = document.querySelector("input[type='submit'][value='CHECKOUT']");
+                if (itemsTotal.length === 0) {
+                    checkoutButton.disabled = true;
+                } else {
+                    checkoutButton.disabled = false;
+                }
             }
         });
     }

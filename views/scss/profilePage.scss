@@ -1,0 +1,124 @@
+body{
+    *{
+        font-family: Kanit;
+    }
+    main{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+        #all{
+            grid-column-start: 2;
+            justify-self: center;
+            width: 80%;
+            display: grid;
+            grid-template-columns: 70% 30%;
+            #orders{
+                border-radius: 8px 0 0 8px;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .titles{
+                    width: 90%;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid black;
+                }
+                #list{
+                    width: 90%;
+                    display: flex;
+                    flex-direction: column;
+                    .tableHead, .order{
+                        width: 100%;
+                        display: grid;
+                        grid-template-columns: 18% 31% 18% 18% 18%;
+                        text-align: center;
+                        p{
+                            align-self: center;
+                        }                        
+                    }
+                    .tableHead{
+                        p{
+                            font-weight: bolder;
+                            color: #5f5f5f;
+
+                        }
+                    }
+                    .order{
+                        border: 1px solid black;
+                        border-radius: 15px;
+                        height: 100px;
+                        .products{
+                            height: 90px;
+                            overflow-y: scroll;
+                            scrollbar-width: thin;
+                            align-self: flex-start;
+                            p{
+                                width: auto;
+                                height: 10%;
+                            }
+                        }
+                        p{
+                            a{
+                                text-decoration: none;
+                                background-color: #d4d4d4;
+                                padding: 4px;
+                                border: 1px solid black;
+                                border-radius: 10px;
+                                color: black;
+                            }
+                        }
+                        margin-bottom: 1%;;
+                    }
+                    
+                }
+            } 
+            #userInfo{
+                background-color: #d4d4d4;
+                border-radius: 0 8px 8px 0;
+                display: flex;
+                flex-direction: column;
+                align-items:  center;
+                .titles{
+                    width: 90%;
+                    border-bottom: 1px solid black;
+                    text-align: center;
+                }
+                #email{
+                    width: 90%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+                form{
+                    width: 90%;
+                    display: flex;
+                    flex-direction: column;
+                    *{
+                        margin-top: 5%;
+                    }
+                    .text{
+                        width: auto;
+                        height: 35px;
+                        color: #000000;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                    #button{
+                        width: 60%;
+                        align-self: center;
+                        margin-top: 15%;
+                        margin-bottom: 5%;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        background-color: #FF5E00;
+                        font-weight: bold;
+                        height: 35px;
+
+                    }
+                }
+            }
+        }
+    }
+
+}
