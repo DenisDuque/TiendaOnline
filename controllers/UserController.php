@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../models/UserModel.php";
 require_once __DIR__."/../models/OrdersModel.php";
+require_once __DIR__."/../models/ProductModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
@@ -114,10 +115,13 @@ class UserController {
 
     public function showWishlist(){
         if(isset($_SESSION["email"])){
-            $user = UserModel::getSpecifiedUser($_SESSION["email"]);
-            $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
+            $codes = UserModel::getUserWishList($_SESSION["email"]);
+            $products = [];
+            foreach($codes as $code){
+                $products[$code[0]] = ProductModel::getProductWithCode($code[0]);
+            }
             include "views\General\Components\headerHome.html";
-            include "views/Users/userProfile.php";
+            include "views/Users/wishList.php";
         }else{
             $_SESSION["origin"] = "wishList";
             self::default();

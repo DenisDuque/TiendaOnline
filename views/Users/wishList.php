@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?php
+        print_r($products);
+    ?>
 </body>
 </html>

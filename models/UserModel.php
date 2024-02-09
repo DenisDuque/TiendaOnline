@@ -199,19 +199,6 @@ class UserModel extends Database {
         }
     }
 
-    public static function getUserOrders($email){
-        try {
-            $query = "SELECT * FROM shopping WHERE useremail = :user";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindParam(":user", $email);
-        } 
-        catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
-        }
-
-    }
-
 
     public static function updateUser($email){
         try {
@@ -233,8 +220,19 @@ class UserModel extends Database {
     }
 
 
-    public static function getUserWishList(){
-        
+    public static function getUserWishList($email){
+        try {
+            $query = "SELECT productcode FROM wishlist WHERE useremail = :email";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(":email", $email);
+            $stmt->execute(); 
+            $codes = $stmt->fetchAll(PDO::FETCH_NUM);
+            return $codes;
+        } 
+        catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
     }
 }
 ?>

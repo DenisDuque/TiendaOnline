@@ -129,9 +129,8 @@ class ProductModel extends Database {
         $this->image["lateral"] = $image;
     }
 
-    public static function getProductWithCode(){
+    public static function getProductWithCode($code){
         try {
-            $code = isset($_GET['code']) ? $_GET['code'] : 'za123-za';
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':code', $code, PDO::PARAM_STR);
