@@ -23,10 +23,10 @@ class BaseProductSearch {
       const productPrice = product.price;
       const productDescription = product.description;
       const inWishlist = product.inWishlist ? 'inWishlist.png' : 'defaultHeart.png';
-      const productImage = product.image;
+      const productImage = product.image.replace(/\s/g, '');
       return `
         <article id="${product.code}" class="product-article">
-          <img src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
+          <img class="product-heart" src="views/assets/images/utils/${inWishlist}" alt="Wishlist">
           <img src="views/assets/images/products/${productImage}.png" alt="${productDescription}">
           <p>${productName}</p>
           <p>${productPrice}</p>

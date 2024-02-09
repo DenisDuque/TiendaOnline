@@ -464,46 +464,47 @@ class OrdersModel extends Database {
     }
 
     public static function getStock(){
-        // Recogemos todo lo que hay en el carrito.
         $email=$_SESSION['email'];
-        $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
-        $stmt = self::getConnection()->prepare($query);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // Variable para comprobar que todos los productos tenian stock.
-        $allProductsHaveStock = true;
-        foreach($result as $key => $product){
-            $queryStock = "SELECT stock, sold FROM products WHERE code = :code";
-            $stmt = self::getConnection()->prepare($queryStock);
-            $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
-            $stmt->execute();
-            $resultStock = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if($resultStock[0]['stock'] < self::getProductAmount($product['product'], $result[$key]['shop'])){
-                $allProductsHaveStock = false;
-                echo "Error! No tenemos stock de estos modelos ahora mismo. Lo sentimos!";
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php'>";
-            }
-        }
-        if ($allProductsHaveStock) {
-            // Todos los productos tienen suficiente stock, entonces podemos restar la cantidad comprada del stock en la base de datos
-            foreach ($result as $key => $product) {
-                // Actualizar el stock y la cantidad vendida en la base de datos
-                $queryUpdateStock = "UPDATE products SET stock = stock - :amount, sold = sold + :amount WHERE code = :code";
-                $stmt = self::getConnection()->prepare($queryUpdateStock);
-                $stmt->bindParam(':amount', $product['amount'], PDO::PARAM_INT);
-                $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
-                $stmt->execute();
-            }
-            $date = $_POST['fecha'];
-            $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
-            $stmt = self::getConnection()->prepare($queryUpdateShopping);
-            $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
-            $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
+        try {
+            $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
+            $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
-            echo "COMPRA REALIZADA CON ÉXITO! Volviendo al inicio";
-            echo "<META HTTP-EQUIV='REFRESH' CONTENT='100;URL=index.php'>";
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $allProductsHaveStock = true;
+            foreach($result as $key => $product){
+                $queryStock = "SELECT stock, sold FROM products WHERE code = :code";
+                $stmt = self::getConnection()->prepare($queryStock);
+                $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
+                $stmt->execute();
+                $resultStock = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                if($resultStock[0]['stock'] < self::getProductAmount($product['product'], $result[$key]['shop'])){
+                    $allProductsHaveStock = false;
+                    echo "Error! No tenemos stock de estos modelos ahora mismo. Lo sentimos!";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php'>";
+                }
+            }
+            if ($allProductsHaveStock) {
+                foreach ($result as $key => $product) {
+                    $queryUpdateStock = "UPDATE products SET stock = stock - :amount, sold = sold + :amount WHERE code = :code";
+                    $stmt = self::getConnection()->prepare($queryUpdateStock);
+                    $stmt->bindParam(':amount', $product['amount'], PDO::PARAM_INT);
+                    $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
+                    $stmt->execute();
+                }
+                $date = $_POST['fecha'];
+                $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
+                $stmt = self::getConnection()->prepare($queryUpdateShopping);
+                $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
+                $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt->execute();
+                echo "COMPRA REALIZADA CON ÉXITO! Volviendo al inicio";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='100;URL=index.php'>";
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
         }
     }
 

@@ -3,8 +3,8 @@
 <?php
         require_once("views\General\Components\headerHome.html");
 ?>
-<div>
-    <nav>
+<section>
+    <nav class="searchNav">
         <div></div>
         <input type="text" id="searchInput" class="search" placeholder="Search">
         <div id="sortby">
@@ -28,6 +28,6 @@
         <button id="categories-show"><img src="views/assets/images/utils/selectArrow.png" alt="Flecha desplegable"/></button>
     </nav>
     <section id="itemsContainer"></section>
-</div>
+</section>
 <script src="views/js/search.js"></script>
 <script src="views/js/initSearch.js"></script>
