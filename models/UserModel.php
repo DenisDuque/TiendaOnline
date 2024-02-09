@@ -231,5 +231,10 @@ class UserModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
+
+
+    public static function getUserWishList(){
+        
+    }
 }
 ?>

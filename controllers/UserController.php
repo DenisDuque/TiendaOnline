@@ -31,6 +31,9 @@ class UserController {
                     if($_SESSION["origin"] = "profile"){
                         unset($_SESSION["origin"]);
                         echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showProfile'>";
+                    }elseif($_SESSION["origin"] = "wishlist"){
+                        unset($_SESSION["origin"]);
+                        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showWishlist'>";
                     }
                 }else{
                     echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
@@ -105,6 +108,18 @@ class UserController {
             include "views/Users/userProfile.php";
         }else{
             $_SESSION["origin"] = "profile";
+            self::default();
+        }
+    }
+
+    public function showWishlist(){
+        if(isset($_SESSION["email"])){
+            $user = UserModel::getSpecifiedUser($_SESSION["email"]);
+            $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
+            include "views\General\Components\headerHome.html";
+            include "views/Users/userProfile.php";
+        }else{
+            $_SESSION["origin"] = "wishList";
             self::default();
         }
     }
