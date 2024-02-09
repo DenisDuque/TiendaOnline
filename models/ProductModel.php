@@ -489,7 +489,6 @@ class ProductModel extends Database {
     }
 
     public static function inWishList(){
-        //echo "<script>console.log('tusmuertos');</script>";
         $exists = false;
         $query = "SELECT * FROM wishlist WHERE useremail = :user AND productcode = :product";
         $stmt = self::getConnection()->prepare($query);
