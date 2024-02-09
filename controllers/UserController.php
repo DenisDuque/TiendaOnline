@@ -96,6 +96,9 @@ class UserController {
             if(isset($_POST["name"])){
                 UserModel::updateUser($_SESSION["email"]);
             }
+            if(isset($_GET["deleteOrder"])){
+                OrdersModel::dropOrder($_GET["deleteOrder"]);
+            }
             $user = UserModel::getSpecifiedUser($_SESSION["email"]);
             $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
             include "views\General\Components\headerHome.html";

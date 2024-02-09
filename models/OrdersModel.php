@@ -506,6 +506,22 @@ class OrdersModel extends Database {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='100;URL=index.php'>";
         }
     }
-    
+
+    public static function dropOrder($orderID){
+        try{
+            $deleteOrder = "DELETE FROM shopping WHERE id = :ID";
+            $order = self::getConnection()->prepare($deleteOrder);
+            $order->bindParam(':ID', $orderID);
+            $order->execute();
+
+            $deleteCarts = "DELETE FROM inCart WHERE shop = :shop";
+            $cart = self::getConnection()->prepare($deleteCarts);
+            $cart->bindParam(':shop', $orderID);
+            $cart->execute();
+        }catch(PDOException $e){
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());        
+        }
+    }
 }
 ?>
