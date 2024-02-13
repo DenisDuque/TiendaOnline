@@ -20,24 +20,24 @@
                 echo "<div id='images'>";
                     echo 
                         "<div class='image'>
-                            <img src='".$product["img"]."' alt='producto'>
+                            <img src='views/assets/images/products/".$product["lateral"]."' alt='producto'>
                         </div>";
                     echo 
                         "<div class='image'>
-                            <img src='".$product["img"]."' alt='producto'>
+                            <img src='views/assets/images/products/".$product["bottom"]."' alt='producto'>
                         </div>";
                     echo 
                         "<div class='image'>
-                            <img src='views\assets\images\utils\perro.jpg' alt='producto'>
+                            <img src='views/assets/images/products/".$product["top"]."' alt='producto'>
                         </div>";
                     echo 
-                        "<div class='image'>
-                            <img src='views\assets\images\utils\perro.jpg' alt='perro'>
+                        "<div class='image' id='3d360'>
+                            <img src='views\assets\images\utils\modelo3dEnlace.png' alt='Enlace al modelo 3D del producto'>
                         </div>";
                 echo "</div>";
                 echo 
                 "<div class='image' id='mainImage'>
-                    <img src='".$product["img"]."' alt='producto' id='main'>
+                    <img src='".$product["lateral"]."' alt='producto' id='main'>
                 </div>";
             echo "</div>";
 

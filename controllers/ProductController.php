@@ -137,7 +137,7 @@ class ProductController {
             }
         }
         require_once __DIR__.'/../models/CategoryModel.php';
-        $product = ProductModel::getProductWithCode();
+        $product = ProductModel::getProductWithCode($_GET["code"]);
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);
         $product["inWishList"] = ProductModel::inWishList();
         include __DIR__.'/../views/General/productPage.php';

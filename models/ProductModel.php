@@ -129,15 +129,16 @@ class ProductModel extends Database {
         $this->image["lateral"] = $image;
     }
 
-    public static function getProductWithCode(){
+    public static function getProductWithCode($code){
         try {
-            $code = isset($_GET['code']) ? $_GET['code'] : 'za123-za';
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':code', $code, PDO::PARAM_STR);
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
-            $product["img"] = self::getProductImage("lateral",$code);
+            $product["lateral"] = self::getProductImage("lateralperspective",$code);
+            $product["top"] = self::getProductImage("aboveperspective",$code);
+            $product["bottom"] = self::getProductImage("belowperspective",$code);
             return $product;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());

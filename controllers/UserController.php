@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../models/UserModel.php";
 require_once __DIR__."/../models/OrdersModel.php";
+require_once __DIR__."/../models/ProductModel.php";
 class UserController {
     public function default() {
         // Mostrar la vista de inicio de sesión
@@ -31,6 +32,9 @@ class UserController {
                     if($_SESSION["origin"] = "profile"){
                         unset($_SESSION["origin"]);
                         echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showProfile'>";
+                    }elseif($_SESSION["origin"] = "wishlist"){
+                        unset($_SESSION["origin"]);
+                        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showWishlist'>";
                     }
                 }else{
                     echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
@@ -96,12 +100,30 @@ class UserController {
             if(isset($_POST["name"])){
                 UserModel::updateUser($_SESSION["email"]);
             }
+            if(isset($_GET["deleteOrder"])){
+                OrdersModel::dropOrder($_GET["deleteOrder"]);
+            }
             $user = UserModel::getSpecifiedUser($_SESSION["email"]);
             $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
             include "views\General\Components\headerHome.html";
             include "views/Users/userProfile.php";
         }else{
             $_SESSION["origin"] = "profile";
+            self::default();
+        }
+    }
+
+    public function showWishlist(){
+        if(isset($_SESSION["email"])){
+            $codes = UserModel::getUserWishList($_SESSION["email"]);
+            $products = [];
+            foreach($codes as $code){
+                $products[$code[0]] = ProductModel::getProductWithCode($code[0]);
+            }
+            include "views\General\Components\headerHome.html";
+            include "views/Users/wishList.php";
+        }else{
+            $_SESSION["origin"] = "wishList";
             self::default();
         }
     }
