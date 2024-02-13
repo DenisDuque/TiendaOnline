@@ -12,13 +12,13 @@
                 include("views/Administrator/Components/ordersPanel.html");
             ?>
         </div>
-        <div class="formProd">
+        <!--<div class="formProd">
             <?php
                 //SOLUCION TEMPORAL: comentar uno y descomentar el otro para ver los formularios.
                 //include("views/Administrator/Components/editProductForm.php");
-                include("views/Administrator/Components/createProductForm.php");
+                //include("views/Administrator/Components/createProductForm.php");
             ?>
-        </div>
+        </div>-->
     </div>
     <div id="rightPanel">
         <h2>Products</h2>

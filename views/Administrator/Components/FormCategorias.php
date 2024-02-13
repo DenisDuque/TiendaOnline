@@ -22,7 +22,7 @@
                 <select name="active">
                     <option value="enabled">enabled</option>
                     <option value="disabled">disabled</option>
-                </select>s
+                </select>
             </td>
         </tr>
         <tr>
