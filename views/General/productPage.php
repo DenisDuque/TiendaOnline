@@ -19,15 +19,15 @@
             echo "<div id='allImages'>";
                 echo "<div id='images'>";
                     echo 
-                        "<div class='image'>
+                        "<div class='image imageBtn'>
                             <img src='views/assets/images/products/".$product["lateral"]."' alt='producto'>
                         </div>";
                     echo 
-                        "<div class='image'>
+                        "<div class='image imageBtn'>
                             <img src='views/assets/images/products/".$product["bottom"]."' alt='producto'>
                         </div>";
                     echo 
-                        "<div class='image'>
+                        "<div class='image imageBtn'>
                             <img src='views/assets/images/products/".$product["top"]."' alt='producto'>
                         </div>";
                     echo 
