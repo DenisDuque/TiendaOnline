@@ -37,7 +37,7 @@
                 echo "</div>";
                 echo 
                 "<div class='image' id='mainImage'>
-                    <img src='".$product["lateral"]."' alt='producto' id='main'>
+                    <img src='views/assets/images/products/".$product["lateral"]."' alt='producto' id='main'>
                 </div>";
             echo "</div>";
 
