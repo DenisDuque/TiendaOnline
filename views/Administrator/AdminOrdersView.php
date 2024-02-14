@@ -10,6 +10,7 @@
                     ?>
                 </div>
                 <div class="orderInfo">
+                    <button id="closeOrderForm"><img src='views/assets/images/utils/signout.png'></button>
                     <h2 id="name">Name</h2>
                     <h2 id="surname">Surname</h2>
                     <?php include("views/Administrator/Components/editOrdersForm.html"); ?>

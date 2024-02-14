@@ -119,7 +119,7 @@ header.admin {
         padding: 5vh 1vw;
         background-color: $adminOrange;
         border-radius: $radius;
-        display: flex;
+        display: none;
         flex-direction: column;
         transition: all 0.5s ease;
         h4 {
@@ -141,7 +141,7 @@ header.admin {
         padding: 5vh 1vw;
         background-color: $adminOrange;
         border-radius: $radius;
-        display: flex;
+        display: none;
         flex-direction: column;
         transition: all 0.5s ease;
         h4 {
@@ -309,7 +309,7 @@ header.admin {
         height: 100%;
         width: 16vw;  // Ajustar al ancho deseado
         margin-left: 1vh;  // Agregar margen a la izquierda
-        display: flex;
+        display: none;
         flex-direction: column;
         align-content: center;
         border-radius: $radius;
@@ -363,6 +363,11 @@ header.admin {
             #text label{
                 text-decoration: none; /* Desactiva el subrayado en las etiquetas individuales si es necesario */
             }
+        }
+        .closeOrderForm {
+            display: flex;
+            justify-content: center;
+            margin: 0;
         }
         #divStatus, #divPrice{
             padding-left: 0;
