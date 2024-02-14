@@ -105,7 +105,7 @@ class UserController {
             }
             $user = UserModel::getSpecifiedUser($_SESSION["email"]);
             $orders = OrdersModel::getOrdersWithDetail($_SESSION["email"]);
-            include "views\General\Components\headerHome.html";
+            include "views\General\Components\headerHome.php";
             include "views/Users/userProfile.php";
         }else{
             $_SESSION["origin"] = "profile";
@@ -120,7 +120,7 @@ class UserController {
             foreach($codes as $code){
                 $products[$code[0]] = ProductModel::getProductWithCode($code[0]);
             }
-            include "views\General\Components\headerHome.html";
+            include "views\General\Components\headerHome.php";
             include "views/Users/wishList.php";
         }else{
             $_SESSION["origin"] = "wishList";

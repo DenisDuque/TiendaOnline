@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php         
-        require_once("views\General\Components\headerHome.html");
+        require_once("views\General\Components\headerHome.php");
     ?>
     
     <main id="productPage">

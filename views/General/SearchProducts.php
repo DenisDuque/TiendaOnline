@@ -1,7 +1,7 @@
 <!-- http://localhost/TiendaOnline/index.php?page=Product&action=showSearchProducts -->
 <!--Header include-->
 <?php
-        require_once("views\General\Components\headerHome.html");
+        require_once("views\General\Components\headerHome.php");
 ?>
 <section>
     <nav class="searchNav">
