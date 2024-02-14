@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
+    function showEditOrderForm() {
+        
+    }
     function fillDataOrder(code){
         var datos = code.split(",");
         var orderId = document.getElementById("orderId");
@@ -146,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('.editOrderBtn').forEach(button => {
         button.addEventListener('click', function() {
+            showEditOrderForm();
             fillDataOrder(button.id);
         });
     });

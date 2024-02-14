@@ -17,7 +17,7 @@
         } else {
             echo "<input type='hidden' name='loggedCheck' id='loggedCheck' value='unlogged'>";
         }
-        include("views\General\Components\headerHome.html");
+        include("views\General\Components\headerHome.php");
     ?>
     <!--Image slider-->
     <div class="swiper-container">
