@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let mainImage = document.getElementById("mainImage");
         mainImage.children[0].src = image;
     }
-    var images = document.getElementsByClassName("image");
+    var images = document.getElementsByClassName("imageBtn");
 
     for(let i = 0; i<images.length; i++){
         if(images[i].id != "mainImage"){
