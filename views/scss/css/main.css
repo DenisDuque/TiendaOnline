@@ -282,8 +282,13 @@ body .product-article {
 }
 body .product-article img {
   width: 100%;
+  height: 20vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 5vh;
 }
 body .product-article .product-heart {
+  margin: 0;
   position: relative;
   top: 1vh;
   left: 1vh;
@@ -342,12 +347,14 @@ body .product-article p {
   padding-right: 1vw;
 }
 #productPage #allImages #images .image {
-  width: 5vw;
-  height: auto;
+  height: 20%;
+  width: 20%;
   display: flex;
+  justify-content: center;
+  align-content: center;
 }
 #productPage #allImages #images .image img {
-  width: 100%;
+  width: 80%;
   height: auto;
 }
 #productPage #allImages #images .image:hover {

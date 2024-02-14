@@ -1,5 +1,5 @@
 <?php
-    require_once("views\General\Components\headerHome.html");
+    require_once("views\General\Components\headerHome.php");
     if(isset($_SESSION['email'])) {
         echo "<input type='hidden' id='hiddenEmail' value='".$_SESSION['email']."'>";
     } else {

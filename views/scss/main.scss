@@ -287,9 +287,13 @@ body {
 
         img {
             width: 100%;
+            height: 20vh;
+            object-fit: cover;
+            margin-bottom: 5vh;
         }
 
         .product-heart {
+            margin: 0;
             position: relative;
             top: 1vh;
             left: 1vh;
@@ -348,11 +352,13 @@ body {
                 justify-content: space-around;
                 padding-right: 1vw;
                 .image{
-                    width: 5vw;
-                    height: auto;
+                    height: 20%;
+                    width: 20%;
                     display: flex;
+                    justify-content: center;
+                    align-content: center;
                     img{
-                        width: 100%;
+                        width: 80%;
                         height: auto;
                     }
                 }
