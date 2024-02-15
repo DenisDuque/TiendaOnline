@@ -8,7 +8,7 @@ class ProductController {
         require_once __DIR__.'/../models/CategoryModel.php';
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
+        $products = ProductModel::getAllProducts(null);
         $productArray = array_map(function($product) {
             return [
                 'code' => $product->getCode(),
@@ -24,20 +24,37 @@ class ProductController {
         include __DIR__.'/../views/General/PrincipalView.php';
     }
     public function showAdminProduct() {
-        $products = ProductModel::getAllProducts();
-        include __DIR__.'/../views/Administrator/AdminProductsView.php';
+        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if($_SESSION['rol'] == 'admin') {
+                $search = isset($_GET['search']) ? $_GET['search'] : null;
+                $products = ProductModel::getAllProducts($search);
+                include __DIR__.'/../views/Administrator/AdminProductsView.php';
+            } else {
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+            }
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+        }
     }
 
     public function showAdminDashboard() {
-        $products = ProductModel::getTopProducts(10);
-        include __DIR__.'/../views/Administrator/AdminDashboardView.php';
+        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if($_SESSION['rol'] == 'admin') {
+                $products = ProductModel::getTopProducts(10);
+                include __DIR__.'/../views/Administrator/AdminDashboardView.php';
+            } else {
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+            }
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+        }
     }
 
     public function showSearchProducts() {
         require_once __DIR__.'/../models/CategoryModel.php';
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
+        $products = ProductModel::getAllProducts(null);
         $productArray = array_map(function($product) {
             return [
                 'code' => $product->getCode(),

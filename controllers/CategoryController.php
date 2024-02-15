@@ -4,9 +4,17 @@ require_once __DIR__.'/../models/ProductModel.php';
 class CategoryController {
     
     public function showAdminCategory() {
-        $search = isset($_GET['search']) ? $_GET['search'] : null;
-        $categories = CategoryModel::listCategories($search);
-        include __DIR__.'/../views/Administrator/AdminCategoriesView.php';
+        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if($_SESSION['rol'] == 'admin') {
+                $search = isset($_GET['search']) ? $_GET['search'] : null;
+                $categories = CategoryModel::listCategories($search);
+                include __DIR__.'/../views/Administrator/AdminCategoriesView.php';
+            } else {
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+            }
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+        }
     }
     public static function generateCategoriesOptions() {
         $categories = CategoryModel::listCategories(null);

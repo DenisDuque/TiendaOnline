@@ -31,23 +31,46 @@
         }
 
         public static function listCategories($search) {
-            try{
-                $query = "SELECT * FROM categories";
-                $categories = self::getConnection()->prepare($query);
-                $categories->execute();
-                $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
-                $allCategories = array_map(function($row) {
-                    return new CategoryModel(
-                        $row['code'],
-                        $row['name'],
-                        $row['status']
-                    );
-                }, $rows);
-        
-                return $allCategories;
-            } catch (PDOException $e) {
-                error_log("Error: " . $e->getMessage());
-                throw new Exception("Database error: " . $e->getMessage());
+            if($search == null) {
+                try{
+                    $query = "SELECT * FROM categories";
+                    $categories = self::getConnection()->prepare($query);
+                    $categories->execute();
+                    $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
+                    $allCategories = array_map(function($row) {
+                        return new CategoryModel(
+                            $row['code'],
+                            $row['name'],
+                            $row['status']
+                        );
+                    }, $rows);
+            
+                    return $allCategories;
+                } catch (PDOException $e) {
+                    error_log("Error: " . $e->getMessage());
+                    throw new Exception("Database error: " . $e->getMessage());
+                }
+            } else {
+                $search = '%' . $search . '%';
+                try{
+                    $query = "SELECT * FROM categories WHERE name LIKE :name";
+                    $categories = self::getConnection()->prepare($query);
+                    $categories->bindParam(':name', $search, PDO::PARAM_STR);
+                    $categories->execute();
+                    $rows = $categories->fetchAll(PDO::FETCH_ASSOC);
+                    $allCategories = array_map(function($row) {
+                        return new CategoryModel(
+                            $row['code'],
+                            $row['name'],
+                            $row['status']
+                        );
+                    }, $rows);
+            
+                    return $allCategories;
+                } catch (PDOException $e) {
+                    error_log("Error: " . $e->getMessage());
+                    throw new Exception("Database error: " . $e->getMessage());
+                }
             }
         }
 

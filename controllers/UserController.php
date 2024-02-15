@@ -8,7 +8,9 @@ class UserController {
         $incorrectPassword = false;
         include 'views/LoginView.php';
     }
-
+    public function showLoggedError() {
+        include 'views/Administrator/Components/errorLogMessage.html';
+    }
     public function processLogin() {
         // Procesar el formulario de inicio de sesión
         $userEmail = $_POST['loginEmail'];
@@ -21,7 +23,7 @@ class UserController {
             $_SESSION['rol'] = $rol;
             // Autenticación exitosa, redirige a la página principal dependiendo del rol
             if($rol == 'admin') {
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=administrator'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=Product&action=showAdminDashboard'>";
             } else {
                 if(isset($_GET["code"])){
                     //En caso de que se nos haya redirigido al login desde una pagina de producto, este se almacenara en el origen
@@ -90,9 +92,17 @@ class UserController {
     }
 
     public function showAdminUser() {
-        $search = isset($_GET['search']) ? $_GET['search'] : null;
-        $customers = UserModel::showcustomers($search);
-        include __DIR__.'/../views/Administrator/AdminCustomersView.php';
+        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if($_SESSION['rol'] == 'admin') {
+                $search = isset($_GET['search']) ? $_GET['search'] : null;
+                $customers = UserModel::showcustomers($search);
+                include __DIR__.'/../views/Administrator/AdminCustomersView.php';
+            } else {
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+            }
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+        }
     }
 
     public function showProfile(){

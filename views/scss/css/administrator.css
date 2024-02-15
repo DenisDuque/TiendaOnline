@@ -105,7 +105,7 @@ header.admin img:hover {
   padding: 5vh 1vw;
   background-color: rgba(255, 94, 0, 0.25);
   border-radius: 10px;
-  display: flex;
+  display: none;
   flex-direction: column;
   transition: all 0.5s ease;
 }
@@ -126,7 +126,7 @@ header.admin img:hover {
   padding: 5vh 1vw;
   background-color: rgba(255, 94, 0, 0.25);
   border-radius: 10px;
-  display: flex;
+  display: none;
   flex-direction: column;
   transition: all 0.5s ease;
 }
@@ -284,7 +284,7 @@ header.admin img:hover {
   height: 100%;
   width: 16vw;
   margin-left: 1vh;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-content: center;
   border-radius: 10px;
@@ -339,6 +339,11 @@ header.admin img:hover {
 }
 #leftPanel .orderInfo #productsAmount #text label {
   text-decoration: none; /* Desactiva el subrayado en las etiquetas individuales si es necesario */
+}
+#leftPanel .orderInfo .closeOrderForm {
+  display: flex;
+  justify-content: center;
+  margin: 0;
 }
 #leftPanel .orderInfo #divStatus, #leftPanel .orderInfo #divPrice {
   padding-left: 0;

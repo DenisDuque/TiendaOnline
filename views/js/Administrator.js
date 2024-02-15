@@ -64,11 +64,75 @@ document.addEventListener('DOMContentLoaded', function() {
             item.innerHTML = datos[i];
             listado.appendChild(item);
         }
-        
-        
-
     }
-
+    function showEditCategoryForm() {
+        var paneles = document.querySelector('.panels');
+        var editFormCat = document.getElementById('formEditCategory');
+        var createFormCat = document.getElementById('formCreateCategory');
+        paneles.style.display = 'none';
+        editFormCat.style.display = 'flex';
+        createFormCat.style.display = 'none';
+    }
+    function showEditProductForm() {
+        var paneles = document.querySelector('.panels');
+        var editFormProd = document.getElementById('formEditProduct');
+        var createFormProd = document.getElementById('formCreateProduct');
+        paneles.style.display = 'none';
+        editFormProd.style.display = 'flex';
+        createFormProd.style.display = 'none';
+    }
+    function showCreateCategoryForm() {
+        var paneles = document.querySelector('.panels');
+        var editFormCat = document.getElementById('formEditCategory');
+        var createFormCat = document.getElementById('formCreateCategory');
+        paneles.style.display = 'none';
+        editFormCat.style.display = 'none';
+        createFormCat.style.display = 'flex';
+    }
+    function showCreateProductForm() {
+        var paneles = document.querySelector('.panels');
+        var editFormProd = document.getElementById('formEditProduct');
+        var createFormProd = document.getElementById('formCreateProduct');
+        paneles.style.display = 'none';
+        editFormProd.style.display = 'none';
+        createFormProd.style.display = 'flex';
+    }
+    function hideEditCategoryFormShowPanels() {
+        var paneles = document.querySelector('.panels');
+        var miDiv = document.getElementById('formEditCategory');
+        miDiv.style.display = 'none';
+        paneles.style.display = 'flex';
+    }
+    function hideCreateCategoryFormShowPanels() {
+        var paneles = document.querySelector('.panels');
+        var miDiv = document.getElementById('formCreateCategory');
+        miDiv.style.display = 'none';
+        paneles.style.display = 'flex';
+    }
+    function hideOrderFormShowPanels() {
+        var paneles = document.querySelector('.panels');
+        var miDiv = document.querySelector('.orderInfo');
+        miDiv.style.display = 'none';
+        paneles.style.display = 'flex';
+    }
+    function hideEditProductFormShowPanels() {
+        var paneles = document.querySelector('.panels');
+        var editFormProd = document.getElementById('formEditProduct');
+        paneles.style.display = 'flex';
+        editFormProd.style.display = 'none';
+    }
+    function hideCreateProductFormShowPanels() {
+        var paneles = document.querySelector('.panels');
+        var createFormProd = document.getElementById('formCreateProduct');
+        paneles.style.display = 'flex';
+        createFormProd.style.display = 'none';
+    }
+    function showEditOrderForm() {
+        var paneles = document.querySelector('.panels');
+        var miDiv = document.querySelector('.orderInfo');
+        miDiv.style.display = 'flex';
+        paneles.style.display = 'none';
+    }
     function fillDataOrder(code){
         var datos = code.split(",");
         var orderId = document.getElementById("orderId");
@@ -131,21 +195,63 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return true;
     }
-
+    var closeOrderForm = document.getElementById('closeOrderForm');
+    if(closeOrderForm) {
+        closeOrderForm.addEventListener('click', function() {
+            hideOrderFormShowPanels();
+        });
+    }
+    var closeEditCategoryForm = document.getElementById('closeEditCategoryForm');
+    if(closeEditCategoryForm) {
+        closeEditCategoryForm.addEventListener('click', function() {
+            hideEditCategoryFormShowPanels();
+        });
+    }
+    var closeCreateCategoryForm = document.getElementById('closeCreateCategoryForm');
+    if(closeCreateCategoryForm) {
+        closeCreateCategoryForm.addEventListener('click', function() {
+            hideCreateCategoryFormShowPanels();
+        });
+    }
+    var closeEditProductForm = document.getElementById('closeEditProductForm');
+    if(closeEditProductForm) {
+        closeEditProductForm.addEventListener('click', function() {
+            hideEditProductFormShowPanels();
+        });
+    }
+    var closeCreateProductForm = document.getElementById('closeCreateProductForm');
+    if(closeCreateProductForm) {
+        closeCreateProductForm.addEventListener('click', function() {
+            hideCreateProductFormShowPanels();
+        });
+    }
+    document.querySelectorAll('.addCreateCategoryForm').forEach(button => {
+        button.addEventListener('click', function() {
+            showCreateCategoryForm();
+        });
+    });
+    document.querySelectorAll('.addCreateProductForm').forEach(button => {
+        button.addEventListener('click', function() {
+            showCreateProductForm();
+        });
+    });
     document.querySelectorAll('.editCatBtn').forEach(button => {
         button.addEventListener('click', function() {
+            showEditCategoryForm();
             fillDataCategory(button.id);
         });
     });
 
     document.querySelectorAll('.editProdBtn').forEach(button => {
         button.addEventListener('click', function() {
+            showEditProductForm();
             fillDataProduct(button.id);
         });
     });
 
     document.querySelectorAll('.editOrderBtn').forEach(button => {
         button.addEventListener('click', function() {
+            showEditOrderForm();
             fillDataOrder(button.id);
         });
     });
@@ -186,12 +292,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    /*searchBtn.addEventListener("click", function(e){
+    searchBtn.addEventListener("click", function(e){
         console.log("Boton clickado");
         let search = document.getElementById("search");
         let currentURL = window.location.href;
         let url = new URL(currentURL);
+        let Controller = url.searchParams.get("page");
         let action = url.searchParams.get("action");
-        window.location.href = "index.php?page=User&action=" + action + "&search=" + search.value;
-    });*/
+        window.location.href = "index.php?page=" + Controller + "&action=" + action + "&search=" + search.value;
+    });
 });
