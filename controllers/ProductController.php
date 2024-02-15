@@ -8,7 +8,7 @@ class ProductController {
         require_once __DIR__.'/../models/CategoryModel.php';
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
+        $products = ProductModel::getAllProducts(null);
         $productArray = array_map(function($product) {
             return [
                 'code' => $product->getCode(),
@@ -24,7 +24,8 @@ class ProductController {
         include __DIR__.'/../views/General/PrincipalView.php';
     }
     public function showAdminProduct() {
-        $products = ProductModel::getAllProducts();
+        $search = isset($_GET['search']) ? $_GET['search'] : null;
+        $products = ProductModel::getAllProducts($search);
         include __DIR__.'/../views/Administrator/AdminProductsView.php';
     }
 
@@ -37,7 +38,7 @@ class ProductController {
         require_once __DIR__.'/../models/CategoryModel.php';
         // Hay que filtrar tanto por categoria, como por barra de busqueda, y ordenar por Sort by.
         $categories = CategoryModel::listCategories("");
-        $products = ProductModel::getAllProducts();
+        $products = ProductModel::getAllProducts(null);
         $productArray = array_map(function($product) {
             return [
                 'code' => $product->getCode(),

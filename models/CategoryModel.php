@@ -51,8 +51,9 @@
                     throw new Exception("Database error: " . $e->getMessage());
                 }
             } else {
+                $search = '%' . $search . '%';
                 try{
-                    $query = "SELECT * FROM categories WHERE name = :name";
+                    $query = "SELECT * FROM categories WHERE name LIKE :name";
                     $categories = self::getConnection()->prepare($query);
                     $categories->bindParam(':name', $search, PDO::PARAM_STR);
                     $categories->execute();
