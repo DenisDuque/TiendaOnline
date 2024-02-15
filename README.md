@@ -12,7 +12,7 @@ composer require mpdf/mpdf
 
 # ThreeJS Visualizer
 
-The 3D visualizer has to be downloaded from his own repository, located at [ThreeJSVisualizer](https://github.com/DenisDuque/ThreeJSVisualizer).
+The 3D models visualizer has to be downloaded from it's own repository, located at [ThreeJSVisualizer](https://github.com/DenisDuque/ThreeJSVisualizer).
 
 Remember you need to start the project aside this one, it will start on another localhost port, if you need to edit the port, change the port in the file **[productPage.js](https://github.com/DenisDuque/TiendaOnline/views/js/archivo.js)**
 
