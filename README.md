@@ -1,6 +1,6 @@
 # Composer
 
-Foobar is a Python library for dealing with word pluralization.
+Composer is required to enable de PDF creation.
 
 ## Libraries
 
