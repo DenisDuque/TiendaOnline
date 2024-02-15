@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
-    <link rel="stylesheet" href="views\scss\css\main.css.css">
+    <link rel="stylesheet" href="views\scss\css\productPage.css">
     <script src="views\js\productPage.js"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
         require_once("views\General\Components\headerHome.php");
     ?>
     
-    <main id="productPage">
+    <main>
     <?php
         echo "<div id='main'>";
             echo "<div id='allImages'>";

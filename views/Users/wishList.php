@@ -11,10 +11,11 @@
         <section id='itemsContainer'>
     <?php
         foreach($products as $code=>$product){
-            echo "<article id='$code' class='producst-article'>";
+            echo "<article id='$code' class='product-article'>";
                 echo "<img class='product-heart' src='views/assets/images/utils/defaultheart.png'>";
-                echo "<img class='product-heart' src='views/assets/images/products/".$product["img"]."'>";
+                echo "<img class='product-heart' src='views/assets/images/products/".$product["lateral"]."'>";
                 echo "<p>".$product["name"]."</p>";
+                echo "<p>".$product["price"]."</p>";
             echo "</article>";
         }
     ?>
