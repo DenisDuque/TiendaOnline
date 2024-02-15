@@ -9,9 +9,17 @@ class OrdersController
 {
     public function showAdminOrders()
     {
-        $search = isset($_GET['search']) ? $_GET['search'] : null;
-        $Orders = OrdersModel::getOrdersWithDetail($search);
-        include __DIR__ . '/../views/Administrator/AdminOrdersView.php';
+        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if($_SESSION['rol'] == 'admin') {
+                $search = isset($_GET['search']) ? $_GET['search'] : null;
+                $Orders = OrdersModel::getOrdersWithDetail($search);
+                include __DIR__ . '/../views/Administrator/AdminOrdersView.php';
+            } else {
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+            }
+        } else {
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showLoggedError'>";
+        }
     }
     public function showOrders()
     {
