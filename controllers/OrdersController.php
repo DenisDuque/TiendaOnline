@@ -166,15 +166,15 @@ class OrdersController
             echo "<input type='hidden' id='hiddenEmail' value='" . $email . "'>";
             $products = OrdersModel::getInCart($email);
             $allProductsHaveStock = OrdersModel::getStock($products);
-            OrdersModel::updateProductsTable($products);
-            OrdersModel::updateShoppingTable($date);
-            $resultFactura = array();
-            foreach($products as $product){
-                $añadir = ProductModel::getProductWithCode($product['product']);
-                $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
-            }
             if ($allProductsHaveStock) {
-                // asao
+                OrdersModel::updateProductsTable($products);
+                $idCompra = OrdersModel::getIdCompra($email);
+                OrdersModel::updateShoppingTable($date);
+                $resultFactura = array();
+                foreach($products as $product){
+                    $añadir = ProductModel::getProductWithCode($product['product']);
+                    $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
+                }
             } else {
                 // AVISAR DE QUE NO HAY STOCK Y REDIRIGIR AL MENU.
             }
