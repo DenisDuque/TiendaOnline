@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const cartCount = document.getElementById("cartNumber");
+    let cartNumber = 0;
     processCart();
     function processCart() {
         const productsArray = readLocalStorage();
@@ -88,26 +90,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function updateLocalStorage(productsArray) {
         localStorage.setItem("products", JSON.stringify(productsArray));  
-        let cartNumber = document.getElementById("cartNumber");
         let cartAmount = 0;
 
         productsArray.forEach(function (product) {
             cartAmount += product.amount;
         });
 
-        cartNumber.innerHTML = cartAmount;
-    }
-
-    async function updateDatabase(productsArray) {
-        localStorage.setItem("products", JSON.stringify(productsArray));  
-        let cartNumber = document.getElementById("cartNumber");
-        let cartAmount = 0;
-
-        productsArray.forEach(function (product) {
-            cartAmount += product.amount;
-        });
-
-        cartNumber.innerHTML = cartAmount;
+        cartCount.innerHTML = cartAmount;
     }
 
     function readLocalStorage() {
@@ -149,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 success: function(response) {
                     console.log("correcto: ", response);
                     processCart();
+                    
                 }
             });
         }
