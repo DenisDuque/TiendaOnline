@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/OrdersModel.php';
 require_once __DIR__ . '/../models/UserModel.php';
+require_once __DIR__ . '/../models/ProductModel.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // use Spipu\Html2Pdf\Html2Pdf;
@@ -173,14 +174,28 @@ class OrdersController
                 $resultFactura = array();
                 foreach($products as $product){
                     $añadir = ProductModel::getProductWithCode($product['product']);
-                    $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
+                    $resultFactura[] = $añadir;
                 }
+                $firma = OrdersModel::getFirmaAdmin();
+                if (empty($_POST['promo'])) {
+                    $discount = array(
+                        array('code' => 'None', 'discount' => 0)
+                    );
+                } else {
+                    $discount = OrdersModel::getDiscount($_POST['promo']);
+                }
+                $shippingmode = OrdersModel::getShippingMethod($_POST['shipping']);
+                $company = OrdersModel::getCompanyInfo();
+
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=views/General/compraExitosa.php'>";
+                OrdersModel::generatePDF($products, $resultFactura, $_POST['totalCostInput'], $date, $shippingmode, $discount, $firma, $idCompra, $company);
             } else {
+                echo "no hay stock!";
                 // AVISAR DE QUE NO HAY STOCK Y REDIRIGIR AL MENU.
             }
 
             // la de abajo es la antigua
-            OrdersModel::getStockk();
+            // OrdersModel::getStockk();
         } else {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
@@ -189,5 +204,25 @@ class OrdersController
     public function downloadOrder()
     {
         // Codigo para descargar la factura
+        $email = $_SESSION['email'];
+        $products = OrdersModel::getInCart($email);
+        $idCompra = OrdersModel::getIdCompra($email);
+        $date = $_POST['fecha'];
+        $firma = OrdersModel::getFirmaAdmin();
+        $resultFactura = array();
+        foreach ($products as $product) {
+            $añadir = ProductModel::getProductWithCode($product['product']);
+            $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
+        }
+        if (empty($_POST['promo'])) {
+            $discount = array(
+                array('code' => 'None', 'discount' => 0)
+            );
+        } else {
+            $discount = OrdersModel::getDiscount($_POST['promo']);
+        }
+        $shippingmode = OrdersModel::getShippingMethod($_POST['shipping']);
+        $company = OrdersModel::getCompanyInfo();
+        OrdersModel::generatePDF($products, $resultFactura, $_POST['totalCostInput'], $date, $shippingmode, $discount, $firma, $idCompra, $company);
     }
 }

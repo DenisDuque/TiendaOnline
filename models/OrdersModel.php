@@ -532,14 +532,15 @@ class OrdersModel extends Database
                 }
             }
 
-            return $allProductsHaveStock;   
+            return $allProductsHaveStock;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
     // Hay que pasarle un array siempre.
-    public static function updateProductsTable($products){
+    public static function updateProductsTable($products)
+    {
         try {
             // foreach ($products as $key => $product) {
             foreach ($products as $product) {
@@ -555,7 +556,8 @@ class OrdersModel extends Database
         }
     }
 
-    public static function updateShoppingTable($date){
+    public static function updateShoppingTable($date)
+    {
         try {
             $email = $_SESSION['email'];
             $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
@@ -569,7 +571,8 @@ class OrdersModel extends Database
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getProduct(){
+    public static function getProduct()
+    {
         // hay una funcion en ProductModel que le pasas el codigo y te lo dice todo.
     }
     public static function getStockk()
@@ -745,11 +748,11 @@ class OrdersModel extends Database
                 <tbody>';
         foreach ($resultFactura as $key => $product11) {
             $html .= '<tr>
-                        <td>' . $product11[0]['name'] . '</td>
+                        <td>' . $product11['name'] . '</td>
                         <td>' . $result[$key]['amount'] . '</td>
                         <td>' . $result[$key]['size'] . '</td>
-                        <td>' . number_format($product11[0]['price'], 2) . '</td>
-                        <td>' . number_format($product11[0]['price'] * $result[$key]['amount'], 2) . '</td>
+                        <td>' . number_format($product11['price'], 2) . '</td>
+                        <td>' . number_format($product11['price'] * $result[$key]['amount'], 2) . '</td>
                     </tr>';
         }
         $html .= '<tr>
