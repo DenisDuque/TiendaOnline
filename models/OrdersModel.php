@@ -79,12 +79,14 @@ class OrdersModel extends Database {
     public static function getOrdersWithDetail($search) {
         try {
             $badStatus='cart';
+            $search = '%' . $search . '%';
             if($search != null) {
-                $query = "SELECT * FROM (shopping INNER JOIN users
+                /*$query = "SELECT * FROM (shopping INNER JOIN users
                             ON shopping.useremail = users.email)
                             WHERE (shopping.id::text LIKE :search OR shopping.useremail::text LIKE :search 
                             OR shopping.price::text LIKE :search OR shopping.status::text LIKE :search 
-                            OR shopping.datepurchase::text LIKE :search OR shopping.dateend::text LIKE :search) AND status::text NOT LIKE :status";
+                            OR shopping.datepurchase::text LIKE :search OR shopping.dateend::text LIKE :search) AND status::text NOT LIKE :status";*/
+                $query = "SELECT * FROM shopping INNER JOIN users ON shopping.useremail = users.email WHERE status::text NOT LIKE :status AND shopping.useremail::text LIKE :search";
                 $stmt = self::getConnection()->prepare($query);
                 $stmt->bindParam(':search', $search);
                 $stmt->bindParam(':status', $badStatus);

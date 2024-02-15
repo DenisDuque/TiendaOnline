@@ -169,33 +169,63 @@ class ProductModel extends Database {
         }
     }
 
-    public static function getAllProducts() {
-        try {
-            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->execute();
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public static function getAllProducts($search) {
+        if($search == null) {
+            try {
+                $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->execute();
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $Products = array_map(function($row) {
-                return new ProductModel(
-                    $row['code'],
-                    $row['codecategory'],
-                    $row['name'],
-                    $row['description'],
-                    $row['featured'],
-                    $row['price'],
-                    $row['sold'],
-                    $row['stock'],
-                    $row['status'],
-                    $row['size'],
-                    $row['code']."-Side"
-                );
-            }, $rows);
-            
-            return $Products;
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            throw new Exception("Database error: " . $e->getMessage());
+                $Products = array_map(function($row) {
+                    return new ProductModel(
+                        $row['code'],
+                        $row['codecategory'],
+                        $row['name'],
+                        $row['description'],
+                        $row['featured'],
+                        $row['price'],
+                        $row['sold'],
+                        $row['stock'],
+                        $row['status'],
+                        $row['size'],
+                        $row['code']."-Side"
+                    );
+                }, $rows);
+                
+                return $Products;
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
+        } else {
+            $search = '%' . $search . '%';
+            try {
+                $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE name LIKE :name";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindParam(':name', $search, PDO::PARAM_STR);
+                $stmt->execute();
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $Products = array_map(function($row) {
+                    return new ProductModel(
+                        $row['code'],
+                        $row['codecategory'],
+                        $row['name'],
+                        $row['description'],
+                        $row['featured'],
+                        $row['price'],
+                        $row['sold'],
+                        $row['stock'],
+                        $row['status'],
+                        $row['size'],
+                        $row['code']."-Side"
+                    );
+                }, $rows);
+                return $Products;
+            } catch (PDOException $e) {
+                error_log("Error: " . $e->getMessage());
+                throw new Exception("Database error: " . $e->getMessage());
+            }
         }
     }
 
