@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     const cartCount = document.getElementById("cartNumber");
-    let cartNumber = 0;
     processCart();
     function processCart() {
         const productsArray = readLocalStorage();
@@ -19,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (startIndex !== -1 && endIndex !== -1) {
                     var tableContent = response.substring(startIndex, endIndex + '</table>'.length);
                     leftPannel.innerHTML = tableContent;
+                    updateCartNumber();
                 } else {
                     console.error("Table not found in the response");
                 }
@@ -99,6 +99,16 @@ document.addEventListener('DOMContentLoaded', function() {
         cartCount.innerHTML = cartAmount;
     }
 
+    function updateCartNumber() {
+        const productsAmountElement = document.querySelectorAll('.productAmount');
+        let totalAmount = 0;
+        productsAmountElement.forEach(productAmountElement => {
+            const productAmount = parseInt(productAmountElement.innerHTML);
+            totalAmount += productAmount;
+        });
+        cartCount.innerHTML = totalAmount;
+    }
+
     function readLocalStorage() {
         var localStorageValue = localStorage.getItem('products');
         return localStorageValue ? JSON.parse(localStorageValue) : [];
@@ -137,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }),
                 success: function(response) {
                     console.log("correcto: ", response);
+                    
                     processCart();
                     
                 }
@@ -170,16 +181,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }),
                 success: function(response) {
                     console.log("correcto: ", response);
+                    
                     processCart();
                 }
             });
         } 
     });
     $(document).on("click", ".deleteButton", function(){
-        var idProduct = this.getAttribute('codeId');
-        var stock = this.getAttribute('stock');
-        var cant = this.getAttribute('cant');
-        var size = this.getAttribute('size');
         var idProduct = this.getAttribute('codeId');
         var stock = this.getAttribute('stock');
         var cant = this.getAttribute('cant');
