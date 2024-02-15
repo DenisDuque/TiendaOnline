@@ -159,4 +159,8 @@ class OrdersController
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
     }
+
+    public function downloadOrder(){
+        // Codigo para descargar la factura
+    }
 }

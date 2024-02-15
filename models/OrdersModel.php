@@ -499,13 +499,17 @@ class OrdersModel extends Database
     {
         $email = $_SESSION['email'];
         try {
+            // getInCart()
             $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // return $result
+            // hasta aqui;
+            // Hay que pasarle un array siempre.
+            // getStock($cart)
             $allProductsHaveStock = true;
-            $resultFactura = array();
             foreach ($result as $key => $product) {
                 $queryStock = "SELECT * FROM products WHERE code = :code";
                 $stmt = self::getConnection()->prepare($queryStock);
@@ -536,6 +540,7 @@ class OrdersModel extends Database
                 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt->execute();
 
+                $resultFactura = array();
                 foreach ($result as $product1) {
                     $factura = "SELECT * FROM products WHERE code = :code";
                     $stmt = self::getConnection()->prepare($factura);
@@ -554,8 +559,7 @@ class OrdersModel extends Database
                 $shippingmode = self::getShippingMethod($_POST['shipping']);
                 $company = self::getCompanyInfo();
 
-                echo "COMPRA REALIZADA CON ÉXITO! Volviendo al inicio";
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='100;URL=index.php'>";
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=views/General/compraExitosa.php'>";
                 self::generatePDF($result, $resultFactura, $_POST['totalCostInput'], $date, $shippingmode, $discount, $firma, $idCompra, $company);
             }
         } catch (PDOException $e) {
@@ -623,13 +627,13 @@ class OrdersModel extends Database
 
         // Set HTML content for the header with an absolute path to the image
         $header = '<div style="width: 100px; height: 100px; overflow: hidden; margin-right: 5px;">
-                        <img src="views/assets/images/utils/logo.png" alt="Urban store logo" style="width: 100%; height: auto;">
+                        <img src="./views/assets/images/utils/logo.png" alt="Urban store logo" style="width: 100%; height: auto;">
                     </div>';
 
         $mpdf->writeHTML($header);
 
         // Add content to the body of the PDF
-        $html = '<h1>'.$company[0]['name'] . '</h1>';
+        $html = '<h1>' . $company[0]['name'] . '</h1>';
         $html .= $company[0]['phone'] . '<br>';
         $html .= $company[0]['cif'] . '<br>';
         $html .= $company[0]['email'] . '<br>';
@@ -672,7 +676,7 @@ class OrdersModel extends Database
                     <td>$' . number_format($totalCost, 2) . '</td>
                 </tr>';
         $html .= '</tbody></table>';
-        $html .= '<p>Firma Administrador:</p><img src="views/assets/images/signatures/' . $firma[0]['signature'] . '" alt="Firma Admin" style="width: 100px; height: auto;">';
+        $html .= '<p>Firma Administrador:</p><img src="./views/assets/images/signatures/' . str_replace(' ', '', $firma[0]['signature']) . '" alt="Firma Admin" style="width: 100px; height: auto;">';
 
         // Save the PDF to a file
         $mpdf->writeHTML($html);
