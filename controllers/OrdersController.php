@@ -153,14 +153,33 @@ class OrdersController
     public function purchaseOrder()
     {
         if (isset($_SESSION['email'])) {
-            echo "<input type='hidden' id='hiddenEmail' value='" . $_SESSION['email'] . "'>";
-            OrdersModel::getStock();
+            $email = $_SESSION['email'];
+            $date = $_POST['fecha'];
+            echo "<input type='hidden' id='hiddenEmail' value='" . $email . "'>";
+            $products = OrdersModel::getInCart($email);
+            $allProductsHaveStock = OrdersModel::getStock($products);
+            OrdersModel::updateProductsTable($products);
+            OrdersModel::updateShoppingTable($date);
+            $resultFactura = array();
+            foreach($products as $product){
+                $añadir = ProductModel::getProductWithCode($product['product']);
+                $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
+            }
+            if ($allProductsHaveStock) {
+                // asao
+            } else {
+                // AVISAR DE QUE NO HAY STOCK Y REDIRIGIR AL MENU.
+            }
+
+            // la de abajo es la antigua
+            OrdersModel::getStockk();
         } else {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
     }
 
-    public function downloadOrder(){
+    public function downloadOrder()
+    {
         // Codigo para descargar la factura
     }
 }

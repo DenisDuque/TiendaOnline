@@ -94,11 +94,12 @@ class OrdersModel extends Database
         $this->products = $products;
     }
 
-    public static function getOrdersWithDetail($search) {
+    public static function getOrdersWithDetail($search)
+    {
         try {
-            $badStatus='cart';
+            $badStatus = 'cart';
             $search = '%' . $search . '%';
-            if($search != null) {
+            if ($search != null) {
                 /*$query = "SELECT * FROM (shopping INNER JOIN users
                             ON shopping.useremail = users.email)
                             WHERE (shopping.id::text LIKE :search OR shopping.useremail::text LIKE :search 
@@ -496,20 +497,95 @@ class OrdersModel extends Database
         return $htmlTable;
     }
 
-    public static function getStock()
+    // EMPIEZO AQUI!
+    public static function getInCart($email)
     {
-        $email = $_SESSION['email'];
         try {
-            // getInCart()
             $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // return $result
-            // hasta aqui;
+            return $result;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    // Hay que pasarle un array siempre.
+    public static function getStock($products)
+    {
+        try {
+            $allProductsHaveStock = true;
+            foreach ($products as $key => $product) {
+                $queryStock = "SELECT * FROM products WHERE code = :code";
+                $stmt = self::getConnection()->prepare($queryStock);
+                $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
+                $stmt->execute();
+                $productsStock = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($productsStock[0]['stock'] < self::getProductAmount($product['product'], $products[$key]['shop'])) {
+                    $allProductsHaveStock = false;
+                    // echo "Error! No tenemos stock de estos modelos ahora mismo. Lo sentimos!";
+                    // echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php'>";
+                }
+            }
+
+            return $allProductsHaveStock;   
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    // Hay que pasarle un array siempre.
+    public static function updateProductsTable($products){
+        try {
+            // foreach ($products as $key => $product) {
+            foreach ($products as $product) {
+                $queryUpdateStock = "UPDATE products SET stock = stock - :amount, sold = sold + :amount WHERE code = :code";
+                $stmt = self::getConnection()->prepare($queryUpdateStock);
+                $stmt->bindParam(':amount', $product['amount'], PDO::PARAM_INT);
+                $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
+                $stmt->execute();
+            }
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    public static function updateShoppingTable($date){
+        try {
+            $email = $_SESSION['email'];
+            $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
+            $stmt = self::getConnection()->prepare($queryUpdateShopping);
+            $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
+            $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+    public static function getProduct(){
+        // hay una funcion en ProductModel que le pasas el codigo y te lo dice todo.
+    }
+    public static function getStockk()
+    {
+        $email = $_SESSION['email'];
+        try {
+            // getInCart() HECHO1
+            $query = "SELECT * FROM inCart WHERE shop = (SELECT id FROM shopping WHERE useremail = :email AND status = 'cart')";
+            $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // return $result;
+            // hasta aqui!!
             // Hay que pasarle un array siempre.
-            // getStock($cart)
+            // getStock($cart) HECHO1
             $allProductsHaveStock = true;
             foreach ($result as $key => $product) {
                 $queryStock = "SELECT * FROM products WHERE code = :code";
@@ -524,7 +600,11 @@ class OrdersModel extends Database
                     echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php'>";
                 }
             }
+            // return $allProductsHaveStock;
+            // hasta aqui!!
             if ($allProductsHaveStock) {
+                // Hay que pasarle un array siempre.
+                // updateProductsTable($cart) HECHO1
                 foreach ($result as $key => $product) {
                     $queryUpdateStock = "UPDATE products SET stock = stock - :amount, sold = sold + :amount WHERE code = :code";
                     $stmt = self::getConnection()->prepare($queryUpdateStock);
@@ -532,22 +612,30 @@ class OrdersModel extends Database
                     $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
                     $stmt->execute();
                 }
+                // hasta aqui!!
+
                 $idCompra = self::getIdCompra($email);
                 $date = $_POST['fecha'];
+                // updateShoppingTable($date) HECHO1
                 $queryUpdateShopping = "UPDATE shopping SET price = :price, datepurchase = :datepurchase, status = 'pending' WHERE useremail = :email AND status = 'cart'";
                 $stmt = self::getConnection()->prepare($queryUpdateShopping);
                 $stmt->bindParam(':price', $_POST['totalCostInput'], PDO::PARAM_INT);
                 $stmt->bindParam(':datepurchase', $date, PDO::PARAM_STR);
                 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
                 $stmt->execute();
-
+                // hasta aqui!!
                 $resultFactura = array();
                 foreach ($result as $product1) {
+                    // hay que pasarle siempre un array
+                    // getProduct($cart)1
+                    // funcion del product model desde aqui.
                     $factura = "SELECT * FROM products WHERE code = :code";
                     $stmt = self::getConnection()->prepare($factura);
                     $stmt->bindParam(':code', $product1['product'], PDO::PARAM_STR);
                     $stmt->execute();
+                    // funcion del product model hasta aqui.
                     $resultFactura[] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // hasta aqui!!
                 }
                 $firma = self::getFirmaAdmin();
                 if (empty($_POST['promo'])) {
