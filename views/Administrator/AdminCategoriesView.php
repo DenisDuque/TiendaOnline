@@ -36,14 +36,9 @@
                     }
                     ?>
                 </div>
-                <h1>Popular categories chart</h1>
-                <canvas id="canvasCatTopProducts" width="620" height="300"></canvas>
-                <style>
-                    canvas {
-                        border: 1px solid #000;
-                    }
-                </style>
             </div>
+            <h1>Popular categories chart</h1>
+            <canvas id="canvasCatTopProducts" width="620" height="300"></canvas>
         </div>
     </body>
 </html>
