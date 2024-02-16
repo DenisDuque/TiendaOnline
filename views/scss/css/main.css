@@ -31,7 +31,6 @@
   }
   .product-article {
     width: 30vw !important;
-    height: -moz-fit-content;
     height: fit-content;
     padding: 2vh 2vh;
     margin-bottom: 4vh;
@@ -307,12 +306,10 @@ body .product-article {
   border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
-  height: -moz-fit-content;
   height: fit-content;
 }
 body .product-article img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 body .product-article .product-heart {
   margin: 0;
