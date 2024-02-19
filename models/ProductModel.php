@@ -561,8 +561,10 @@ class ProductModel extends Database {
     }
     public static function getCategoryFromAllProducts() {
         try {
-            $query = "SELECT codecategory FROM products";
+            $badStock = 0;
+            $query = "SELECT codecategory FROM products WHERE stock != :stock";
             $stmt = self::getConnection()->prepare($query);
+            $stmt->bindParam(':stock', $badStock, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

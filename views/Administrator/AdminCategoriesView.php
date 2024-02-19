@@ -37,7 +37,7 @@
                     ?>
                 </div>
             </div>
-            <h1>Popular categories chart</h1>
+            <h1>Categories with products in stock chart</h1>
             <canvas id="canvasCatTopProducts" width="620" height="300"></canvas>
         </div>
     </body>

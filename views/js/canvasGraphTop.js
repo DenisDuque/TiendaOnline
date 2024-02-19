@@ -46,7 +46,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         var x = i * (barWidth + barSpacing) + barSpacing; // Añadir margen a la derecha de la primera barra
                         var y = canvas.height - topMargin - calculateScaledHeight(data[i].sales, canvas.height);
 
-                        ctx.fillStyle = 'rgba(255, 94, 0, 0.4)'; // Nuevo color de las barras
+                        if(data[i].sales < 25) {
+                            ctx.fillStyle = 'rgba(255, 0, 0, 0.4)';
+                        } else if (data[i].sales < 75) {
+                            ctx.fillStyle = 'rgba(255, 165, 0, 0.4';
+                        } else {
+                            ctx.fillStyle = 'rgba(255, 94, 0, 0.4)'; 
+                        }
+
                         ctx.fillRect(x, y, barWidth, calculateScaledHeight(data[i].sales, canvas.height));
 
                         ctx.fillStyle = '#000';
