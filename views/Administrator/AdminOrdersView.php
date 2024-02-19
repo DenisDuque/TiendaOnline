@@ -53,7 +53,7 @@
                             echo "
                                 <div id='". $orderId ."' class='defaultComponent'>
                                     <div class='imageComponent'>
-                                        <img src='views/assets/images/users/"/*. $userImage */."' alt='Customer'>
+                                        <img src='views/assets/images/utils/customers.png' alt='Customer'>
                                     </div>
                                     <div class='textOnLeft'>
                                         <h4 class='name'>". $userName ." ". $userSurname ."</h4>

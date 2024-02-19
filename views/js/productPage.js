@@ -88,6 +88,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    const visualizerBtn = document.getElementById('3d360');
+
+    visualizerBtn.addEventListener('click', function() {
+        const queryParams = new URLSearchParams(window.location.search);
+
+        const code = queryParams.get('code');
+        const port = '5173';
+
+        const ThreeJSVisualizer = 'http://localhost:'+ port +'?model=' + code;
+
+        window.open(ThreeJSVisualizer, '_blank');
+    });
     /*function readLocalStorage() {
         var localStorageValue = localStorage.getItem('myLocalStorage');
         return localStorageValue ? JSON.parse(localStorageValue) : [];

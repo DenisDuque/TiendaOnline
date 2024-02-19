@@ -31,7 +31,6 @@
   }
   .product-article {
     width: 30vw !important;
-    height: -moz-fit-content;
     height: fit-content;
     padding: 2vh 2vh;
     margin-bottom: 4vh;
@@ -59,6 +58,7 @@
     margin-bottom: 5vh;
   }
   #sortby h3 {
+    width: -moz-max-content;
     width: max-content;
     margin-left: 1vw;
   }
@@ -120,7 +120,8 @@ body header nav ul li a {
   flex-direction: column;
   height: 2em;
   width: 2em;
-  text-decoration: auto;
+  -webkit-text-decoration: auto;
+          text-decoration: auto;
 }
 body header nav ul li a img {
   width: 2em;
@@ -188,7 +189,9 @@ body #sortby select {
   background-position-y: center;
   background-position-x: 90%;
   display: inline-block;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   font: inherit;
   line-height: 1.5em;
@@ -196,8 +199,6 @@ body #sortby select {
   border: none;
   /* reset */
   margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -249,7 +250,9 @@ body #categories .category {
   align-content: center;
   box-shadow: 1px 2px 4px 0px rgba(0, 0, 0, 0.25);
   list-style: none;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   padding: 0 1vw;
   cursor: pointer;
   transition: all ease 0.2s;
@@ -307,12 +310,10 @@ body .product-article {
   border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
-  height: -moz-fit-content;
   height: fit-content;
 }
 body .product-article img {
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 body .product-article .product-heart {
   margin: 0;
@@ -321,7 +322,8 @@ body .product-article .product-heart {
   left: 1vh;
   width: 3vh;
   height: 3vh;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 body .product-article p {
   margin: 0;
@@ -372,10 +374,12 @@ body .swiper-container .swiper-wrapper .swiper-slide .text {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: -moz-max-content;
   width: max-content;
   text-align: left;
 }
 body .swiper-container .swiper-wrapper .swiper-slide .text h2 {
+  width: -moz-max-content;
   width: max-content;
   font-size: 4em;
   margin-left: 5%;
@@ -386,6 +390,7 @@ body .swiper-container .swiper-wrapper .swiper-slide .text .ExploreNow {
   border-radius: 10px;
   padding: 2em;
   background-color: black;
+  width: -moz-fit-content;
   width: fit-content;
   margin-bottom: 5%;
   margin-left: 5%;
@@ -407,7 +412,8 @@ body .swiper-container .swiper-wrapper .swiper-slide .foto img {
   width: 100%;
   max-width: 370px;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 body .swiper-container .swiper-buttons {
   margin-bottom: 10px;

@@ -484,7 +484,7 @@ class OrdersModel extends Database
                 "<div><button class='deleteButton' codeId='" . $product['code'] . "' size='" . $product['size'] . "' cant='" . $product['amount'] . "' stock='" . $info[0]['stock'] . "'>Borrar</button>" .
                 "</td>" .
                 "<td>" .
-                "<div><button class='minusButton' codeId='" . $product['code'] . "' size='" . $product['size'] . "' cant='" . $product['amount'] . "' stock='" . $info[0]['stock'] . "'>-</button><div>" . $product['amount'] . "</div><button class='plusButton' codeId='" . $product['code'] . "' size='" . $product['size'] . "' cant='" . $product['amount'] . "' stock='" . $info[0]['stock'] . "'>+</button></div>" .
+                "<div><button class='minusButton' codeId='" . $product['code'] . "' size='" . $product['size'] . "' cant='" . $product['amount'] . "' stock='" . $info[0]['stock'] . "'>-</button><div class='productAmount'>" . $product['amount'] . "</div><button class='plusButton' codeId='" . $product['code'] . "' size='" . $product['size'] . "' cant='" . $product['amount'] . "' stock='" . $info[0]['stock'] . "'>+</button></div>" .
                 "</td>" .
                 "<td>" .
                 "<div>$" . $info[0]['price'] . "</div>" .
