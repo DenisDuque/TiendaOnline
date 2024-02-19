@@ -715,14 +715,8 @@ class OrdersModel extends Database
 
     public static function generatePDF($result, $resultFactura, $totalCost, $date, $shipping, $discount, $firma, $idCompra, $company)
     {
+        // Crear instancia de mPDF
         $mpdf = new \Mpdf\Mpdf();
-
-        // Set HTML content for the header with an absolute path to the image
-        $header = '<div style="width: 100px; height: 100px; overflow: hidden; margin-right: 5px;">
-                        <img src="./views/assets/images/utils/logo.png" alt="Urban store logo" style="width: 100%; height: auto;">
-                    </div>';
-
-        $mpdf->writeHTML($header);
 
         // Add content to the body of the PDF
         $html = '<h1>' . $company[0]['name'] . '</h1>';
@@ -736,43 +730,43 @@ class OrdersModel extends Database
 
         // Add table with product details
         $html .= '<table border="1" cellpadding="5" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Nombre del Producto</th>
-                        <th>Cantidad</th>
-                        <th>Talla</th>
-                        <th>Precio</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>';
+<thead>
+    <tr>
+        <th>Nombre del Producto</th>
+        <th>Cantidad</th>
+        <th>Talla</th>
+        <th>Precio</th>
+        <th>Total</th>
+    </tr>
+</thead>
+<tbody>';
         foreach ($resultFactura as $key => $product11) {
             $html .= '<tr>
-                        <td>' . $product11['name'] . '</td>
-                        <td>' . $result[$key]['amount'] . '</td>
-                        <td>' . $result[$key]['size'] . '</td>
-                        <td>' . number_format($product11['price'], 2) . '</td>
-                        <td>' . number_format($product11['price'] * $result[$key]['amount'], 2) . '</td>
-                    </tr>';
+        <td>' . $product11['name'] . '</td>
+        <td>' . $result[$key]['amount'] . '</td>
+        <td>' . $result[$key]['size'] . '</td>
+        <td>' . number_format($product11['price'], 2) . '</td>
+        <td>' . number_format($product11['price'] * $result[$key]['amount'], 2) . '</td>
+    </tr>';
         }
         $html .= '<tr>
-                    <td colspan="4"><strong>Shipping Method:</strong></td>
-                    <td>' . $shipping[0]['name'] . ' : $' . $shipping[0]['price'] . '</td>
-                </tr>';
+    <td colspan="4"><strong>Shipping Method:</strong></td>
+    <td>' . $shipping[0]['name'] . ' : $' . $shipping[0]['price'] . '</td>
+</tr>';
         $html .= '<tr>
-                    <td colspan="4"><strong>Discount:</strong></td>
-                    <td>' . $discount[0]['code'] . ' : -' . $discount[0]['discount'] . '%</td>
-                </tr>';
+    <td colspan="4"><strong>Discount:</strong></td>
+    <td>' . $discount[0]['code'] . ' : -' . $discount[0]['discount'] . '%</td>
+</tr>';
         $html .= '<tr>
-                    <td colspan="4"><strong>Total:</strong></td>
-                    <td>$' . number_format($totalCost, 2) . '</td>
-                </tr>';
+    <td colspan="4"><strong>Total:</strong></td>
+    <td>$' . number_format($totalCost, 2) . '</td>
+</tr>';
         $html .= '</tbody></table>';
         $html .= '<p>Firma Administrador:</p><img src="./views/assets/images/signatures/' . str_replace(' ', '', $firma[0]['signature']) . '" alt="Firma Admin" style="width: 100px; height: auto;">';
 
-        // Save the PDF to a file
+        // Generar el PDF
         $mpdf->writeHTML($html);
-        $mpdf->Output('FacturaCompra' . $idCompra[0]['id'] . '.pdf', 'D');
+        $mpdf->output('Order'.$idCompra.'.pdf', 'D');
     }
 
     public static function dropOrder($orderID)

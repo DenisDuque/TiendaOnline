@@ -10,8 +10,8 @@ class OrdersController
 {
     public function showAdminOrders()
     {
-        if(isset($_SESSION['email']) && isset($_SESSION['rol'])) {
-            if($_SESSION['rol'] == 'admin') {
+        if (isset($_SESSION['email']) && isset($_SESSION['rol'])) {
+            if ($_SESSION['rol'] == 'admin') {
                 $search = isset($_GET['search']) ? $_GET['search'] : null;
                 $Orders = OrdersModel::getOrdersWithDetail($search);
                 include __DIR__ . '/../views/Administrator/AdminOrdersView.php';
@@ -164,7 +164,6 @@ class OrdersController
         if (isset($_SESSION['email'])) {
             $email = $_SESSION['email'];
             $date = $_POST['fecha'];
-            echo "<input type='hidden' id='hiddenEmail' value='" . $email . "'>";
             $products = OrdersModel::getInCart($email);
             $allProductsHaveStock = OrdersModel::getStock($products);
             if ($allProductsHaveStock) {
@@ -172,30 +171,14 @@ class OrdersController
                 $idCompra = OrdersModel::getIdCompra($email);
                 OrdersModel::updateShoppingTable($date);
                 $resultFactura = array();
-                foreach($products as $product){
+                foreach ($products as $product) {
                     $añadir = ProductModel::getProductWithCode($product['product']);
                     $resultFactura[] = $añadir;
                 }
-                $firma = OrdersModel::getFirmaAdmin();
-                if (empty($_POST['promo'])) {
-                    $discount = array(
-                        array('code' => 'None', 'discount' => 0)
-                    );
-                } else {
-                    $discount = OrdersModel::getDiscount($_POST['promo']);
-                }
-                $shippingmode = OrdersModel::getShippingMethod($_POST['shipping']);
-                $company = OrdersModel::getCompanyInfo();
-
-                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=views/General/compraExitosa.php'>";
-                OrdersModel::generatePDF($products, $resultFactura, $_POST['totalCostInput'], $date, $shippingmode, $discount, $firma, $idCompra, $company);
+                include __DIR__ . '/../views/General/compraExitosa.php';
             } else {
-                echo "no hay stock!";
-                // AVISAR DE QUE NO HAY STOCK Y REDIRIGIR AL MENU.
+                include __DIR__ . '/../views/General/compraExitosa.php';
             }
-
-            // la de abajo es la antigua
-            // OrdersModel::getStockk();
         } else {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
@@ -203,26 +186,29 @@ class OrdersController
 
     public function downloadOrder()
     {
-        // Codigo para descargar la factura
-        $email = $_SESSION['email'];
-        $products = OrdersModel::getInCart($email);
-        $idCompra = OrdersModel::getIdCompra($email);
-        $date = $_POST['fecha'];
-        $firma = OrdersModel::getFirmaAdmin();
-        $resultFactura = array();
-        foreach ($products as $product) {
-            $añadir = ProductModel::getProductWithCode($product['product']);
-            $resultFactura[] = $añadir->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($_POST['post']) && isset($_POST['products']) && isset($_POST['idCompra'])) {
+            $products = json_decode($_POST['products'], true);
+            $post = json_decode($_POST['post'], true);
+            $idCompra = $_POST['idCompra'];
+            // Código para descargar la factura
+            $firma = OrdersModel::getFirmaAdmin();
+            $resultFactura = array();
+            foreach ($products as $product) {
+                $añadir = ProductModel::getProductWithCode($product['product']);
+                array_push($resultFactura, $añadir);
+            }
+            if (empty($post['promo'])) {
+                $discount = array(
+                    array('code' => 'None', 'discount' => 0)
+                );
+            } else {
+                $discount = OrdersModel::getDiscount($post['promo']);
+            }
+            $shippingmode = OrdersModel::getShippingMethod($post['shipping']);
+            $company = OrdersModel::getCompanyInfo();
+            // Generar el PDF con los datos obtenidos
+            OrdersModel::generatePDF($products, $resultFactura, $post['totalCostInput'], $post['fecha'], $shippingmode, $discount, $firma, $idCompra, $company);
+            
         }
-        if (empty($_POST['promo'])) {
-            $discount = array(
-                array('code' => 'None', 'discount' => 0)
-            );
-        } else {
-            $discount = OrdersModel::getDiscount($_POST['promo']);
-        }
-        $shippingmode = OrdersModel::getShippingMethod($_POST['shipping']);
-        $company = OrdersModel::getCompanyInfo();
-        OrdersModel::generatePDF($products, $resultFactura, $_POST['totalCostInput'], $date, $shippingmode, $discount, $firma, $idCompra, $company);
     }
 }

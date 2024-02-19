@@ -1,20 +1,20 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Agrega un evento de escucha para el envío del formulario
     var orderForm = document.getElementById('orderForm');
     if (orderForm) {
-        orderForm.addEventListener('submit', function(event) {
+        orderForm.addEventListener('submit', function (event) {
             // Obtén la fecha actual en formato yyyy-mm-dd
             var today = obtenerFechaActual();
-            
+
             // Establece el valor del input hidden 'fecha' con la fecha actual
             document.getElementById('fecha').value = today;
-            
+
             // Obtén el contenido del div totalCost
             var totalCostText = document.getElementById('totalCost').textContent.trim(); // Obtener el contenido del div totalCost
-            
+
             // Extraer solo el número final del texto totalCost
             var totalCostValue = totalCostText.match(/\d+(\.\d{1,2})?/); // Buscar un número con opcionalmente hasta dos decimales
-            
+
             // Verificar si se encontró un número
             if (totalCostValue) {
                 // Parsear el número extraído como un entero
