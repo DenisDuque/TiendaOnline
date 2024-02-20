@@ -88,12 +88,8 @@ class UserModel extends Database {
                 $hashedPasswordFromDatabase = $user['password'];
                 if (password_verify($password, $hashedPasswordFromDatabase)) {
                     return $user['rol'];
-                } else {
-                    //echo('Contraseña incorrecta');
                 }
-            } else {
-                echo('Usuario no encontrado');
-            }
+            } 
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
