@@ -143,7 +143,7 @@ canvas {
 }
 #leftPanel .formProd {
   height: 72vh;
-  width: 30vw;
+  width: 16vw;
   padding: 5vh 1vw;
   background-color: rgba(255, 94, 0, 0.25);
   border-radius: 10px;
@@ -159,6 +159,12 @@ canvas {
   text-align: center;
 }
 #leftPanel .formProd form {
+  height: 100%;
+  width: 100%;
+  padding: 5vh 1vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
   display: flex;
   flex-direction: column;
 }
@@ -239,6 +245,29 @@ canvas {
   background-color: white;
   border-radius: 30px;
   border: 1px solid #ccc; /* Añade un borde para visualización */
+}
+#leftPanel .formProd form .EditProdForm {
+  margin-top: 0;
+  height: 72vh;
+  width: 16vw;
+}
+#leftPanel .formProd form .EditProdForm table {
+  width: 100%;
+}
+#leftPanel .formProd form .EditProdForm table label {
+  width: 100%;
+}
+#leftPanel .formProd form .EditProdForm table label + input[type=text], #leftPanel .formProd form .EditProdForm table label + input[type=file], #leftPanel .formProd form .EditProdForm table label + select {
+  width: calc(100% - 2vw);
+}
+#leftPanel .formProd form .EditProdForm table .addSizeBtn {
+  width: 100%;
+}
+#leftPanel .formProd form .EditProdForm table #sizeList {
+  width: 100%;
+}
+#leftPanel .formProd form .EditProdForm table .submitBtn {
+  width: 100%;
 }
 @media (min-width: 600px) {
   #leftPanel .formProd form #sizeList {

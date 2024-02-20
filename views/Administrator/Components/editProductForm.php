@@ -27,6 +27,11 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <span id="error"></span>
+                </td>
+            </tr>
+            <tr>
                 <td><label for="price">Price</label></td>
             </tr>
             <tr>
@@ -123,3 +128,42 @@
         </table>
     </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el formulario y el campo de nombre
+        var form = document.getElementById("EditProdForm");
+        var nameInput = document.getElementById("name");
+        var errorSpan = document.getElementById("error");
+
+        // Agrega un evento de escucha para el cambio en el campo de nombre
+        nameInput.addEventListener("input", function() {
+            // Verifica la entrada del usuario en tiempo real
+            if (!isValidName(nameInput.value)) {
+                // Si la entrada no es válida, muestra el mensaje de error
+                errorSpan.textContent = 'Invalid name';
+                errorSpan.style.color = 'red';
+                submitBtn.disabled = true; // Deshabilitar el botón de enviar
+                event.preventDefault(); // Evitar el envío del formulario    
+            } else {
+                // Si la entrada es válida, borra el mensaje de error
+                errorSpan.innerHTML = "";
+            }
+        });
+
+        // Agrega un evento de escucha para el envío del formulario
+        form.addEventListener("submit", function(event) {
+            // Verifica la entrada del usuario antes de permitir el envío del formulario
+            if (!isValidName(nameInput.value)) {
+                // Si la entrada no es válida, evita que el formulario se envíe
+                event.preventDefault();
+            }
+        });
+
+        // Función para validar el campo de nombre
+        function isValidName(name) {
+            // Utiliza una expresión regular para verificar si el nombre contiene caracteres no permitidos
+            var regex = /[\$&\-_/%()@<>]/;
+            return !regex.test(name);
+        }
+    });
+</script>

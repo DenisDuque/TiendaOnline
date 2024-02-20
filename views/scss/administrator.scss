@@ -159,7 +159,7 @@ canvas {
 
     .formProd{
         height: 72vh;
-        width: 30vw;
+        width: 16vw;
         padding: 5vh 1vw;
         background-color: $adminOrange;
         border-radius: $radius;
@@ -174,6 +174,12 @@ canvas {
             text-align: center;
         }
         form {
+            height: 100%; // Hacer que el formulario ocupe el 100% de la altura del contenedor
+            width: 100%; // Hacer que el formulario ocupe el 100% del ancho del contenedor
+            padding: 5vh 1vw;
+            border-radius: $radius;
+            display: flex;
+            flex-direction: column;
             label{
                 font-weight: bold;
             }
@@ -258,6 +264,37 @@ canvas {
                 border-radius: 30px;
                 border: 1px solid #ccc; /* Añade un borde para visualización */
             }
+
+            .EditProdForm {
+                margin-top: 0;
+                height: 72vh;
+                width: 16vw; // Ajuste el ancho del formulario según tus necesidades
+                
+                table {
+                    width: 100%; // Ajustar el ancho de la tabla al 100%
+                    label {
+                        width: 100%; // Ajustar el ancho de las etiquetas al 100%
+                
+                        &+input[type="text"],
+                        &+input[type="file"],
+                        &+select {
+                            width: calc(100% - 2 * 1vw); // Ajustar el ancho de los campos de entrada al 100% menos los márgenes
+                        }
+                    }
+                
+                    .addSizeBtn {
+                        width: 100%; // Ajustar el ancho del botón al 100%
+                    }
+                
+                    #sizeList {
+                        width: 100%; // Ajustar el ancho de la lista de tallas al 100%
+                    }
+                
+                    .submitBtn {
+                        width: 100%; // Ajustar el ancho del botón de envío al 100%
+                    }
+                }
+            }
             
             @media (min-width: 600px) {
                 #sizeList {
@@ -268,7 +305,7 @@ canvas {
             
         }
     }
-
+    
     #formEditCategory {
         margin-left: 2vw;
         position: absolute;
