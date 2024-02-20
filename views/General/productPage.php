@@ -69,7 +69,7 @@
                         }
                                 echo "<input type='hidden' name='function' value='wishlist'>";
                                 echo "<button type='submit' id='wishlist'>";
-                                    echo "<p>wishlist</p>";
+                                    echo "<p>Wishlist</p>";
                                     if($product["inWishList"]){
                                         echo "<img src='views/assets/images/utils/redHeart.png' alt='heart'>";
                                     }else{
