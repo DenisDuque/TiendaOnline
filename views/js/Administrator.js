@@ -291,14 +291,15 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = "index.php?page="+ id +"&action=" + action;
         });
     }
-
-    searchBtn.addEventListener("click", function(e){
-        console.log("Boton clickado");
-        let search = document.getElementById("search");
-        let currentURL = window.location.href;
-        let url = new URL(currentURL);
-        let Controller = url.searchParams.get("page");
-        let action = url.searchParams.get("action");
-        window.location.href = "index.php?page=" + Controller + "&action=" + action + "&search=" + search.value;
-    });
+    if(searchBtn) {
+        searchBtn.addEventListener("click", function(e){
+            console.log("Boton clickado");
+            let search = document.getElementById("search");
+            let currentURL = window.location.href;
+            let url = new URL(currentURL);
+            let Controller = url.searchParams.get("page");
+            let action = url.searchParams.get("action");
+            window.location.href = "index.php?page=" + Controller + "&action=" + action + "&search=" + search.value;
+        });
+    }
 });

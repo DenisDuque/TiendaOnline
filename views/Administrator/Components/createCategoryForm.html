@@ -1,9 +1,9 @@
 <div id="formCreateCategory" class="adminForm">
     <button id="closeCreateCategoryForm"><img src='views/assets/images/utils/signout.png'></button>
-    <h4 id="editCategoryTitle">Create Category</h4>
+    <h4 id="createCategoryTitle">Create Category</h4>
     <form action="index.php?page=Category&action=createCategory" method="POST">
         <label for="name">Category name</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" required>
         <div>
             <label for="active">Status</label>
             <select name="active" id="select">

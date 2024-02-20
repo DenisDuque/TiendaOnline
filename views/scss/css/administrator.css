@@ -55,6 +55,28 @@ header.admin img:hover {
   height: 82vh;
 }
 
+canvas {
+  border: 1px solid #000;
+  width: 500px;
+  height: 300px;
+}
+
+.canvasContainer {
+  display: flex;
+  justify-content: right;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .panelTitle {
+    font-size: 25px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .panelTitle {
+    font-size: 36px;
+  }
+}
 #leftPanel {
   position: relative;
   display: flex;
@@ -89,7 +111,6 @@ header.admin img:hover {
   height: 7vh;
 }
 #leftPanel .panels .panel p {
-  font-size: 36px;
   margin-top: -2vh;
 }
 #leftPanel .panels .panel:hover {
@@ -129,6 +150,7 @@ header.admin img:hover {
   display: none;
   flex-direction: column;
   transition: all 0.5s ease;
+  animation: slideLeft 2s ease-in-out forwards;
 }
 #leftPanel .formProd h4 {
   margin: 0;
@@ -279,6 +301,61 @@ header.admin img:hover {
   background-color: #B7FFB0;
   font-size: 16px;
 }
+#leftPanel #formCreateCategory {
+  margin-left: 2vw;
+  position: absolute;
+  animation: slideLeft 2s ease-in-out forwards;
+}
+#leftPanel #formCreateCategory #createCategoryTitle {
+  margin-bottom: 5vh;
+}
+#leftPanel #formCreateCategory label {
+  font-size: 20px;
+}
+#leftPanel #formCreateCategory input {
+  border-radius: 10px;
+  border: none;
+  height: 3vh;
+}
+#leftPanel #formCreateCategory div {
+  margin-bottom: 2.5vh;
+}
+#leftPanel #formCreateCategory div label {
+  margin-right: 3vw;
+}
+#leftPanel #formCreateCategory select {
+  background-image: url("../../assets/images/utils/selectArrow.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 100%;
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid black;
+  width: 6vw;
+  font-size: 16px;
+  font-weight: 500;
+}
+#leftPanel #formCreateCategory #name {
+  width: 10vw;
+  margin-bottom: 2.5vh;
+}
+#leftPanel #formCreateCategory #listado {
+  margin: 0;
+  padding: 1vw;
+  height: 32.5vh;
+  overflow-y: scroll;
+}
+#leftPanel #formCreateCategory #listado li {
+  list-style: none;
+  margin: 0;
+}
+#leftPanel #formCreateCategory .submitBtn {
+  margin-top: 2vh;
+  height: 4vh;
+  background-color: #B7FFB0;
+  font-size: 16px;
+}
 #leftPanel .orderInfo {
   background-color: rgba(255, 94, 0, 0.25);
   height: 100%;
@@ -290,6 +367,7 @@ header.admin img:hover {
   border-radius: 10px;
   margin-bottom: 2.5vh;
   transition: all ease 0.33s 0;
+  animation: slideLeft 2s ease-in-out forwards;
   cursor: pointer;
   user-select: none;
 }
@@ -350,6 +428,14 @@ header.admin img:hover {
   display: flex;
   justify-content: space-between;
 }
+#leftPanel .orderInfo #pedidoEnviado {
+  margin-top: 2vh;
+  height: 4vh;
+  background-color: #B7FFB0;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+}
 
 @keyframes slideLeft {
   from {
@@ -363,7 +449,7 @@ header.admin img:hover {
   float: right;
   width: 41vw;
   height: 100%;
-  margin-right: 20vw;
+  margin-right: 15vw;
 }
 #rightPanel h2 {
   margin-top: 2vh;
@@ -490,7 +576,7 @@ header.admin img:hover {
 
 .defaultComponent {
   width: 100%;
-  height: 15vh;
+  height: 17vh;
   display: flex;
   flex-direction: row;
   background-color: rgba(255, 94, 0, 0.25);

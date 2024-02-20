@@ -65,8 +65,30 @@ header.admin {
     height: 82vh;
 }
 
-// Left Panel Styles
+//Canvas
 
+canvas {
+    border: 1px solid #000;
+    width: 500px;
+    height: 300px;
+}
+.canvasContainer {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+}
+
+// Left Panel Styles
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+    .panelTitle {
+        font-size: 25px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .panelTitle {
+        font-size: 36px;
+    }
+}
 #leftPanel {
     // border: 1px solid black;
     //overflow: hidden;
@@ -100,7 +122,7 @@ header.admin {
                 height: 7vh;
             }
             p {
-                font-size: 36px;
+                //font-size: 36px;
                 margin-top: -2vh;
             }
         }
@@ -144,6 +166,7 @@ header.admin {
         display: none;
         flex-direction: column;
         transition: all 0.5s ease;
+        animation: slideLeft 2s ease-in-out forwards;
         h4 {
             margin: 0;
             padding: 0;
@@ -304,6 +327,64 @@ header.admin {
         }
         
     }
+    #formCreateCategory {
+        margin-left: 2vw;
+        position: absolute;
+        animation: slideLeft 2s ease-in-out forwards;
+        
+        #createCategoryTitle {
+            margin-bottom: 5vh;
+        }
+        label {
+            font-size: 20px;
+        }
+        input {
+            border-radius: $radius;
+            border: none;
+            height: 3vh;
+        }
+        div {
+            margin-bottom: 2.5vh;
+            label {
+                margin-right: 3vw;
+            }
+        }
+        select {
+            background-image: url("../../assets/images/utils/selectArrow.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            background-position: 100%;
+            appearance: none;
+            border: none;
+            border-bottom: 1px solid black;
+            width: 6vw;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        #name {
+            width: 10vw;
+            margin-bottom: 2.5vh;
+        }
+        #listado {
+            margin: 0;
+            padding: 1vw;
+            height: 32.5vh;
+            overflow-y: scroll;
+            li {
+                list-style: none;
+                margin: 0;
+            }
+        }
+        
+        .submitBtn {
+            margin-top: 2vh;
+            height: 4vh;
+            background-color: $greenSave;
+            font-size: 16px;
+        }
+        
+    }
     .orderInfo {
         background-color: $adminOrange;
         height: 100%;
@@ -315,6 +396,7 @@ header.admin {
         border-radius: $radius;
         margin-bottom: 2.5vh;
         transition: all ease 0.33s 0;
+        animation: slideLeft 2s ease-in-out forwards;
         cursor: pointer;
         user-select: none;
         h2, form{
@@ -374,6 +456,14 @@ header.admin {
             display: flex;
             justify-content: space-between;
         }    
+        #pedidoEnviado {
+            margin-top: 2vh;
+            height: 4vh;
+            background-color: $greenSave;
+            font-size: 16px;
+            border: none;
+            border-radius: 15px;
+        }
     }
 }
 @keyframes slideLeft {
@@ -391,7 +481,7 @@ header.admin {
     float: right;
     width: 41vw;
     height: 100%;
-    margin-right: 20vw;
+    margin-right: 15vw;
     h2 {
         margin-top: 2vh;
         font-size: 42px;
@@ -535,7 +625,7 @@ header.admin {
 
 .defaultComponent {
     width: 100%;
-    height: 15vh;
+    height: 17vh;
     display: flex;
     flex-direction: row;
     background-color: $adminOrange;
