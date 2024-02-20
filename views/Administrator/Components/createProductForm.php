@@ -5,26 +5,26 @@
             <tr><td><label for="name" class="underline">Name product</label></td></tr>
             <tr>
                 <td>
-                    <input type="text" name="name" id="name">
+                    <input type="text" name="name" id="name" required>
                 </td>
             </tr>
             <tr></tr>
             <tr><td><label for="price"  class="underline">Price</label></td></tr>
             <tr>
                 <td>
-                    <input type="text" name="price" id="price">
+                    <input type="text" name="price" id="price" required pattern="[0-9]+(\.[0-9]+)?">
                 </td>
             </tr>
             <tr><td><label for="stock"  class="underline">Stock</label></td></tr>
             <tr>
                 <td>
-                    <input type="text" name="stock" id="stock">
+                    <input type="text" name="stock" id="stock" required pattern="[0-9]+">
                 </td>
             </tr>
             <tr><td><label for="description"  class="underline">Description</label></td></tr>
             <tr>
                 <td>
-                    <input type="text" name="description" id="description">
+                    <input type="text" name="description" id="description" required>
                 </td>
             </tr>
             <tr><td><label for=""  class="underline">Featured</label></td></tr>
