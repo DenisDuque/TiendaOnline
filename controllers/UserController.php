@@ -25,22 +25,7 @@ class UserController {
             if($rol == 'admin') {
                 echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=Product&action=showAdminDashboard'>";
             } else {
-                if(isset($_GET["code"])){
-                    //En caso de que se nos haya redirigido al login desde una pagina de producto, este se almacenara en el origen
-                    //y despues de loguear volveremos a la pagina de ese producto
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=showProduct&code=".$_GET["code"]."'>";
-                    $_SESSION["function"] = $_POST["function"];
-                }elseif(isset($_SESSION["origin"])){
-                    if($_SESSION["origin"] = "profile"){
-                        unset($_SESSION["origin"]);
-                        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showProfile'>";
-                    }elseif($_SESSION["origin"] = "wishlist"){
-                        unset($_SESSION["origin"]);
-                        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User&action=showWishlist'>";
-                    }
-                }else{
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=product&action=default'>";
-                }
+                echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php'>";
             }
         } else {
             // Autenticación fallida, vuelve a mostrar el formulario de inicio de sesión
