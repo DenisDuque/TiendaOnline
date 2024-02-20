@@ -33,7 +33,9 @@
                         echo "</div>";
                         echo "<p>".$order->getPrice()."</p>";
                         echo "<p>".$order->getStatus()."</p>";
-                        echo "<p><a href='index.php?page=User&action=showProfile&deleteOrder=".$order->getId()."'>CANCEL</a></p>";
+                        if($order->getStatus() != "shipped"){
+                            echo "<p><a href='index.php?page=User&action=showProfile&deleteOrder=".$order->getId()."'>CANCEL</a></p>";
+                        }
                     echo "</div>";
                 }
             echo "</div>";
