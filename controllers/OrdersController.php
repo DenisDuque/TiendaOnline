@@ -85,11 +85,15 @@ class OrdersController
     {
         $prod = $_POST['productDetails'];
         $product = explode('&', $prod);
-        if (isset($_SESSION['email'])) {
-            str_replace(' ', '', $product[0]);
-            OrdersModel::addToCart(str_replace(' ', '', $product[0]), str_replace(' ', '', $product[1]), str_replace(' ', '', $product[2]), $_SESSION['email']);
+        if(empty($_POST['productDetails'])){
+            if (isset($_SESSION['email'])) {
+                str_replace(' ', '', $product[0]);
+                OrdersModel::addToCart(str_replace(' ', '', $product[1]), str_replace(' ', '', $product[0]), str_replace(' ', '', $product[2]), $_SESSION['email']);
+            }
+            echo "<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
+        }else{
+            echo "<meta http-equiv='refresh' content='0.1;index.php?page=product&action=showProduct&code=".$product[0]."&notSelected=size'>";
         }
-        echo "<meta http-equiv='refresh' content='0.1;index.php?page=orders&action=showCart'>";
     }
     public function transformToLoggedCart()
     {

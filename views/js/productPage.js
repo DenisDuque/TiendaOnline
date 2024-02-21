@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
             let details = document.querySelector('button.selected').value;
-            document.getElementById("productDetails").value = details.trim();
+            let prodcuctDetails = document.getElementById("productDetails");
+            prodcuctDetails.value = prodcuctDetails.value+details.trim();
         })
     }
 

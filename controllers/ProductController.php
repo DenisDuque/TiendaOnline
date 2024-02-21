@@ -153,6 +153,9 @@ class ProductController {
                 }
             }
         }
+        if(isset($_GET['notSelected'])){
+            $noSeleccionado = "Debes seleccionar una talla";
+        }
         require_once __DIR__.'/../models/CategoryModel.php';
         $product = ProductModel::getProductWithCode($_GET["code"]);
         $product["category"] = CategoryModel::getCategory($product["codecategory"]);

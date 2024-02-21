@@ -53,7 +53,10 @@
                     echo "<div id='sizes'>";
                         $chars = array("{", "}", '"', ' ');
                         foreach($sizes as $size){
-                            echo "<button class='sizeBtn' value='". str_replace($chars, "", $size) ."&".$product['code']."&".$product['stock']."'>EU".str_replace($chars, "", $size)."</button>";
+                            echo "<button class='sizeBtn' value='&". str_replace($chars, "", $size) ."&".$product['stock']."'>EU".str_replace($chars, "", $size)."</button>";
+                        }
+                        if(isset($noSeleccionado)){
+                            echo "<h4>$noSeleccionado</h4>";
                         }
                     echo "</div>";
                     echo "<div id='description'>";
@@ -80,7 +83,7 @@
                         
                         //add to cart btn
                             echo "<form action='index.php?page=orders&action=productForCart' method=post>";
-                                echo "<input type='hidden' name='productDetails' id='productDetails'>";
+                                echo "<input type='hidden' name='productDetails' id='productDetails' value='".$_GET["code"]."'>";
                                 if(isset($_SESSION['email'])) {
                                     echo "<button type='submit'>";
                                         echo "<p>Add to cart</p>";
