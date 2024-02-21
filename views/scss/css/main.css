@@ -137,7 +137,7 @@ body header nav ul .cart-li img {
 }
 body header nav ul .cart-li .dot {
   /* border: 1px solid $orange; */
-  color: #000;
+  color: #FF5E00;
   border-radius: 100%;
   text-decoration: none;
   width: 1vw;

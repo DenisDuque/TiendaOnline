@@ -53,7 +53,7 @@
                     echo "<input type='text' class='text' name='name' id='name' value='".$user->getName()." ".$user->getSurname()."'>";
                     echo "<label for='phone'>PHONE</label>";
                     echo "<input type='tel' class='text'  name='phone' id='phone' value='".$user->getPhone()."'>";
-                    echo "<label for='address'>ADDRESS</label>";
+                    echo "<label for='adress'>ADDRESS</label>";
                     echo "<input type='text' class='text' name='adress' id='adress' value='".$user->getAddress()."'>";
                     echo "<input type='submit' value='SAVE CHANGES' id='button'>";
                 echo "</form>";

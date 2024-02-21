@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-buttons">
+        <div class="swiper-buttons" aria-label="slider de imagenes de productos">
             <button class="swiper-button" data-index="0"></button>
             <button class="swiper-button" data-index="1"></button>
             <button class="swiper-button" data-index="2"></button>

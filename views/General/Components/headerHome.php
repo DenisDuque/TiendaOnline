@@ -30,7 +30,7 @@
             <li><a href="index.php?page=User&action=showProfile"><img id="customersButton" src="views/assets/images/utils/profile.png" alt="Profile"></a></li>
             <?php
                 if(isset($_SESSION["email"])){
-                    echo "<li><a href='index.php?page=User&action=LogOut'><img id='logoutClientButton' src='views/assets/images/utils/signout.png'></a></li>";
+                    echo "<li><a href='index.php?page=User&action=LogOut'><img id='logoutClientButton' src='views/assets/images/utils/signout.png' alt='Cerrar Sesion'></a></li>";
                 }
             ?>
         </ul>
