@@ -57,6 +57,9 @@ body #cart #leftPannel table tbody #shoppingTitle #counterItems {
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) {
   border: 1px solid grey;
 }
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td {
+  height: 8vh;
+}
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child {
   display: flex;
   flex-wrap: wrap;
@@ -73,18 +76,22 @@ body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:fi
   justify-content: space-between;
   align-items: center;
 }
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(2) h3 {
+  height: 4vh;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(2) div {
+  margin-right: 4vw;
+  align-items: end;
+}
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(3) {
-  height: auto;
-  margin-top: 5px;
-  text-align: center;
-  display: flex;
-  align-items: center;
+  display: none;
 }
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(4) {
   width: 5vw;
   margin-left: 2vw;
 }
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(4) button {
+  margin-top: 5vh;
   width: 5vw;
   border: 1px solid rgb(191, 48, 48);
   background-color: rgb(191, 48, 48);
@@ -109,6 +116,9 @@ body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nt
 body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) div div {
   margin-top: 1vh;
   margin-left: 2vw;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) div:last-child {
+  margin-bottom: 1vh;
 }
 body #cart #rightPannel {
   display: flex;

@@ -1,6 +1,7 @@
 <?php
-require_once(__DIR__.'/../config/Database.php');
-class ProductModel extends Database {
+require_once(__DIR__ . '/../config/Database.php');
+class ProductModel extends Database
+{
     private $code;
     private $name;
     private $description;
@@ -17,105 +18,130 @@ class ProductModel extends Database {
         "bottom" => ""
     ];
 
-    public function setCode($code) {
+    public function setCode($code)
+    {
         $this->code = $code;
     }
 
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
-    } 
+    }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
-    
-    public function setDescription($description) {
-        $this->description = $description;
-    } 
 
-    public function getDescription() {
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function setCategory($category) {
+    public function setCategory($category)
+    {
         $this->category = $category;
-    } 
+    }
 
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 
-    public function setPrice($price) {
+    public function setPrice($price)
+    {
         $this->price = $price;
-    } 
+    }
 
-    public function getPrice() {
+    public function getPrice()
+    {
         return $this->price;
     }
 
-    public function setStock($stock) {
+    public function setStock($stock)
+    {
         $this->stock = $stock;
-    } 
+    }
 
-    public function getStock() {
+    public function getStock()
+    {
         return $this->stock;
     }
 
-    public function setSize($size) {
+    public function setSize($size)
+    {
         $this->size = $size;
-    } 
+    }
 
-    public function getSize() {
+    public function getSize()
+    {
         return $this->size;
     }
 
-    public function setSold($sold) {
+    public function setSold($sold)
+    {
         $this->sold = $sold;
-    } 
+    }
 
-    public function getSold() {
+    public function getSold()
+    {
         return $this->sold;
     }
 
-    public function setFeatured($featured) {
+    public function setFeatured($featured)
+    {
         $this->featured = $featured;
-    } 
+    }
 
-    public function getFeatured() {
+    public function getFeatured()
+    {
         return $this->featured;
     }
 
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
-    public function setImage($image) {
+    public function setImage($image)
+    {
         $this->image = $image;
     }
 
-    public function getImage($side) {
+    public function getImage($side)
+    {
         return $this->image[$side];
     }
 
-    public function setImagesArray($images) {
+    public function setImagesArray($images)
+    {
         $this->image["lateral"] = $images[0];
         $this->image["top"] = $images[1];
         $this->image["bottom"] = $images[2];
     }
 
-    public function getImagesArray() {
+    public function getImagesArray()
+    {
         return $this->image;
     }
 
-    public function __construct($code,$category,$name,$description,$featured,$price,$sold,$stock,$status,$size,$image){
+    public function __construct($code, $category, $name, $description, $featured, $price, $sold, $stock, $status, $size, $image)
+    {
         $this->code = $code;
         $this->category = $category;
         $this->name = $name;
@@ -129,16 +155,17 @@ class ProductModel extends Database {
         $this->image["lateral"] = $image;
     }
 
-    public static function getProductWithCode($code){
+    public static function getProductWithCode($code)
+    {
         try {
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':code', $code, PDO::PARAM_STR);
             $stmt->execute();
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
-            $product["lateral"] = self::getProductImage("lateralperspective",$code);
-            $product["top"] = self::getProductImage("aboveperspective",$code);
-            $product["bottom"] = self::getProductImage("belowperspective",$code);
+            $product["lateral"] = self::getProductImage("lateralperspective", $code);
+            $product["top"] = self::getProductImage("aboveperspective", $code);
+            $product["bottom"] = self::getProductImage("belowperspective", $code);
             return $product;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
@@ -146,8 +173,9 @@ class ProductModel extends Database {
         }
     }
 
-    
-    public static function generateCode($name, $category){
+
+    public static function generateCode($name, $category)
+    {
         //Dos primeras letras categoria--numero 3 cifras--Tres primeras letras producto
         $categoryNum = intval($category);
         try {
@@ -162,22 +190,24 @@ class ProductModel extends Database {
             $categoryStr = substr($categoryName, 0, 2);
             $productStr = substr($name, 0, 2);
             return strtolower($categoryStr) . $randNumStr . "-" . strtolower($productStr);
-            
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
-    public static function getAllProducts($search) {
-        if($search == null) {
+    public static function getAllProducts($search)
+    {
+        if ($search == null) {
             try {
-                $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products";
+                $enabled = 'enabled';
+                $query = "SELECT * FROM products WHERE status = :status";
                 $stmt = self::getConnection()->prepare($query);
+                $stmt->bindValue(':status', $enabled, PDO::PARAM_STR);
                 $stmt->execute();
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $Products = array_map(function($row) {
+                $Products = array_map(function ($row) {
                     return new ProductModel(
                         $row['code'],
                         $row['codecategory'],
@@ -189,10 +219,10 @@ class ProductModel extends Database {
                         $row['stock'],
                         $row['status'],
                         $row['size'],
-                        $row['code']."-Side"
+                        $row['code'] . "-Side"
                     );
                 }, $rows);
-                
+
                 return $Products;
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
@@ -206,7 +236,7 @@ class ProductModel extends Database {
                 $stmt->bindParam(':name', $search, PDO::PARAM_STR);
                 $stmt->execute();
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $Products = array_map(function($row) {
+                $Products = array_map(function ($row) {
                     return new ProductModel(
                         $row['code'],
                         $row['codecategory'],
@@ -218,7 +248,7 @@ class ProductModel extends Database {
                         $row['stock'],
                         $row['status'],
                         $row['size'],
-                        $row['code']."-Side"
+                        $row['code'] . "-Side"
                     );
                 }, $rows);
                 return $Products;
@@ -229,60 +259,25 @@ class ProductModel extends Database {
         }
     }
 
-    public static function getProductsWhere($condition) {
-    try {
-        // Modificar la consulta SQL para incluir la condición en el nombre del producto
-        if (isset($_GET['category']) && $_GET['category'] !== "null") {
-            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
-            $stmt = self::getConnection()->prepare($query);
-            $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
-        } else {
-            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
-            $stmt = self::getConnection()->prepare($query);
-        }
-        
-        $search = '%' . $condition . '%';
-        $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $Products = array_map(function($row) {
-            return new ProductModel(
-                $row['code'],
-                $row['codecategory'],
-                $row['name'],
-                $row['description'],
-                $row['featured'],
-                $row['price'],
-                $row['sold'],
-                $row['stock'],
-                $row['status'],
-                $row['size'],
-                $row['code']."-Side"
-
-                );
-            }, $rows);
-
-            // Devolver los datos en formato JSON
-            return $Products;
-        } catch (PDOException $e) {
-            error_log("Error: " . $e->getMessage());
-            // Devolver un mensaje de error en formato JSON
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
-        }
-    }
-
-    public static function getFeaturedProducts() {
+    public static function getProductsWhere($condition)
+    {
         try {
-            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE featured = true";
-            $stmt = self::getConnection()->prepare($query);
-            
+            // Modificar la consulta SQL para incluir la condición en el nombre del producto
+            if (isset($_GET['category']) && $_GET['category'] !== "null") {
+                $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE (name LIKE :condition OR name = :condition) AND codecategory = :category";
+                $stmt = self::getConnection()->prepare($query);
+                $stmt->bindValue(':category', $_GET['category'], PDO::PARAM_INT);
+            } else {
+                $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE name LIKE :condition OR name = :condition";
+                $stmt = self::getConnection()->prepare($query);
+            }
+
+            $search = '%' . $condition . '%';
+            $stmt->bindValue(':condition', $search, PDO::PARAM_STR);
             $stmt->execute();
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            $Products = array_map(function($row) {
+
+            $Products = array_map(function ($row) {
                 return new ProductModel(
                     $row['code'],
                     $row['codecategory'],
@@ -294,11 +289,48 @@ class ProductModel extends Database {
                     $row['stock'],
                     $row['status'],
                     $row['size'],
-                    $row['code']."-Side"
-    
+                    $row['code'] . "-Side"
+
                 );
             }, $rows);
-    
+
+            // Devolver los datos en formato JSON
+            return $Products;
+        } catch (PDOException $e) {
+            error_log("Error: " . $e->getMessage());
+            // Devolver un mensaje de error en formato JSON
+            header('Content-Type: application/json');
+            http_response_code(500);
+            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+        }
+    }
+
+    public static function getFeaturedProducts()
+    {
+        try {
+            $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products WHERE featured = true";
+            $stmt = self::getConnection()->prepare($query);
+
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $Products = array_map(function ($row) {
+                return new ProductModel(
+                    $row['code'],
+                    $row['codecategory'],
+                    $row['name'],
+                    $row['description'],
+                    $row['featured'],
+                    $row['price'],
+                    $row['sold'],
+                    $row['stock'],
+                    $row['status'],
+                    $row['size'],
+                    $row['code'] . "-Side"
+
+                );
+            }, $rows);
+
             // Devolver los datos en formato JSON
             return $Products;
         } catch (PDOException $e) {
@@ -311,16 +343,17 @@ class ProductModel extends Database {
     }
 
 
-    
 
-    public static function getTopProducts($limit = 10) {
+
+    public static function getTopProducts($limit = 10)
+    {
         try {
             $query = "SELECT code, codecategory, name, description, featured, price, sold, stock, status, size FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
             $stmt->execute();
-    
-            $topProducts = array_map(function($row) {
+
+            $topProducts = array_map(function ($row) {
                 return new ProductModel(
                     $row['code'],
                     $row['codecategory'],
@@ -332,17 +365,18 @@ class ProductModel extends Database {
                     $row['stock'],
                     $row['status'],
                     $row['size'],
-                    $row['code']."-Side"
+                    $row['code'] . "-Side"
                 );
             }, $stmt->fetchAll(PDO::FETCH_ASSOC));
-            
+
             return $topProducts;
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getTopProductsGraph($limit = 10) {
+    public static function getTopProductsGraph($limit = 10)
+    {
         try {
             $query = "SELECT code, sold FROM products ORDER BY sold DESC LIMIT :limit";
             $stmt = self::getConnection()->prepare($query);
@@ -356,7 +390,8 @@ class ProductModel extends Database {
         }
     }
 
-    public static function getProductImage($perspective, $product) {
+    public static function getProductImage($perspective, $product)
+    {
         try {
             $query = "SELECT route FROM images WHERE perspectives LIKE :perspectives AND product = :product";
             $stmt = self::getConnection()->prepare($query);
@@ -364,8 +399,8 @@ class ProductModel extends Database {
             $stmt->bindParam(':product', $product);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if(!empty($result)) {
-                $img = array_map(function($item) {
+            if (!empty($result)) {
+                $img = array_map(function ($item) {
                     return $item['route'];
                 }, $result);
                 return $img[0];
@@ -377,14 +412,15 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getCategoryProductId($category) {
+    public static function getCategoryProductId($category)
+    {
         try {
             $query = "SELECT code FROM products WHERE codeCategory = :codeCategory";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':codeCategory', $category);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $products = array_map(function($item) {
+            $products = array_map(function ($item) {
                 return $item['code'];
             }, $result);
             return $products;
@@ -393,8 +429,9 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function insertOrUpdateImage($image, $id, $perspective) {
-        if($image != NULL) {
+    public static function insertOrUpdateImage($image, $id, $perspective)
+    {
+        if ($image != NULL) {
             try {
                 $query = "SELECT * FROM images WHERE product = :product AND perspectives = :perspectives";
                 $stmt = self::getConnection()->prepare($query);
@@ -402,7 +439,7 @@ class ProductModel extends Database {
                 $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);
                 $stmt->execute();
                 $numRows = $stmt->rowCount();
-                if($numRows > 0) {
+                if ($numRows > 0) {
                     $updateQuery = "UPDATE images
                     SET route = :route
                     WHERE product = :product AND perspectives = :perspectives";
@@ -416,8 +453,8 @@ class ProductModel extends Database {
                     $stmt = self::getConnection()->prepare($insertQuery);
                     $stmt->bindParam(':product', $id, PDO::PARAM_STR);
                     $stmt->bindParam(':route', $image, PDO::PARAM_STR);
-                    $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);   
-                    $stmt->execute();             
+                    $stmt->bindParam(':perspectives', $perspective, PDO::PARAM_STR);
+                    $stmt->execute();
                 }
             } catch (PDOException $e) {
                 error_log("Error: " . $e->getMessage());
@@ -425,18 +462,19 @@ class ProductModel extends Database {
             }
         }
     }
-    public static function createProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
-        try{
+    public static function createProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes)
+    {
+        try {
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
             $stmt->bindParam(':code', $id, PDO::PARAM_STR);
             $stmt->execute();
             $rows = $stmt->rowCount();
-            if($rows >= 1){
+            if ($rows >= 1) {
                 echo "Ya existe este producto.";
-            }else{
+            } else {
                 // Realizar la inserción
-                $sizesArray = explode(',', $sizes); 
+                $sizesArray = explode(',', $sizes);
                 $sizeString = "{" . implode(",", $sizesArray) . "}";
                 $insertQuery = "INSERT INTO products (code, name, description, featured, price, stock, status, codecategory, size, sold) VALUES (:code, :name, :description, :featured, :price, :stock, :status, :codecategory, :size, 0);";
                 $insertStatement = self::getConnection()->prepare($insertQuery);
@@ -451,27 +489,28 @@ class ProductModel extends Database {
                 $insertStatement->bindParam(':size', $sizeString, PDO::PARAM_STR);
                 $result = $insertStatement->execute();
                 if ($result) {
+                    self::insertOrUpdateImage($sideView, $id, "lateralperspective");
+                    self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
+                    self::insertOrUpdateImage($bottomView, $id, "belowperspective");
+                    self::insertOrUpdateImage($View3D, $id, "3dmodel");
                     echo "Product added correctly";
                 } else {
                     echo "Error";
                 }
-                self::insertOrUpdateImage($sideView, $id, "lateralperspective");
-                self::insertOrUpdateImage($aboveView, $id, "aboveperspective");
-                self::insertOrUpdateImage($bottomView, $id, "belowperspective");
-                self::insertOrUpdateImage($View3D, $id, "3dmodel");
-                echo"<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
+                echo "<meta http-equiv='refresh' content='0.1;index.php?page=Product&action=showAdminProduct'>";
             }
         } catch (PDOException $e) {
             error_log("Error: " . $e->getMessage());
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function editProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes) {
+    public static function editProduct($id, $name, $description, $featured, $price, $stock, $status, $category, $sideView, $aboveView, $bottomView, $View3D, $sizes)
+    {
         try {
             $updateQuery = "UPDATE products 
             SET name = :name, description = :description, featured = :featured, price = :price, stock = :stock, status = :status, codecategory = :category, size = :sizes
             WHERE code = :id";
-            $sizesArray = explode(',', $sizes); 
+            $sizesArray = explode(',', $sizes);
             $sizeString = "{" . implode(",", $sizesArray) . "}";
             $updateStatement = self::getConnection()->prepare($updateQuery);
             $updateStatement->bindParam(':id', $id, PDO::PARAM_STR);
@@ -499,7 +538,8 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getProductInfoForCart($code) {
+    public static function getProductInfoForCart($code)
+    {
         try {
             $query = "SELECT * FROM products WHERE code = :code";
             $stmt = self::getConnection()->prepare($query);
@@ -519,7 +559,8 @@ class ProductModel extends Database {
         }
     }
 
-    public static function inWishList(){
+    public static function inWishList()
+    {
         $exists = false;
         $query = "SELECT * FROM wishlist WHERE useremail = :user AND productcode = :product";
         $stmt = self::getConnection()->prepare($query);
@@ -527,14 +568,15 @@ class ProductModel extends Database {
         $stmt->bindParam(':product', $_GET['code']);
         $stmt->execute();
         $rows = $stmt->rowCount();
-        if($rows > 0){
+        if ($rows > 0) {
             $exists = true;
         }
         return $exists;
     }
 
 
-    public static function addToWishList(){
+    public static function addToWishList()
+    {
         try {
             $query = "INSERT INTO wishlist (useremail,productcode) VALUES (:user, :product)";
             $stmt = self::getConnection()->prepare($query);
@@ -547,7 +589,8 @@ class ProductModel extends Database {
         }
     }
 
-    public static function dropFromWishList(){
+    public static function dropFromWishList()
+    {
         try {
             $query = "DELETE FROM wishlist WHERE useremail = :user AND productcode = :product";
             $stmt = self::getConnection()->prepare($query);
@@ -559,7 +602,8 @@ class ProductModel extends Database {
             throw new Exception("Database error: " . $e->getMessage());
         }
     }
-    public static function getCategoryFromAllProducts() {
+    public static function getCategoryFromAllProducts()
+    {
         try {
             $badStock = 0;
             $query = "SELECT codecategory FROM products WHERE stock != :stock";
@@ -573,4 +617,3 @@ class ProductModel extends Database {
         }
     }
 }
-?>
