@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var panels = document.getElementsByClassName("panel");
     var searchBtn = document.getElementById("searchBtn");
 
-    function fillDataProduct(code){
+    function fillDataProduct(code) {
         var datos = code.split(",");
         let id = datos[0];
         let name = datos[1];
@@ -24,42 +24,42 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("stock").value = stock;
         document.getElementById("featured").checked = featured;
         $('#sizeList').empty();
-        for (let i = 0 ; i != sizesArray.length-1 ; i++) {
+        for (let i = 0; i != sizesArray.length - 1; i++) {
             var newSize = sizesArray[i];
             if (newSize.trim() !== "") {
                 $('#sizeList').append('<div class="size">' + newSize + '</div>');
             }
         }
-        if(status=="enabled"){
+        if (status == "enabled") {
             document.getElementById("select").selectedIndex = "enabled";
-        }else{
-            document.getElementById("select").selectedIndex = "disabled"; 
+        } else {
+            document.getElementById("select").selectedIndex = "disabled";
         }
         let selectCategory = document.getElementById("category");
-        for(let i = 0; i<selectCategory.options.length;i++){
+        for (let i = 0; i < selectCategory.options.length; i++) {
             let opcion = document.getElementById(selectCategory.options[i].id);
-            if(opcion.id == category){
+            if (opcion.id == category) {
                 selectCategory.options.selectedIndex = opcion.index;
             }
-        }    
+        }
     }
 
-    function fillDataCategory(code){
+    function fillDataCategory(code) {
         var datos = code.split(",");
         let id = datos[0];
         let name = datos[1];
         let status = datos[2];
         document.getElementById("code").value = id;
         document.getElementById("name").value = name;
-        if(status=="enabled"){
+        if (status == "enabled") {
             document.getElementById("select").selectedIndex = "enabled";
-        }else{
-            document.getElementById("select").selectedIndex = "disabled"; 
+        } else {
+            document.getElementById("select").selectedIndex = "disabled";
         }
 
         var listado = document.getElementById("listado");
         listado.innerHTML = "";
-        for(let i = 3; i < datos.length; i++){
+        for (let i = 3; i < datos.length; i++) {
             let item = document.createElement("li");
             item.innerHTML = datos[i];
             listado.appendChild(item);
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         miDiv.style.display = 'flex';
         paneles.style.display = 'none';
     }
-    function fillDataOrder(code){
+    function fillDataOrder(code) {
         var datos = code.split(",");
         var orderId = document.getElementById("orderId");
         var titleName = document.getElementById("name");
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var divEmail = document.getElementById("email");
         var divPhone = document.getElementById("phone");
         var listProd = document.getElementById("products");
-        listProd.innerHTML="";
+        listProd.innerHTML = "";
         var listAmount = document.getElementById("amount");
         listAmount.innerHTML = "";
         var divStatus = document.getElementById("status");
@@ -153,10 +153,10 @@ document.addEventListener('DOMContentLoaded', function() {
         divEmail.innerHTML = datos[3];
         divPhone.innerHTML = datos[4];
         divStatus.innerHTML = datos[5];
-        divPrice.innerHTML = "$"+datos[6];
+        divPrice.innerHTML = "$" + datos[6];
 
         var products = datos[7].split("/");
-        for(let i = 1; i<products.length;i++){
+        for (let i = 1; i < products.length; i++) {
             let product = products[i].split(":");
             let item = document.createElement("li");
             item.innerHTML = product[0];
@@ -179,14 +179,22 @@ document.addEventListener('DOMContentLoaded', function() {
         var newSize = $('#sizeInput').val();
         if (newSize.trim() !== "") {
             $('#sizeList').append('<div class="size">' + newSize + '</div>');
-            $('#sizeInput').val(""); 
+            $('#sizeInput').val("");
         }
     }
-    
+
+    function addSizeCreate() {
+        var newSize = $('#sizeInputCreate').val();
+        if (newSize.trim() !== "") {
+            $('#sizeListCreate').append('<div class="size">' + newSize + '</div>');
+            $('#sizeInputCreate').val("");
+        }
+    }
+
     function preparePost() {
         var sizeDivs = $('.size');
         if (sizeDivs.length > 0) {
-            var sizesStrings = sizeDivs.map(function() {
+            var sizesStrings = sizeDivs.map(function () {
                 return $(this).text();
             }).get().join(',');
             $('#sizeInp').val(sizesStrings);
@@ -195,70 +203,87 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return true;
     }
+    function preparePostCreate() {
+        var sizeDivs = $('.size');
+        if (sizeDivs.length > 0) {
+            var sizesStrings = sizeDivs.map(function () {
+                return $(this).text();
+            }).get().join(',');
+            $('#sizeInpCreate').val(sizesStrings);
+        } else {
+            $('#sizeInpCreate').val("");
+        }
+        return true;
+    }
     var closeOrderForm = document.getElementById('closeOrderForm');
-    if(closeOrderForm) {
-        closeOrderForm.addEventListener('click', function() {
+    if (closeOrderForm) {
+        closeOrderForm.addEventListener('click', function () {
             hideOrderFormShowPanels();
         });
     }
     var closeEditCategoryForm = document.getElementById('closeEditCategoryForm');
-    if(closeEditCategoryForm) {
-        closeEditCategoryForm.addEventListener('click', function() {
+    if (closeEditCategoryForm) {
+        closeEditCategoryForm.addEventListener('click', function () {
             hideEditCategoryFormShowPanels();
         });
     }
     var closeCreateCategoryForm = document.getElementById('closeCreateCategoryForm');
-    if(closeCreateCategoryForm) {
-        closeCreateCategoryForm.addEventListener('click', function() {
+    if (closeCreateCategoryForm) {
+        closeCreateCategoryForm.addEventListener('click', function () {
             hideCreateCategoryFormShowPanels();
         });
     }
     var closeEditProductForm = document.getElementById('closeEditProductForm');
-    if(closeEditProductForm) {
-        closeEditProductForm.addEventListener('click', function() {
+    if (closeEditProductForm) {
+        closeEditProductForm.addEventListener('click', function () {
             hideEditProductFormShowPanels();
         });
     }
     var closeCreateProductForm = document.getElementById('closeCreateProductForm');
-    if(closeCreateProductForm) {
-        closeCreateProductForm.addEventListener('click', function() {
+    if (closeCreateProductForm) {
+        closeCreateProductForm.addEventListener('click', function () {
             hideCreateProductFormShowPanels();
         });
     }
     document.querySelectorAll('.addCreateCategoryForm').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showCreateCategoryForm();
         });
     });
     document.querySelectorAll('.addCreateProductForm').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showCreateProductForm();
         });
     });
     document.querySelectorAll('.editCatBtn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showEditCategoryForm();
             fillDataCategory(button.id);
         });
     });
 
     document.querySelectorAll('.editProdBtn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showEditProductForm();
             fillDataProduct(button.id);
         });
     });
 
     document.querySelectorAll('.editOrderBtn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             showEditOrderForm();
             fillDataOrder(button.id);
         });
     });
 
     document.querySelectorAll('.addSizeBtn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             addSize();
+        });
+    });
+    document.querySelectorAll('.addSizeBtnCreate').forEach(button => {
+        button.addEventListener('click', function () {
+            addSizeCreate();
         });
     });
     /*var url = window.location.href;
@@ -270,29 +295,29 @@ document.addEventListener('DOMContentLoaded', function() {
             preparePost();
         });
     }*/
-    $('#EditProdForm').submit(function(event) {
+    $('#EditProdForm').submit(function (event) {
         console.log("Evento de submit capturado");
         preparePost();
     });
 
-    $('#CreateProdForm').submit(function(event) {
+    $('#CreateProdForm').submit(function (event) {
         console.log("Evento de submit capturado");
-        preparePost();
+        preparePostCreate();
     });
-    
+
 
     for (let i = 0; i < panels.length; i++) {
         panels[i].addEventListener("click", function (e) {
             let id = e.currentTarget.id;
             let action = "showAdmin" + id;
-            if(id == 'Dashboard') {
+            if (id == 'Dashboard') {
                 id = 'Product';
             }
-            window.location.href = "index.php?page="+ id +"&action=" + action;
+            window.location.href = "index.php?page=" + id + "&action=" + action;
         });
     }
-    if(searchBtn) {
-        searchBtn.addEventListener("click", function(e){
+    if (searchBtn) {
+        searchBtn.addEventListener("click", function (e) {
             console.log("Boton clickado");
             let search = document.getElementById("search");
             let currentURL = window.location.href;

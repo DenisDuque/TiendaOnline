@@ -1,3 +1,4 @@
+<script src="views/js/validacion.js"></script>
 <div class="formProd" id="formEditProduct">
     <button id="closeEditProductForm"><img src='views/assets/images/utils/signout.png'></button>
     <form id="EditProdForm" action="index.php?page=Product&action=editProduct" method="POST" enctype="multipart/form-data">
@@ -128,8 +129,7 @@
         </table>
     </form>
 </div>
-<script src="views/js/validacion.js"></script>
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Obtén el formulario y el campo de nombre
         var form = document.getElementById("EditProdForm");
@@ -167,4 +167,4 @@
             return !regex.test(name);
         }
     });
-</script>
+</script> -->

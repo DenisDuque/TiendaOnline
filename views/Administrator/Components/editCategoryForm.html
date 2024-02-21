@@ -1,3 +1,4 @@
+<script src="views/js/validacionCategory.js"></script>
 <div id="formEditCategory" class="adminForm">
     <button id="closeEditCategoryForm"><img src='views/assets/images/utils/signout.png'></button>
     <h4 id="editCategoryTitle">Edit Category</h4>
@@ -19,28 +20,3 @@
         <input type="submit" class="submitBtn" value="Save changes">
     </form>
 </div>
-<script src="views/js/validacionCategory.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var form = document.getElementById('editCategoryForm');
-        var nameInput = document.getElementById('name');
-        var submitBtn = document.querySelector('.submitBtn');
-        var errorSpan = document.getElementById('error');
-
-        form.addEventListener('submit', function (event) {
-            var forbiddenCharacters = /[$&_/(%)@<>]/;
-
-            if (forbiddenCharacters.test(nameInput.value)) {
-                errorSpan.textContent = 'Invalid name';
-                errorSpan.style.color = 'red';
-                submitBtn.disabled = true; // Deshabilitar el botón de enviar
-                event.preventDefault(); // Evitar el envío del formulario
-            }
-        });
-
-        nameInput.addEventListener('input', function () {
-            errorSpan.textContent = ''; // Limpiar el mensaje de error
-            submitBtn.disabled = false; // Habilitar el botón de enviar cuando se modifica el campo
-        });
-    });
-</script>

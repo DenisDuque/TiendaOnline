@@ -1,3 +1,4 @@
+<script src="views/js/validacion.js"></script>
 <div class="formProd" id="formCreateProduct">
     <button id="closeCreateProductForm"><img src='views/assets/images/utils/signout.png'></button>
     <form id="CreateProdForm" action="index.php?page=Product&action=createProduct" method="POST" enctype="multipart/form-data">
@@ -93,22 +94,21 @@
             </tr>
             <tr id="sizes">
                 <td><label for="">Sizes</label></td>
-                <td id="addSize"><input type="text" id="sizeInput" placeholder="Add a size"><button type="button" class='addSizeBtn'>+</button></td>
+                <td id="addSize"><input type="text" id="sizeInputCreate" placeholder="Add a size"><button type="button" class='addSizeBtnCreate'>+</button></td>
             </tr>
             <tr>
                 <td>
-                    <div id="sizeList"></div>
+                    <div id="sizeListCreate"></div>
                 </td>
             </tr>
-            <input type="hidden" id="sizeInp" name="sizes">
+            <input type="hidden" id="sizeInpCreate" name="sizes">
             <tr>
                 <td><input type="submit" class="submitBtn" value="Save changes"></td>
             </tr>
         </table>
     </form>
 </div>
-<script src="views/js/validacion.js"></script>
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Obtén el formulario y el campo de nombre
         var form = document.getElementById("EditProdForm");
@@ -146,4 +146,4 @@
             return !regex.test(name);
         }
     });
-</script>
+</script> -->

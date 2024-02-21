@@ -524,7 +524,6 @@ class OrdersModel extends Database
                 $stmt->bindParam(':code', $product['product'], PDO::PARAM_STR);
                 $stmt->execute();
                 $productsStock = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
                 if ($productsStock[0]['stock'] < self::getProductAmount($product['product'], $products[$key]['shop'])) {
                     $allProductsHaveStock = false;
                     // echo "Error! No tenemos stock de estos modelos ahora mismo. Lo sentimos!";

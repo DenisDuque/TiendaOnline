@@ -13,7 +13,7 @@
     require_once("views/General/Components/headerHome.php");
 
     if (isset($_SESSION['email'])) {
-        if (isset($allProductsHaveStock)) {
+        if ($stock) {
             echo '<div id="compraExitosa">';
             echo '<h1>Compra Realizada con éxito!</h1>';
     ?>
@@ -34,8 +34,10 @@
     <?php
             echo '</div>';
         } else {
+            echo '<div id="compraExitosa">';
             echo 'No hay stock, lo sentimos!';
-            echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php?page=User&action=default'>";
+            echo '</div>';
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='4;URL=index.php?page=Product'>";
         }
     } else {
         echo "<input type='hidden' name='hiddenEmail' value='unlogged'>";

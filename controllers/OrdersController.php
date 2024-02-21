@@ -175,10 +175,11 @@ class OrdersController
                     $añadir = ProductModel::getProductWithCode($product['product']);
                     $resultFactura[] = $añadir;
                 }
-                include __DIR__ . '/../views/General/compraExitosa.php';
+                $stock = true;
             } else {
-                include __DIR__ . '/../views/General/compraExitosa.php';
+                $stock = false;
             }
+            include __DIR__ . '/../views/General/compraExitosa.php';
         } else {
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=User'>";
         }
@@ -208,7 +209,6 @@ class OrdersController
             $company = OrdersModel::getCompanyInfo();
             // Generar el PDF con los datos obtenidos
             OrdersModel::generatePDF($products, $resultFactura, $post['totalCostInput'], $post['fecha'], $shippingmode, $discount, $firma, $idCompra, $company);
-            
         }
     }
 }
