@@ -67,7 +67,7 @@ class UserController {
         }
     
         // Redirigir a otra página después del registro exitoso
-        echo 'Registro realizado';
+        echo"<meta http-equiv='refresh' content='0;url=index.php?page=Product'>";
     }    
     public function logOut() {
         if(isset($_SESSION['email'])) {
