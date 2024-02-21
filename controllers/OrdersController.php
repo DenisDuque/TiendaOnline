@@ -85,7 +85,7 @@ class OrdersController
     {
         $prod = $_POST['productDetails'];
         $product = explode('&', $prod);
-        if(empty($_POST['productDetails'])){
+        if(count($product)>1){
             if (isset($_SESSION['email'])) {
                 str_replace(' ', '', $product[0]);
                 OrdersModel::addToCart(str_replace(' ', '', $product[1]), str_replace(' ', '', $product[0]), str_replace(' ', '', $product[2]), $_SESSION['email']);
