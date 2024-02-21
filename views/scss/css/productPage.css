@@ -104,6 +104,9 @@
   main #info #options #sizes button.selected {
     background-color: rgba(255, 94, 0, 0.4);
   }
+  main #info #options #sizes h4 {
+    color: red;
+  }
   main #info #options #buttons {
     width: 80%;
     padding-top: 10px;
