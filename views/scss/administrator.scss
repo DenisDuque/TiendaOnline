@@ -265,33 +265,42 @@ canvas {
                 border: 1px solid #ccc; /* Añade un borde para visualización */
             }
 
-            .EditProdForm {
+            #EditProdForm {
                 margin-top: 0;
-                height: 72vh;
-                width: 16vw; // Ajuste el ancho del formulario según tus necesidades
-                
+                /* Asegurar que el formulario comience desde la parte superior */
+                height: 60vh;
+                width: 16vw;
+                /* Ajustar el ancho del formulario según tus necesidades */
+
                 table {
-                    width: 100%; // Ajustar el ancho de la tabla al 100%
+                    width: 16vw;
+                    /* Ajustar el ancho de la tabla al 100% */
+
                     label {
-                        width: 100%; // Ajustar el ancho de las etiquetas al 100%
-                
+                        width: 100%;
+                        /* Ajustar el ancho de las etiquetas al 100% */
+
                         &+input[type="text"],
                         &+input[type="file"],
                         &+select {
-                            width: calc(100% - 2 * 1vw); // Ajustar el ancho de los campos de entrada al 100% menos los márgenes
+                            width: calc(100% - 2 * 1vw);
+                            /* Ajustar el ancho de los campos de entrada al 100% menos los márgenes */
                         }
                     }
-                
+
                     .addSizeBtn {
-                        width: 100%; // Ajustar el ancho del botón al 100%
+                        width: 3vw;
+                        /* Ajustar el ancho del botón al 100% */
                     }
-                
+                    
                     #sizeList {
-                        width: 100%; // Ajustar el ancho de la lista de tallas al 100%
+                        width: 100%;
+                        /* Ajustar el ancho de la lista de tallas al 100% */
                     }
-                
+
                     .submitBtn {
-                        width: 100%; // Ajustar el ancho del botón de envío al 100%
+                        width: 100%;
+                        /* Ajustar el ancho del botón de envío al 100% */
                     }
                 }
             }
@@ -348,7 +357,7 @@ canvas {
         #listado {
             margin: 0;
             padding: 1vw;
-            height: 32.5vh;
+            height: 30vh;
             overflow-y: scroll;
             li {
                 list-style: none;

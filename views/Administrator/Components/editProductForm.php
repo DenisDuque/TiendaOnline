@@ -128,6 +128,7 @@
         </table>
     </form>
 </div>
+<script src="views/js/validacion.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Obtén el formulario y el campo de nombre

@@ -10,70 +10,104 @@ body {
         height: 70vh;
 
         #leftPannel {
-                width: 50vw;
-                background-color: rgba(255, 255, 255, 1);
-                border-top-left-radius: 15px;
-                border-bottom-left-radius: 15px;
-        
-                table {
-                    margin: 0 auto;
-                    width: 90%;
-                    background-color: red;
-        
-                    tbody {
-                        width: 100%;
-        
-                        #shoppingTitle {
-                            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-                            padding-bottom: 10px;
+            width: 50vw;
+            background-color: rgba(255, 255, 255, 1);
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            overflow-y: auto; // Agrega una barra de desplazamiento vertical si es necesario
+
+            table {
+                margin: 0 auto;
+                width: 90%;
+                border-collapse: collapse;
+
+                tbody {
+                    width: 100%;
+                    max-height: 60vh; // Establece la altura máxima
+
+                    overflow-y: auto; // Agrega una barra de desplazamiento vertical si es necesario
+
+                    #shoppingTitle {
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                        padding-bottom: 10px;
+                        #counterItems{
+                            font-size: 22px;
+                            width: 5vw;
                         }
-        
-                        tr {
-                            td {
-                                &:first-child {
-                                    display: flex;
-                                    align-items: center;
-        
-                                    div {
+                    }
+
+                    tr:not(:first-child):not(:nth-child(2)) {
+                        border: 1px solid grey;
+                        td {
+                            &:first-child {
+                                display: flex;
+                                flex-wrap: wrap;
+                                flex-direction: row;
+
+                                div {
+                                    &:first-child {
+                                        margin-right: 10px; // Ajusta el margen entre el primer y segundo div
+                                    }
+
+                                    &:nth-child(2) {
+                                        // background-color: blue;
+                                        width: 12vw;
+                                        height: 5vh;
                                         display: flex;
                                         flex-direction: column;
-                                        margin-right: 10px;
-        
-                                        img {
-                                            margin-bottom: 10px;
-                                        }
-        
-                                        div {
-                                            &:first-child {
-                                                margin-bottom: 10px;
-                                            }
-        
-                                            &:nth-child(2) {
-                                                margin-bottom: 10px;
-                                            }
-        
-                                            &:last-child {
-                                                margin-bottom: 0;
-                                            }
+                                        justify-content: space-between;
+                                        align-items: center; // Alinea en el centro
+                                    }
+
+                                    &:nth-child(3) {
+                                        height: auto;
+                                        margin-top: 5px; // Ajusta el margen entre el segundo y tercer div
+                                        text-align: center; // Centra el texto horizontalmente
+                                        display: flex;
+                                        align-items: center; // Centra el texto verticalmente
+                                    }
+
+                                    &:nth-child(4) {
+                                        width: 5vw;
+                                        margin-left: 2vw; // Ajusta el margen entre el tercer y cuarto div
+                                        button {
+                                            width: 5vw;
+                                            border: 1px solid rgb(191, 48, 48);
+                                            background-color: rgb(191, 48, 48);
+                                            margin-bottom: 1vh;
                                         }
                                     }
                                 }
                             }
-        
-                            &:nth-child(n + 3) {
-                                td {
-                                    h1 {
-                                        white-space: nowrap;
-                                        overflow: hidden;
-                                        text-overflow: ellipsis;
-                                        max-width: 100%;
+
+                            &:nth-child(2) {
+                                width: 5vw;
+                                margin: 0 auto;
+                                div {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    // width: 5vw;
+                                    // text-align: center;
+                                    button {
+                                        font-size: large;
+                                        margin-left: 1.5vw; // Ajusta el margen entre el primer y segundo div
+                                        border: 1px solid black;
+                                        border-radius: 50%;
+                                    }
+                                    div {
+                                        margin-top: 1vh;
+                                        margin-left: 2vw;
                                     }
                                 }
+                                /* Centra el contenido horizontalmente dentro del td */
                             }
                         }
                     }
                 }
             }
+        }
+
         #rightPannel {
             display: flex;
             flex-direction: column;

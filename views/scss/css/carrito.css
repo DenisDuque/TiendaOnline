@@ -34,45 +34,81 @@ body #cart #leftPannel {
   background-color: rgb(255, 255, 255);
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
+  overflow-y: auto;
 }
 body #cart #leftPannel table {
   margin: 0 auto;
   width: 90%;
-  background-color: red;
+  border-collapse: collapse;
 }
 body #cart #leftPannel table tbody {
   width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 body #cart #leftPannel table tbody #shoppingTitle {
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   padding-bottom: 10px;
 }
-body #cart #leftPannel table tbody tr td:first-child {
+body #cart #leftPannel table tbody #shoppingTitle #counterItems {
+  font-size: 22px;
+  width: 5vw;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) {
+  border: 1px solid grey;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:first-child {
+  margin-right: 10px;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(2) {
+  width: 12vw;
+  height: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(3) {
+  height: auto;
+  margin-top: 5px;
+  text-align: center;
   display: flex;
   align-items: center;
 }
-body #cart #leftPannel table tbody tr td:first-child div {
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(4) {
+  width: 5vw;
+  margin-left: 2vw;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:first-child div:nth-child(4) button {
+  width: 5vw;
+  border: 1px solid rgb(191, 48, 48);
+  background-color: rgb(191, 48, 48);
+  margin-bottom: 1vh;
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) {
+  width: 5vw;
+  margin: 0 auto;
+  /* Centra el contenido horizontalmente dentro del td */
+}
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) div {
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  justify-content: space-between;
 }
-body #cart #leftPannel table tbody tr td:first-child div img {
-  margin-bottom: 10px;
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) div button {
+  font-size: large;
+  margin-left: 1.5vw;
+  border: 1px solid black;
+  border-radius: 50%;
 }
-body #cart #leftPannel table tbody tr td:first-child div div:first-child {
-  margin-bottom: 10px;
-}
-body #cart #leftPannel table tbody tr td:first-child div div:nth-child(2) {
-  margin-bottom: 10px;
-}
-body #cart #leftPannel table tbody tr td:first-child div div:last-child {
-  margin-bottom: 0;
-}
-body #cart #leftPannel table tbody tr:nth-child(n+3) td h1 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+body #cart #leftPannel table tbody tr:not(:first-child):not(:nth-child(2)) td:nth-child(2) div div {
+  margin-top: 1vh;
+  margin-left: 2vw;
 }
 body #cart #rightPannel {
   display: flex;

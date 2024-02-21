@@ -2,7 +2,9 @@
     <button id="closeCreateProductForm"><img src='views/assets/images/utils/signout.png'></button>
     <form id="CreateProdForm" action="index.php?page=Product&action=createProduct" method="POST" enctype="multipart/form-data">
         <table>
-            <tr><td><label for="name" class="underline">Name product</label></td></tr>
+            <tr>
+                <td><label for="name" class="underline">Name product</label></td>
+            </tr>
             <tr>
                 <td>
                     <input type="text" name="name" id="name" required>
@@ -13,31 +15,39 @@
                     <span id="error"></span>
                 </td>
             </tr>
-            <tr><td><label for="price"  class="underline">Price</label></td></tr>
+            <tr>
+                <td><label for="price" class="underline">Price</label></td>
+            </tr>
             <tr>
                 <td>
                     <input type="text" name="price" id="price" required pattern="[0-9]+(\.[0-9]+)?">
                 </td>
             </tr>
-            <tr><td><label for="stock"  class="underline">Stock</label></td></tr>
+            <tr>
+                <td><label for="stock" class="underline">Stock</label></td>
+            </tr>
             <tr>
                 <td>
                     <input type="text" name="stock" id="stock" required pattern="[0-9]+">
                 </td>
             </tr>
-            <tr><td><label for="description"  class="underline">Description</label></td></tr>
+            <tr>
+                <td><label for="description" class="underline">Description</label></td>
+            </tr>
             <tr>
                 <td>
                     <input type="text" name="description" id="description" required>
                 </td>
             </tr>
-            <tr><td><label for=""  class="underline">Featured</label></td></tr>
+            <tr>
+                <td><label for="" class="underline">Featured</label></td>
+            </tr>
             <tr>
                 <td>
                     <input type="checkbox" name="featured" id="featured">
                 </td>
             </tr>
-            
+
             <tr>
                 <td id="status">
                     <label for="">Status</label>
@@ -50,17 +60,19 @@
             <tr>
                 <td id="category">
                     <label for="">Category</label>
-                    <select name="category" id="category"> 
-                        <?php 
-                            $categories = CategoryController::generateCategoriesOptions();
-                            foreach ($categories as $category) {
-                                echo "<option id='".$category->getCode()."' value='".$category->getCode()."'>".ucfirst($category->getName())."</option>";
-                            }
+                    <select name="category" id="category">
+                        <?php
+                        $categories = CategoryController::generateCategoriesOptions();
+                        foreach ($categories as $category) {
+                            echo "<option id='" . $category->getCode() . "' value='" . $category->getCode() . "'>" . ucfirst($category->getName()) . "</option>";
+                        }
                         ?>
                     </select>
                 </td>
             </tr>
-            <tr><td><label for="">Perspectives</label></td></tr>
+            <tr>
+                <td><label for="">Perspectives</label></td>
+            </tr>
             <tr id="views">
                 <td>
                     <label for="Side">Side</label>
@@ -89,10 +101,13 @@
                 </td>
             </tr>
             <input type="hidden" id="sizeInp" name="sizes">
-            <tr><td><input type="submit" class="submitBtn" value="Save changes"></td></tr>
+            <tr>
+                <td><input type="submit" class="submitBtn" value="Save changes"></td>
+            </tr>
         </table>
     </form>
 </div>
+<script src="views/js/validacion.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Obtén el formulario y el campo de nombre

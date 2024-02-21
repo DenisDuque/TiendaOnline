@@ -246,28 +246,36 @@ canvas {
   border-radius: 30px;
   border: 1px solid #ccc; /* Añade un borde para visualización */
 }
-#leftPanel .formProd form .EditProdForm {
+#leftPanel .formProd form #EditProdForm {
   margin-top: 0;
-  height: 72vh;
+  /* Asegurar que el formulario comience desde la parte superior */
+  height: 60vh;
   width: 16vw;
+  /* Ajustar el ancho del formulario según tus necesidades */
 }
-#leftPanel .formProd form .EditProdForm table {
+#leftPanel .formProd form #EditProdForm table {
+  width: 16vw;
+  /* Ajustar el ancho de la tabla al 100% */
+}
+#leftPanel .formProd form #EditProdForm table label {
   width: 100%;
+  /* Ajustar el ancho de las etiquetas al 100% */
 }
-#leftPanel .formProd form .EditProdForm table label {
-  width: 100%;
-}
-#leftPanel .formProd form .EditProdForm table label + input[type=text], #leftPanel .formProd form .EditProdForm table label + input[type=file], #leftPanel .formProd form .EditProdForm table label + select {
+#leftPanel .formProd form #EditProdForm table label + input[type=text], #leftPanel .formProd form #EditProdForm table label + input[type=file], #leftPanel .formProd form #EditProdForm table label + select {
   width: calc(100% - 2vw);
+  /* Ajustar el ancho de los campos de entrada al 100% menos los márgenes */
 }
-#leftPanel .formProd form .EditProdForm table .addSizeBtn {
-  width: 100%;
+#leftPanel .formProd form #EditProdForm table .addSizeBtn {
+  width: 3vw;
+  /* Ajustar el ancho del botón al 100% */
 }
-#leftPanel .formProd form .EditProdForm table #sizeList {
+#leftPanel .formProd form #EditProdForm table #sizeList {
   width: 100%;
+  /* Ajustar el ancho de la lista de tallas al 100% */
 }
-#leftPanel .formProd form .EditProdForm table .submitBtn {
+#leftPanel .formProd form #EditProdForm table .submitBtn {
   width: 100%;
+  /* Ajustar el ancho del botón de envío al 100% */
 }
 @media (min-width: 600px) {
   #leftPanel .formProd form #sizeList {
@@ -317,7 +325,7 @@ canvas {
 #leftPanel #formEditCategory #listado {
   margin: 0;
   padding: 1vw;
-  height: 32.5vh;
+  height: 30vh;
   overflow-y: scroll;
 }
 #leftPanel #formEditCategory #listado li {
