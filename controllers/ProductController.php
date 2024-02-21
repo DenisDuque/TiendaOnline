@@ -185,6 +185,7 @@ class ProductController {
             $featured = isset($_POST['featured']) ? true : false;
             ProductModel::editProduct(str_replace(' ', '', $_POST['code']),$_POST['name'], $_POST['description'], $featured, $_POST['price'], $_POST['stock'], $_POST['active'], $_POST['category'], $Sideimage, $Upimage, $Bottomimage, $image3D, $_POST['sizes']);
         }
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='0.1;URL=index.php?page=Product&action=showAdminProduct'>";
     }
     public function createProduct() {
         $Sideimage = null;

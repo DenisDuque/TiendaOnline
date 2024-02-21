@@ -1,0 +1,199 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+@import 'scrollbar.scss';
+
+body {
+    #cart {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 70vh;
+
+        #leftPannel {
+            width: 50vw;
+            background-color: rgba(255, 255, 255, 1);
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            overflow-y: auto; // Agrega una barra de desplazamiento vertical si es necesario
+
+            table {
+                margin: 0 auto;
+                width: 90%;
+                border-collapse: collapse;
+
+                tbody {
+                    width: 100%;
+                    max-height: 60vh; // Establece la altura máxima
+
+                    overflow-y: auto; // Agrega una barra de desplazamiento vertical si es necesario
+
+                    #shoppingTitle {
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                        padding-bottom: 10px;
+                        #counterItems{
+                            font-size: 22px;
+                            width: 5vw;
+                        }
+                    }
+
+                    tr:not(:first-child):not(:nth-child(2)) {
+                        border: 1px solid grey;
+                        td {
+                            &:first-child {
+                                display: flex;
+                                flex-wrap: wrap;
+                                flex-direction: row;
+
+                                div {
+                                    &:first-child {
+                                        margin-right: 10px; // Ajusta el margen entre el primer y segundo div
+                                    }
+
+                                    &:nth-child(2) {
+                                        // background-color: blue;
+                                        width: 12vw;
+                                        height: 5vh;
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        align-items: center; // Alinea en el centro
+                                    }
+
+                                    &:nth-child(3) {
+                                        height: auto;
+                                        margin-top: 5px; // Ajusta el margen entre el segundo y tercer div
+                                        text-align: center; // Centra el texto horizontalmente
+                                        display: flex;
+                                        align-items: center; // Centra el texto verticalmente
+                                    }
+
+                                    &:nth-child(4) {
+                                        width: 5vw;
+                                        margin-left: 2vw; // Ajusta el margen entre el tercer y cuarto div
+                                        button {
+                                            width: 5vw;
+                                            border: 1px solid rgb(191, 48, 48);
+                                            background-color: rgb(191, 48, 48);
+                                            margin-bottom: 1vh;
+                                        }
+                                    }
+                                }
+                            }
+
+                            &:nth-child(2) {
+                                width: 5vw;
+                                margin: 0 auto;
+                                div {
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    // width: 5vw;
+                                    // text-align: center;
+                                    button {
+                                        font-size: large;
+                                        margin-left: 1.5vw; // Ajusta el margen entre el primer y segundo div
+                                        border: 1px solid black;
+                                        border-radius: 50%;
+                                    }
+                                    div {
+                                        margin-top: 1vh;
+                                        margin-left: 2vw;
+                                    }
+                                }
+                                /* Centra el contenido horizontalmente dentro del td */
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #rightPannel {
+            display: flex;
+            flex-direction: column;
+            width: 20vw;
+            justify-content: center;
+
+            form {
+                // background-color: whitesmoke;
+                margin: 0 auto;
+                width: 18vw;
+
+                h1 {
+                    margin-top: 0px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+                    /* Línea entre el título principal y itemsPrice */
+                    padding-bottom: 4vh;
+                    /* Espaciado opcional */
+                }
+
+                .itemsPrice {
+                    display: flex;
+                    margin-top: 3vh;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    border-top: 1px solid rgba(0, 0, 0, 0.5);
+                    /* Línea entre itemsPrice y el siguiente contenido */
+                    padding-top: 10px;
+                    /* Espaciado opcional */
+                }
+
+                #promoCode {
+                    width: 100%;
+                    margin-top: 3vh;
+
+                    input {
+                        width: 17vw;
+                    }
+
+                    /* Agrega estilos al botón APPLY */
+                    button {
+                        margin: 10px auto;
+                        margin-bottom: 5vh;
+                        /* Ajusta el margen entre el botón APPLY y el siguiente contenido */
+                        width: 7vw;
+                        height: 4vh;
+                        border: 1px solid rgba(255, 94, 0, 1);
+                        border-radius: 5px;
+                        background-color: rgba(255, 94, 0, 1);
+                        color: white;
+                    }
+                }
+
+                #shippingMethod {
+                    margin-top: 3vh;
+
+                    select {
+                        width: 17.5vw;
+                    }
+                }
+
+                #totalCost {
+                    border-top: 1px solid rgba(0, 0, 0, 0.5);
+                    /* Línea entre el botón APPLY y totalCost */
+                    padding-top: 4vh;
+                    /* Espaciado opcional */
+                }
+
+                h6 {
+                    height: 4vh;
+                    margin-top: 0px;
+                    margin-bottom: 0px;
+                    font-size: medium;
+                }
+
+                input[type="submit"] {
+                    margin: 0 auto;
+                    width: 100%;
+                    height: 7vh;
+                    border: 1px solid rgba(255, 94, 0, 1);
+                    border-radius: 5px;
+                    background-color: rgba(255, 94, 0, 1);
+                    color: white;
+                }
+            }
+
+            background-color: whitesmoke;
+        }
+    }
+}

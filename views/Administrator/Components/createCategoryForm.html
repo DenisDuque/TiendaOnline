@@ -1,9 +1,10 @@
 <div id="formCreateCategory" class="adminForm">
     <button id="closeCreateCategoryForm"><img src='views/assets/images/utils/signout.png'></button>
     <h4 id="createCategoryTitle">Create Category</h4>
-    <form action="index.php?page=Category&action=createCategory" method="POST">
+    <form action="index.php?page=Category&action=createCategory" method="POST" id="createCategoryForm">
         <label for="name">Category name</label>
         <input type="text" name="name" id="name" required>
+        <span id="error"></span>
         <div>
             <label for="active">Status</label>
             <select name="active" id="select">
@@ -11,6 +12,52 @@
                 <option id="disabled" value="disabled">disabled</option>
             </select>
         </div>
-        <input type="submit" class="submitBtn" value="Save changes"></input>
+        <input type="submit" class="submitBtn" value="Save changes">
     </form>
 </div>
+<script src="views/js/validacionCategory.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtén el formulario y el campo de nombre
+        var form = document.getElementById("createCategoryForm");
+        var nameInput = document.getElementById("name");
+        var errorSpan = document.getElementById("error");
+        var submitBtn = document.querySelector('.submitBtn'); // Asumiendo que el botón de enviar tiene la clase 'submitBtn'
+
+        // Agrega un evento de escucha para el envío del formulario
+        form.addEventListener("submit", function (event) {
+            // Verifica la entrada del usuario antes de permitir el envío del formulario
+            if (!isValidName(nameInput.value)) {
+                // Si la entrada no es válida, muestra el mensaje de error
+                errorSpan.textContent = 'Invalid name';
+                errorSpan.style.color = 'red';
+                event.preventDefault(); // Evitar el envío del formulario
+            } else {
+                // Si la entrada es válida, borra el mensaje de error
+                errorSpan.innerHTML = "";
+            }
+        });
+
+        // Agrega un evento de escucha para el cambio en el campo de nombre
+        nameInput.addEventListener("input", function () {
+            // Verifica la entrada del usuario en tiempo real
+            if (!isValidName(nameInput.value)) {
+                // Si la entrada no es válida, muestra el mensaje de error y deshabilita el botón de enviar
+                errorSpan.textContent = 'Invalid name';
+                errorSpan.style.color = 'red';
+                submitBtn.disabled = true;
+            } else {
+                // Si la entrada es válida, borra el mensaje de error y habilita el botón de enviar
+                errorSpan.innerHTML = "";
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Función para validar el campo de nombre
+        function isValidName(name) {
+            // Utiliza una expresión regular para verificar si el nombre contiene caracteres no permitidos
+            var regex = /[\$&\-_/%()@<>]/;
+            return !regex.test(name);
+        }
+    });
+</script>
