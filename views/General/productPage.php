@@ -16,19 +16,19 @@
     <main>
     <?php
         echo "<div id='main'>";
-            echo "<div id='allImages'>";
+            echo "<div id='allImages' aria-label='imagen principal y seleccionables'>";
                 echo "<div id='images'>";
                     echo 
                         "<div class='image imageBtn'>
-                            <img src='views/assets/images/products/".$product["lateral"]."' alt='producto'>
+                            <img src='views/assets/images/products/".$product["lateral"]."' alt='Foto lateral del producto'>
                         </div>";
                     echo 
                         "<div class='image imageBtn'>
-                            <img src='views/assets/images/products/".$product["bottom"]."' alt='producto'>
+                            <img src='views/assets/images/products/".$product["bottom"]."' alt='Foto de la parte inferior del producto'>
                         </div>";
                     echo 
                         "<div class='image imageBtn'>
-                            <img src='views/assets/images/products/".$product["top"]."' alt='producto'>
+                            <img src='views/assets/images/products/".$product["top"]."' alt='Foto de la imagen superior del producto'>
                         </div>";
                     echo 
                         "<div class='image' id='3d360'>
@@ -42,7 +42,7 @@
             echo "</div>";
 
             
-            echo "<div id='info'>";
+            echo "<div id='info' aria-label='Informacion del producto y botones de tallas, lista de deseos y compra'>";
                 echo "<h1>".$product["name"]."</h1>";
                 echo "<h2>".$product["category"]["name"]."</h3>";
                 echo "<h3>$".$product["price"]."</h3>";
@@ -50,7 +50,7 @@
                 echo "<h3>Choose a size</h3>";
                 $sizes = explode(",",$product["size"]);
                 echo "<div id='options'>";
-                    echo "<div id='sizes'>";
+                    echo "<div id='sizes' aria-label='botones de seleccion de talla'>";
                         $chars = array("{", "}", '"', ' ');
                         foreach($sizes as $size){
                             echo "<button class='sizeBtn' value='&". str_replace($chars, "", $size) ."&".$product['stock']."'>EU".str_replace($chars, "", $size)."</button>";
@@ -63,7 +63,7 @@
                         echo "<h3>Description</h3>";
                         echo "<h4>".$product["description"]."</h4>";
                     echo "</div>";
-                    echo "<div id='buttons'>";
+                    echo "<div id='buttons' aria-label='Botones para añadir producto al carrito y a la lista de deseados'>";
                         //wishlist btn
                         if(!isset($_SESSION["email"])){
                             echo "<form action='index.php?page=user&action=default&code=".$_GET["code"]."' method='post'>";

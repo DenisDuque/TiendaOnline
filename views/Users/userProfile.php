@@ -10,7 +10,7 @@
     <main>
         <div id="all">
     <?php
-        echo "<div id='orders'>";
+        echo "<div id='orders' arialabel='Listado de pedidos que has realizado con informacion como la fecha y el estado'>";
             echo "<div class='titles'>";
                 echo "<h1>My Orders</h1>";
                 echo "<h1>".count($orders)." order(s)</h1>";

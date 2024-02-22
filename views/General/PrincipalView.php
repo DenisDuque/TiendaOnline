@@ -20,7 +20,7 @@
         include("views\General\Components\headerHome.php");
     ?>
     <!--Image slider-->
-    <div class="swiper-container">
+    <div class="swiper-container" aria-label="Deslizable">
         <div class="swiper-wrapper">    
             <div class="swiper-slide">
                 <div class="content">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-buttons" aria-label="slider de imagenes de productos">
+        <div class="swiper-buttons" aria-label="Botones de slider">
             <button class="swiper-button" data-index="0"></button>
             <button class="swiper-button" data-index="1"></button>
             <button class="swiper-button" data-index="2"></button>
@@ -77,7 +77,7 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="views/js/slider.js"></script>
     <section class="home-products">
-        <div class="categories-title">
+        <div class="categories-title" aria-label="Categorias de los productos">
             <h2>Categories</h2>
             <a href="index.php?page=Product&action=showSearchProducts">Search</a>
         </div>

@@ -20,8 +20,8 @@ if (isset($_SESSION['email'])) {
     <div id="cart">
         <script src="views/js/cartPage.js"></script>
         <script src="views/js/checkout.js"></script>
-        <div id="leftPannel"></div>
-        <div id="rightPannel">
+        <div id="leftPannel" aria-label="Listado de los productos del carrito con informacion como el nombre y el precio"></div>
+        <div id="rightPannel" aria-label="Formulario con las opciones de compra como el tipo de envio y la posibilidad de añadir un codigo promocional"> 
             <form id="orderForm" action="index.php?page=Orders&action=purchaseOrder" method="POST" enctype="multipart/form-data">
                 <h1>Order Summary</h1>
                 <div id="itemsPrice"></div>

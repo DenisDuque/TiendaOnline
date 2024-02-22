@@ -8,7 +8,7 @@
 </head>
 <body>
     <main>
-        <section id='itemsContainer'>
+        <section id='itemsContainer' aria-label="Lista de articulos que has añadidoa tu lista de deseados">
     <?php
         foreach($products as $code=>$product){
             echo "<article id='$code' class='product-article'>";
